@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN"><head>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Photograph</title>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <style>
-        body { font-family: "Noto Serif SC", "Songti SC", STSong, "Microsoft YaHei", serif; max-width: 800px; margin: 0 auto; padding: 50px 24px; font-size: 20px; line-height: 1.8; letter-spacing: 0.05em; background-color: #F0F7F4; color: #2D4035; } h1 { text-align: left !important; font-size: 28px; margin-bottom: 0.5em; font-weight: bold; border-bottom: 1px solid #CDE0D5; padding-bottom: 20px; color: #1A2E22; } p { margin-bottom: 1.5em; text-indent: 2em; text-align: justify; }
+        body { font-family: "Noto Serif SC", "Songti SC", STSong, "Microsoft YaHei", serif; max-width: 800px; margin: 0 auto; padding: 50px 24px; font-size: 20px; line-height: 1.8; letter-spacing: 0.05em; background-color: #FAFAFA; color: #2C2C2C; } h1 { text-align: left !important; font-size: 28px; margin-bottom: 0.5em; font-weight: bold; border-bottom: 1px solid #EEEEEE; padding-bottom: 20px; color: #111111; } p { margin-bottom: 1.5em; text-indent: 2em; text-align: justify; }
         body { padding-top: 70px !important; transition: padding-top 0.3s cubic-bezier(0.4,0,0.2,1); }
         body.bar-hidden { padding-top: 20px !important; }
         .reader-bar { position: fixed; top: 0; left: 0; right: 0; min-height: 50px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 1px 8px rgba(0,0,0,0.08); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px; }
@@ -54,103 +55,7 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-<style id="matrix-core-styles">
-        .para-wrap { position: relative; margin-bottom: 1.5em; }
-        .para-wrap > p { margin-bottom: 0 !important; }
-        .anno-toggle, .ai-toggle {
-            display: inline-flex;
-            margin-left: 6px;
-            cursor: pointer;
-            opacity: 0.2;
-            font-size: 0.8rem;
-            vertical-align: middle;
-            transition: all 0.2s;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
-        .anno-toggle.has-anno { opacity: 1; }
-        .anno-toggle::after { content: "🔴"; }
-        .ai-toggle { margin-left: 4px; opacity: 0.5; }
-        .ai-toggle::after { content: "🤖"; }
-        .ai-toggle.loading::after {
-            content: "⏳";
-            display: inline-block;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .anno-box {
-            display: none;
-            margin-top: 10px;
-            background: #f8f6ff;
-            border-left: 4px solid #8e7cc3;
-            padding: 12px 16px;
-            border-radius: 0 6px 6px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-        }
-        .anno-view {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #4a4a4a;
-            min-height: 24px;
-            font-family: -apple-system, sans-serif;
-            text-align: left;
-            text-indent: 0;
-        }
-        .anno-edit {
-            width: 100%;
-            min-height: 120px;
-            padding: 10px;
-            font-family: monospace;
-            font-size: 1rem;
-            border: 1px dashed #8e7cc3;
-            border-radius: 6px;
-            box-sizing: border-box;
-            resize: vertical;
-            display: none;
-            background: #fff;
-            color: #333;
-            outline: none;
-            text-align: left;
-            -webkit-appearance: none;
-        }
-        .anno-edit:focus {
-            border: 1px solid #8e7cc3;
-            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
-        }
-        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
-        .markdown-body p:last-child { margin-bottom: 0; }
-        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
-            color: #8e7cc3;
-            font-size: 1.15rem;
-            margin: 10px 0 8px 0;
-            border-bottom: 1px dashed #e0d8f0;
-            padding-bottom: 4px;
-        }
-        .markdown-body blockquote {
-            margin: 0 0 10px 0;
-            padding: 10px 15px;
-            background: rgba(142,124,195,0.1);
-            border-left: 4px solid #8e7cc3;
-            color: #555;
-        }
-        #matrix-sync-status {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: bold;
-            color: white;
-            display: none;
-            z-index: 2147483647;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-    </style></head>
+</head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -163,141 +68,45 @@
     </div>
     <div id="content-container">
     <h1 style="text-align: left !important;">The Photograph</h1>
-    <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/25 18:33:19</div>
+    <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/25 18:56:25</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那张照片</p>
-    <div class="para-wrap"><p>The old woman sat by the window every day, watching the world blur past like a watercolor painting left in the rain. Her name was Eleanor, and she had lived in this house for sixty-seven years. The nurses called her "sweetie" and "dear," words that slid off her like water off waxed paper.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
-<ul>
-<li><strong>sit by the window</strong> = 坐在窗边</li>
-<li><strong>every day</strong> = 每天</li>
-<li><strong>watch the world blur past</strong> = 看着世界模糊地从眼前掠过</li>
-<li><strong>blur past</strong> = 模糊地掠过；飞快经过而变得模糊</li>
-<li><strong>like a watercolor painting left in the rain</strong> = 像一幅被留在雨中的水彩画</li>
-<li><strong>watercolor painting</strong> = 水彩画</li>
-<li><strong>left in the rain</strong> = 被留在雨中；这里是过去分词短语修饰 <strong>painting</strong></li>
-<li><strong>have lived in this house for sixty-seven years</strong> = 已经在这所房子里生活了67年</li>
-<li><strong>for + 时间段</strong> = 持续……时间；常与现在完成时连用</li>
-<li><strong>call sb. “sweetie” / “dear”</strong> = 称某人为“亲爱的”等</li>
-<li><strong>words that...</strong> = ……的这些称呼/话语；<strong>that</strong> 引导定语从句</li>
-<li><strong>slide off sb.</strong> = 从某人身上滑落；这里比喻“对某人不起作用、无法产生影响”</li>
-<li><strong>like water off waxed paper</strong> = 像水从蜡纸上滑落一样；比喻某种话语完全无法影响某人</li>
-<li><strong>waxed paper</strong> = 蜡纸；表面光滑防水的纸</li>
-<li><strong>words that slid off her like water off waxed paper</strong> = 这些称呼对她毫无作用，完全无法触动她</li>
-<li><strong>slide off A like B off C</strong> = 像B从C上滑落一样从A身上滑落；一种比喻性表达</li>
-</ul>
-</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
-
-- **sit by the window** = 坐在窗边
-- **every day** = 每天
-- **watch the world blur past** = 看着世界模糊地从眼前掠过
-- **blur past** = 模糊地掠过；飞快经过而变得模糊
-- **like a watercolor painting left in the rain** = 像一幅被留在雨中的水彩画
-- **watercolor painting** = 水彩画
-- **left in the rain** = 被留在雨中；这里是过去分词短语修饰 **painting**
-- **have lived in this house for sixty-seven years** = 已经在这所房子里生活了67年
-- **for + 时间段** = 持续……时间；常与现在完成时连用
-- **call sb. “sweetie” / “dear”** = 称某人为“亲爱的”等
-- **words that...** = ……的这些称呼/话语；**that** 引导定语从句
-- **slide off sb.** = 从某人身上滑落；这里比喻“对某人不起作用、无法产生影响”
-- **like water off waxed paper** = 像水从蜡纸上滑落一样；比喻某种话语完全无法影响某人
-- **waxed paper** = 蜡纸；表面光滑防水的纸
-- **words that slid off her like water off waxed paper** = 这些称呼对她毫无作用，完全无法触动她
-- **slide off A like B off C** = 像B从C上滑落一样从A身上滑落；一种比喻性表达</textarea></div></div>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">老妇人每天都坐在窗边，看着窗外的世界模糊地掠过，仿佛一幅被遗落在雨中的水彩画。她名叫埃莉诺，在这栋房子里已经生活了六十七年。护士们称她“亲爱的”“宝贝”，这些称呼落在她身上，就像水从蜡纸上滑落一样，无法留下任何痕迹。</p>
-    <div class="para-wrap"><p>Her granddaughter, Mira, visited every Sunday. Mira was twenty-six, with tired eyes and a job that demanded too much. She came because her mother had asked her to, because family was supposed to mean something, because—if she was honest—she had nowhere else to be.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
-<ul>
-<li><strong>granddaughter</strong> = 孙女；外孙女</li>
-<li><strong>visit every Sunday</strong> = 每周日都去探望</li>
-<li><strong>be twenty-six</strong> = 26岁</li>
-<li><strong>with tired eyes</strong> = 带着疲惫的双眼；这里是 <strong>with + 名词</strong> 描述人物状态</li>
-<li><strong>a job that demanded too much</strong> = 一份要求太多、让人不堪重负的工作</li>
-<li><strong>demand too much</strong> = 要求过多；给某人造成过重负担</li>
-<li><strong>come because...</strong> = 因为……而来</li>
-<li><strong>ask sb. to do sth.</strong> = 要求/请某人做某事</li>
-<li><strong>family was supposed to mean something</strong> = 家人本应该意味着某种重要的东西；这里 <strong>be supposed to</strong> 表示“按理说应该”</li>
-<li><strong>mean something</strong> = 有意义；意味着某种重要性</li>
-<li><strong>if she was honest</strong> = 如果她说实话的话；坦率地说</li>
-<li><strong>have nowhere else to be</strong> = 没有其他地方可去；没有别的地方需要待着</li>
-<li><strong>because A, because B, because C</strong> = 连续列出多个原因，形成递进/强调效果</li>
-<li><strong>because—if she was honest—...</strong> = 破折号插入补充说明，相当于“因为——如果她坦白说——……”</li>
-</ul>
-</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
-
-- **granddaughter** = 孙女；外孙女
-- **visit every Sunday** = 每周日都去探望
-- **be twenty-six** = 26岁
-- **with tired eyes** = 带着疲惫的双眼；这里是 **with + 名词** 描述人物状态
-- **a job that demanded too much** = 一份要求太多、让人不堪重负的工作
-- **demand too much** = 要求过多；给某人造成过重负担
-- **come because...** = 因为……而来
-- **ask sb. to do sth.** = 要求/请某人做某事
-- **family was supposed to mean something** = 家人本应该意味着某种重要的东西；这里 **be supposed to** 表示“按理说应该”
-- **mean something** = 有意义；意味着某种重要性
-- **if she was honest** = 如果她说实话的话；坦率地说
-- **have nowhere else to be** = 没有其他地方可去；没有别的地方需要待着
-- **because A, because B, because C** = 连续列出多个原因，形成递进/强调效果
-- **because—if she was honest—...** = 破折号插入补充说明，相当于“因为——如果她坦白说——……”</textarea></div></div>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她的孙女米拉每个星期天都会来看她。米拉二十六岁，有一双疲惫的眼睛，还有一份要求过多、让人不堪重负的工作。她之所以来，是因为母亲让她来，是因为家人本应意味着某种重要的东西，也是因为——如果她诚实面对自己的内心——她其实也无处可去。</p>
-    <div class="para-wrap"><p>Eleanor rarely spoke anymore. When she did, her words were tangled threads, pulling at memories that had long since unraveled. "The blue teacup," she might say, apropos of nothing. Or "He promised to come back before the snow."<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
-<ul>
-<li><strong>rarely speak anymore</strong> = 已经很少再说话；<strong>anymore</strong> 表示“如今不再/不再像以前一样”</li>
-<li><strong>when she did</strong> = 当她开口说话时；这里 <strong>did</strong> 代替前面的 <strong>spoke</strong>，避免重复</li>
-<li><strong>her words were tangled threads</strong> = 她的话语像纠缠在一起的线；比喻语言混乱、难以理清</li>
-<li><strong>tangled threads</strong> = 缠绕的线；这里是比喻用法</li>
-<li><strong>pull at memories</strong> = 牵动/拉扯记忆</li>
-<li><strong>pulling at memories</strong> = 牵动着记忆；现在分词短语作补充说明</li>
-<li><strong>long since</strong> = 早已；很久以前就已经</li>
-<li><strong>long since unraveled</strong> = 早已解开/散乱；这里 <strong>unravel</strong> 比喻记忆逐渐瓦解、失去完整性</li>
-<li><strong>memory has unraveled</strong> = 记忆已经逐渐瓦解、变得支离破碎</li>
-<li><strong>apropos of nothing</strong> = 毫无缘由地；没头没脑地；突然说起与当前话题无关的事情</li>
-<li><strong>might say</strong> = 可能会说；这里 <strong>might</strong> 表示一种可能出现的情况</li>
-<li><strong>The blue teacup</strong> = “那只蓝色茶杯”；作为独立话语，体现她突然从记忆中蹦出一个片段</li>
-<li><strong>He promised to come back</strong> = 他答应会回来；<strong>promise to do sth.</strong> = 答应做某事</li>
-<li><strong>come back before the snow</strong> = 在下雪之前回来</li>
-<li><strong>before + 从句</strong> = 在……之前</li>
-</ul>
-</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
-
-- **rarely speak anymore** = 已经很少再说话；**anymore** 表示“如今不再/不再像以前一样”
-- **when she did** = 当她开口说话时；这里 **did** 代替前面的 **spoke**，避免重复
-- **her words were tangled threads** = 她的话语像纠缠在一起的线；比喻语言混乱、难以理清
-- **tangled threads** = 缠绕的线；这里是比喻用法
-- **pull at memories** = 牵动/拉扯记忆
-- **pulling at memories** = 牵动着记忆；现在分词短语作补充说明
-- **long since** = 早已；很久以前就已经
-- **long since unraveled** = 早已解开/散乱；这里 **unravel** 比喻记忆逐渐瓦解、失去完整性
-- **memory has unraveled** = 记忆已经逐渐瓦解、变得支离破碎
-- **apropos of nothing** = 毫无缘由地；没头没脑地；突然说起与当前话题无关的事情
-- **might say** = 可能会说；这里 **might** 表示一种可能出现的情况
-- **The blue teacup** = “那只蓝色茶杯”；作为独立话语，体现她突然从记忆中蹦出一个片段
-- **He promised to come back** = 他答应会回来；**promise to do sth.** = 答应做某事
-- **come back before the snow** = 在下雪之前回来
-- **before + 从句** = 在……之前</textarea></div></div>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺已经很少说话了。即使开口，她的话也像缠绕在一起的线，牵扯着那些早已 unravel、早已支离破碎的记忆。“那只蓝色茶杯。”她有时会毫无缘由地说。或者：“他答应过，会在下雪之前回来。”</p>
+    <p>The old woman sat by the window every day, watching the world blur past like a watercolor painting left in the rain. Her name was Eleanor, and she had lived in this house for sixty-seven years. The nurses called her "sweetie" and "dear," words that slid off her like water off waxed paper.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">老妇人每天都坐在窗边，看着外面的世界模糊地掠过，就像一幅被遗忘在雨中的水彩画。她名叫埃莉诺，已经在这栋房子里生活了六十七年。护士们称她“亲爱的”“宝贝”，这些称呼从她身上滑落，就像水从涂过蜡的纸上滑落一样，没有留下任何痕迹。</p>
+    <p>Her granddaughter, Mira, visited every Sunday. Mira was twenty-six, with tired eyes and a job that demanded too much. She came because her mother had asked her to, because family was supposed to mean something, because—if she was honest—she had nowhere else to be.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她的孙女米拉每个星期天都会来看她。米拉二十六岁，有一双疲惫的眼睛，还有一份要求太多、让人不堪重负的工作。她之所以来，是因为母亲让她来，是因为家人本应该意味着某种重要的东西，也是因为——如果她诚实面对自己的内心——她其实也没有别的地方可去。</p>
+    <p>Eleanor rarely spoke anymore. When she did, her words were tangled threads, pulling at memories that had long since unraveled. "The blue teacup," she might say, apropos of nothing. Or "He promised to come back before the snow."</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺已经很少说话了。即使她开口，她的话语也像缠在一起的线，牵扯着那些早已支离破碎的记忆。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“那只蓝色的茶杯。”她有时会毫无缘由地说。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">或者：“他答应过会在下雪之前回来。”</p>
     <p>Mira would nod and hold her hand and wait for the visit to end.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉会点点头，握着她的手，等待这次探访结束。</p>
     <p>One rainy Sunday in November, Mira arrived to find Eleanor more agitated than usual. The old woman's fingers plucked at her blanket, her eyes darting to the door.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">十一月的一个雨天，正值星期日，米拉来到这里时，发现埃莉诺比平时更加焦躁。老妇人的手指不停地拨弄着身上的毯子，目光不断瞥向门口。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">十一月一个下着雨的星期天，米拉来到这里时，发现埃莉诺比平时更加焦躁。老妇人的手指不停地拨弄着身上的毯子，目光不断地瞥向门口。</p>
     <p>"Is he here?" Eleanor asked. "Is he back?"</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“他在这里吗？”埃莉诺问道，“他回来了吗？”</p>
     <p>"Who, Grandma?"</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“谁啊，奶奶？”</p>
     <p>But Eleanor had already retreated into silence, her gaze fixed on something Mira couldn't see.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">但埃莉诺已经再次退回了沉默之中，她的目光定定地望着某个米拉看不见的东西。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">但埃莉诺已经再次陷入沉默，她的目光定定地停留在某个米拉看不见的东西上。</p>
     <p>Later that afternoon, Mira found herself in the attic. She had come up to escape the suffocating stillness of the house, to find something to do with her hands. The attic was a museum of forgotten things: trunks of yellowed linens, boxes of Christmas ornaments, furniture draped in ghostly sheets.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那天下午晚些时候，米拉发现自己来到了阁楼。她来到这里，是为了逃离这栋房子令人窒息的寂静，也是为了找点事情做，让自己的双手忙起来。阁楼就像一座被遗忘之物的博物馆：里面有装着泛黄亚麻织品的箱子，有一盒盒圣诞装饰品，还有蒙着幽灵般白布的家具。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那天下午晚些时候，米拉发现自己来到了阁楼。她上来是为了逃离这栋房子令人窒息的寂静，也是为了找点事情做，让自己的双手忙起来。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">阁楼就像一座被遗忘之物的博物馆：装着泛黄亚麻织品的大箱子、一盒盒圣诞装饰品，以及蒙着幽灵般白布的家具。</p>
     <p>In the corner, beneath a window thick with dust, she found a small wooden chest. It wasn't locked, just latched. Inside were letters, bundled with twine, and a photograph.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">在角落里，一扇积满厚厚灰尘的窗户下面，她发现了一个小木箱。箱子没有上锁，只是扣上了搭扣。里面放着一些用麻绳捆起来的信，还有一张照片。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">在角落里，一扇积满厚厚灰尘的窗户下面，她发现了一个小木箱。箱子没有上锁，只是扣上了搭扣。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">里面有一些用麻绳捆起来的信，还有一张照片。</p>
     <p>The photograph showed a young man in uniform, his smile bright and careless. He stood in front of a train station, one hand raised in farewell. On the back, in faded ink: Thomas, 1944. Come back to me.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">照片上是一名穿着制服的年轻男子，他笑容灿烂而无忧无虑。他站在火车站前，一只手抬起，正在挥手告别。照片背面用已经褪色的墨水写着：</p>
-    <p>Thomas, 1944. Come back to me.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">照片上是一名穿着制服的年轻男子，他的笑容灿烂而无忧无虑。他站在火车站前，一只手抬起，正在挥手告别。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">照片背面用褪色的墨水写着：</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">托马斯，1944年。回来找我。</p>
     <p>Mira's breath caught. She had never heard of a Thomas. Her grandfather had been named Harold, a quiet man who had died before she was born. But here was another man, another love, another story.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉屏住了呼吸。她从未听说过什么托马斯。她的祖父名叫哈罗德，是一个沉默寡言的男人，在她出生之前就已经去世了。</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">但现在，在她眼前的，却是另一个男人、另一段爱情、另一个故事。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉屏住了呼吸。她从未听说过一个叫托马斯的人。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她的祖父名叫哈罗德，是一个沉默寡言的男人，在她出生之前就去世了。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">但现在这里出现了另一个男人、另一段爱情、另一个故事。</p>
     <p>She brought the photograph downstairs.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她把照片带到了楼下。</p>
     <p>Eleanor was still by the window, but something had shifted. Her eyes, usually clouded, were clear.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺依然坐在窗边，但有什么东西发生了变化。她平日里浑浊的双眼，此刻却异常清澈。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺仍然坐在窗边，但有什么东西发生了变化。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她平时浑浊的双眼，此刻却变得清澈起来。</p>
     <p>"You found him," she said softly.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“你找到他了。”她轻声说道。</p>
     <p>"Who was he, Grandma?"</p>
@@ -305,42 +114,50 @@
     <p>Eleanor's hands trembled as she took the photograph. She traced the young man's face with her fingertips.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺接过照片时，双手微微颤抖。她用指尖轻轻描摹着年轻男子的脸庞。</p>
     <p>"Thomas," she whispered. "Thomas promised he would come back. He said we would marry in the spring, when the lilacs bloomed."</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“托马斯。”她低声说道，“托马斯答应过，他会回来。他说我们会在春天结婚，等丁香花盛开的时候。”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“托马斯。”她低声说道。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“托马斯答应过他会回来。他说我们会在春天结婚，等丁香花盛开的时候。”</p>
     <p>"What happened?"</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“后来发生了什么？”</p>
     <p>Eleanor was quiet for a long moment. Outside, the rain had stopped, and a thin blade of sunlight cut through the clouds.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺沉默了很久。窗外，雨已经停了，一缕细细的阳光穿透了云层。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺沉默了很久。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">窗外，雨已经停了，一缕细细的阳光穿透了云层。</p>
     <p>"He didn't come back," she said. "The telegram came instead. I was nineteen. I thought I would die from it."</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“他没有回来。”她说，“来的是一封电报。那时候我十九岁。我当时觉得自己会因此死去。”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“他没有回来。”她说。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“来的却是一封电报。那时候我十九岁。我当时觉得自己会因为这件事死去。”</p>
     <p>Mira sat beside her, their shoulders touching. "I'm sorry."</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉坐到她身旁，两人的肩膀轻轻碰在一起。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉坐到她身边，两人的肩膀轻轻碰在一起。</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“对不起。”</p>
     <p>"I married Harold three years later. He was a good man. Kind." Eleanor paused. "But sometimes, when I close my eyes, I still see Thomas at the station. He's always waving. He's always smiling. He never grows old."</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“三年后，我嫁给了哈罗德。他是个好人，很善良。”埃莉诺停顿了一下，“但有时候，当我闭上眼睛，我仍然能看见车站里的托马斯。他总是在挥手。他总是在微笑。他永远不会老去。”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“三年后，我嫁给了哈罗德。他是个好人，很善良。”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺停顿了一下。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“但有时候，当我闭上眼睛，我仍然能看见车站里的托马斯。他总是在挥手。他总是在微笑。他永远不会老去。”</p>
     <p>Tears slipped down Eleanor's wrinkled cheeks, but she was smiling too—a smile Mira had never seen before, young and sad and impossibly tender.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">泪水顺着埃莉诺布满皱纹的脸颊滑落，但她同时也在微笑——那是一种米拉从未见过的笑容，年轻、悲伤，却又温柔得令人难以置信。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">泪水顺着埃莉诺布满皱纹的脸颊滑落，但她同时也在微笑——那是一种米拉从未见过的笑容，年轻、悲伤，却又温柔得难以想象。</p>
     <p>"Do you know what I've learned?" Eleanor asked.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“你知道我明白了什么吗？”埃莉诺问道。</p>
     <p>"What?"</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“什么？”</p>
     <p>"Love doesn't end. It just changes shape." She pressed the photograph to her chest. "He's been with me all along. In the quiet moments. In the spaces between."</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“爱不会结束。它只是改变了形状。”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“爱不会结束。它只是改变了形态。”</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她把照片紧紧按在胸口。</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“他一直都陪着我。从未离开。在那些寂静的时刻里，在那些间隙之中。”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“他一直都陪着我。在那些寂静的时刻里，在那些间隙之中。”</p>
     <p>Mira thought of her own life, her own failed relationships, her own fear of loving too deeply. She thought of how she had always kept one foot out the door.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉想到了自己的人生，想到了那些失败的感情，也想到了自己害怕爱得太深的恐惧。她想起自己一直以来是怎样给自己留着退路，始终有一只脚站在门外。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉想到了自己的人生，想到了自己失败的感情，也想到了自己害怕爱得太深的恐惧。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她想起自己一直以来都是怎样给自己留着退路，始终让一只脚留在门外。</p>
     <p>"Grandma," she said, "I think I've been afraid."</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“奶奶，”她说，“我想，我一直都在害怕。”</p>
     <p>Eleanor turned to her, and for a moment, her eyes held the wisdom of all those years.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺转过身看着她。那一刻，她的眼睛里仿佛承载着几十年来积累的全部智慧。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺转过身看着她。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那一刻，她的眼睛里仿佛承载着这些年来积累的全部智慧。</p>
     <p>"Don't be," she said. "Love is worth the breaking."</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“不要害怕。”她说，“爱值得你为之破碎。”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“不要害怕。”她说。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“爱值得你为之破碎。”</p>
     <p>They sat together as the afternoon faded into evening, the photograph resting between them. And when Mira finally left, she carried something with her—not just the story, but a new understanding.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她们一起坐在那里，看着午后渐渐走向黄昏，照片静静地放在两人之间。</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">最终，米拉离开了。可她带走的不只是这个故事，还有一种全新的领悟。</p>
     <p>She visited again the next Sunday. And the one after that.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">下一个星期日，她又来了。</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">再下一个星期日，她也来了。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">下一个星期天，她又来了。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">再下一个星期天，她也来了。</p>
     <p>Eleanor didn't always remember her name, but she always remembered the photograph. And sometimes, when the light was just right, she would smile and say, "He'll come back. You'll see."</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺并不总能记得她的名字，但她总能记得那张照片。</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">有时候，当光线恰到好处时，她会微笑着说：</p>
@@ -348,7 +165,8 @@
     <p>Mira would smile back and hold her hand.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉也会对她微笑，并握住她的手。</p>
     <p>She didn't correct her. Some truths were too beautiful to interrupt.</p>
-    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她没有纠正她。有些真相，美好得不应该被打断。</p>    </div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她没有纠正她。</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">有些真相，美好得不应该被打断。</p>    </div>
     <script>
         var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
         var prefs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { font: 1.0, dictEnabled: true, barHidden: true, highlightEnabled: true, blurEnabled: true };
@@ -474,55 +292,5 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-
-<script id="matrix-static-script">
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
-
-                const isNewTpl = !!document.getElementById('en-container');
-                document.querySelectorAll('.para-wrap').forEach(wrap => {
-                    const toggle = wrap.querySelector('.anno-toggle');
-                    const box = wrap.querySelector('.anno-box');
-                    const view = wrap.querySelector('.anno-view');
-                    if (!toggle || !box || !view) return;
-
-                    toggle.onclick = (e) => {
-                        e.stopPropagation();
-                        if (box.style.display === 'block') {
-                            box.style.display = 'none';
-                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        } else {
-                            box.style.display = 'block';
-                            view.style.display = 'block';
-                        }
-                    };
-
-                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
-                    view.addEventListener('touchstart', e => {
-                        activeFingers = e.touches.length;
-                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
-                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
-                        } else { activeFingers = 0; }
-                    }, {passive: true});
-
-                    view.addEventListener('touchmove', e => {
-                        if (!activeFingers) return;
-                        const diffX = touchStartX - e.touches[0].clientX;
-                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
-                        if (diffY > 40) { activeFingers = 0; return; }
-                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
-                        if (isSwipeCloseGesture && diffX > 60) {
-                            box.style.display = 'none';
-                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            activeFingers = 0;
-                        }
-                    }, {passive: true});
-
-                    view.addEventListener('touchend', e => {
-                        if (e.touches.length === 0) activeFingers = 0;
-                    }, {passive: true});
-                });
-            }, 500);
-        });
-    </script></body></html>
+</body>
+</html>
