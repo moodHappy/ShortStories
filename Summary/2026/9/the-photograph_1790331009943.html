@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Photograph</title>
@@ -55,7 +54,103 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -70,7 +165,43 @@
     <h1 style="text-align: left !important;">The Photograph</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/25 18:33:19</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那张照片</p>
-    <p>The old woman sat by the window every day, watching the world blur past like a watercolor painting left in the rain. Her name was Eleanor, and she had lived in this house for sixty-seven years. The nurses called her "sweetie" and "dear," words that slid off her like water off waxed paper.</p>
+    <div class="para-wrap"><p>The old woman sat by the window every day, watching the world blur past like a watercolor painting left in the rain. Her name was Eleanor, and she had lived in this house for sixty-seven years. The nurses called her "sweetie" and "dear," words that slid off her like water off waxed paper.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
+<ul>
+<li><strong>sit by the window</strong> = 坐在窗边</li>
+<li><strong>every day</strong> = 每天</li>
+<li><strong>watch the world blur past</strong> = 看着世界模糊地从眼前掠过</li>
+<li><strong>blur past</strong> = 模糊地掠过；飞快经过而变得模糊</li>
+<li><strong>like a watercolor painting left in the rain</strong> = 像一幅被留在雨中的水彩画</li>
+<li><strong>watercolor painting</strong> = 水彩画</li>
+<li><strong>left in the rain</strong> = 被留在雨中；这里是过去分词短语修饰 <strong>painting</strong></li>
+<li><strong>have lived in this house for sixty-seven years</strong> = 已经在这所房子里生活了67年</li>
+<li><strong>for + 时间段</strong> = 持续……时间；常与现在完成时连用</li>
+<li><strong>call sb. “sweetie” / “dear”</strong> = 称某人为“亲爱的”等</li>
+<li><strong>words that...</strong> = ……的这些称呼/话语；<strong>that</strong> 引导定语从句</li>
+<li><strong>slide off sb.</strong> = 从某人身上滑落；这里比喻“对某人不起作用、无法产生影响”</li>
+<li><strong>like water off waxed paper</strong> = 像水从蜡纸上滑落一样；比喻某种话语完全无法影响某人</li>
+<li><strong>waxed paper</strong> = 蜡纸；表面光滑防水的纸</li>
+<li><strong>words that slid off her like water off waxed paper</strong> = 这些称呼对她毫无作用，完全无法触动她</li>
+<li><strong>slide off A like B off C</strong> = 像B从C上滑落一样从A身上滑落；一种比喻性表达</li>
+</ul>
+</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
+
+- **sit by the window** = 坐在窗边
+- **every day** = 每天
+- **watch the world blur past** = 看着世界模糊地从眼前掠过
+- **blur past** = 模糊地掠过；飞快经过而变得模糊
+- **like a watercolor painting left in the rain** = 像一幅被留在雨中的水彩画
+- **watercolor painting** = 水彩画
+- **left in the rain** = 被留在雨中；这里是过去分词短语修饰 **painting**
+- **have lived in this house for sixty-seven years** = 已经在这所房子里生活了67年
+- **for + 时间段** = 持续……时间；常与现在完成时连用
+- **call sb. “sweetie” / “dear”** = 称某人为“亲爱的”等
+- **words that...** = ……的这些称呼/话语；**that** 引导定语从句
+- **slide off sb.** = 从某人身上滑落；这里比喻“对某人不起作用、无法产生影响”
+- **like water off waxed paper** = 像水从蜡纸上滑落一样；比喻某种话语完全无法影响某人
+- **waxed paper** = 蜡纸；表面光滑防水的纸
+- **words that slid off her like water off waxed paper** = 这些称呼对她毫无作用，完全无法触动她
+- **slide off A like B off C** = 像B从C上滑落一样从A身上滑落；一种比喻性表达</textarea></div></div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">老妇人每天都坐在窗边，看着窗外的世界模糊地掠过，仿佛一幅被遗落在雨中的水彩画。她名叫埃莉诺，在这栋房子里已经生活了六十七年。护士们称她“亲爱的”“宝贝”，这些称呼落在她身上，就像水从蜡纸上滑落一样，无法留下任何痕迹。</p>
     <p>Her granddaughter, Mira, visited every Sunday. Mira was twenty-six, with tired eyes and a job that demanded too much. She came because her mother had asked her to, because family was supposed to mean something, because—if she was honest—she had nowhere else to be.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她的孙女米拉每个星期天都会来看她。米拉二十六岁，有一双疲惫的眼睛，还有一份要求过多、让人不堪重负的工作。她之所以来，是因为母亲让她来，是因为家人本应意味着某种重要的东西，也是因为——如果她诚实面对自己的内心——她其实也无处可去。</p>
@@ -277,5 +408,55 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
