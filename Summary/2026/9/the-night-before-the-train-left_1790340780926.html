@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The night before the train left</title>
@@ -55,7 +54,103 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -70,7 +165,41 @@
     <h1 style="text-align: left !important;">The night before the train left</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/25 20:52:49</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">火车离开的前一夜</p>
-    <p>The world outside Eleanor’s boarding-house window was a soft November blur of fog and distant lamps. Inside, the single lamp on the dresser threw long shadows across the narrow bed.</p>
+    <div class="para-wrap"><p>The world outside Eleanor’s boarding-house window was a soft November blur of fog and distant lamps. Inside, the single lamp on the dresser threw long shadows across the narrow bed.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
+<ul>
+<li><strong>the world outside ... window</strong> = ……窗外的世界</li>
+<li><strong>boarding-house window</strong> = 寄宿公寓的窗户；<strong>boarding house</strong> = 提供住宿的寄宿房屋/公寓</li>
+<li><strong>a soft November blur</strong> = 柔和、朦胧的十一月景象；<strong>blur</strong> = 模糊的一片</li>
+<li><strong>a blur of fog and distant lamps</strong> = 一片由雾气和远处灯光构成的朦胧景象</li>
+<li><strong>fog and distant lamps</strong> = 雾气和远处的灯光</li>
+<li><strong>distant lamps</strong> = 远处的灯光</li>
+<li><strong>inside</strong> = 在室内；与前面的 <strong>outside</strong> 形成对照</li>
+<li><strong>the single lamp on the dresser</strong> = 梳妆台上唯一的一盏灯</li>
+<li><strong>single lamp</strong> = 唯一的一盏灯</li>
+<li><strong>dresser</strong> = 梳妆台；斗柜</li>
+<li><strong>throw long shadows</strong> = 投下长长的影子</li>
+<li><strong>throw shadows across sth.</strong> = 把影子投射到……上/横跨……</li>
+<li><strong>long shadows across the narrow bed</strong> = 长长的影子投射在狭窄的床上</li>
+<li><strong>narrow bed</strong> = 狭窄的床</li>
+<li><strong>a blur of A and B</strong> = 一片由 A 和 B 构成的朦胧景象；常用于文学描写</li>
+</ul>
+</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
+
+- **the world outside ... window** = ……窗外的世界
+- **boarding-house window** = 寄宿公寓的窗户；**boarding house** = 提供住宿的寄宿房屋/公寓
+- **a soft November blur** = 柔和、朦胧的十一月景象；**blur** = 模糊的一片
+- **a blur of fog and distant lamps** = 一片由雾气和远处灯光构成的朦胧景象
+- **fog and distant lamps** = 雾气和远处的灯光
+- **distant lamps** = 远处的灯光
+- **inside** = 在室内；与前面的 **outside** 形成对照
+- **the single lamp on the dresser** = 梳妆台上唯一的一盏灯
+- **single lamp** = 唯一的一盏灯
+- **dresser** = 梳妆台；斗柜
+- **throw long shadows** = 投下长长的影子
+- **throw shadows across sth.** = 把影子投射到……上/横跨……
+- **long shadows across the narrow bed** = 长长的影子投射在狭窄的床上
+- **narrow bed** = 狭窄的床
+- **a blur of A and B** = 一片由 A 和 B 构成的朦胧景象；常用于文学描写</textarea></div></div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺寄宿公寓窗外的世界，是十一月柔和的雾气与远处灯火交织成的一片模糊。屋内，梳妆台上那盏孤灯在窄床上投下长长的影子。</p>
     <p>Thomas stood in his uniform, the wool still smelling of new issue and starch, his cap already on the chair. Eleanor, nineteen and barefoot in her thin cotton nightgown, locked the door with a click that felt louder than any telegram.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">托马斯穿着军服站着，羊毛还带着新发的气味和浆洗的味道，军帽已放在椅子上。十九岁的埃莉诺赤着脚，穿着薄棉睡裙，把门锁上，那一声轻响比任何电报都更响亮。</p>
@@ -229,5 +358,55 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
