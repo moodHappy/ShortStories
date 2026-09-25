@@ -1,1 +1,45 @@
-1
+name: Rebuild ShortStories Calendar Index
+
+# 触发条件：定时触发 + 手动触发 + 新精读笔记推送时触发
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # 每周一北京时间早上 8:00 (UTC 00:00) 运行
+  workflow_dispatch:     # 允许在 GitHub 网页上手动点击运行
+  push:
+    paths:
+      - 'Summary/**'     # 只要 Summary 目录下有新的精读 HTML 推送上来，自动触发更新
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write    # 赋予机器人写入代码库的权限
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Rebuild ShortStories Calendar Index
+        # 巧妙利用管道符，给脚本发送 "q" 指令
+        # 启动 generate_hub.py 扫描 Summary 目录生成最新的 index.html -> 接收到 q 信号 -> 成功退出
+        # 注意：这里的 generate_hub.py 需要与你实际的 Python 脚本文件名保持一致
+        run: echo "q" | python generate_hub.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # 使用 "." 追踪当前目录下的所有新增和变动，完美兼容 Summary 及其内部子文件夹
+          git add .
+          
+          # 如果 index.html 或索引有变动，提交并推送到 ShortStories 仓库
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto rebuild ShortStories calendar index" && git push)
