@@ -88,7 +88,7 @@ def scan_summary_notes():
     return archive_data, total_count
 
 def generate_hub_html(archive_data):
-    """生成高级杂志风格的日历 WebApp (index.html)"""
+    """生成高级文学风格的日历 WebApp (index.html)"""
     json_data = json.dumps(archive_data, ensure_ascii=False)
 
     html_template = """<!DOCTYPE html>
@@ -96,19 +96,20 @@ def generate_hub_html(archive_data):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ShortStories - 网页精读日历枢纽</title>
+    <title>ShortStories - 短篇小说日历枢纽</title>
     <style>
         :root {
-            --primary: #667eea;
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --bg: #f8fafc;
+            /* 温暖文学风配色 */
+            --primary: #b85c38;          /* 主色调：赤土暖棕/锈红 */
+            --primary-gradient: linear-gradient(135deg, #c06c4b 0%, #8b4022 100%);
+            --bg: #fcfbfa;               /* 背景色：护眼轻暖白/纸张色 */
             --card: #ffffff;
-            --text: #2d3748;
-            --muted: #718096;
-            --border: #e2e8f0;
+            --text: #362f2d;             /* 文字色：深墨褐，减缓高对比度疲劳 */
+            --muted: #8c8279;            /* 次级文字：暖灰色 */
+            --border: #e8e2da;           /* 边框色：浅卡其灰 */
         }
         body, html {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            font-family: "Georgia", "Times New Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, serif;
             background: var(--bg); margin: 0; padding: 0; color: var(--text); -webkit-font-smoothing: antialiased;
         }
         .container { max-width: 640px; margin: 0 auto; padding-bottom: 30px; }
@@ -116,29 +117,30 @@ def generate_hub_html(archive_data):
         /* 顶部导航与搜索框 */
         .top-bar {
             background: var(--card); padding: 14px 18px; display: flex; gap: 10px; align-items: center;
-            border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 10px rgba(139, 64, 34, 0.04);
         }
         .search-input {
             flex: 1; padding: 10px 16px; border: 1.5px solid var(--border); border-radius: 20px;
-            font-size: 14px; outline: none; background: #f8fafc; transition: all 0.2s;
+            font-size: 14px; outline: none; background: #fcfbfa; transition: all 0.2s; font-family: sans-serif;
         }
-        .search-input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(102,126,234,0.15); }
+        .search-input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(184, 92, 56, 0.15); }
         .settings-btn { background: none; border: none; font-size: 22px; cursor: pointer; padding: 4px; border-radius: 50%; }
 
         /* 控制器 */
         .controls {
             padding: 15px 20px; display: flex; justify-content: center; align-items: center; gap: 10px;
-            background: var(--bg); border-bottom: 1px solid var(--border);
+            background: var(--bg); border-bottom: 1px dashed var(--border);
         }
         .control-btn {
             background: var(--primary-gradient); color: #fff; border: none; border-radius: 8px;
             padding: 8px 14px; font-size: 14px; cursor: pointer; font-weight: bold; transition: all 0.2s;
-            box-shadow: 0 2px 6px rgba(102,126,234,0.3);
+            box-shadow: 0 2px 6px rgba(184, 92, 56, 0.25); font-family: sans-serif;
         }
         .control-btn:active { transform: scale(0.95); opacity: 0.9; }
         .select-box {
             padding: 6px 12px; border: 1.5px solid var(--border); border-radius: 8px;
             font-size: 15px; background: #fff; outline: none; font-weight: bold; cursor: pointer; color: var(--text);
+            font-family: sans-serif;
         }
 
         /* 日历区域 */
@@ -146,51 +148,52 @@ def generate_hub_html(archive_data):
         .weekdays {
             display: grid; grid-template-columns: repeat(7, 1fr); text-align: center;
             font-weight: bold; font-size: 13px; color: var(--muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--border);
+            font-family: sans-serif;
         }
-        .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+        .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-family: sans-serif; }
         .day-cell {
             aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
             font-size: 15px; font-weight: 600; border-radius: 12px; cursor: pointer; position: relative; transition: all 0.2s;
         }
         .day-cell.empty { visibility: hidden; }
         .day-cell.has-notes { color: var(--text); font-weight: 700; }
-        .day-cell.no-notes { color: #cbd5e0; }
-        .day-cell.selected { background: #ebf4ff; border: 2px solid var(--primary); color: var(--primary); font-weight: bold; }
-        .day-cell.today { background: #edf2f7; color: var(--text); }
+        .day-cell.no-notes { color: #d6cfc7; }
+        .day-cell.selected { background: #faede6; border: 2px solid var(--primary); color: var(--primary); font-weight: bold; }
+        .day-cell.today { background: #ebe3dc; color: var(--text); }
         .dot { width: 6px; height: 6px; background-color: var(--primary); border-radius: 50%; position: absolute; bottom: 6px; display: none; }
         .day-cell.has-notes .dot { display: block; }
 
         /* 文章列表 */
-        .notes-section { padding: 0 16px; }
+        .notes-section { padding: 0 16px; font-family: sans-serif; }
         .note-item-wrapper { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
         .note-item {
             flex: 1; background: var(--card); border-radius: 14px; padding: 16px; display: flex;
             justify-content: space-between; align-items: center; text-decoration: none; color: var(--text);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03); border-left: 4px solid var(--primary); transition: all 0.2s; overflow: hidden;
+            box-shadow: 0 2px 8px rgba(139, 64, 34, 0.05); border-left: 4px solid var(--primary); transition: all 0.2s; overflow: hidden;
         }
-        .note-item:active { transform: scale(0.98); background: #f7fafc; }
-        .note-title { font-size: 15px; color: #2d3748; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; font-weight: bold; flex: 1; }
+        .note-item:active { transform: scale(0.98); background: #faf5f2; }
+        .note-title { font-size: 15px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; font-weight: bold; flex: 1; }
         .delete-btn {
-            background: #e53e3e; color: white; border: none; border-radius: 10px; padding: 0 16px;
+            background: #d9534f; color: white; border: none; border-radius: 10px; padding: 0 16px;
             height: 52px; font-size: 16px; cursor: pointer; display: none; transition: all 0.2s; flex-shrink: 0;
         }
 
-        .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; background: var(--card); border-radius: 14px; }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; background: var(--card); border-radius: 14px; font-family: sans-serif; }
         #loadingBar { height: 3px; background: var(--primary-gradient); width: 0%; transition: width 0.3s; position: fixed; top: 0; left: 0; z-index: 9999; }
 
         /* Modal 统一样式 */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(4px); }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(54, 47, 45, 0.6); z-index: 1000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(4px); font-family: sans-serif; }
         .modal-content { background: var(--card); border-radius: 16px; padding: 22px; width: 100%; max-width: 460px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
-        .modal-title { margin: 0 0 15px 0; font-size: 18px; font-weight: bold; color: #1a202c; }
+        .modal-title { margin: 0 0 15px 0; font-size: 18px; font-weight: bold; color: var(--text); }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: bold; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; background: #fff; }
-        .form-group input:disabled { background-color: #f1f5f9; color: #a0aec0; cursor: not-allowed; }
+        .form-group input:disabled { background-color: #f5f2ef; color: #a39c97; cursor: not-allowed; }
         .form-group textarea { font-family: monospace; resize: vertical; min-height: 200px; }
         .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 12px; }
         .btn { padding: 8px 16px; border-radius: 8px; border: none; font-size: 14px; font-weight: bold; cursor: pointer; transition: opacity 0.2s; }
         .btn:hover { opacity: 0.9; }
-        .btn-cancel { background: #edf2f7; color: #4a5568; }
+        .btn-cancel { background: #ebe5e0; color: #5c554e; }
         .btn-save { background: var(--primary-gradient); color: #fff; }
     </style>
 </head>
@@ -198,7 +201,7 @@ def generate_hub_html(archive_data):
     <div id="loadingBar"></div>
 
     <div class="top-bar">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 搜索，或空置回车发布杂志..." autocomplete="off">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 搜索，或空置回车发布短篇小说..." autocomplete="off">
         <button class="settings-btn" id="openSettingsBtn" title="配置中心">⚙️</button>
     </div>
 
@@ -237,8 +240,8 @@ def generate_hub_html(archive_data):
                 <input type="text" id="upFilename" placeholder="粘贴下方源码后自动生成...">
             </div>
             <div class="form-group">
-                <label>杂志 HTML 源码</label>
-                <textarea id="upContent" placeholder="在此粘贴杂志完整 HTML 代码..."></textarea>
+                <label>短篇小说 HTML 源码</label>
+                <textarea id="upContent" placeholder="在此粘贴小说完整 HTML 代码..."></textarea>
             </div>
 
             <div class="modal-actions">
@@ -252,7 +255,7 @@ def generate_hub_html(archive_data):
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-content">
             <h3 class="modal-title">⚙️ 核心配置中心</h3>
-            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">设置后在精读页面中点击 🤖 AI解析 即可自动同步保存。</p>
+            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">设置后在阅读页面中点击 🤖 AI解析 即可自动同步保存。</p>
             
             <div class="form-group">
                 <label>GitHub Personal Token</label>
@@ -269,7 +272,7 @@ def generate_hub_html(archive_data):
                 </div>
             </div>
 
-            <div style="border-top: 1px dashed #e2e8f0; margin: 15px 0;"></div>
+            <div style="border-top: 1px dashed var(--border); margin: 15px 0;"></div>
 
             <div class="form-group">
                 <label>自定义 AI Endpoint URL</label>
@@ -385,7 +388,7 @@ def generate_hub_html(archive_data):
                             
                             delBtn.onclick = async (e) => {
                                 e.preventDefault();
-                                if(confirm('确认删除此篇精读笔记并同步删除 GitHub 云端文件吗？')) {
+                                if(confirm('确认删除此篇小说并同步删除 GitHub 云端文件吗？')) {
                                     const pathToDelete = note.path;
                                     dayData.splice(index, 1);
                                     if (dayData.length === 0) delete archiveData[AppState.year][AppState.month][AppState.day];
@@ -396,10 +399,10 @@ def generate_hub_html(archive_data):
                             wrapper.appendChild(delBtn); notesList.appendChild(wrapper);
                         });
                     } else {
-                        notesList.innerHTML = '<div class="empty-state">未找到匹配的精读笔记 🔍</div>';
+                        notesList.innerHTML = '<div class="empty-state">未找到匹配的小说 🔍</div>';
                     }
                 } else {
-                    notesList.innerHTML = '<div class="empty-state">当日暂无精读笔记 📖</div>';
+                    notesList.innerHTML = '<div class="empty-state">当日暂无短篇小说 📖</div>';
                 }
             } catch (err) { console.error(err); }
         }
@@ -473,7 +476,7 @@ def generate_hub_html(archive_data):
             if(!content) return alert("请粘贴 HTML 代码！");
             
             filename = filename.replace(/[^a-zA-Z0-9\s-_]/g, '').trim().replace(/\s+/g, '-');
-            if(!filename) filename = "article";
+            if(!filename) filename = "story";
 
             const ghToken = localStorage.getItem('LITIT_GH_TOKEN');
 
@@ -498,7 +501,7 @@ def generate_hub_html(archive_data):
                 const resUpload = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${fullPath}`, {
                     method: 'PUT',
                     headers: { 'Authorization': `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: `Upload new magazine: ${filename}`, content: base64Content })
+                    body: JSON.stringify({ message: `Upload new short story: ${filename}`, content: base64Content })
                 });
 
                 if(!resUpload.ok) throw new Error("文件推送失败");
@@ -506,7 +509,7 @@ def generate_hub_html(archive_data):
 
                 // 2. 🔑 核心修复：抓取 HTML 的 <title> 标题，更新本地索引变量
                 let displayTitleMatch = content.match(/<title[^>]*>(.*?)<\/title>/i);
-                let htmlTitle = displayTitleMatch ? displayTitleMatch[1].replace(/<[^>]+>/g, '').trim() : "未命名杂志";
+                let htmlTitle = displayTitleMatch ? displayTitleMatch[1].replace(/<[^>]+>/g, '').trim() : "未命名小说";
                 
                 // 过长自动截断
                 if (htmlTitle.length > 60) {
@@ -554,7 +557,7 @@ def generate_hub_html(archive_data):
                 
                 document.getElementById('uploadModal').style.display = 'none';
                 document.getElementById('saveUploadBtn').innerText = "推送至云端 🚀";
-                alert('🎉 发布成功！杂志已归档至云端。');
+                alert('🎉 发布成功！小说已归档至云端。');
                 
             } catch (e) {
                 console.error(e);
@@ -647,10 +650,10 @@ def git_push_to_github():
 
 def main():
     print("=======================================")
-    print("📚 ShortStories - 精读日历枢纽生成器")
+    print("📚 ShortStories - 故事日历枢纽生成器")
     print("=======================================")
     archive_data, count = scan_summary_notes()
-    print(f"🔍 扫描完成，共找到 {count} 篇网页精读简报。")
+    print(f"🔍 扫描完成，共找到 {count} 篇短篇小说。")
     generate_hub_html(archive_data)
     git_push_to_github()
 
