@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # 升级到 v4，解决 Node.js 20 弃用警告
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # 升级到 v5，解决 Node.js 20 弃用警告
         with:
           python-version: '3.10'
 
@@ -28,10 +28,8 @@ jobs:
         run: pip install requests
 
       - name: Rebuild ShortStories Calendar Index
-        # 巧妙利用管道符，给脚本发送 "q" 指令
-        # 启动 generate_hub.py 扫描 Summary 目录生成最新的 index.html -> 接收到 q 信号 -> 成功退出
-        # 注意：这里的 generate_hub.py 需要与你实际的 Python 脚本文件名保持一致
-        run: echo "q" | python generate_hub.py
+        # 修正为你实际的 Python 文件名
+        run: python generate_index.py
 
       - name: Commit and Push changes
         run: |
