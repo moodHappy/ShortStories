@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>A Midsummer Escape</title>
@@ -55,7 +54,103 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -70,7 +165,65 @@
     <h1 style="text-align: left !important;">A Midsummer Escape</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/26 22:53:58</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">仲夏逃亡</p>
-    <p>Three years ago, the city was trapped in an unforgiving heatwave. The asphalt baked during the day and radiated a suffocating warmth long into the night. Claire sat on the fire escape of her cramped apartment, peeling a damp tank top away from her collarbone. The air was entirely still, heavy with the scent of hot garbage and melting tar.</p>
+    <div class="para-wrap"><p>Three years ago, the city was trapped in an unforgiving heatwave. The asphalt baked during the day and radiated a suffocating warmth long into the night. Claire sat on the fire escape of her cramped apartment, peeling a damp tank top away from her collarbone. The air was entirely still, heavy with the scent of hot garbage and melting tar.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
+<ul>
+<li><strong>three years ago</strong> = 三年前</li>
+<li><strong>be trapped in a heatwave</strong> = 被困在热浪之中；这里指城市被持续高温笼罩</li>
+<li><strong>an unforgiving heatwave</strong> = 无情的、难以忍受的热浪；<strong>unforgiving</strong> = 严酷的、不留情面的</li>
+<li><strong>asphalt</strong> = 沥青路面</li>
+<li><strong>the asphalt baked</strong> = 沥青路面被高温炙烤；<strong>bake</strong> = 被烤热、晒得滚烫</li>
+<li><strong>during the day</strong> = 白天期间</li>
+<li><strong>radiate sth.</strong> = 散发、释放（热量、光等）</li>
+<li><strong>radiate a suffocating warmth</strong> = 散发令人窒息的热气</li>
+<li><strong>long into the night</strong> = 一直持续到深夜；<strong>long into + 时间</strong> = 远远持续到……</li>
+<li><strong>radiated ... long into the night</strong> = 热量一直散发到深夜</li>
+<li><strong>suffocating warmth</strong> = 令人窒息的热气；<strong>suffocating</strong> = 让人喘不过气的、压抑的</li>
+<li><strong>sit on the fire escape</strong> = 坐在消防梯/逃生梯上</li>
+<li><strong>fire escape</strong> = 消防逃生梯；建筑物外部的紧急逃生设施</li>
+<li><strong>cramped apartment</strong> = 狭小拥挤的公寓；<strong>cramped</strong> = 空间狭窄、拥挤的</li>
+<li><strong>peel sth. away from sth.</strong> = 把某物从另一物上揭开/撕离</li>
+<li><strong>peel a damp tank top away from her collarbone</strong> = 把湿透的背心从锁骨处揭开</li>
+<li><strong>damp tank top</strong> = 潮湿的背心；<strong>tank top</strong> = 无袖背心</li>
+<li><strong>collarbone</strong> = 锁骨</li>
+<li><strong>the air was entirely still</strong> = 空气完全静止；一点风也没有</li>
+<li><strong>still air</strong> = 静止的空气；没有风的空气</li>
+<li><strong>heavy with sth.</strong> = 充满某种气味/感觉；被某物笼罩</li>
+<li><strong>heavy with the scent of...</strong> = 弥漫着……的气味</li>
+<li><strong>the scent of hot garbage</strong> = 滚热垃圾散发出的气味</li>
+<li><strong>melting tar</strong> = 正在融化的柏油/焦油</li>
+<li><strong>hot garbage</strong> = 炎热天气中散发臭味的垃圾</li>
+<li><strong>baked / radiated / melting</strong> = 连续使用与高温相关的动词，强化整段闷热、窒息的环境感</li>
+<li><strong>be heavy with + 名词</strong> = 充满……；常用于空气、气氛、场景等</li>
+</ul>
+</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
+
+- **three years ago** = 三年前
+- **be trapped in a heatwave** = 被困在热浪之中；这里指城市被持续高温笼罩
+- **an unforgiving heatwave** = 无情的、难以忍受的热浪；**unforgiving** = 严酷的、不留情面的
+- **asphalt** = 沥青路面
+- **the asphalt baked** = 沥青路面被高温炙烤；**bake** = 被烤热、晒得滚烫
+- **during the day** = 白天期间
+- **radiate sth.** = 散发、释放（热量、光等）
+- **radiate a suffocating warmth** = 散发令人窒息的热气
+- **long into the night** = 一直持续到深夜；**long into + 时间** = 远远持续到……
+- **radiated ... long into the night** = 热量一直散发到深夜
+- **suffocating warmth** = 令人窒息的热气；**suffocating** = 让人喘不过气的、压抑的
+- **sit on the fire escape** = 坐在消防梯/逃生梯上
+- **fire escape** = 消防逃生梯；建筑物外部的紧急逃生设施
+- **cramped apartment** = 狭小拥挤的公寓；**cramped** = 空间狭窄、拥挤的
+- **peel sth. away from sth.** = 把某物从另一物上揭开/撕离
+- **peel a damp tank top away from her collarbone** = 把湿透的背心从锁骨处揭开
+- **damp tank top** = 潮湿的背心；**tank top** = 无袖背心
+- **collarbone** = 锁骨
+- **the air was entirely still** = 空气完全静止；一点风也没有
+- **still air** = 静止的空气；没有风的空气
+- **heavy with sth.** = 充满某种气味/感觉；被某物笼罩
+- **heavy with the scent of...** = 弥漫着……的气味
+- **the scent of hot garbage** = 滚热垃圾散发出的气味
+- **melting tar** = 正在融化的柏油/焦油
+- **hot garbage** = 炎热天气中散发臭味的垃圾
+- **baked / radiated / melting** = 连续使用与高温相关的动词，强化整段闷热、窒息的环境感
+- **be heavy with + 名词** = 充满……；常用于空气、气氛、场景等</textarea></div></div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">三年前，这座城市被困在一场无情的酷暑之中。柏油马路在白天被烤得滚烫，直到深夜仍在散发着令人窒息的热气。克莱尔坐在她那间狭窄公寓的消防通道上，将汗湿的背心从锁骨上扯开。空气完全凝滞，弥漫着滚烫的垃圾和融化的柏油气味。</p>
     <p>She was twenty-two, nearly broke, and fiercely determined not to let the oppressive weather dictate her Friday night. Her phone buzzed against the rusted iron grating. It was a message from a guy she had been seeing casually, inviting her to a polite, quiet dinner at an upscale bistro. She stared at the screen, watching a drop of sweat roll down her temple, and locked the phone without replying.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那年她二十二岁，几乎身无分文，却拼了命地不想让这压抑的天气支配她的周五夜晚。手机在生锈的铁格栅上震动起来。是一个她随便约会过的男人发来的信息，邀请她去一家高档小酒馆吃一顿文雅、安静的晚餐。她盯着屏幕，看着一滴汗水顺着太阳穴流下，没有回复便锁上了手机。</p>
@@ -203,5 +356,55 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
