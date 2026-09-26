@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>First Snow</title>
@@ -55,7 +54,103 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -70,7 +165,59 @@
     <h1 style="text-align: left !important;">First Snow</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/26 17:39:24</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">初雪</p>
-    <p>The neon sign of "The Bluebird" flickered relentlessly, casting a harsh pink glow over the frost-covered window. Inside, the bass from the jukebox vibrated through the sticky wooden floor. Clara slid into the cracked leather booth, shaking melting snow from her hair, instantly enveloped by the loud, chaotic energy of her friends.</p>
+    <div class="para-wrap"><p>The neon sign of "The Bluebird" flickered relentlessly, casting a harsh pink glow over the frost-covered window. Inside, the bass from the jukebox vibrated through the sticky wooden floor. Clara slid into the cracked leather booth, shaking melting snow from her hair, instantly enveloped by the loud, chaotic energy of her friends.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
+<ul>
+<li><strong>neon sign</strong> = 霓虹灯招牌</li>
+<li><strong>flicker relentlessly</strong> = 不停地闪烁；<strong>relentlessly</strong> = 持续不断地、不停歇地</li>
+<li><strong>cast a harsh pink glow over sth.</strong> = 将刺眼的粉色光芒投射到……上</li>
+<li><strong>harsh glow</strong> = 刺眼、强烈而不柔和的光</li>
+<li><strong>frost-covered window</strong> = 覆着霜的窗户；<strong>-covered</strong> = 被……覆盖的</li>
+<li><strong>inside</strong> = 在里面；这里作为句首地点状语</li>
+<li><strong>the bass from the jukebox</strong> = 点唱机发出的低音/低沉的音乐声</li>
+<li><strong>jukebox</strong> = 自动点唱机</li>
+<li><strong>vibrate through sth.</strong> = 震动着穿过……；使……都感受到震动</li>
+<li><strong>sticky wooden floor</strong> = 黏乎乎的木地板；<strong>sticky</strong> = 黏的</li>
+<li><strong>slide into the booth</strong> = 滑入卡座；这里指轻快/顺势坐进卡座</li>
+<li><strong>cracked leather booth</strong> = 有裂纹的皮革卡座</li>
+<li><strong>leather booth</strong> = 皮革卡座；酒吧、餐馆里常见的半封闭座位</li>
+<li><strong>shake sth. from one's hair</strong> = 抖掉头发上的某物</li>
+<li><strong>shake melting snow from her hair</strong> = 抖落正在融化的雪</li>
+<li><strong>melting snow</strong> = 正在融化的雪</li>
+<li><strong>be enveloped by sth.</strong> = 被某物包围/笼罩</li>
+<li><strong>enveloped by the loud, chaotic energy</strong> = 被喧闹而混乱的活力包围</li>
+<li><strong>loud, chaotic energy</strong> = 喧闹、混乱而充满活力的氛围</li>
+<li><strong>the energy of her friends</strong> = 她朋友们所营造出的活跃气氛</li>
+<li><strong>instantly enveloped by...</strong> = 立刻被……包围；过去分词短语表示随后的状态/结果</li>
+<li><strong>cast A over B</strong> = 将 A 投射/笼罩在 B 上</li>
+<li><strong>vibrate through A</strong> = 震动穿过 A；声音/低音传遍某个空间</li>
+<li><strong>slide into + 座位</strong> = 滑进/坐进某个座位</li>
+</ul>
+</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
+
+- **neon sign** = 霓虹灯招牌
+- **flicker relentlessly** = 不停地闪烁；**relentlessly** = 持续不断地、不停歇地
+- **cast a harsh pink glow over sth.** = 将刺眼的粉色光芒投射到……上
+- **harsh glow** = 刺眼、强烈而不柔和的光
+- **frost-covered window** = 覆着霜的窗户；**-covered** = 被……覆盖的
+- **inside** = 在里面；这里作为句首地点状语
+- **the bass from the jukebox** = 点唱机发出的低音/低沉的音乐声
+- **jukebox** = 自动点唱机
+- **vibrate through sth.** = 震动着穿过……；使……都感受到震动
+- **sticky wooden floor** = 黏乎乎的木地板；**sticky** = 黏的
+- **slide into the booth** = 滑入卡座；这里指轻快/顺势坐进卡座
+- **cracked leather booth** = 有裂纹的皮革卡座
+- **leather booth** = 皮革卡座；酒吧、餐馆里常见的半封闭座位
+- **shake sth. from one's hair** = 抖掉头发上的某物
+- **shake melting snow from her hair** = 抖落正在融化的雪
+- **melting snow** = 正在融化的雪
+- **be enveloped by sth.** = 被某物包围/笼罩
+- **enveloped by the loud, chaotic energy** = 被喧闹而混乱的活力包围
+- **loud, chaotic energy** = 喧闹、混乱而充满活力的氛围
+- **the energy of her friends** = 她朋友们所营造出的活跃气氛
+- **instantly enveloped by...** = 立刻被……包围；过去分词短语表示随后的状态/结果
+- **cast A over B** = 将 A 投射/笼罩在 B 上
+- **vibrate through A** = 震动穿过 A；声音/低音传遍某个空间
+- **slide into + 座位** = 滑进/坐进某个座位</textarea></div></div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“蓝鸟”酒吧的霓虹灯招牌无休止地闪烁着，在结霜的窗户上投下刺眼的粉色光芒。室内，点唱机传出的重低音震动着踩得发粘的木地板。克拉拉滑进那张皮革开裂的卡座，抖落头发上正在融化的雪花，瞬间就被朋友们喧闹、混乱的活力包围了。</p>
     <p>"Finally!" Claire yelled over the music, sliding a condensation-beaded pint glass of pale ale across the table. "We thought you got swallowed by the blizzard. What took you so long? You're missing happy hour."</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“总算来了！”克莱尔盖过音乐的喧嚣大喊着，将一杯挂满水珠的淡色艾尔啤酒推过桌面。“我们还以为你被暴风雪吞了呢。怎么搞了这么久？你都错过欢乐时光了。”</p>
@@ -207,5 +354,55 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
