@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Son</title>
@@ -55,7 +54,103 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -70,7 +165,47 @@
     <h1 style="text-align: left !important;">The Son</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/25 21:09:33</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">儿子</p>
-    <p>The night before the train left, the boarding-house room smelled of coal smoke and damp wool. Thomas locked the door, turned, and looked at her the way a man looks at the last thing he will ever truly own. Eleanor was already pulling the nightgown over her head. She did not wait for him to ask.</p>
+    <div class="para-wrap"><p>The night before the train left, the boarding-house room smelled of coal smoke and damp wool. Thomas locked the door, turned, and looked at her the way a man looks at the last thing he will ever truly own. Eleanor was already pulling the nightgown over her head. She did not wait for him to ask.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
+<ul>
+<li><strong>the night before the train left</strong> = 火车出发前一晚；<strong>the night before + 过去式</strong> = ……前一晚</li>
+<li><strong>the boarding-house room</strong> = 寄宿公寓的房间</li>
+<li><strong>smell of coal smoke and damp wool</strong> = 带有煤烟和潮湿羊毛的气味</li>
+<li><strong>coal smoke</strong> = 煤烟</li>
+<li><strong>damp wool</strong> = 潮湿的羊毛；<strong>damp</strong> = 潮湿的、湿气重的</li>
+<li><strong>lock the door</strong> = 锁上门</li>
+<li><strong>turn</strong> = 转身；这里指转过身面对 Eleanor</li>
+<li><strong>look at her</strong> = 看着她</li>
+<li><strong>the way a man looks at...</strong> = 像一个男人注视……的方式；<strong>the way + 从句</strong> = ……的方式</li>
+<li><strong>the last thing he will ever truly own</strong> = 他此生最后真正拥有的东西</li>
+<li><strong>the last thing + 从句</strong> = 最后/最后一个……的东西；这里带有强烈的情感色彩</li>
+<li><strong>ever truly own</strong> = 此生真正拥有；<strong>ever</strong> 加强“曾经/此生”的语气</li>
+<li><strong>be already doing sth.</strong> = 已经正在做某事</li>
+<li><strong>pull the nightgown over her head</strong> = 把睡裙从头上套下来/拉下来</li>
+<li><strong>nightgown</strong> = 睡裙；睡衣</li>
+<li><strong>not wait for sb. to do sth.</strong> = 没有等某人做某事</li>
+<li><strong>She did not wait for him to ask.</strong> = 她没有等他开口要求</li>
+<li><strong>the way + 主语 + 谓语</strong> = ……的样子/方式；这里用于描写 Thomas 注视 Eleanor 的眼神</li>
+</ul>
+</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
+
+- **the night before the train left** = 火车出发前一晚；**the night before + 过去式** = ……前一晚
+- **the boarding-house room** = 寄宿公寓的房间
+- **smell of coal smoke and damp wool** = 带有煤烟和潮湿羊毛的气味
+- **coal smoke** = 煤烟
+- **damp wool** = 潮湿的羊毛；**damp** = 潮湿的、湿气重的
+- **lock the door** = 锁上门
+- **turn** = 转身；这里指转过身面对 Eleanor
+- **look at her** = 看着她
+- **the way a man looks at...** = 像一个男人注视……的方式；**the way + 从句** = ……的方式
+- **the last thing he will ever truly own** = 他此生最后真正拥有的东西
+- **the last thing + 从句** = 最后/最后一个……的东西；这里带有强烈的情感色彩
+- **ever truly own** = 此生真正拥有；**ever** 加强“曾经/此生”的语气
+- **be already doing sth.** = 已经正在做某事
+- **pull the nightgown over her head** = 把睡裙从头上套下来/拉下来
+- **nightgown** = 睡裙；睡衣
+- **not wait for sb. to do sth.** = 没有等某人做某事
+- **She did not wait for him to ask.** = 她没有等他开口要求
+- **the way + 主语 + 谓语** = ……的样子/方式；这里用于描写 Thomas 注视 Eleanor 的眼神</textarea></div></div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">火车离开的前一夜，寄宿公寓的房间里弥漫着煤烟与潮湿羊毛的气味。托马斯锁上门，转过身，用一种男人看着自己最后真正拥有的东西的眼神看着她。埃莉诺已经把睡裙从头顶扯了下来。她没有等他开口。</p>
     <p>He took her mouth first. Hard. One hand in her hair, the other braced against the wall as she sank to her knees and opened for him. She sucked him deep, spit running down her chin, throat working around every inch while he cursed under his breath and thrust in short, desperate strokes. When he pulled free, the head of his cock was flushed and shining. He pushed her onto the bed, straddled her chest, and forced her breasts together around himself. The wet slap of flesh filled the small room. She licked the tip every time it appeared between her tits, tasting salt and heat, until he groaned and slid lower, shoved her legs wide, and drove into her cunt in one long, ruthless stroke.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">他先要了她的嘴。用力。一只手抓住她的头发，另一只手撑在墙上，她跪下去为他张开。她深深含住他，唾液顺着下巴流下，喉咙吞吐着每一寸，而他低声咒骂，用短促而绝望的抽送顶进她的喉咙。当他抽出来时，龟头已经又红又亮。他把她推倒在床上，跨坐到她胸口，强行把她的乳房聚拢，夹住自己的阴茎。湿润的拍打声充满了狭小的房间。她每次看到龟头从乳沟里冒出就舔上去，尝到咸味与热度，直到他低吼着往下移，分开她的双腿，用一记又长又狠的抽送整个没入她的体内。</p>
@@ -233,5 +368,55 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
