@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Wait</title>
@@ -55,7 +54,103 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -70,7 +165,57 @@
     <h1 style="text-align: left !important;">The Wait</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/26 08:05:19</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">等待</p>
-    <p>The Ardennes forest was a suffocating sea of white and gray. It was early December 1944, and the cold had a way of seeping into the marrow, making men feel old before they turned twenty. Thomas sat on a damp ammunition crate, using a rusted bayonet to scrape hardened mud from his boots.</p>
+    <div class="para-wrap"><p>The Ardennes forest was a suffocating sea of white and gray. It was early December 1944, and the cold had a way of seeping into the marrow, making men feel old before they turned twenty. Thomas sat on a damp ammunition crate, using a rusted bayonet to scrape hardened mud from his boots.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
+<ul>
+<li><strong>The Ardennes forest</strong> = 阿登森林；二战西线著名战场地区</li>
+<li><strong>a suffocating sea of white and gray</strong> = 一片令人窒息的灰白色海洋；<strong>sea of + 名词</strong> 比喻大片、无边无际的某物</li>
+<li><strong>suffocating</strong> = 令人窒息的；压抑得让人喘不过气</li>
+<li><strong>white and gray</strong> = 白色与灰色；这里营造寒冷、阴沉的视觉氛围</li>
+<li><strong>early December 1944</strong> = 1944年12月初</li>
+<li><strong>the cold had a way of doing sth.</strong> = 寒冷总有一种让某事发生的方式；一种文学性的拟人表达</li>
+<li><strong>seep into the marrow</strong> = 渗入骨髓；<strong>seep into</strong> = 缓慢渗入</li>
+<li><strong>marrow</strong> = 骨髓</li>
+<li><strong>make sb. feel old</strong> = 使某人感到苍老/衰惫</li>
+<li><strong>make men feel old before they turned twenty</strong> = 让还没满20岁的人就感到自己已经老了</li>
+<li><strong>before they turned twenty</strong> = 在他们满20岁之前；<strong>turn + 年龄</strong> = 到某个年龄</li>
+<li><strong>sit on a damp ammunition crate</strong> = 坐在一只潮湿的弹药箱上</li>
+<li><strong>damp ammunition crate</strong> = 潮湿的弹药箱</li>
+<li><strong>ammunition</strong> = 弹药；军火</li>
+<li><strong>ammunition crate</strong> = 弹药箱</li>
+<li><strong>use sth. to do sth.</strong> = 用某物做某事</li>
+<li><strong>a rusted bayonet</strong> = 一把生锈的刺刀</li>
+<li><strong>rusted</strong> = 生锈的</li>
+<li><strong>bayonet</strong> = 刺刀</li>
+<li><strong>scrape A from B</strong> = 把 A 从 B 上刮掉</li>
+<li><strong>scrape hardened mud from his boots</strong> = 从靴子上刮掉已经干硬的泥</li>
+<li><strong>hardened mud</strong> = 干硬的泥；<strong>hardened</strong> = 变硬的、凝固的</li>
+<li><strong>scrape sth. from/off sth.</strong> = 从某物上刮掉某物；常用于清除附着物</li>
+</ul>
+</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
+
+- **The Ardennes forest** = 阿登森林；二战西线著名战场地区
+- **a suffocating sea of white and gray** = 一片令人窒息的灰白色海洋；**sea of + 名词** 比喻大片、无边无际的某物
+- **suffocating** = 令人窒息的；压抑得让人喘不过气
+- **white and gray** = 白色与灰色；这里营造寒冷、阴沉的视觉氛围
+- **early December 1944** = 1944年12月初
+- **the cold had a way of doing sth.** = 寒冷总有一种让某事发生的方式；一种文学性的拟人表达
+- **seep into the marrow** = 渗入骨髓；**seep into** = 缓慢渗入
+- **marrow** = 骨髓
+- **make sb. feel old** = 使某人感到苍老/衰惫
+- **make men feel old before they turned twenty** = 让还没满20岁的人就感到自己已经老了
+- **before they turned twenty** = 在他们满20岁之前；**turn + 年龄** = 到某个年龄
+- **sit on a damp ammunition crate** = 坐在一只潮湿的弹药箱上
+- **damp ammunition crate** = 潮湿的弹药箱
+- **ammunition** = 弹药；军火
+- **ammunition crate** = 弹药箱
+- **use sth. to do sth.** = 用某物做某事
+- **a rusted bayonet** = 一把生锈的刺刀
+- **rusted** = 生锈的
+- **bayonet** = 刺刀
+- **scrape A from B** = 把 A 从 B 上刮掉
+- **scrape hardened mud from his boots** = 从靴子上刮掉已经干硬的泥
+- **hardened mud** = 干硬的泥；**hardened** = 变硬的、凝固的
+- **scrape sth. from/off sth.** = 从某物上刮掉某物；常用于清除附着物</textarea></div></div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">阿登森林是一片令人窒息的灰白之海。那是1944年12月初，寒冷似乎能直接渗入骨髓，让这些还不到二十岁的年轻人在不知不觉中苍老。托马斯坐在一只潮湿的弹药箱上，用一把生锈的刺刀刮去靴子上结块的泥巴。</p>
     <p>"You think they'll issue us winter gear before we freeze to death?" asked Miller, a kid from Chicago who hadn't stopped shivering for three days.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“你觉得他们会在我们冻死之前发冬装吗？”米勒问道。这个来自芝加哥的瘦小伙已经连续打了三天冷战。</p>
@@ -215,5 +360,55 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
