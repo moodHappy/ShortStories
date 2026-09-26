@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Fall</title>
@@ -55,7 +54,103 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -70,7 +165,57 @@
     <h1 style="text-align: left !important;">The Fall</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/26 16:34:03</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">降雪</p>
-    <p>The snow began to fall just as Miller had predicted. It didn't drift down gently; it drove hard, stinging their faces like shards of glass. The distant rifle shot had been a scout's warning. Now, the gray silence was shattered entirely, replaced by the terrifying, deafening whistle of incoming artillery.</p>
+    <div class="para-wrap"><p>The snow began to fall just as Miller had predicted. It didn't drift down gently; it drove hard, stinging their faces like shards of glass. The distant rifle shot had been a scout's warning. Now, the gray silence was shattered entirely, replaced by the terrifying, deafening whistle of incoming artillery.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 Key Expressions</h3>
+<ul>
+<li><strong>begin to fall</strong> = 开始下落；开始降临；这里指开始下雪</li>
+<li><strong>just as</strong> = 正当……的时候；恰好在……之时</li>
+<li><strong>as Miller had predicted</strong> = 正如 Miller 预言的那样；<strong>had predicted</strong> 为过去完成时</li>
+<li><strong>drift down gently</strong> = 轻柔地飘落下来；<strong>drift</strong> = 随风缓缓飘动</li>
+<li><strong>drive hard</strong> = 猛烈地吹打/袭来；这里描述雪在强风中猛烈飞来</li>
+<li><strong>sting one's face</strong> = 刺痛某人的脸</li>
+<li><strong>sting</strong> = 刺痛；使感到尖锐的疼痛</li>
+<li><strong>like shards of glass</strong> = 像玻璃碎片一样；<strong>shard</strong> = 碎片，尤指尖锐的碎片</li>
+<li><strong>the distant rifle shot</strong> = 远处的步枪枪声</li>
+<li><strong>had been a scout's warning</strong> = 原来是侦察兵发出的警告；<strong>had been</strong> 表示对之前事件的回溯说明</li>
+<li><strong>scout's warning</strong> = 侦察兵的警告</li>
+<li><strong>shatter the silence</strong> = 打破寂静；彻底打破沉寂</li>
+<li><strong>the gray silence</strong> = 灰暗的寂静；带有环境描写色彩</li>
+<li><strong>be shattered entirely</strong> = 被彻底打破</li>
+<li><strong>be replaced by sth.</strong> = 被某物取代</li>
+<li><strong>replaced by the terrifying... whistle</strong> = 被令人恐惧的……呼啸声所取代</li>
+<li><strong>terrifying</strong> = 令人恐惧的；骇人的</li>
+<li><strong>deafening</strong> = 震耳欲聋的</li>
+<li><strong>whistle of incoming artillery</strong> = 袭来炮火的呼啸声</li>
+<li><strong>incoming artillery</strong> = 正在袭来的炮火/炮弹</li>
+<li><strong>artillery</strong> = 炮火；火炮；炮兵</li>
+<li><strong>deafening whistle</strong> = 震耳欲聋的呼啸声</li>
+<li><strong>shatter A, replaced by B</strong> = 打破 A，随后由 B 取代；这里通过 <strong>过去分词短语</strong> 快速推进场景</li>
+</ul>
+</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 Key Expressions
+
+- **begin to fall** = 开始下落；开始降临；这里指开始下雪
+- **just as** = 正当……的时候；恰好在……之时
+- **as Miller had predicted** = 正如 Miller 预言的那样；**had predicted** 为过去完成时
+- **drift down gently** = 轻柔地飘落下来；**drift** = 随风缓缓飘动
+- **drive hard** = 猛烈地吹打/袭来；这里描述雪在强风中猛烈飞来
+- **sting one's face** = 刺痛某人的脸
+- **sting** = 刺痛；使感到尖锐的疼痛
+- **like shards of glass** = 像玻璃碎片一样；**shard** = 碎片，尤指尖锐的碎片
+- **the distant rifle shot** = 远处的步枪枪声
+- **had been a scout's warning** = 原来是侦察兵发出的警告；**had been** 表示对之前事件的回溯说明
+- **scout's warning** = 侦察兵的警告
+- **shatter the silence** = 打破寂静；彻底打破沉寂
+- **the gray silence** = 灰暗的寂静；带有环境描写色彩
+- **be shattered entirely** = 被彻底打破
+- **be replaced by sth.** = 被某物取代
+- **replaced by the terrifying... whistle** = 被令人恐惧的……呼啸声所取代
+- **terrifying** = 令人恐惧的；骇人的
+- **deafening** = 震耳欲聋的
+- **whistle of incoming artillery** = 袭来炮火的呼啸声
+- **incoming artillery** = 正在袭来的炮火/炮弹
+- **artillery** = 炮火；火炮；炮兵
+- **deafening whistle** = 震耳欲聋的呼啸声
+- **shatter A, replaced by B** = 打破 A，随后由 B 取代；这里通过 **过去分词短语** 快速推进场景</textarea></div></div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">雪正如米勒预料的那样下起来了。它并非温柔地飘落，而是猛烈地袭来，像碎玻璃一样刺痛着他们的脸。远处的那声枪响是侦察兵的警告。现在，那片灰暗的死寂被彻底粉碎，取而代之的是令人恐惧、震耳欲聋的炮弹呼啸声。</p>
     <p>"Get down!" Thomas roared, diving back toward the trench. The earth shuddered violently as the German 88s found their range. Jagged splinters of frozen pine rained down around them like shrapnel. Miller was scrambling just a few paces behind, his oversized helmet slipping forward, obscuring his vision.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“趴下！”托马斯怒吼着，朝战壕扑去。随着德军的88毫米高射炮找到了射击诸元，大地开始剧烈震颤。冰冻的松树碎片像弹片一样在他们周围如雨点般落下。米勒就在几步之外连滚带爬地跟着，他那过大的头盔向前滑落，遮挡住了视线。</p>
@@ -211,5 +356,55 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
