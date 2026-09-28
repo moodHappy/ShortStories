@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Eighteen-Year-Old Margaret</title>
@@ -55,7 +54,103 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
@@ -70,7 +165,56 @@
     <h1 style="text-align: left !important;">Eighteen-Year-Old Margaret</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/29 00:46:41</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">十八岁的玛格丽特</p>
-    <p>At eighteen, Margaret was already a striking vision of grace, inheriting her mother’s delicate poise and her father’s quiet resilience.</p>
+    <div class="para-wrap"><p>At eighteen, Margaret was already a striking vision of grace, inheriting her mother’s delicate poise and her father’s quiet resilience.<span class="anno-toggle has-anno"></span></p><div class="anno-box notranslate" translate="no" style="display: none;"><div class="anno-view markdown-body notranslate" translate="no"><h3>📌 完整翻译</h3>
+<p>在十八岁时，玛格丽特已经是一道惊艳的优雅风景，既继承了母亲的柔美仪态，又拥有父亲的沉静韧性。</p>
+<h3>📌 Key Expressions</h3>
+<ul>
+<li><p><strong>at eighteen</strong>
+= 在十八岁时
+（表示具体年龄的时间状语）</p>
+</li>
+<li><p><strong>striking vision of grace</strong>
+= 惊艳的优雅形象
+（“vision”在此作比喻，用来形容外貌或气质）</p>
+</li>
+<li><p><strong>inheriting</strong>
+= 继承
+（这里用现在分词作状语，表示“带有…的特质”）</p>
+</li>
+<li><p><strong>delicate poise</strong>
+= 柔美仪态
+（“poise”指举止、姿态的从容与优雅）</p>
+</li>
+<li><p><strong>quiet resilience</strong>
+= 沉静韧性
+（“quiet”修饰“resilience”，强调不张扬的坚韧）</p>
+</li>
+</ul>
+</div><textarea class="anno-edit notranslate" translate="no" style="display:none;">### 📌 完整翻译
+
+在十八岁时，玛格丽特已经是一道惊艳的优雅风景，既继承了母亲的柔美仪态，又拥有父亲的沉静韧性。
+
+### 📌 Key Expressions
+
+- **at eighteen**
+  = 在十八岁时
+  （表示具体年龄的时间状语）
+
+- **striking vision of grace**
+  = 惊艳的优雅形象
+  （“vision”在此作比喻，用来形容外貌或气质）
+
+- **inheriting**
+  = 继承
+  （这里用现在分词作状语，表示“带有…的特质”）
+
+- **delicate poise**
+  = 柔美仪态
+  （“poise”指举止、姿态的从容与优雅）
+
+- **quiet resilience**
+  = 沉静韧性
+  （“quiet”修饰“resilience”，强调不张扬的坚韧）</textarea></div></div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">十八岁那年，玛格丽特就已经展现出惊人的优雅，她继承了母亲那份精致的沉稳，以及父亲那份内敛的坚韧。</p>
     <p>It was the autumn of 1998, long before the cold shadows of the federal penitentiary or the suffocating grip of men like Director Sterling would ever darken her life.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那是1998年的秋天，远在联邦监狱冰冷的阴影，或是像典狱长斯特林这样的人那令人窒息的控制笼罩她的生活之前。</p>
@@ -221,5 +365,55 @@
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
