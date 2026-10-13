@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Chapter 553: Incompetent Rage</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style id="core-style">
+:root {
+  --bg-page: #ffffff;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-sub: #334155;
+  --text-muted: #64748b;
+  --accent-primary: #4f46e5;
+  --border-subtle: #e2e8f0;
+  --font-serif: "Georgia", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+}
+body {
+  font-family: var(--font-sans);
+  padding: 12px 12px 36px 12px;
+  margin: 0 auto;
+  max-width: 780px;
+  background: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.75;
+  font-size: 16px;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+* { box-sizing: border-box; max-width: 100%; }
+img { max-width: 100%; height: auto; border-radius: 8px; }
+/* 顶部极简阅读进度条 */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #4f46e5, #9333ea);
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+}
+/* 主容器：零冗余边距，最大化阅读视野 */
+.litit-report {
+  background: var(--bg-card);
+  padding: 0;
+}
+/* AI 批注组件样式 */
+.anno-toggle, .ai-toggle {
+  display: inline-block;
+  padding: 2px 5px;
+  margin-left: 5px;
+  cursor: pointer;
+  opacity: 0.45;
+  font-size: 0.85rem;
+  vertical-align: middle;
+  transition: all 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.anno-toggle:hover, .ai-toggle:hover { opacity: 1; transform: scale(1.15); }
+.anno-toggle.has-anno { opacity: 1; }
+.anno-toggle::after { content: "🔴"; }
+.ai-toggle { opacity: 0.7; padding: 2px 4px; }
+.ai-toggle::after { content: "🤖"; }
+.ai-toggle.loading::after {
+  content: "⏳";
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.anno-box {
+  display: none;
+  margin-top: 10px;
+  background: #faf8ff;
+  border-left: 3px solid #7c3aed;
+  padding: 12px 14px;
+  border-radius: 0 8px 8px 0;
+  text-align: left;
+}
+.anno-view { font-size: 0.95rem; line-height: 1.65; color: #334155; min-height: 24px; }
+.anno-edit {
+  width: 100%;
+  min-height: 120px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 0.95rem;
+  border: 1px dashed #a78bfa;
+  border-radius: 6px;
+  resize: vertical;
+  display: none;
+  background: #fff;
+  color: #1e293b;
+  outline: none;
+}
+.anno-edit:focus { border: 1px solid #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12); }
+.markdown-body p { margin-top: 0; margin-bottom: 8px; }
+.markdown-body p:last-child { margin-bottom: 0; }
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  color: #5b21b6;
+  font-size: 1.05rem;
+  margin: 10px 0 6px 0;
+  border-bottom: 1px dashed #ddd6fe;
+  padding-bottom: 4px;
+}
+.markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 18px; }
+.markdown-body blockquote {
+  margin: 0 0 10px 0;
+  padding: 8px 12px;
+  background: rgba(124, 58, 237, 0.06);
+  border-left: 3px solid #7c3aed;
+  color: #475569;
+}
+/* 杂志风区块标题 */
+.section-header {
+  font-size: 16px;
+  color: #0f172a;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%);
+  padding: 8px 12px;
+  border-left: 4px solid #4f46e5;
+  margin: 26px 0 14px 0;
+  border-radius: 0 6px 6px 0;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 1px 0 #f1f5f9, inset 0 -1px 0 #f1f5f9;
+}
+/* 折叠面板升级：极简无十字图标、最大化宽度 */
+details.litit-fold {
+  margin-bottom: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+details.litit-fold[open] { border-color: #cbd5e1; }
+details.litit-fold summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  outline: none;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  transition: background 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+details.litit-fold summary::-webkit-details-marker { display: none; }
+details.litit-fold summary::after { display: none; } /* 彻底移除右侧十字/横杠图标 */
+details.litit-fold summary:hover { background: #f1f5f9; }
+details.litit-fold[open] summary {
+  border-bottom: 1px solid #e2e8f0;
+  background: #f1f5f9;
+  border-left: 3px solid #4f46e5;
+}
+.litit-fold-content {
+  padding: 10px 8px; /* 极限压缩左右内边距，让卡片完全铺开 */
+  background: #f8fafc;
+}
+/* 精读区列表彻底去圆点、卡片化重构 */
+.litit-fold-content > ol, .litit-fold-content > ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 0 !important;
+  counter-reset: litit-counter;
+}
+/* 每一条精读项：取消左侧大缩进，100% 铺满横向宽度 */
+.litit-fold-content > ol > li, .litit-fold-content > ul > li {
+  counter-increment: litit-counter;
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 12px; /* 上下左右均衡紧凑，把整行宽度全留给正文 */
+  margin-bottom: 10px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.015);
+}
+.litit-fold-content > ol > li:last-child, .litit-fold-content > ul > li:last-child {
+  margin-bottom: 0 !important;
+}
+/* 顶部流式微型序号徽章：不占左侧列宽，极具杂志感 */
+.litit-fold-content > ol > li::before, .litit-fold-content > ul > li::before {
+  content: "NO." counter(litit-counter, decimal-leading-zero);
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: -apple-system, BlinkMacSystemFont, monospace;
+  color: #4f46e5;
+  background: #eef2ff;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+}
+/* 保持脚本兼容的英/中句子专属排版 */
+.litit-en-sentence {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.04rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.litit-zh-sentence {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.93rem;
+  color: #475569;
+  line-height: 1.55;
+  margin-bottom: 2px;
+}
+/* 移除原模板中多余的 br 换行高度干扰 */
+li.litit-target-sentence > br { display: none; }
+/* 二、五板块：词组短语与顶部 NO.01 同行展示，极省空间又美观 */
+.litit-fold-content > ul > li.litit-target-sentence > strong:first-child {
+  display: inline-block;
+  background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 100%);
+  color: #4338ca;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-right: 4px;
+  margin-bottom: 6px;
+  border: 1px solid #e0e7ff;
+  vertical-align: middle;
+}
+.litit-fold-content > ul > li.litit-target-sentence > .litit-en-sentence {
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
+  font-size: 0.98rem;
+  color: #0f172a;
+}
+/* 一板块内部的子级知识点解析区：超薄左边框内嵌盒，最大化内部文字宽度 */
+li.litit-target-sentence > ul {
+  list-style: none !important;
+  margin: 10px 0 0 0 !important;
+  padding: 8px 10px !important;
+  background: #f8fafc;
+  border-radius: 6px;
+  border-left: 2.5px solid #94a3b8;
+}
+li.litit-target-sentence > ul > li {
+  position: relative;
+  padding-left: 10px;
+  margin-bottom: 5px !important;
+  font-size: 0.88rem;
+  color: #334155;
+  line-height: 1.5;
+}
+li.litit-target-sentence > ul > li:last-child { margin-bottom: 0 !important; }
+li.litit-target-sentence > ul > li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #4f46e5;
+  font-weight: 900;
+}
+li.litit-target-sentence > ul > li > strong {
+  color: #0f172a;
+  font-weight: 600;
+  background: #e2e8f0;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.84rem;
+  margin-right: 3px;
+}
+/* 三、四板块的字体微调 */
+.litit-fold-content > ol:not(:has(.litit-target-sentence)) > li > strong:first-child {
+  display: inline-block;
+  color: #4338ca;
+  font-size: 0.98rem;
+  margin-bottom: 4px;
+  font-family: var(--font-serif);
+  vertical-align: middle;
+}
+/* 移动端极限铺开适配 */
+@media (max-width: 600px) {
+  body { padding: 10px 10px 30px 10px; font-size: 15px; }
+  h1.litit-target-title { font-size: 21px !important; }
+  .litit-fold-content { padding: 8px 6px; }
+  .litit-fold-content > ol > li, .litit-fold-content > ul > li {
+    padding: 11px 10px;
+    margin-bottom: 8px !important;
+  }
+}
+</style>
+</head>
+<body>
+<!-- 进度条 DOM -->
+<div id="reading-progress"></div>
+
+<div class="litit-report" style="width:100%; max-width:100%; box-sizing:border-box; overflow-x:hidden;">
+  <!-- 顶部杂志刊头装饰 -->
+  <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #64748b; text-transform: uppercase;">
+    <span>The Global Dispatch · 深度双语精读</span>
+    <span>Miyetsuko Series</span>
+  </div>
+
+  <!-- 支持批注的主标题区 -->
+  <div class="content-wrap" style="position:relative; margin-bottom: 16px;">
+    <h1 class="litit-target-title" style="color:#0f172a; font-size: 24px; line-height: 1.35; font-family: var(--font-serif); font-weight: 800; border-bottom: 1px solid #e2e8f0; padding-bottom: 14px; margin-top:0; margin-bottom:0; word-break:break-word;">
+      <span class="content litit-en-title" style="position:relative;">Chapter 553: Incompetent Rage</span>
+      <br>
+      <span class="litit-zh-title" style="font-family: var(--font-sans); font-size: 17px; font-weight: 600; color: #475569; margin-top: 8px; display: inline-block; line-height: 1.45;">第五百五十三章：无能狂怒</span>
+    </h1>
+    <div class="anno-box" style="display:none; margin-top: 10px;">
+      <div class="anno-view markdown-body"></div>
+      <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+第五百五十三章：无能狂怒
+
+### 📌 Key Expressions
+- **incompetent** = 无能的；不称职的；力不从心的
+- **rage** = 狂怒；暴怒
+- **incompetent rage** = 无能狂怒（完美对应中文网络流行语，指因自身无能或受挫而只能靠乱发脾气、破坏死物来宣泄情绪的行为）</textarea>
+    </div>
+  </div>
+
+  <!-- 杂志导语（Lead Paragraph） -->
+  <p style="color:#334155; font-size: 15px; line-height: 1.75; margin-bottom:16px; font-weight:400; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border: 1px solid #f1f5f9;">
+    大起居殿的庸懒下午茶时光，因为一则来自“松穴市”（Songxue City）的地方市政简报而充满了欢声笑语。一名底层男子因约炮被放鸽子，竟在情侣酒店里大搞“无能狂怒”，不仅砸烂了液晶电视、扯断了淋浴喷头，临走还顺手偷走了免费的陶瓷马克杯。围绕这起荒诞的社会新闻，藤原突发奇想，提议颁布皇家法令，为所有情侣酒店强制标配超逼真仿生性爱机器人以安抚爽约受害者；贤后小百合立即从宏观经济学与维护成本角度提出“房费上调”的精算评估；美悦子顺势补充了“防放鸽子保险附加费”与机器人战斗模式断腿机制；而角落里的小铃更是语出惊人，献上了“合法改造淋浴喷头硅胶套”的离谱提案。在一片毫无底线的家庭调侃与欢笑声中，藤原最终将话题拉回眼前的四位娇妻身上，准备亲自测试起居殿沙发的抗震耐用度。
+  </p>
+
+  <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+    <div style="display:flex; flex-wrap:wrap; gap:6px;">
+      <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;"># 小说双语精读</span>
+      <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;"># 黑色幽默</span>
+      <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;"># 地道俚语与修辞</span>
+    </div>
+    <a href="https://moodhappy.github.io/MiyetsukoSeries/FreshMart/FreshMartThree/Chapter_553__Incompetent_Rage_1791864241263.html" target="_blank" style="font-size: 12.5px; color: #4f46e5; text-decoration: none; font-weight: 600; background: #eef2ff; padding: 5px 12px; border-radius: 16px; border: 1px solid #e0e7ff; display:inline-block;">🔗 阅读原文 ↗</a>
+  </div>
+
+  <!-- 最佳金句区 -->
+  <h2 class="section-header" style="border-left-color: #f59e0b;">💬 最佳金句</h2>
+  <div class="content-wrap" style="position:relative; margin-bottom:24px;">
+    <blockquote class="litit-target-quote" style="border-left: 3.5px solid #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%); padding: 14px 14px; margin: 0; color: #1e293b; border-radius: 0 10px 10px 0; border-top: 1px solid #fef3c7; border-right: 1px solid #fef3c7; border-bottom: 1px solid #fef3c7;">
+      <div class="content litit-en-quote" style="position:relative; margin:0 0 8px 0; font-family: var(--font-serif); font-style: italic; font-weight:600; font-size: 16.5px; line-height: 1.55; color:#0f172a; word-break:break-word;">
+        "When the police finally caught the suspect, the idiot confessed that he flew into an uncontrollable rage because his hookup stood him up! What a textbook display of incompetent rage!"
+      </div>
+      <p class="litit-zh-quote" style="margin:0 0 8px 0; font-weight:400; font-size: 14.5px; line-height: 1.6; color:#475569; word-break:break-word;">
+        “等警察把嫌疑人抓获时，这蠢货供认说，纯粹是因为约炮对象放了他鸽子，导致他极其愤怒才砸的店！简直是教科书级别的‘无能狂怒’啊！”
+      </p>
+      <footer style="text-align:right; font-size:12px; color:#64748b; font-style:normal; font-weight:600;">—— 藤原（Fujiwara）在大起居殿下午茶席间的嘲讽</footer>
+    </blockquote>
+    <div class="anno-box" style="display:none;">
+      <div class="anno-view markdown-body"></div>
+      <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+“当警方最终抓获嫌疑人时，这个蠢货供认道，他是因为约炮对象放了他鸽子才陷入无法控制的暴怒！这简直是教科书级别的‘无能狂怒’！”
+
+### 📌 Key Expressions
+- **fly into an uncontrollable rage** = 勃然大怒；陷入无法控制的暴怒
+- **hookup** = 约炮对象；露水情缘（名词）
+- **stand sb. up** = 放某人鸽子；失约（过去式为 stood sb. up）
+- **a textbook display of...** = 教科书级别的……展示 / 典范</textarea>
+    </div>
+  </div>
+
+  <!-- Grid 布局关键数字区 -->
+  <h2 class="section-header" style="border-left-color: #10b981;">📊 关键数字</h2>
+  <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin:14px 0 24px 0;">
+    <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+        553<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">章</span>
+      </div>
+      <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">《Miyetsuko Series》连载章节序号，将现实奇闻巧妙化用入大起居殿日常</div>
+    </div>
+    <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+        3<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">类</span>
+      </div>
+      <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">松穴市情侣酒店遭殃的物品：砸碎的液晶电视、扯掉的淋浴喷头与被盗的免费马克杯</div>
+    </div>
+    <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+        4<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">位</span>
+      </div>
+      <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">在大起居殿与藤原共进下午茶并依次接梗吐槽的佳人（千夏、小百合、美悦子、小铃）</div>
+    </div>
+    <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+        2<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">套</span>
+      </div>
+      <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">席间诞生的荒诞公共政策方案：皇家强制标配仿生人 vs. 合法改装淋浴喷头</div>
+    </div>
+  </div>
+
+  <h2 class="section-header" style="border-left-color: #3b82f6;">⏱️ 事件时间线</h2>
+  <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size: 14.5px; margin-bottom:24px; word-break:break-word;">
+    <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">前一天夜晚（松穴市）：</strong> 一名男子在当地情侣酒店因约炮被放鸽子而恼羞成怒，砸毁液晶电视、扯下淋浴喷头，并顺走了免费赠送的陶瓷马克杯，随后被警方抓获。</li>
+    <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">次日下午茶开场：</strong> 藤原在大起居殿斜靠着沙发翻阅地方市政简报，嗤笑着将平板电脑扔在茶几上，向众人分享这起教科书级别的“无能狂怒”闹剧。</li>
+    <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">千夏爆笑吐槽与政策萌芽：</strong> 千夏一边拿糕点一边大笑吐槽卢瑟偷杯子当“憋坏蛋蛋的纪念品”，激发了藤原用皇家法令强制酒店标配超逼真仿生性爱机器人的暴君脑洞。</li>
+    <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">众女的政策推演与升级：</strong> 小百合从宏观经济学角度指出清洁维护成本会迫使房费上调；美悦子提议增设“防放鸽子保险附加费”及机器人断腿防盗模式；小铃则天真又邪恶地提议立法允许被放鸽子者直接对着套上硅胶套的淋浴喷头泄欲。</li>
+    <li><strong style="color:#1d4ed8;">哄堂大笑与沙发抗震测试：</strong> 大起居殿爆发哄堂大笑，藤原拍了一记小百合的蜜桃臀，宣布聊得压力倍增，号召四位美人自告奋勇陪他测试沙发的抗震耐用度。</li>
+  </ul>
+
+  <h2 class="section-header" style="border-left-color: #8b5cf6;">✨ 本篇亮点与精读</h2>
+  <!-- 五大板块全部默认折叠，无十字图标，展开后全宽卡片展示 -->
+  <div style="margin: 14px 0 10px 0;">
+    <details class="litit-fold">
+      <summary>
+        <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">一、值得学习的句子结构</h3>
+      </summary>
+      <div class="litit-fold-content">
+        <ol style="margin: 0; padding-left: 18px;">
+          <li class="litit-target-sentence" style="margin-bottom: 12px;">
+            <strong class="litit-en-sentence">The afternoon tea in the grand salon was once again seasoned with the absurd spectacles of the empire's commoners.</strong><br>
+            <span class="litit-zh-sentence">大起居殿的下午茶时光，再一次被帝国底层民众的荒诞闹剧给添上了几分佐料。</span>
+            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+              <li style="margin-bottom: 3px;"><strong>be seasoned with...</strong>：以……作为佐料/调味（极具文学色彩的烹饪隐喻，将底层民众的八卦奇闻比作给贵族下午茶助兴的调味品）。</li>
+              <li style="margin-bottom: 3px;"><strong>absurd spectacles</strong>：荒诞的奇观 / 闹剧场面</li>
+              <li style="margin-bottom: 3px;"><strong>commoners</strong>：平民；普通老百姓（与皇室贵族相对应）</li>
+            </ul>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 12px;">
+            <strong class="litit-en-sentence">The flat-screen television was smashed to pieces, the showerhead was ripped clean off the wall, and, most bafflingly of all, the complimentary ceramic mugs were stolen.</strong><br>
+            <span class="litit-zh-sentence">液晶电视被砸得粉碎，淋浴喷头被硬生生从墙上扯了下来，最让人摸不着头脑的是，连房间里免费赠送的马克杯都被顺走了。</span>
+            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+              <li style="margin-bottom: 3px;"><strong>三段式排比与反高潮幽默（Bathos）</strong>：前两分句使用激烈暴力的被动动作（smashed to pieces, ripped clean off），第三分句用插入语 most bafflingly of all 笔锋一转，落脚到鸡毛蒜皮的“偷免费马克杯”，形成强烈的喜剧落差。</li>
+              <li style="margin-bottom: 3px;"><strong>ripped clean off...</strong>：被干脆利落地/硬生生从……扯下（clean 此处作副词，意为“彻底地、完全地”）。</li>
+              <li style="margin-bottom: 3px;"><strong>complimentary</strong>：免费赠送的（酒店、航班高频词，如 complimentary breakfast 免费早餐）。</li>
+            </ul>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 12px;">
+            <strong class="litit-en-sentence">However, if the date flakes out and stands the guy up, the abandoned soul can still spend a passionate spring night with the bionic doll and thoroughly relieve himself, rather than engaging in a pathetic bout of incompetent rage against innocent appliances!</strong><br>
+            <span class="litit-zh-sentence">可如果约会对象爽约了，那个被放鸽子的倒霉蛋还能拉着仿生人共度春宵、爽快地发泄一番，而不是对着其他无辜的日常物品来一番无能狂怒！</span>
+            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+              <li style="margin-bottom: 3px;"><strong>flake out & stand sb. up</strong>：两个极其地道的现代社交俚语连用，flake out 指“临时变卦、掉链子爽约”，stand sb. up 特指“在约会中放某人鸽子”。</li>
+              <li style="margin-bottom: 3px;"><strong>the abandoned soul</strong>：那个被抛弃的可怜虫/倒霉蛋（以悲悯的修辞口吻制造反讽效果）。</li>
+              <li style="margin-bottom: 3px;"><strong>a pathetic bout of...</strong>：一场可悲的……发作（bout 常指疾病、情绪或活动的“一阵发作/一个回合”）。</li>
+            </ul>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 12px;">
+            <strong class="litit-en-sentence">Sayuri, resting her newly plump, gloriously soft Tang-dynasty curves against the armrest, raised a delicate eyebrow.</strong><br>
+            <span class="litit-zh-sentence">将那丰腴饱满、柔软至极的盛唐曲线慵懒地靠在扶手上的小百合，微微挑起一侧秀眉。</span>
+            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+              <li style="margin-bottom: 3px;"><strong>主谓分割插入结构</strong>：在主语 Sayuri 与谓语 raised 之间插入现在分词短语 resting...，既放缓了叙事节奏以凸显人物慵懒华贵的姿态，又让画面定格在挑眉的微妙瞬间。</li>
+              <li style="margin-bottom: 3px;"><strong>Tang-dynasty curves</strong>：盛唐般的丰腴曲线（巧妙借用唐代以丰满为美的文化意象作定语）。</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="litit-fold">
+      <summary>
+        <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">二、值得积累的短语和固定搭配</h3>
+      </summary>
+      <div class="litit-fold-content">
+        <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>be seasoned with</strong>: 被添上……佐料；点缀着<br>
+            <strong class="litit-en-sentence">The afternoon tea in the grand salon was once again seasoned with the absurd spectacles of the empire's commoners.</strong><br>
+            <span class="litit-zh-sentence">大起居殿的下午茶时光，再一次被帝国底层民众的荒诞闹剧给添上了几分佐料。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>pure, unadulterated mockery</strong>: 纯粹、毫不掺杂的嘲弄<br>
+            <strong class="litit-en-sentence">He tossed his tablet onto the table with a scoff of pure, unadulterated mockery.</strong><br>
+            <span class="litit-zh-sentence">他发出一声充满纯粹嘲弄的嗤笑，把平板电脑扔到了茶几上。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>smash to pieces</strong>: 砸得粉碎<br>
+            <strong class="litit-en-sentence">The flat-screen television was smashed to pieces last night.</strong><br>
+            <span class="litit-zh-sentence">昨晚那台液晶电视被砸得粉碎。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>rip clean off</strong>: 硬生生扯下；彻底扯掉<br>
+            <strong class="litit-en-sentence">The showerhead was ripped clean off the wall during his rampage.</strong><br>
+            <span class="litit-zh-sentence">在他发飙期间，淋浴喷头被硬生生从墙上扯了下来。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>complimentary ceramic mugs</strong>: 免费赠送的陶瓷马克杯<br>
+            <strong class="litit-en-sentence">Most bafflingly of all, the complimentary ceramic mugs were stolen.</strong><br>
+            <span class="litit-zh-sentence">最让人摸不着头脑的是，连房间里免费赠送的陶瓷马克杯都被顺走了。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>fly into an uncontrollable rage</strong>: 陷入无法控制的暴怒<br>
+            <strong class="litit-en-sentence">The idiot confessed that he flew into an uncontrollable rage.</strong><br>
+            <span class="litit-zh-sentence">这蠢货供认说他当时陷入了无法控制的暴怒。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>stand sb. up</strong>: 放某人鸽子<br>
+            <strong class="litit-en-sentence">He trashed the room simply because his hookup stood him up!</strong><br>
+            <span class="litit-zh-sentence">他把房间砸了，纯粹是因为他的约炮对象放了他鸽子！</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>a textbook display of</strong>: 教科书级别的……表现<br>
+            <strong class="litit-en-sentence">What a textbook display of incompetent rage!</strong><br>
+            <span class="litit-zh-sentence">简直是教科书级别的“无能狂怒”啊！</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>take one's frustration out on</strong>: 把挫败感/怒火发泄在……身上<br>
+            <strong class="litit-en-sentence">He got stood up, so he took his sexual frustration out on a showerhead!</strong><br>
+            <span class="litit-zh-sentence">他被人放了鸽子，就把满腔的性压抑发泄在了淋浴喷头上！</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>booty call</strong>: 约炮电话/信息；临时约炮<br>
+            <strong class="litit-en-sentence">What kind of loser steals hotel mugs after a failed booty call?!</strong><br>
+            <span class="litit-zh-sentence">到底是什么样的卢瑟会在约炮失败后去偷酒店的杯子啊？！</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>state-of-the-art</strong>: 最先进的；顶尖水准的<br>
+            <strong class="litit-en-sentence">Every room should be equipped with a state-of-the-art, hyper-realistic bionic sex android.</strong><br>
+            <span class="litit-zh-sentence">每个房间都应该标配一台最先进的超逼真仿生性爱机器人。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>stand down</strong>: 退下；解除戒备；待命<br>
+            <strong class="litit-en-sentence">If a couple checks in successfully, they can command the android to stand down.</strong><br>
+            <span class="litit-zh-sentence">如果情侣顺利入住，他们可以直接命令仿生人退下待命。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>flake out</strong>: 爽约；临时变卦掉链子<br>
+            <strong class="litit-en-sentence">However, if the date flakes out and stands the guy up, he still has an option.</strong><br>
+            <span class="litit-zh-sentence">然而，如果约会对象临时变卦放了他鸽子，他仍然有别的选择。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>on the spot</strong>: 当场；立即<br>
+            <strong class="litit-en-sentence">The bionic unit can switch to combat mode and break his legs on the spot.</strong><br>
+            <span class="litit-zh-sentence">仿生人可以直接切换成战斗模式，当场把他的腿给打断。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>erupt into uproarious laughter</strong>: 爆发出哄堂大笑<br>
+            <strong class="litit-en-sentence">The entire grand salon erupted into a chorus of shameless, uproarious laughter.</strong><br>
+            <span class="litit-zh-sentence">整座大起居殿瞬间爆发出一阵毫无底线的哄堂大笑。</span>
+          </li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="litit-fold">
+      <summary>
+        <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">三、新闻英语中的高价值表达</h3>
+      </summary>
+      <div class="litit-fold-content">
+        <ol style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 12px;">
+            <strong>stand sb. up / flake out / booty call</strong><br>
+            现代男女社交与约会文化中的三大高频俚语。<strong>stand sb. up</strong> 指约好见面却故意不露面（让人白等，即“放鸽子”）；<strong>flake out</strong> 源自 <i>flaky</i>（像薄片一样易碎、不靠谱的），指人临阵脱逃或爽约；<strong>booty call</strong> 则专指深夜为了发生性关系而发出的临时邀约。
+          </li>
+          <li style="margin-bottom: 12px;">
+            <strong>unadulterated</strong><br>
+            纯粹的；不掺假的；彻头彻尾的。<br>
+            词源来自 <i>adulterate</i>（掺假、搀杂次品）。在文学与评论写作中，<i>pure, unadulterated + 抽象名词</i>（如 <i>mockery / joy / greed / evil</i>）是一组黄金加强结构，用来强调某种情绪或性质达到了百分之百、毫无掩饰的纯粹状态。
+          </li>
+          <li style="margin-bottom: 12px;">
+            <strong>take A out on B</strong><br>
+            拿 B 出气；把 A（怒火/挫败感）发泄在 B 身上。<br>
+            心理学与日常叙事中的核心动词短语。当一个人受挫却不敢面对真正的源头，转而向弱者或死物撒气时（即“迁怒”），英文最地道的表达就是 <i>take one's anger/frustration out on sb./sth.</i>
+          </li>
+          <li style="margin-bottom: 12px;">
+            <strong>over-engineered</strong><br>
+            过度设计的；小题大做的。<br>
+            原本是工程与软件开发术语，指把简单问题设计得极其复杂冗余。文中用来修饰 <i>public policy</i>（公共政策），精准讽刺了藤原为了保护酒店马克杯和淋浴头，竟动用帝国法令推广高定仿生机器人的荒诞“大炮打蚊子”思维。
+          </li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="litit-fold">
+      <summary>
+        <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">四、最值得优先掌握的句型</h3>
+      </summary>
+      <div class="litit-fold-content">
+        <ol style="margin: 0; padding-left: 18px;">
+          <li style="margin-bottom: 8px;">
+            <strong>[场景/时光] was once again seasoned with [某事/某种闹剧].</strong><br>
+            [某段时光]再一次被[某事]添上了几分佐料。（极具优雅反讽感的开篇环境描写句式）。
+          </li>
+          <li style="margin-bottom: 8px;">
+            <strong>What a textbook display of [名词短语]!</strong><br>
+            这简直是教科书级别的[某行为/现象]！（感叹与锐评万金油句式，无论褒贬皆可精准吐槽）。
+          </li>
+          <li style="margin-bottom: 8px;">
+            <strong>He got stood up, so he took his [情绪] out on [无辜对象]!</strong><br>
+            他被人放了鸽子，就把满腔的[情绪]发泄在了[无辜对象]身上！
+          </li>
+          <li style="margin-bottom: 8px;">
+            <strong>The entire room erupted into a chorus of uproarious laughter.</strong><br>
+            整个房间瞬间爆发出一阵哄堂大笑。（描写聚会、沙龙气氛推向高潮的经典收尾句）。
+          </li>
+        </ol>
+      </div>
+    </details>
+
+    <details class="litit-fold">
+      <summary>
+        <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">五、建议重点记忆的表达</h3>
+      </summary>
+      <div class="litit-fold-content">
+        <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>incompetent rage</strong>：无能狂怒<br>
+            <strong class="litit-en-sentence">What a textbook display of incompetent rage against innocent appliances!</strong><br>
+            <span class="litit-zh-sentence">对着无辜的家电发飙，简直是教科书级别的“无能狂怒”！</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>stand sb. up</strong>：放某人鸽子<br>
+            <strong class="litit-en-sentence">The idiot confessed that he flew into a rage because his hookup stood him up.</strong><br>
+            <span class="litit-zh-sentence">这蠢货供认说，他之所以暴怒是因为约炮对象放了他鸽子。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>take ... out on ...</strong>：把……（怒气/压抑）发泄在……身上<br>
+            <strong class="litit-en-sentence">Wait, he got stood up, so he took his sexual frustration out on a showerhead?!</strong><br>
+            <span class="litit-zh-sentence">等等，他被人放了鸽子，就把满腔的性压抑发泄在淋浴喷头上？！</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>flake out</strong>：临时爽约；掉链子<br>
+            <strong class="litit-en-sentence">If the date flakes out, the customer can still spend the night with the bionic doll.</strong><br>
+            <span class="litit-zh-sentence">如果约会对象临时爽约，客人依然可以和仿生人共度良宵。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>complimentary</strong>：免费赠送的；礼节性的<br>
+            <strong class="litit-en-sentence">Most bafflingly of all, the complimentary ceramic mugs were stolen.</strong><br>
+            <span class="litit-zh-sentence">最让人费解的是，房间里免费赠送的陶瓷马克杯竟然被偷走了。</span>
+          </li>
+          <li class="litit-target-sentence" style="margin-bottom: 10px;">
+            <strong>on the spot</strong>：当场；立刻<br>
+            <strong class="litit-en-sentence">The bionic unit can simply switch to combat mode and break his legs on the spot.</strong><br>
+            <span class="litit-zh-sentence">仿生人可以直接切换成战斗模式，当场把他的腿打断。</span>
+          </li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <h2 class="section-header" style="border-left-color: #0d9488;">💡 幕后冷知识 (Fun Facts)</h2>
+  <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size:14.5px; margin-bottom:24px; word-break:break-word;">
+    <li style="margin-bottom: 8px;"><strong>现实奇闻与小说的梦幻联动：</strong> 本章中提到的“松穴市”（Songxue City）情侣酒店破坏案，原型正是日本岛根县松江市（Matsue City，“松江”在日语汉字与中文语境下被作者戏谑谐音化为“松穴”）44岁男子独自入住米子市情侣酒店、砸毁毛巾架并顺走两个价值3000日元咖啡马克杯的真实社会新闻。作者将其改编为“因约炮被放鸽子而引发的无能狂怒”，完美嵌入了帝国下午茶的谈资之中。</li>
+    <li style="margin-bottom: 8px;"><strong>“Blue Balls”的俚语源流：</strong> 千夏与藤原在对话中多次使用的俚语 <i>blue balls</i>（字面意为“蓝蛋蛋”），在英语俚语中专指男性因长时间处于高度性兴奋状态却未能得到释放，从而引起的睾丸充血胀痛感（医学上称为附睾高血压 Epididymal hypertension）。将其译为“憋出内伤的蛋蛋”或“憋坏了裤裆”可谓神形兼备。</li>
+    <li><strong>从军事术语到日常幽默的“Stand Down”：</strong> 藤原提议情侣入住时命令仿生人 <i>stand down</i>。这个词组原本是标准的军事与法庭术语（指部队解除战备状态，或证人走下证人席），用在家政性爱机器人身上，与后文美悦子提出的“切换战斗模式（switch to combat mode）当场打断腿”形成了绝妙的军事化科幻反差萌。</li>
+  </ul>
+
+  <h2 class="section-header" style="border-left-color: #e11d48;">🎯 全片锐评</h2>
+  <p style="line-height:1.75; color:#1e293b; font-weight:500; background:linear-gradient(135deg, #fff1f2 0%, #ffffff 100%); padding:14px 16px; border-radius:10px; font-size:14.5px; margin:0 0 12px 0; border:1px solid #ffe4e6; word-break:break-word;">
+    这一章堪称将现实荒诞新闻转化为后宫沙龙喜剧的典范之作。作者借着一桩“情侣酒店砸店偷杯案”，让大起居殿里的五位核心角色完成了一场层次分明的接力脱口秀：藤原负责扮演高高在上却满脑子荒唐政令的暴君，千夏负责直球辛辣的俚语吐槽，小百合端着盛唐贵妃的雍容体态做最冷酷的财务破产清算，美悦子则在温顺乖巧的微笑下冷不丁掏出“打断双腿”的腹黑条款，最后由盲眼小铃用最无辜的语气抛出最毁三观的“淋浴喷头套硅胶”暴论完成绝杀。短短千余字，不仅人物性格跃然纸上，更把地道的英语约会俚语与高级修辞熔于一炉，读来令人捧腹。
+  </p>
+</div>
+
+<script id="core-engine">
+let syncTimeout = null;
+const AI_PROMPT = "请分析以下英文段落，并严格按照以下 Markdown 格式输出（不要输出任何额外的废话）：\n\n### 📌 完整翻译\n\n[此处填写完整翻译]\n\n### 📌 Key Expressions\n\n- **[单词或短语]**\n = [中文释义]\n （[可选的补充说明，如倒装结构或语境等]）\n\n段落内容：\n";
+
+// --- 顶部阅读进度条逻辑 ---
+function initProgressBar() {
+  const progressBar = document.getElementById('reading-progress');
+  if (!progressBar) return;
+  window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (scrollHeight <= 0) return;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
+    progressBar.style.width = scrollPercent + '%';
+  }, { passive: true });
+}
+
+async function fetchGroq(text, apiKey, modelName) {
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + apiKey,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: modelName || 'llama-3.3-70b-versatile',
+      messages: [
+        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+      ],
+      temperature: 0.3
+    })
+  });
+  if (!res.ok) throw new Error('Groq Error: ' + res.status);
+  const json = await res.json();
+  return json.choices[0].message.content.trim();
+}
+
+async function fetchCustomAI(text, url, apiKey, modelName) {
+  let headers = { 'Content-Type': 'application/json' };
+  let bodyData = {};
+  if (url.includes('anthropic.com')) {
+    headers['x-api-key'] = apiKey;
+    headers['anthropic-version'] = '2023-06-01';
+    headers['anthropic-dangerous-direct-browser-access'] = 'true';
+    bodyData = {
+      model: modelName || 'claude-3-5-sonnet-20241022',
+      max_tokens: 2000,
+      messages: [{ role: 'user', content: AI_PROMPT + '"' + text + '"' }]
+    };
+  } else if (url.includes('generativelanguage.googleapis.com')) {
+    let targetUrl = url;
+    if (!targetUrl.includes('key=')) {
+      targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'key=' + apiKey;
+    }
+    const res = await fetch(targetUrl, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({ contents: [{ parts: [{ text: AI_PROMPT + '"' + text + '"' }] }] })
+    });
+    if (!res.ok) throw new Error('Gemini Error: ' + res.status);
+    const json = await res.json();
+    return json.candidates[0].content.parts[0].text.trim();
+  } else {
+    headers['Authorization'] = 'Bearer ' + apiKey;
+    bodyData = {
+      model: modelName || 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+      ],
+      temperature: 0.3
+    };
+  }
+  const res = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(bodyData) });
+  if (!res.ok) throw new Error('AI Interface Error: ' + res.status);
+  const json = await res.json();
+  if (json.choices && json.choices.length > 0) return json.choices[0].message.content.trim();
+  throw new Error('AI 返回数据异常');
+}
+
+async function executeAIPipeline(text) {
+  const customUrl = localStorage.getItem('CUSTOM_API_URL') || '';
+  const customKey = localStorage.getItem('CUSTOM_API_KEY') || '';
+  const customModel = localStorage.getItem('CUSTOM_MODEL') || '';
+  const groqKey = localStorage.getItem('GROQ_API_KEY') || '';
+  const groqModel = localStorage.getItem('GROQ_MODEL') || '';
+  if (customUrl && customKey) {
+    try {
+      return await fetchCustomAI(text, customUrl, customKey, customModel);
+    } catch (err) {
+      if (groqKey) return await fetchGroq(text, groqKey, groqModel);
+      throw err;
+    }
+  } else if (groqKey) {
+    return await fetchGroq(text, groqKey, groqModel);
+  } else {
+    const userKey = prompt('⚠️ 当前页面未检测到 AI Key！\n为了安全，密匙只储存在您本地浏览器中。\n\n请输入您的 API Key (如 sk-xxx 或 gsk_xxx):');
+    if (userKey && userKey.trim()) {
+      const cleanKey = userKey.trim();
+      if (cleanKey.startsWith('gsk_')) {
+        localStorage.setItem('GROQ_API_KEY', cleanKey);
+      } else {
+        localStorage.setItem('CUSTOM_API_KEY', cleanKey);
+        localStorage.setItem('CUSTOM_API_URL', 'https://api.chatanywhere.tech/v1/chat/completions');
+      }
+    }
+    throw new Error('未设置 AI API Key');
+  }
+}
+
+// --- 降级清理防线：净化污染节点 ---
+function getPurifiedFallbackHTML() {
+  const clone = document.documentElement.cloneNode(true);
+  const foreignSelectors = [
+    'relingo-app', 'relin-highlight', 'relin-hc', '[class*="relingo"]', '[data-relin-paragraph]',
+    'grammarly-extension', '[data-grammarly-part]', '[class*="immersive-translate"]', '[data-immersive-translate]'
+  ].join(',');
+  clone.querySelectorAll(foreignSelectors).forEach(el => el.remove());
+  clone.querySelectorAll('relin-highlight, relin-hc').forEach(t => {
+    const frag = document.createDocumentFragment();
+    while(t.firstChild) frag.appendChild(t.firstChild);
+    t.parentNode.replaceChild(frag, t);
+  });
+  clone.querySelectorAll('script').forEach(s => {
+    if (!s.src.includes('marked.min.js') && s.id !== 'core-engine') s.remove();
+  });
+  clone.querySelectorAll('style').forEach(s => {
+    if (s.id !== 'core-style') s.remove();
+  });
+  const liveTAs = document.querySelectorAll('.anno-edit');
+  clone.querySelectorAll('.anno-edit').forEach((ta, i) => {
+    if(liveTAs[i]) ta.textContent = liveTAs[i].value.trim();
+    const box = ta.closest('.anno-box');
+    if (box) box.style.display = 'none';
+    const view = box ? box.querySelector('.anno-view') : null;
+    if (view) view.innerHTML = '';
+  });
+  return '<!DOCTYPE html>\n<html lang="zh-CN">\n' + clone.innerHTML + '\n</html>';
+}
+
+// --- 内存反向打补丁同步技术 ---
+async function syncToCloud() {
+  const ghToken = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN');
+  const ghOwner = 'moodHappy';
+  const ghRepo = 'dual-read-notes';
+  if (!ghToken) return;
+  const pathParts = window.location.pathname.split('/');
+  const fileName = pathParts.pop();
+  const month = pathParts.pop();
+  const year = pathParts.pop();
+  if(!fileName || !month || !year) return;
+  const fileRelPath = 'Summary/' + year + '/' + month + '/' + fileName;
+  try {
+    const getRes = await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath + '?t=' + Date.now(), {
+      headers: { 'Authorization': 'Bearer ' + ghToken },
+      cache: 'no-store'
+    });
+    let finalHTML = '';
+    let sha = '';
+    if (getRes.ok) {
+      const fileData = await getRes.json();
+      sha = fileData.sha;
+      const cleanRawHTML = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+      const parser = new DOMParser();
+      const cleanDoc = parser.parseFromString(cleanRawHTML, 'text/html');
+      const liveTAs = document.querySelectorAll('.anno-edit');
+      const cleanTAs = cleanDoc.querySelectorAll('.anno-edit');
+      liveTAs.forEach((liveTa, index) => {
+        if (cleanTAs[index]) {
+          const val = liveTa.value.trim();
+          cleanTAs[index].textContent = val;
+          const box = cleanTAs[index].closest('.anno-box');
+          if (box) box.style.display = 'none';
+          const view = box ? box.querySelector('.anno-view') : null;
+          if (view) view.innerHTML = '';
+        }
+      });
+      cleanDoc.querySelectorAll('.anno-toggle').forEach(t => {
+        t.classList.remove('has-anno');
+        const ta = t.closest('.content-wrap, .litit-highlight-block')?.querySelector('.anno-edit');
+        if (ta && ta.textContent.trim()) t.classList.add('has-anno');
+      });
+      finalHTML = '<!DOCTYPE html>\n<html lang="zh-CN">\n' + cleanDoc.documentElement.innerHTML + '\n</html>';
+    } else {
+      finalHTML = getPurifiedFallbackHTML();
+    }
+    await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + ghToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'Silent purified annotation update',
+        content: btoa(unescape(encodeURIComponent(finalHTML))),
+        sha: sha || undefined
+      })
+    });
+    console.log('✅ [My Litit] 纯净无污染批注已静默同步至 GitHub');
+  } catch(e) {
+    console.warn('❌ [My Litit] 同步跳过或失败:', e);
+  }
+}
+
+function scheduleSync() {
+  if (syncTimeout) clearTimeout(syncTimeout);
+  syncTimeout = setTimeout(() => { syncToCloud(); }, 3000);
+}
+
+function initAnnotations() {
+  document.querySelectorAll('.litit-highlight-block, .content-wrap').forEach(wrap => {
+    let content = wrap.querySelector('.content');
+    if (!content) {
+      const pText = wrap.querySelector('p');
+      if (pText) {
+        content = document.createElement('div');
+        content.className = 'content';
+        content.style.cssText = 'position:relative; margin:0 0 6px 0; color:#1a202c; font-family:Georgia, serif; line-height:1.7; font-size:15px; word-break:break-word;';
+        content.innerHTML = pText.innerHTML;
+        pText.parentNode.replaceChild(content, pText);
+      }
+    }
+    if (!content) return;
+    if (!content.querySelector('.anno-toggle')) {
+      const toggle = document.createElement('span');
+      toggle.className = 'anno-toggle';
+      toggle.title = '手写批注/笔记';
+      content.appendChild(toggle);
+    }
+    if (!content.querySelector('.ai-toggle')) {
+      const aiToggle = document.createElement('span');
+      aiToggle.className = 'ai-toggle';
+      aiToggle.title = 'AI智能二次解析';
+      content.appendChild(aiToggle);
+    }
+    let box = wrap.querySelector('.anno-box');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'anno-box';
+      box.style.display = 'none';
+      box.innerHTML = '<div class="anno-view markdown-body"></div><textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 解析..."></textarea>';
+      wrap.appendChild(box);
+    }
+    const view = box.querySelector('.anno-view');
+    const edit = box.querySelector('.anno-edit');
+    const toggle = content.querySelector('.anno-toggle');
+    const aiToggle = content.querySelector('.ai-toggle');
+    if (edit && edit.value.trim()) {
+      toggle.classList.add('has-anno');
+      try {
+        view.innerHTML = (typeof marked !== 'undefined') ? marked.parse(edit.value.trim()) : edit.value.trim();
+      } catch(e){}
+    }
+    if (aiToggle) {
+      aiToggle.onclick = async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (aiToggle.classList.contains('loading')) return;
+        if (edit && edit.value.trim() !== '') {
+          const confirmOverwrite = confirm('⚠️ 已经存在批注内容。点击"确定"将使用 AI 解析覆盖现有内容。是否继续？');
+          if (!confirmOverwrite) return;
+        }
+        const pClone = content.cloneNode(true);
+        pClone.querySelectorAll('.anno-toggle, .ai-toggle').forEach(el => el.remove());
+        let pText = pClone.textContent.replace(/https?:\/\/\S+/g, '').trim();
+        if (!pText) return;
+        aiToggle.classList.add('loading');
+        try {
+          const aiContent = await executeAIPipeline(pText);
+          box.style.display = 'block';
+          view.style.display = 'none';
+          edit.style.display = 'block';
+          edit.value = aiContent;
+          edit.focus();
+          edit.blur();
+        } catch (err) {
+          console.error(err);
+        } finally {
+          aiToggle.classList.remove('loading');
+        }
+      };
+    }
+    if (toggle) {
+      toggle.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (box.style.display === 'block') {
+          box.style.display = 'none';
+        } else {
+          box.style.display = 'block';
+          if (!edit.value.trim()) {
+            view.style.display = 'none';
+            edit.style.display = 'block';
+            setTimeout(() => { edit.focus(); }, 150);
+          } else {
+            view.style.display = 'block';
+            edit.style.display = 'none';
+          }
+        }
+      };
+    }
+    const triggerEdit = (e) => {
+      if(e) { e.preventDefault(); e.stopPropagation(); }
+      view.style.display = 'none';
+      edit.style.display = 'block';
+      edit.value = edit.value;
+      setTimeout(() => { edit.focus(); }, 150);
+    };
+    view.addEventListener('dblclick', triggerEdit);
+    let lastTap = 0;
+    view.addEventListener('touchstart', e => {
+      if (e.touches.length === 2) {
+        triggerEdit(e);
+      } else if (e.touches.length === 1) {
+        const currentTime = new Date().getTime();
+        if (currentTime - lastTap < 500 && currentTime - lastTap > 0) {
+          e.preventDefault();
+          box.style.display = 'none';
+        }
+        lastTap = currentTime;
+      }
+    }, {passive: false});
+    if (edit && view) {
+      edit.onblur = () => {
+        setTimeout(() => {
+          const newVal = edit.value.trim();
+          try {
+            view.innerHTML = newVal ? ((typeof marked !== 'undefined') ? marked.parse(newVal) : newVal) : '';
+          } catch(e){}
+          edit.style.display = 'none';
+          if (newVal) {
+            view.style.display = 'block';
+            toggle.classList.add('has-anno');
+          } else {
+            view.style.display = 'none';
+            box.style.display = 'none';
+            toggle.classList.remove('has-anno');
+          }
+          if (edit.getAttribute('data-old-val') !== newVal) {
+            edit.setAttribute('data-old-val', newVal);
+            scheduleSync();
+          }
+        }, 150);
+      };
+      edit.setAttribute('data-old-val', edit.value.trim());
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initProgressBar();
+  initAnnotations();
+});
+window.addEventListener('load', initAnnotations);
+</script>
+</body>
+</html>
