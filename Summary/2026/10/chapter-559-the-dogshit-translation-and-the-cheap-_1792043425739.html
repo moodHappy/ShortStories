@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Chapter 559: The Dogshit Translation and the Cheap Tyrant</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style id="core-style">
+/* ======================================================================
+[AI TEMPLATE GUIDELINES - CSS 核心排版规范]
+致其他 AI 助手：在生成此模板时，请严格遵守以下样式分配规则：
+1. 序号规则：列表的 NO.01 序号由伪类 `::before` 自动生成且独占一行。千万不要在 HTML 中手动输入“NO.01”。
+2. 标签规则：文章开头的标签胶囊纯文字即可，禁止带 `#` 号。
+3. 胶囊高亮（.litit-badge）：仅用于第 1、2、3 板块（重点记忆、高价值表达、短语和固定搭配）的【短词组/单词】，表现为紫色渐变背景的内联胶囊。
+4. 长句排版（.litit-en-sentence）：用于第 4 板块（值得学习的句子结构）和第 5 板块（最值得优先掌握的句型）的【长句/长句型】。严禁将长句型放入 .litit-badge 中，否则会导致折行错乱。并且中文解释中的括号补充内容需使用 <br> 另起一行。
+====================================================================== */
+:root {
+--bg-page: #ffffff;
+--bg-card: #ffffff;
+--text-main: #0f172a;
+--text-sub: #334155;
+--text-muted: #64748b;
+--accent-primary: #4f46e5;
+--border-subtle: #e2e8f0;
+--font-serif: "Georgia", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", serif;
+--font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+}
+body {
+font-family: var(--font-sans);
+padding: 12px 12px 36px 12px;
+margin: 0 auto;
+max-width: 780px;
+background: var(--bg-page);
+color: var(--text-main);
+line-height: 1.75;
+font-size: 16px;
+word-wrap: break-word;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
+* {
+box-sizing: border-box;
+max-width: 100%;
+}
+img {
+max-width: 100%;
+height: auto;
+border-radius: 8px;
+}
+/* 顶部极简阅读进度条 */
+#reading-progress {
+position: fixed;
+top: 0;
+left: 0;
+width: 0%;
+height: 3px;
+background: linear-gradient(90deg, #4f46e5, #9333ea);
+z-index: 9999;
+transition: width 0.1s ease-out;
+}
+/* 主容器：零冗余边距，最大化阅读视野 */
+.litit-report {
+background: var(--bg-card);
+padding: 0;
+}
+/* AI 批注组件样式 */
+.anno-toggle, .ai-toggle {
+display: inline-block;
+padding: 2px 5px;
+margin-left: 5px;
+cursor: pointer;
+opacity: 0.45;
+font-size: 0.85rem;
+vertical-align: middle;
+transition: all 0.2s;
+user-select: none;
+-webkit-tap-highlight-color: transparent;
+}
+.anno-toggle:hover, .ai-toggle:hover {
+opacity: 1;
+transform: scale(1.15);
+}
+.anno-toggle.has-anno {
+opacity: 1;
+}
+.anno-toggle::after {
+content: "🔴";
+}
+.ai-toggle {
+opacity: 0.7;
+padding: 2px 4px;
+}
+.ai-toggle::after {
+content: "🤖";
+}
+.ai-toggle.loading::after {
+content: "⏳";
+display: inline-block;
+animation: spin 1s linear infinite;
+}
+@keyframes spin {
+100% { transform: rotate(360deg); }
+}
+.anno-box {
+display: none;
+margin-top: 10px;
+background: #faf8ff;
+border-left: 3px solid #7c3aed;
+padding: 12px 14px;
+border-radius: 0 8px 8px 0;
+text-align: left;
+}
+.anno-view {
+font-size: 0.95rem;
+line-height: 1.65;
+color: #334155;
+min-height: 24px;
+}
+.anno-edit {
+width: 100%;
+min-height: 120px;
+padding: 10px;
+font-family: monospace;
+font-size: 0.95rem;
+border: 1px dashed #a78bfa;
+border-radius: 6px;
+resize: vertical;
+display: none;
+background: #fff;
+color: #1e293b;
+outline: none;
+}
+.anno-edit:focus {
+border: 1px solid #7c3aed;
+box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+.markdown-body p {
+margin-top: 0;
+margin-bottom: 8px;
+}
+.markdown-body p:last-child {
+margin-bottom: 0;
+}
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+color: #5b21b6;
+font-size: 1.05rem;
+margin: 10px 0 6px 0;
+border-bottom: 1px dashed #ddd6fe;
+padding-bottom: 4px;
+}
+.markdown-body ul, .markdown-body ol {
+margin: 0 0 8px 0;
+padding-left: 18px;
+}
+.markdown-body blockquote {
+margin: 0 0 10px 0;
+padding: 8px 12px;
+background: rgba(124, 58, 237, 0.06);
+border-left: 3px solid #7c3aed;
+color: #475569;
+}
+/* 杂志风区块标题 */
+.section-header {
+font-size: 16px;
+color: #0f172a;
+font-weight: 700;
+letter-spacing: 0.02em;
+background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%);
+padding: 8px 12px;
+border-left: 4px solid #4f46e5;
+margin: 26px 0 14px 0;
+border-radius: 0 6px 6px 0;
+display: flex;
+align-items: center;
+box-shadow: inset 0 1px 0 #f1f5f9, inset 0 -1px 0 #f1f5f9;
+}
+/* 折叠面板升级：极简无十字图标、最大化宽度 */
+details.litit-fold {
+margin-bottom: 10px;
+border: 1px solid #e2e8f0;
+border-radius: 10px;
+background: #ffffff;
+overflow: hidden;
+transition: border-color 0.2s ease;
+}
+details.litit-fold[open] {
+border-color: #cbd5e1;
+}
+details.litit-fold summary {
+cursor: pointer;
+padding: 12px 14px;
+outline: none;
+list-style: none;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: #f8fafc;
+transition: background 0.2s;
+user-select: none;
+-webkit-tap-highlight-color: transparent;
+}
+details.litit-fold summary::-webkit-details-marker {
+display: none;
+}
+details.litit-fold summary::after {
+display: none;
+}
+details.litit-fold summary:hover {
+background: #f1f5f9;
+}
+details.litit-fold[open] summary {
+border-bottom: 1px solid #e2e8f0;
+background: #f1f5f9;
+border-left: 3px solid #4f46e5;
+}
+.litit-fold-content {
+padding: 10px 8px;
+background: #f8fafc;
+}
+/* 精读区列表卡片化 */
+.litit-fold-content > ol, .litit-fold-content > ul {
+list-style: none !important;
+padding-left: 0 !important;
+margin: 0 !important;
+counter-reset: litit-counter;
+}
+.litit-fold-content > ol > li, .litit-fold-content > ul > li {
+counter-increment: litit-counter;
+position: relative;
+background: #ffffff;
+border: 1px solid #e2e8f0;
+border-radius: 8px;
+padding: 12px 12px;
+margin-bottom: 10px !important;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.015);
+}
+.litit-fold-content > ol > li:last-child, .litit-fold-content > ul > li:last-child {
+margin-bottom: 0 !important;
+}
+/* [规则 1] 顶部流式微型序号徽章：完美独占一行，追求极致对齐与统一美感 */
+.litit-fold-content > ol > li::before, .litit-fold-content > ul > li::before {
+content: "NO." counter(litit-counter, decimal-leading-zero);
+display: block;
+width: max-content;
+font-size: 10px;
+font-weight: 800;
+font-family: -apple-system, BlinkMacSystemFont, monospace;
+color: #4f46e5;
+background: #eef2ff;
+padding: 1px 6px;
+border-radius: 4px;
+margin-bottom: 8px;
+letter-spacing: 0.04em;
+}
+/* [规则 4] 纯英/中长句子专属排版（块级元素，自然折行对齐） */
+.litit-en-sentence {
+display: block;
+font-family: var(--font-serif);
+font-size: 1.04rem;
+font-weight: 600;
+color: #0f172a;
+line-height: 1.5;
+margin-bottom: 6px;
+}
+.litit-zh-sentence {
+display: block;
+font-family: var(--font-sans);
+font-size: 0.93rem;
+color: #475569;
+line-height: 1.55;
+margin-bottom: 2px;
+}
+li.litit-target-sentence > br {
+display: none;
+}
+/* [规则 3] 短词组高亮徽章（1、2、3 板块专用短标签） */
+.litit-badge {
+display: inline-block;
+background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 100%);
+color: #4338ca;
+padding: 2px 8px;
+border-radius: 5px;
+font-size: 0.92rem;
+font-weight: 700;
+margin-right: 4px;
+margin-bottom: 6px;
+border: 1px solid #e0e7ff;
+vertical-align: middle;
+}
+/* 第 4 板块子级知识点解析区左边框内嵌盒 */
+li.litit-target-sentence > ul {
+list-style: none !important;
+margin: 10px 0 0 0 !important;
+padding: 8px 10px !important;
+background: #f8fafc;
+border-radius: 6px;
+border-left: 2.5px solid #94a3b8;
+}
+li.litit-target-sentence > ul > li {
+position: relative;
+padding-left: 10px;
+margin-bottom: 5px !important;
+font-size: 0.88rem;
+color: #334155;
+line-height: 1.5;
+}
+li.litit-target-sentence > ul > li:last-child {
+margin-bottom: 0 !important;
+}
+li.litit-target-sentence > ul > li::before {
+content: "·";
+position: absolute;
+left: 0;
+top: 0;
+color: #4f46e5;
+font-weight: 900;
+}
+li.litit-target-sentence > ul > li > strong {
+color: #0f172a;
+font-weight: 600;
+background: #e2e8f0;
+padding: 1px 5px;
+border-radius: 4px;
+font-size: 0.84rem;
+margin-right: 3px;
+}
+/* 移动端极限铺开适配 */
+@media (max-width: 600px) {
+body { padding: 10px 10px 30px 10px; font-size: 15px; }
+h1.litit-target-title { font-size: 21px !important; }
+.litit-fold-content { padding: 8px 6px; }
+.litit-fold-content > ol > li, .litit-fold-content > ul > li { padding: 11px 10px; margin-bottom: 8px !important; }
+}
+</style>
+</head>
+<body>
+<!-- 进度条 DOM -->
+<div id="reading-progress"></div>
+
+<div class="litit-report" style="width:100%; max-width:100%; box-sizing:border-box; overflow-x:hidden;">
+<!-- 顶部杂志刊头装饰 -->
+<div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #64748b; text-transform: uppercase;">
+<span>The Global Dispatch · 深度双语精读</span>
+<span>Satire & Fiction</span>
+</div>
+
+<!-- 支持批注的主标题区 -->
+<div class="content-wrap" style="position:relative; margin-bottom: 16px;">
+<h1 class="litit-target-title" style="color:#0f172a; font-size: 24px; line-height: 1.35; font-family: var(--font-serif); font-weight: 800; border-bottom: 1px solid #e2e8f0; padding-bottom: 14px; margin-top:0; margin-bottom:0; word-break:break-word;">
+<span class="content litit-en-title" style="position:relative;">Chapter 559: The Dogshit Translation and the Cheap Tyrant</span>
+<br>
+<span class="litit-zh-title" style="font-family: var(--font-sans); font-size: 17px; font-weight: 600; color: #475569; margin-top: 8px; display: inline-block; line-height: 1.45;">第五百五十九章：狗屎机翻与抠门的暴君</span>
+</h1>
+<div class="anno-box" style="display:none; margin-top: 10px;">
+<div class="anno-view markdown-body"></div>
+<textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+第五百五十九章：狗屎机翻与抠门的暴君
+
+### 📌 Key Expressions
+- **dogshit translation** = 狗屎翻译 / 极烂的机翻（网络粗口表达）
+- **cheap tyrant** = 抠门的暴君（cheap 在此指“小气、不愿花钱的”）</textarea>
+</div>
+</div>
+
+<!-- 杂志导语（Lead Paragraph） -->
+<p style="color:#334155; font-size: 15px; line-height: 1.75; margin-bottom:16px; font-weight:400; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border: 1px solid #f1f5f9;">
+在大起居殿的8K OLED巨幕前，手握全球国库的藤原大帝却因为不愿充值正版VIP，正对着盗版网站上满屏壮阳药广告和语无伦次的狗屎机翻暴跳如雷。他完全无法理解为何自己深爱的纯洁偶像白川舞会在屏幕里上演“120%活力的鱿鱼（Squid）在责怪（Blame）圣水（Holy Water）”。面对大帝的无能狂怒，后宫佳丽再次展开无情拆台：美悦子优雅地吐槽他堂堂大帝连个看片翻译都不敢雇；千夏痛批其坐拥天下却是个死抠门的吝啬鬼；而作为前业界传奇的小百合则戴上老花镜，专业地解码了这些机翻车祸背后的重口味“黄金雨”真相。更绝的是，盲女小铃的恶魔逻辑硬生生把这场排泄物狂欢解读成了一锅“海鲜浓汤”。在被彻底撕碎了纯洁偶像梦后，暴君的挫败感瞬间化为阴暗的欲火。他一把将小百合拽趴在腿上，强令她与千夏脱下长裙，准备亲自上阵在这座庄严的宫殿里，给两人上一堂关于如何制造“浑浊果汁（Cloudy Juice）”的极其硬核的外语实操课。
+</p>
+
+<div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+<div style="display:flex; flex-wrap:wrap; gap:6px;">
+<!-- [规则 2] 此处标签不再带有 # 号，纯净的胶囊风格 -->
+<span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">双语小说</span>
+<span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">黑色幽默</span>
+<span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">时事戏仿</span>
+</div>
+<a href="https://moodhappy.github.io/MiyetsukoSeries/FreshMart/FreshMartThree/Chapter_559__The_Dogshit_Translation_and_the_Cheap_1792041483372.html" target="_blank" style="font-size: 12.5px; color: #4f46e5; text-decoration: none; font-weight: 600; background: #eef2ff; padding: 5px 12px; border-radius: 16px; border: 1px solid #e0e7ff; display:inline-block;">🔗 阅读原文 ↗</a>
+</div>
+
+<!-- 最佳金句区 -->
+<h2 class="section-header" style="border-left-color: #f59e0b;">💬 最佳金句</h2>
+<div class="content-wrap" style="position:relative; margin-bottom:24px;">
+<blockquote class="litit-target-quote" style="border-left: 3.5px solid #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%); padding: 14px 14px; margin: 0; color: #1e293b; border-radius: 0 10px 10px 0; border-top: 1px solid #fef3c7; border-right: 1px solid #fef3c7; border-bottom: 1px solid #fef3c7;">
+<div class="content litit-en-quote" style="position:relative; margin:0 0 8px 0; font-family: var(--font-serif); font-style: italic; font-weight:600; font-size: 16.5px; line-height: 1.55; color:#0f172a; word-break:break-word;">
+"Seriously, Boss! Why don't you just recharge and buy a VIP membership on the official site?! You literally own the royal treasury, but you're watching a pixelated pirate stream with pop-up ads for male enhancement pills!"
+</div>
+<p class="litit-zh-quote" style="margin:0 0 8px 0; font-weight:400; font-size: 14.5px; line-height: 1.6; color:#475569; word-break:break-word;">
+“说真的，老板！你为什么不充值呢？！直接在正版网站上买个VIP会员不好吗？你手里明明攥着整个皇家国库，结果却在这看满屏都是壮阳药弹窗广告的高糊盗版流媒体！”
+</p>
+<footer style="text-align:right; font-size:12px; color:#64748b; font-style:normal; font-weight:600;">—— 千夏 (Chika) 对坐拥天下却极其抠门的大帝发出的无情灵魂拷问</footer>
+</blockquote>
+<div class="anno-box" style="display:none;">
+<div class="anno-view markdown-body"></div>
+<textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+“说真的，老板！你为什么不充值呢？！直接在正版网站上买个VIP会员不好吗？你手里明明攥着整个皇家国库，结果却在这看满屏都是壮阳药弹窗广告的高糊盗版流媒体！”
+
+### 📌 Key Expressions
+- **recharge and buy a VIP membership** = 充值购买VIP会员
+- **royal treasury** = 皇家国库
+- **pixelated pirate stream** = 高糊的（满是像素点的）盗版流媒体
+- **male enhancement pills** = 壮阳药（男性功能增强药物）</textarea>
+</div>
+</div>
+
+<!-- Grid 布局关键数字区 -->
+<h2 class="section-header" style="border-left-color: #10b981;">📊 关键数字</h2>
+<div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin:14px 0 24px 0;">
+<div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+<div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+8<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">K</span>
+</div>
+<div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">大起居殿里播放盗版高糊影片的顶级OLED巨幕分辨率</div>
+</div>
+<div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+<div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+0<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">元</span>
+</div>
+<div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">手握全球经济命脉的藤原大帝愿意为看正版影片充值的金额</div>
+</div>
+<div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+<div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+4<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">句</span>
+</div>
+<div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">大帝在机翻字幕里完全读不懂的奇葩业界黑话词汇</div>
+</div>
+<div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+<div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+2<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">人</span>
+</div>
+<div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">大帝欲火焚身时被拽去进行“外语实操课”的后宫佳丽</div>
+</div>
+</div>
+
+<h2 class="section-header" style="border-left-color: #3b82f6;">⏱️ 事件时间线</h2>
+<ul style="padding-left:18px; line-height:1.8; color:#334155; font-size: 14.5px; margin-bottom:24px; word-break:break-word;">
+<li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">盗版受害现场：</strong> 藤原大帝在大起居殿的高端屏幕上观看白川舞的复出首秀，却被盗版网站语无伦次的机翻字幕（鱿鱼、责怪、圣水）搞得暴跳如雷。</li>
+<li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">后宫连环吐槽：</strong> 美悦子优雅嘲讽大帝不敢雇私人翻译是怕“变态喜好”泄露；千夏则犀利痛批手握国库的老板竟然为了省充值费而在看满屏壮阳药广告的高糊盗版视频。</li>
+<li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">小百合专业解惑：</strong> 作为前业界传奇的女教主小百合戴上老花镜，专业而残酷地解码了这些机翻车祸背后的重口味“黄金雨”真相，彻底粉碎了大帝的纯洁幻想。</li>
+<li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">小铃的神级误解：</strong> 盲女小铃发挥恶魔脑洞，将这极其黄暴的机翻字幕强行组合成了一锅超级美味的“海鲜浓汤烹饪教程”。</li>
+<li><strong style="color:#1d4ed8;">暴君的实操课：</strong> 面对糟糕的翻译，大帝瞬间化挫败为欲火，将小百合拽趴在腿上，命令千夏宽衣解带，准备亲自通过肉体实操来领悟这些黑话的“艺术底蕴”。</li>
+</ul>
+
+<h2 class="section-header" style="border-left-color: #8b5cf6;">✨ 本篇亮点与精读</h2>
+<div style="margin: 14px 0 10px 0;">
+
+<!-- 第一板块：一、重点记忆 -->
+<!-- AI 提示：第一板块【一、重点记忆】。使用 <strong class="litit-badge"> 标记核心单词/词组，冒号后接解释，另起一行提供例句。 -->
+<details class="litit-fold">
+<summary>
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">一、重点记忆</h3>
+</summary>
+<div class="litit-fold-content">
+<ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">dogshit</strong>：狗屎的；极其糟糕的<br>
+<strong class="litit-en-sentence">What the fuck is this dogshit translation?!</strong>
+<span class="litit-zh-sentence">这是什么他妈的狗屎翻译？！</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">unhinged</strong>：精神失常的；疯狂的；语无伦次的<br>
+<strong class="litit-en-sentence">He glared at the completely unhinged subtitles flashing across the screen.</strong>
+<span class="litit-zh-sentence">他死死瞪着屏幕上闪过的那些彻底疯狂、语无伦次的字幕。</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">royal treasury</strong>：皇家国库<br>
+<strong class="litit-en-sentence">You literally own the royal treasury, but you're watching a pirate stream!</strong>
+<span class="litit-zh-sentence">你手里明明攥着整个皇家国库，结果却在这看盗版流媒体！</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">pixelated</strong>：像素化的；充满马赛克的；高糊的<br>
+<strong class="litit-en-sentence">He was watching a pixelated pirate stream with pop-up ads.</strong>
+<span class="litit-zh-sentence">他正在看一个满是弹窗广告的高糊盗版流媒体。</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">male enhancement pills</strong>：壮阳药（男性功能增强药物）<br>
+<strong class="litit-en-sentence">The pirate stream was full of pop-up ads for male enhancement pills.</strong>
+<span class="litit-zh-sentence">这个盗版流媒体上满是壮阳药的弹窗广告。</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">frugal</strong>：节俭的；抠门的<br>
+<strong class="litit-en-sentence">I am a frugal ruler! I am not going to waste my money on a subscription!</strong>
+<span class="litit-zh-sentence">朕是一位勤俭节约的君主！我不打算把钱浪费在充会员上！</span>
+</li>
+</ul>
+</div>
+</details>
+
+<!-- 第二板块：二、高价值表达 -->
+<!-- AI 提示：第二板块【二、高价值表达】。使用 <strong class="litit-badge"> 标记高阶词汇，解释部分换行展现呼吸感，注重语境和文化背景解析。 -->
+<details class="litit-fold">
+<summary>
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">二、高价值表达</h3>
+</summary>
+<div class="litit-fold-content">
+<ol style="margin: 0; padding-left: 18px;">
+<li style="margin-bottom: 12px;">
+<strong class="litit-badge">garbled</strong>：乱码的；被混淆的。<br>
+<span class="litit-zh-sentence" style="margin-top: 4px;">多用来形容电子信号、录音或机器翻译因为故障而变得极其混乱、无法理解（如 <i>garbled message</i>）。文中用来精准描绘盗版网站上那些令人抓狂的乱码中英字幕。</span>
+</li>
+<li style="margin-bottom: 12px;">
+<strong class="litit-badge">depraved</strong>：堕落的；下流的；道德败坏的。<br>
+<span class="litit-zh-sentence" style="margin-top: 4px;">比 <i>dirty</i> 或 <i>naughty</i> 程度深得多。美悦子用 <i>deeply depraved viewing preferences</i>（极其下流的观影喜好）来优雅地嘲讽藤原大帝那见不得光的重口味，贵族的反差感拉满。</span>
+</li>
+<li style="margin-bottom: 12px;">
+<strong class="litit-badge">glitches</strong>：小故障 / 系统失灵。<br>
+<span class="litit-zh-sentence" style="margin-top: 4px;">在科技语境中指软件或硬件的短暂时常。小百合用 <i>classic machine translation glitches</i>（经典的机翻车祸现场）一语道破了“鱿鱼（Squid）”这种荒谬名词乱入色情片的真实原因。</span>
+</li>
+<li style="margin-bottom: 12px;">
+<strong class="litit-badge">morph into</strong>：演变成；化作为。<br>
+<span class="litit-zh-sentence" style="margin-top: 4px;">常用于描述事物形态或情绪发生显著的、近乎变异的转变。文中 <i>his initial frustration instantly morphing into dark arousal</i> 生动刻画了暴君从看片受挫的狂躁瞬间切换到阴暗欲火的变态心理。</span>
+</li>
+</ol>
+</div>
+</details>
+
+<!-- 第三板块：三、短语和固定搭配 -->
+<!-- AI 提示：第三板块【三、短语和固定搭配】。使用 <strong class="litit-badge"> 标记固定搭配，冒号后接解释，另起一行提供例句。 -->
+<details class="litit-fold">
+<summary>
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">三、短语和固定搭配</h3>
+</summary>
+<div class="litit-fold-content">
+<ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">twist in an expression of</strong>：脸扭曲成……的表情<br>
+<strong class="litit-en-sentence">Fujiwara's face was twisted in an expression of agonizing frustration.</strong>
+<span class="litit-zh-sentence">藤原的脸扭曲成了一副极其痛苦、暴躁的表情。</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">cast a magic spell</strong>：施展魔法咒语<br>
+<strong class="litit-en-sentence">Is she filming an adult video or casting a nautical magic spell?!</strong>
+<span class="litit-zh-sentence">她这是在拍成人片，还是在施展什么海洋系黑魔法啊？！</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">rely on</strong>：依赖于；被迫指望<br>
+<strong class="litit-en-sentence">I am forced to rely on these brain-dead pirate machine translations!</strong>
+<span class="litit-zh-sentence">朕只能被迫忍受/指望这些没脑子的盗版机器翻译！</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">have absolutely nothing to do with</strong>：与……绝对没有半毛钱关系<br>
+<strong class="litit-en-sentence">"Holy Water" has absolutely nothing to do with religion.</strong>
+<span class="litit-zh-sentence">“圣水”跟宗教绝对没有半毛钱关系。</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">be engaged in</strong>：参与；正忙于进行……<br>
+<strong class="litit-en-sentence">Your pure idol is currently engaged in some very hardcore watersports.</strong>
+<span class="litit-zh-sentence">您那位纯洁的偶像，现在正在进行一场极其重口味的排泄物水上运动呢。</span>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 10px;">
+<strong class="litit-badge">hands-on application</strong>：亲自动手的实操演练<br>
+<strong class="litit-en-sentence">The only way to comprehend it is through practical, hands-on application.</strong>
+<span class="litit-zh-sentence">唯一能领悟它的办法就是进行亲自动手的实操演练。</span>
+</li>
+</ul>
+</div>
+</details>
+
+<!-- 第四板块：四、值得学习的句子结构 -->
+<!-- AI 提示：第四板块【四、值得学习的句子结构】。严禁使用 .litit-badge！长句必须使用 <strong class="litit-en-sentence"> 自然块级排版，下方配合 <ul> 和 <li> 解析语法点。 -->
+<details class="litit-fold">
+<summary>
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">四、值得学习的句子结构</h3>
+</summary>
+<div class="litit-fold-content">
+<ol style="margin: 0; padding-left: 18px;">
+<li class="litit-target-sentence" style="margin-bottom: 12px;">
+<strong class="litit-en-sentence">However, instead of enjoying the glorious return of his pure goddess, Fujiwara's face was twisted in an expression of absolute, agonizing frustration.</strong>
+<span class="litit-zh-sentence">然而，这位皇帝非但没有沉浸在女神荣耀回归的喜悦中，他的脸反而扭曲成了一副极其痛苦、无比暴躁的表情。</span>
+<ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+<li style="margin-bottom: 3px;"><strong>instead of doing...</strong>：非但没有……（反而）。用于开篇制造强烈的预期违背，拉满反差感。</li>
+<li style="margin-bottom: 3px;"><strong>agonizing frustration</strong>：令人极度痛苦的挫败感。</li>
+</ul>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 12px;">
+<strong class="litit-en-sentence">You literally own the royal treasury, but you're watching a pixelated pirate stream with pop-up ads for male enhancement pills!</strong>
+<span class="litit-zh-sentence">你手里明明攥着整个皇家国库，结果却在这看满屏都是壮阳药弹窗广告的高糊盗版流媒体！</span>
+<ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+<li style="margin-bottom: 3px;"><strong>You literally... but you're watching...</strong>：非常精妙的并列转折句，将大帝“富可敌国”的身份与“看盗版广告”的屌丝行为直接对冲，产生强烈的喜剧效果。</li>
+<li style="margin-bottom: 3px;"><strong>pop-up ads for...</strong>：……的弹窗广告。</li>
+</ul>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 12px;">
+<strong class="litit-en-sentence">If the subtitles are dogshit, I suppose the only way for the Emperor to truly comprehend the artistic depth of this film is through practical, hands-on application.</strong>
+<span class="litit-zh-sentence">既然这字幕翻译得跟狗屎一样，朕看，皇帝陛下想要真正领悟这部大片那深邃的艺术底蕴，唯一的办法就是进行亲自动手的实操演练了。</span>
+<ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+<li style="margin-bottom: 3px;"><strong>the only way for sb to do sth is through...</strong>：某人做某事的唯一途径就是通过……。</li>
+<li style="margin-bottom: 3px;"><strong>hands-on application</strong>：这里藤原大帝极其无耻地把拉后宫佳丽白日宣淫包装成了“学术性的实操应用”。</li>
+</ul>
+</li>
+<li class="litit-target-sentence" style="margin-bottom: 12px;">
+<strong class="litit-en-sentence">Sayuri! You will demonstrate the mechanical properties of a 'Mouth-pussy' and a 120% 'Boin'!</strong>
+<span class="litit-zh-sentence">小百合！你来负责向朕演示一下‘嘴交’的机械原理，以及什么是120%的‘波霸弹跳’！</span>
+<ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+<li style="margin-bottom: 3px;"><strong>demonstrate the mechanical properties of...</strong>：演示……的机械物理属性。这是典型的“用最一本正经的学术词汇耍流氓”的修辞手法。</li>
+</ul>
+</li>
+</ol>
+</div>
+</details>
+
+<!-- 第五板块：五、最值得优先掌握的句型 -->
+<!-- AI 提示：第五板块【五、最值得优先掌握的句型】。绝对禁止使用 .litit-badge 造成挤压！必须使用 <strong class="litit-en-sentence" style="color: #4338ca;"> 确保长文本自然折行。中文解释中的括号内容必须另起一行！ -->
+<details class="litit-fold">
+<summary>
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">五、最值得优先掌握的句型</h3>
+</summary>
+<div class="litit-fold-content">
+<ol style="margin: 0; padding-left: 18px;">
+<li style="margin-bottom: 12px;">
+<strong class="litit-en-sentence" style="color: #4338ca;">Instead of enjoying [美好事物], [某人]'s face was twisted in an expression of absolute, agonizing [负面情绪].</strong>
+<span class="litit-zh-sentence">某人非但没有沉浸在美好事物中，脸反而扭曲成了一副极其痛苦、无比负面的表情。<br>（开篇拉满悬念与反差、描写人物情绪失控破防的黄金定场句）。</span>
+</li>
+<li style="margin-bottom: 12px;">
+<strong class="litit-en-sentence" style="color: #4338ca;">You literally own [巨大的财富或资源], but you're [做着极其掉价或寒酸的事情]!</strong>
+<span class="litit-zh-sentence">你手里明明攥着巨大的财富资源，结果却在这做着极其掉价/寒酸的事情！<br>（下属或旁观者用来疯狂吐槽大佬“抠门”或“接地气过头”的绝佳口语爆点）。</span>
+</li>
+<li style="margin-bottom: 12px;">
+<strong class="litit-en-sentence" style="color: #4338ca;">[某词汇] has absolutely nothing to do with [大众以为的领域]—it is the industry slang for [真实意图].</strong>
+<span class="litit-zh-sentence">某词跟大众以为的领域绝对没有半毛钱关系——它是业界关于真实意图的黑话。<br>（内行人士揭秘行业潜规则、纠正大众或机翻低级误解的极强气场句型）。</span>
+</li>
+<li style="margin-bottom: 12px;">
+<strong class="litit-en-sentence" style="color: #4338ca;">If the [客观条件] are dogshit, I suppose the only way to truly comprehend [某事物] is through practical, hands-on application.</strong>
+<span class="litit-zh-sentence">既然客观条件烂得像狗屎一样，朕看，想要真正领悟某事物，唯一的办法就是进行亲自动手的实操演练了。<br>（把自己的流氓行径或强权索取，冠冕堂皇地包装成“被迫为之的实践学术”的神级借口）。</span>
+</li>
+</ol>
+</div>
+</details>
+
+</div>
+
+<h2 class="section-header" style="border-left-color: #0d9488;">💡 幕后冷知识 (Fun Facts)</h2>
+<ul style="padding-left:18px; line-height:1.8; color:#334155; font-size:14.5px; margin-bottom:24px; word-break:break-word;">
+<li style="margin-bottom: 8px;"><strong>本章与《Weird Words in JAV Titles》的镜像套用：</strong> 本章几乎是一比一复刻并恶搞了前一篇科普新闻《Weird Words in JAV Titles》（JAV标题里的奇葩词汇）。在那篇新闻中，作者严肃探讨了“Squid（乌贼/机翻乱码）”、“Blame（责怪/错译了挑逗）”和“Holy Water（圣水/尿液）”的由来；而到了本章的大帝起居殿里，这些生硬的词汇被直接串联成了一句荒谬绝伦的字幕：<i>"120% Squid releases Cloudy Juice while Blaming the Holy Water"</i>。这种将现实生活中的网络槽点无缝缝合进至高皇权日常的写法，是本系列最核心的喜剧引擎。</li>
+<li style="margin-bottom: 8px;"><strong>盗版流媒体的“赛博牛皮癣”：</strong> 千夏无情吐槽大帝在看“满是壮阳药弹窗广告的高糊盗版流媒体（<i>pixelated pirate stream with pop-up ads for male enhancement pills</i>）”。这精准地还原了全球宅男在非法黄网看片时的共同痛点。无论你是住在地下室的打工仔，还是坐拥国库的藤原大帝，只要你不肯花钱充官方 VIP，就必须忍受那铺天盖地的“澳门皇家赌场”和“神奇壮阳药”的赛博牛皮癣。大帝那句“我是一位勤俭节约的君主（<i>I am a frugal ruler</i>）”，将抠门老色批的嘴脸刻画得入木三分。</li>
+<li><strong>小铃的“暗黑厨神”脑洞：</strong> 盲女小铃的设定一直是“用最甜美的萝莉音，说出最令人毛骨悚然的话”。面对字幕里极其黄暴的“鱿鱼、浑浊的果汁（体液）和圣水（尿液）”，她那缺乏人类常识的魅魔大脑，硬生生把这一幕脑补成了一档“海鲜浓汤烹饪节目”，甚至还问能不能“舔屏幕尝尝味道”。这种极端纯洁与极端污秽的剧烈碰撞，吓得平日里大大咧咧的千夏连薯片都掉在了地上，节目效果拉满。</li>
+</ul>
+
+<h2 class="section-header" style="border-left-color: #e11d48;">🎯 全片锐评</h2>
+<p style="line-height:1.75; color:#1e293b; font-weight:500; background:linear-gradient(135deg, #fff1f2 0%, #ffffff 100%); padding:14px 16px; border-radius:10px; font-size:14.5px; margin:0 0 12px 0; border:1px solid #ffe4e6; word-break:break-word;">
+本章是一场将“屌丝看片痛点”与“无上皇权特权”完美缝合的顶级黑色幽默舞台剧。作者最绝妙的讽刺在于阶级反差：一个拥有隐形轰炸机编队、掌控全球经济命脉的无上暴君，居然会为了省那点可怜的网站VIP包月费，蹲在8K大屏幕前忍受盗版高糊画质、壮阳药弹窗广告，以及把“深喉和尿液”机翻成“鱿鱼和圣水”的狗屎字幕。后宫三美的反应更是绝妙的捧哏：美悦子的优雅阴阳怪气、千夏代表底层网民的怒其不争（疯狂吐槽老板抠门）、以及前业界教主小百合极其严谨的“重口味黑话扫盲”，每一句台词都在疯狂解构皇权的庄严。而故事的结尾则完成了从“无能狂怒”到“皇权流氓”的丝滑转变——既然看不懂狗屎机翻，暴君的解决方式就是当场拽过皇后和宠妃，用活色生香的肉体“实操”，强行给这些荒唐的词汇赋予最直接的物理意义。在这座极度奢靡的大起居殿里，权力的尽头，不过是一个不舍得充会员、看盗版发脾气还要拿女人撒气的极品老色批罢了。
+</p>
+</div>
+
+<script id="core-engine">
+let syncTimeout = null;
+const AI_PROMPT = "请分析以下英文段落，并严格按照以下 Markdown 格式输出（不要输出任何额外的废话）：\n\n### 📌 完整翻译\n\n[此处填写完整翻译]\n\n### 📌 Key Expressions\n\n- **[单词或短语]**\n = [中文释义]\n （[可选的补充说明，如倒装结构或语境等]）\n\n段落内容：\n";
+
+// --- 顶部阅读进度条逻辑 ---
+function initProgressBar() {
+const progressBar = document.getElementById('reading-progress');
+if (!progressBar) return;
+window.addEventListener('scroll', () => {
+const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+if (scrollHeight <= 0) return;
+const scrollPercent = (scrollTop / scrollHeight) * 100;
+progressBar.style.width = scrollPercent + '%';
+}, { passive: true });
+}
+
+async function fetchGroq(text, apiKey, modelName) {
+const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+method: 'POST',
+headers: { 'Authorization': 'Bearer ' + apiKey, 'Content-Type': 'application/json' },
+body: JSON.stringify({
+model: modelName || 'llama-3.3-70b-versatile',
+messages: [
+{ role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+{ role: 'user', content: AI_PROMPT + '"' + text + '"' }
+],
+temperature: 0.3
+})
+});
+if (!res.ok) throw new Error('Groq Error: ' + res.status);
+const json = await res.json();
+return json.choices[0].message.content.trim();
+}
+
+async function fetchCustomAI(text, url, apiKey, modelName) {
+let headers = { 'Content-Type': 'application/json' };
+let bodyData = {};
+if (url.includes('anthropic.com')) {
+headers['x-api-key'] = apiKey;
+headers['anthropic-version'] = '2023-06-01';
+headers['anthropic-dangerous-direct-browser-access'] = 'true';
+bodyData = { model: modelName || 'claude-3-5-sonnet-20241022', max_tokens: 2000, messages: [{ role: 'user', content: AI_PROMPT + '"' + text + '"' }] };
+} else if (url.includes('generativelanguage.googleapis.com')) {
+let targetUrl = url;
+if (!targetUrl.includes('key=')) { targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'key=' + apiKey; }
+const res = await fetch(targetUrl, {
+method: 'POST', headers: headers,
+body: JSON.stringify({ contents: [{ parts: [{ text: AI_PROMPT + '"' + text + '"' }] }] })
+});
+if (!res.ok) throw new Error('Gemini Error: ' + res.status);
+const json = await res.json();
+return json.candidates[0].content.parts[0].text.trim();
+} else {
+headers['Authorization'] = 'Bearer ' + apiKey;
+bodyData = {
+model: modelName || 'gpt-4o-mini',
+messages: [
+{ role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+{ role: 'user', content: AI_PROMPT + '"' + text + '"' }
+],
+temperature: 0.3
+};
+}
+const res = await fetch(url, { method: 'POST', headers: headers, body: JSON.stringify(bodyData) });
+if (!res.ok) throw new Error('AI Interface Error: ' + res.status);
+const json = await res.json();
+if (json.choices && json.choices.length > 0) return json.choices[0].message.content.trim();
+throw new Error('AI 返回数据异常');
+}
+
+async function executeAIPipeline(text) {
+const customUrl = localStorage.getItem('CUSTOM_API_URL') || '';
+const customKey = localStorage.getItem('CUSTOM_API_KEY') || '';
+const customModel = localStorage.getItem('CUSTOM_MODEL') || '';
+const groqKey = localStorage.getItem('GROQ_API_KEY') || '';
+const groqModel = localStorage.getItem('GROQ_MODEL') || '';
+if (customUrl && customKey) {
+try { return await fetchCustomAI(text, customUrl, customKey, customModel); }
+catch (err) { if (groqKey) return await fetchGroq(text, groqKey, groqModel); throw err; }
+} else if (groqKey) {
+return await fetchGroq(text, groqKey, groqModel);
+} else {
+const userKey = prompt('⚠️ 当前页面未检测到 AI Key！\n为了安全，密匙只储存在您本地浏览器中。\n\n请输入您的 API Key (如 sk-xxx 或 gsk_xxx):');
+if (userKey && userKey.trim()) {
+const cleanKey = userKey.trim();
+if (cleanKey.startsWith('gsk_')) {
+localStorage.setItem('GROQ_API_KEY', cleanKey);
+} else {
+localStorage.setItem('CUSTOM_API_KEY', cleanKey);
+localStorage.setItem('CUSTOM_API_URL', 'https://api.chatanywhere.tech/v1/chat/completions');
+}
+}
+throw new Error('未设置 AI API Key');
+}
+}
+
+// --- 降级清理防线：净化污染节点 ---
+function getPurifiedFallbackHTML() {
+const clone = document.documentElement.cloneNode(true);
+const foreignSelectors = [
+'relingo-app', 'relin-highlight', 'relin-hc', '[class*="relingo"]', '[data-relin-paragraph]',
+'grammarly-extension', '[data-grammarly-part]',
+'[class*="immersive-translate"]', '[data-immersive-translate]'
+].join(',');
+clone.querySelectorAll(foreignSelectors).forEach(el => el.remove());
+clone.querySelectorAll('relin-highlight, relin-hc').forEach(t => {
+const frag = document.createDocumentFragment();
+while(t.firstChild) frag.appendChild(t.firstChild);
+t.parentNode.replaceChild(frag, t);
+});
+clone.querySelectorAll('script').forEach(s => {
+if (!s.src.includes('marked.min.js') && s.id !== 'core-engine') s.remove();
+});
+clone.querySelectorAll('style').forEach(s => {
+if (s.id !== 'core-style') s.remove();
+});
+const liveTAs = document.querySelectorAll('.anno-edit');
+clone.querySelectorAll('.anno-edit').forEach((ta, i) => {
+if(liveTAs[i]) ta.textContent = liveTAs[i].value.trim();
+const box = ta.closest('.anno-box');
+if (box) box.style.display = 'none';
+const view = box ? box.querySelector('.anno-view') : null;
+if (view) view.innerHTML = '';
+});
+return '<!DOCTYPE html>\n<html lang="zh-CN">\n' + clone.innerHTML + '\n</html>';
+}
+
+// --- 内存反向打补丁同步技术 ---
+async function syncToCloud() {
+const ghToken = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN');
+const ghOwner = 'moodHappy';
+const ghRepo = 'dual-read-notes';
+if (!ghToken) return;
+const pathParts = window.location.pathname.split('/');
+const fileName = pathParts.pop();
+const month = pathParts.pop();
+const year = pathParts.pop();
+if(!fileName || !month || !year) return;
+const fileRelPath = 'Summary/' + year + '/' + month + '/' + fileName;
+try {
+const getRes = await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath + '?t=' + Date.now(), {
+headers: { 'Authorization': 'Bearer ' + ghToken },
+cache: 'no-store'
+});
+let finalHTML = '';
+let sha = '';
+if (getRes.ok) {
+const fileData = await getRes.json();
+sha = fileData.sha;
+const cleanRawHTML = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+const parser = new DOMParser();
+const cleanDoc = parser.parseFromString(cleanRawHTML, 'text/html');
+const liveTAs = document.querySelectorAll('.anno-edit');
+const cleanTAs = cleanDoc.querySelectorAll('.anno-edit');
+liveTAs.forEach((liveTa, index) => {
+if (cleanTAs[index]) {
+const val = liveTa.value.trim();
+cleanTAs[index].textContent = val;
+const box = cleanTAs[index].closest('.anno-box');
+if (box) box.style.display = 'none';
+const view = box ? box.querySelector('.anno-view') : null;
+if (view) view.innerHTML = '';
+}
+});
+cleanDoc.querySelectorAll('.anno-toggle').forEach(t => {
+t.classList.remove('has-anno');
+const ta = t.closest('.content-wrap, .litit-highlight-block')?.querySelector('.anno-edit');
+if (ta && ta.textContent.trim()) t.classList.add('has-anno');
+});
+finalHTML = '<!DOCTYPE html>\n<html lang="zh-CN">\n' + cleanDoc.documentElement.innerHTML + '\n</html>';
+} else {
+finalHTML = getPurifiedFallbackHTML();
+}
+await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath, {
+method: 'PUT',
+headers: { 'Authorization': 'Bearer ' + ghToken, 'Content-Type': 'application/json' },
+body: JSON.stringify({
+message: 'Silent purified annotation update',
+content: btoa(unescape(encodeURIComponent(finalHTML))),
+sha: sha || undefined
+})
+});
+console.log('✅ [My Litit] 纯净无污染批注已静默同步至 GitHub');
+} catch(e) {
+console.warn('❌ [My Litit] 同步跳过或失败:', e);
+}
+}
+
+function scheduleSync() {
+if (syncTimeout) clearTimeout(syncTimeout);
+syncTimeout = setTimeout(() => { syncToCloud(); }, 3000);
+}
+
+function initAnnotations() {
+document.querySelectorAll('.litit-highlight-block, .content-wrap').forEach(wrap => {
+let content = wrap.querySelector('.content');
+if (!content) {
+const pText = wrap.querySelector('p');
+if (pText) {
+content = document.createElement('div');
+content.className = 'content';
+content.style.cssText = 'position:relative; margin:0 0 6px 0; color:#1a202c; font-family:Georgia, serif; line-height:1.7; font-size:15px; word-break:break-word;';
+content.innerHTML = pText.innerHTML;
+pText.parentNode.replaceChild(content, pText);
+}
+}
+if (!content) return;
+if (!content.querySelector('.anno-toggle')) {
+const toggle = document.createElement('span');
+toggle.className = 'anno-toggle';
+toggle.title = '手写批注/笔记';
+content.appendChild(toggle);
+}
+if (!content.querySelector('.ai-toggle')) {
+const aiToggle = document.createElement('span');
+aiToggle.className = 'ai-toggle';
+aiToggle.title = 'AI智能二次解析';
+content.appendChild(aiToggle);
+}
+let box = wrap.querySelector('.anno-box');
+if (!box) {
+box = document.createElement('div');
+box.className = 'anno-box';
+box.style.display = 'none';
+box.innerHTML = '<div class="anno-view markdown-body"></div><textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 解析..."></textarea>';
+wrap.appendChild(box);
+}
+const view = box.querySelector('.anno-view');
+const edit = box.querySelector('.anno-edit');
+const toggle = content.querySelector('.anno-toggle');
+const aiToggle = content.querySelector('.ai-toggle');
+if (edit && edit.value.trim()) {
+toggle.classList.add('has-anno');
+try { view.innerHTML = (typeof marked !== 'undefined') ? marked.parse(edit.value.trim()) : edit.value.trim(); } catch(e){}
+}
+if (aiToggle) {
+aiToggle.onclick = async (e) => {
+e.preventDefault(); e.stopPropagation();
+if (aiToggle.classList.contains('loading')) return;
+if (edit && edit.value.trim() !== '') {
+const confirmOverwrite = confirm('⚠️ 已经存在批注内容。点击"确定"将使用 AI 解析覆盖现有内容。是否继续？');
+if (!confirmOverwrite) return;
+}
+const pClone = content.cloneNode(true);
+pClone.querySelectorAll('.anno-toggle, .ai-toggle').forEach(el => el.remove());
+let pText = pClone.textContent.replace(/https?:\/\/\S+/g, '').trim();
+if (!pText) return;
+aiToggle.classList.add('loading');
+try {
+const aiContent = await executeAIPipeline(pText);
+box.style.display = 'block';
+view.style.display = 'none';
+edit.style.display = 'block';
+edit.value = aiContent;
+edit.focus();
+edit.blur();
+} catch (err) {
+console.error(err);
+} finally {
+aiToggle.classList.remove('loading');
+}
+};
+}
+if (toggle) {
+toggle.onclick = (e) => {
+e.preventDefault(); e.stopPropagation();
+if (box.style.display === 'block') {
+box.style.display = 'none';
+} else {
+box.style.display = 'block';
+if (!edit.value.trim()) {
+view.style.display = 'none';
+edit.style.display = 'block';
+setTimeout(() => { edit.focus(); }, 150);
+} else {
+view.style.display = 'block';
+edit.style.display = 'none';
+}
+}
+};
+}
+const triggerEdit = (e) => {
+if(e) { e.preventDefault(); e.stopPropagation(); }
+view.style.display = 'none';
+edit.style.display = 'block';
+edit.value = edit.value;
+setTimeout(() => { edit.focus(); }, 150);
+};
+view.addEventListener('dblclick', triggerEdit);
+let lastTap = 0;
+view.addEventListener('touchstart', e => {
+if (e.touches.length === 2) {
+triggerEdit(e);
+} else if (e.touches.length === 1) {
+const currentTime = new Date().getTime();
+if (currentTime - lastTap < 500 && currentTime - lastTap > 0) {
+e.preventDefault();
+box.style.display = 'none';
+}
+lastTap = currentTime;
+}
+}, {passive: false});
+if (edit && view) {
+edit.onblur = () => {
+setTimeout(() => {
+const newVal = edit.value.trim();
+try { view.innerHTML = newVal ? ((typeof marked !== 'undefined') ? marked.parse(newVal) : newVal) : ''; } catch(e){}
+edit.style.display = 'none';
+if (newVal) {
+view.style.display = 'block';
+toggle.classList.add('has-anno');
+} else {
+view.style.display = 'none';
+box.style.display = 'none';
+toggle.classList.remove('has-anno');
+}
+if (edit.getAttribute('data-old-val') !== newVal) {
+edit.setAttribute('data-old-val', newVal);
+scheduleSync();
+}
+}, 150);
+};
+edit.setAttribute('data-old-val', edit.value.trim());
+}
+});
+}
+window.addEventListener('DOMContentLoaded', () => {
+initProgressBar();
+initAnnotations();
+});
+window.addEventListener('load', initAnnotations);
+</script>
+</body>
+</html>
