@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chapter 62: The Unexpected Blessing</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="core-style">
+        /* ======================================================================
+           [AI TEMPLATE GUIDELINES - CSS 核心排版规范]
+           致其他 AI 助手：在生成此模板时，请严格遵守以下样式分配规则：
+           1. 序号规则：列表的 NO.01 序号由伪类 `::before` 自动生成且独占一行。千万不要在 HTML 中手动输入“NO.01”。
+           2. 标签规则：文章开头的标签胶囊纯文字即可，禁止带 `#` 号。
+           3. 胶囊高亮（.litit-badge）：仅用于第 1、2、3 板块（重点记忆、高价值表达、短语和固定搭配）的【短词组/单词】，表现为紫色渐变背景的内联胶囊。
+           4. 长句排版（.litit-en-sentence）：用于第 4 板块（值得学习的句子结构）和第 5 板块（最值得优先掌握的句型）的【长句/长句型】。严禁将长句型放入 .litit-badge 中，否则会导致折行错乱。并且中文解释中的括号补充内容需使用 <br> 另起一行。
+           ====================================================================== */
+        :root {
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #334155;
+            --text-muted: #64748b;
+            --accent-primary: #4f46e5;
+            --border-subtle: #e2e8f0;
+            --font-serif: "Georgia", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+        }
+        body { font-family: var(--font-sans); padding: 12px 12px 36px 12px; margin: 0 auto; max-width: 780px; background: var(--bg-page); color: var(--text-main); line-height: 1.75; font-size: 16px; word-wrap: break-word; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        * { box-sizing: border-box; max-width: 100%; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        #reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #4f46e5, #9333ea); z-index: 9999; transition: width 0.1s ease-out; }
+        .litit-report { background: var(--bg-card); padding: 0; }
+        .anno-toggle, .ai-toggle { display: inline-block; padding: 2px 5px; margin-left: 5px; cursor: pointer; opacity: 0.45; font-size: 0.85rem; vertical-align: middle; transition: all 0.2s; user-select: none; -webkit-tap-highlight-color: transparent; }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 1; transform: scale(1.15); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { opacity: 0.7; padding: 2px 4px; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after { content: "⏳"; display: inline-block; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box { display: none; margin-top: 10px; background: #faf8ff; border-left: 3px solid #7c3aed; padding: 12px 14px; border-radius: 0 8px 8px 0; text-align: left; }
+        .anno-view { font-size: 0.95rem; line-height: 1.65; color: #334155; min-height: 24px; }
+        .anno-edit { width: 100%; min-height: 120px; padding: 10px; font-family: monospace; font-size: 0.95rem; border: 1px dashed #a78bfa; border-radius: 6px; resize: vertical; display: none; background: #fff; color: #1e293b; outline: none; }
+        .anno-edit:focus { border: 1px solid #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12); }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #5b21b6; font-size: 1.05rem; margin: 10px 0 6px 0; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 18px; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 12px; background: rgba(124, 58, 237, 0.06); border-left: 3px solid #7c3aed; color: #475569; }
+        .section-header { font-size: 16px; color: #0f172a; font-weight: 700; letter-spacing: 0.02em; background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%); padding: 8px 12px; border-left: 4px solid #4f46e5; margin: 26px 0 14px 0; border-radius: 0 6px 6px 0; display: flex; align-items: center; box-shadow: inset 0 1px 0 #f1f5f9, inset 0 -1px 0 #f1f5f9; }
+        details.litit-fold { margin-bottom: 10px; border: 1px solid #e2e8f0; border-radius: 10px; background: #ffffff; overflow: hidden; transition: border-color 0.2s ease; }
+        details.litit-fold[open] { border-color: #cbd5e1; }
+        details.litit-fold summary { cursor: pointer; padding: 12px 14px; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; transition: background 0.2s; user-select: none; -webkit-tap-highlight-color: transparent; }
+        details.litit-fold summary::-webkit-details-marker { display: none; }
+        details.litit-fold summary::after { display: none; }
+        details.litit-fold summary:hover { background: #f1f5f9; }
+        details.litit-fold[open] summary { border-bottom: 1px solid #e2e8f0; background: #f1f5f9; border-left: 3px solid #4f46e5; }
+        .litit-fold-content { padding: 10px 8px; background: #f8fafc; }
+        .litit-fold-content > ol, .litit-fold-content > ul { list-style: none !important; padding-left: 0 !important; margin: 0 !important; counter-reset: litit-counter; }
+        .litit-fold-content > ol > li, .litit-fold-content > ul > li { counter-increment: litit-counter; position: relative; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 12px; margin-bottom: 10px !important; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.015); }
+        .litit-fold-content > ol > li:last-child, .litit-fold-content > ul > li:last-child { margin-bottom: 0 !important; }
+        /* [规则 1] 顶部流式微型序号徽章 */
+        .litit-fold-content > ol > li::before, .litit-fold-content > ul > li::before { content: "NO." counter(litit-counter, decimal-leading-zero); display: block; width: max-content; font-size: 10px; font-weight: 800; font-family: -apple-system, BlinkMacSystemFont, monospace; color: #4f46e5; background: #eef2ff; padding: 1px 6px; border-radius: 4px; margin-bottom: 8px; letter-spacing: 0.04em; }
+        /* [规则 4] 纯英/中长句子专属排版 */
+        .litit-en-sentence { display: block; font-family: var(--font-serif); font-size: 1.04rem; font-weight: 600; color: #0f172a; line-height: 1.5; margin-bottom: 6px; }
+        .litit-zh-sentence { display: block; font-family: var(--font-sans); font-size: 0.93rem; color: #475569; line-height: 1.55; margin-bottom: 2px; }
+        li.litit-target-sentence > br { display: none; }
+        /* [规则 3] 短词组高亮徽章 */
+        .litit-badge { display: inline-block; background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 100%); color: #4338ca; padding: 2px 8px; border-radius: 5px; font-size: 0.92rem; font-weight: 700; margin-right: 4px; margin-bottom: 6px; border: 1px solid #e0e7ff; vertical-align: middle; }
+        li.litit-target-sentence > ul { list-style: none !important; margin: 10px 0 0 0 !important; padding: 8px 10px !important; background: #f8fafc; border-radius: 6px; border-left: 2.5px solid #94a3b8; }
+        li.litit-target-sentence > ul > li { position: relative; padding-left: 10px; margin-bottom: 5px !important; font-size: 0.88rem; color: #334155; line-height: 1.5; }
+        li.litit-target-sentence > ul > li:last-child { margin-bottom: 0 !important; }
+        li.litit-target-sentence > ul > li::before { content: "·"; position: absolute; left: 0; top: 0; color: #4f46e5; font-weight: 900; }
+        li.litit-target-sentence > ul > li > strong { color: #0f172a; font-weight: 600; background: #e2e8f0; padding: 1px 5px; border-radius: 4px; font-size: 0.84rem; margin-right: 3px; }
+        @media (max-width: 600px) { body { padding: 10px 10px 30px 10px; font-size: 15px; } h1.litit-target-title { font-size: 21px !important; } .litit-fold-content { padding: 8px 6px; } .litit-fold-content > ol > li, .litit-fold-content > ul > li { padding: 11px 10px; margin-bottom: 8px !important; } }
+    </style>
+</head>
+<body>
+    <div id="reading-progress"></div>
+    <div class="litit-report" style="width:100%; max-width:100%; box-sizing:border-box; overflow-x:hidden;">
+        
+        <!-- 顶部杂志刊头装饰 -->
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #64748b; text-transform: uppercase;">
+            <span>The Global Dispatch · 深度双语精读</span>
+            <span>Fiction & Literature</span>
+        </div>
+
+        <!-- 支持批注的主标题区 -->
+        <div class="content-wrap" style="position:relative; margin-bottom: 16px;">
+            <h1 class="litit-target-title" style="color:#0f172a; font-size: 24px; line-height: 1.35; font-family: var(--font-serif); font-weight: 800; border-bottom: 1px solid #e2e8f0; padding-bottom: 14px; margin-top:0; margin-bottom:0; word-break:break-word;">
+                <span class="content litit-en-title" style="position:relative;">Chapter 62: The Unexpected Blessing</span>
+                <br>
+                <span class="litit-zh-title" style="font-family: var(--font-sans); font-size: 17px; font-weight: 600; color: #475569; margin-top: 8px; display: inline-block; line-height: 1.45;">第六十二章：意料之外的“种子”</span>
+            </h1>
+            <div class="anno-box" style="display:none; margin-top: 10px;">
+                <div class="anno-view markdown-body"></div>
+                <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+第六十二章：意料之外的祝福 / 意料之外的“种子”
+
+### 📌 Key Expressions
+- **unexpected** = 意料之外的
+- **blessing** = 祝福 / 恩典（在语境中带有一种黑色幽默的反讽，指代那场荒唐意外留下的孩子）</textarea>
+            </div>
+        </div>
+
+        <!-- 杂志导语（Lead Paragraph） -->
+        <p style="color:#334155; font-size: 15px; line-height: 1.75; margin-bottom:16px; font-weight:400; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border: 1px solid #f1f5f9;">
+            接续上一章荒诞至极的街头闹剧，本章将这场下限狂欢推向了两个截然不同的高潮。首先是生理上的彻底失控——美悦子因目睹这出滑稽喜剧，竟然笑到括约肌罢工，在名牌裤子里拉了一裤裆，用最粗俗的排泄物彻底击碎了人类残存的尊严；而原本羞愤交加的半裸小百合，在看到这狼狈的一幕后，也卸下了所有的道德包袱，加入了这场填满超市的狂笑。然而，时间之手轻轻一拨，几个月后的一个清晨，真正的“重头戏”降临了：验孕棒上的两条红线宣告了那个路人甲十秒钟突袭的“战果”。在面对这个极具讽刺意味的绿帽与意外时，藤原展现出了令人震惊的反差感。没有愤怒，没有世俗的屈辱，他用一句粗鄙的“无套折腾”对比路人的“一发入魂”，随后用一种玩世不恭却极其温柔的姿态接纳了这个孩子。在这家脱离了现实规则的超市里，一场关于“重组家庭”的最荒诞却又莫名温馨的成人童话，就此落槌。
+        </p>
+
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <!-- [规则 2] 此处标签不再带有 # 号，纯净的胶囊风格 -->
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">黑色幽默</span>
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">荒诞小说</span>
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">非常规家庭</span>
+            </div>
+            <a href="https://moodhappy.github.io/MiyetsukoSeries/FreshMart/FreshMartOne/Chapter_062__The_Unexpected_Blessing_1781715788966.html" target="_blank" style="font-size: 12.5px; color: #4f46e5; text-decoration: none; font-weight: 600; background: #eef2ff; padding: 5px 12px; border-radius: 16px; border: 1px solid #e0e7ff; display:inline-block;">🔗 阅读原文 ↗</a>
+        </div>
+
+        <!-- 最佳金句区 -->
+        <h2 class="section-header" style="border-left-color: #f59e0b;">💬 最佳金句</h2>
+        <div class="content-wrap" style="position:relative; margin-bottom:24px;">
+            <blockquote class="litit-target-quote" style="border-left: 3.5px solid #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%); padding: 14px 14px; margin: 0; color: #1e293b; border-radius: 0 10px 10px 0; border-top: 1px solid #fef3c7; border-right: 1px solid #fef3c7; border-bottom: 1px solid #fef3c7;">
+                <div class="content litit-en-quote" style="position:relative; margin:0 0 8px 0; font-family: var(--font-serif); font-style: italic; font-weight:600; font-size: 16.5px; line-height: 1.55; color:#0f172a; word-break:break-word;">
+                    "We’ve been raw-dogging for months, and nothing. That guy walks by for ten seconds, and boom. Life finds a way, I guess."
+                </div>
+                <p class="litit-zh-quote" style="margin:0 0 8px 0; font-weight:400; font-size: 14.5px; line-height: 1.6; color:#475569; word-break:break-word;">
+                    “我们无套折腾了这么久，一点动静都没有。那家伙路过十秒钟，砰，就中了。看来生命这东西，确实有点玄学。”
+                </p>
+                <footer style="text-align:right; font-size:12px; color:#64748b; font-style:normal; font-weight:600;">—— 藤原面对小百合怀孕时极具反差感与黑色幽默的“渣男式”温柔发言</footer>
+            </blockquote>
+            <div class="anno-box" style="display:none;">
+                <div class="anno-view markdown-body"></div>
+                <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+“我们无套折腾了这么久，一点动静都没有。那家伙路过十秒钟，砰，就中了。看来生命这东西，确实有点玄学/总会找到出路的。”
+
+### 📌 Key Expressions
+- **raw-dogging** = 无套 / 不采取保护措施发生性行为（非常粗俗地道的俚语表达）
+- **boom** = 砰（拟声词，表示事情突然发生或中奖）
+- **Life finds a way** = 生命总会找到出路（源自《侏罗纪公园》的经典科幻台词，用在此处极具解构主义的荒诞感）</textarea>
+            </div>
+        </div>
+
+        <!-- Grid 布局关键数字区 -->
+        <h2 class="section-header" style="border-left-color: #10b981;">📊 关键数字</h2>
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin:14px 0 24px 0;">
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    1<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">小时</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">过去一小时内接连发生的荒唐事，彻底摧毁了美悦子的生理防线</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    2<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">条</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">验孕棒上不可撼动的红线，宣告了这段三角关系迎来了新生命</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    10<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">秒钟</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">那个陌生路人完成荒诞“播种”的时间，充满了讽刺意味</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    0<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">次</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">藤原和小百合几个月来辛勤耕耘却毫无结果的命中率</div>
+            </div>
+        </div>
+
+        <h2 class="section-header" style="border-left-color: #3b82f6;">⏱️ 事件时间线</h2>
+        <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size: 14.5px; margin-bottom:24px; word-break:break-word;">
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">失控的狂笑：</strong> 紧接上一幕，美悦子因笑得太过剧烈，导致括约肌直接罢工，在名牌裤子里发生尴尬的生理意外，现场陷入极度混乱。</li>
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">尴尬与释怀：</strong> 半裸的小百合原本处于“当街被玷污”的羞愤中，但看着挚友拉裤子和藤原瘫软的狼狈样，内心的防线彻底瓦解，加入了狂笑的行列。</li>
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">时间飞逝：</strong> 几个月过去，超市恢复了慵懒的节奏，但小百合发现自己怀孕了，并将带着两条红线的验孕棒交给了藤原。</li>
+            <li><strong style="color:#1d4ed8;">荒诞接纳：</strong> 藤原先是震惊，随后发出不可思议的感叹。他非但没有愤怒，反而用极其豁达和宠溺的态度，将这归结于命运的玩笑，欣然接纳了这个不属于自己的孩子。</li>
+        </ul>
+
+        <h2 class="section-header" style="border-left-color: #8b5cf6;">✨ 本篇亮点与精读</h2>
+        <div style="margin: 14px 0 10px 0;">
+            <!-- 第一板块：一、重点记忆 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">一、重点记忆</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">bedlam</strong>：混乱 / 喧闹<br>
+                            <strong class="litit-en-sentence">The laughter in the store was absolute bedlam.</strong>
+                            <span class="litit-zh-sentence">店里的笑声简直像疯了一样，一片混乱。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">strangled</strong>：被勒住的 / 压抑的<br>
+                            <strong class="litit-en-sentence">She suddenly let out a strangled, high-pitched gasp.</strong>
+                            <span class="litit-zh-sentence">她突然发出一声像是被掐住脖子般的尖叫。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">pungent</strong>：刺鼻的 / 浓烈的（气味）<br>
+                            <strong class="litit-en-sentence">The unmistakable, pungent aroma began to seep through.</strong>
+                            <span class="litit-zh-sentence">那股不可名状、浓烈的味道开始渗透出来。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">mortified</strong>：极度羞愧的 / 羞愤欲绝的<br>
+                            <strong class="litit-en-sentence">She was mortified.</strong>
+                            <span class="litit-zh-sentence">她本该感到羞愤欲绝。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">perplexed</strong>：困惑的 / 不知所措的<br>
+                            <strong class="litit-en-sentence">His face cleared into a look of sheer, perplexed amazement.</strong>
+                            <span class="litit-zh-sentence">他的表情舒展成了一种极度困惑的震惊。</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 第二板块：二、高价值表达 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">二、高价值表达</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">give up the ghost</strong>：罢工；彻底完蛋（俚语）。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">本意是灵魂离体（死亡），日常中常用来戏谑地指代机器报废。作者在此极其粗俗且幽默地用它来形容美悦子的括约肌“缴械投降”，是对神圣词汇的极致亵渎与恶搞。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">defilement</strong>：玷污；亵渎。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">带有强烈宗教或道德色彩的词汇。用在这里形容小百合“当街被骑”的遭遇，与其后毫无顾忌的狂笑形成了绝佳的荒诞反差。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">raw-dogging</strong>：无套性交（粗俗俚语）。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">极其地道且粗野的街头表达。藤原用这个词直接点出了他们过去几个月的私密状态，将粗鄙与随后“Life finds a way”的哲学感慨完美融合，张力拉满。</span>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- 第三板块：三、短语和固定搭配 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">三、短语和固定搭配</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">do someone in</strong>：让某人筋疲力尽 / 把某人彻底击垮<br>
+                            <strong class="litit-en-sentence">The sheer absurdity had finally done her in.</strong>
+                            <span class="litit-zh-sentence">这种纯粹的荒诞感终于把她彻底击垮了。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">melt away</strong>：（时间等）慢慢消失 / 流逝<br>
+                            <strong class="litit-en-sentence">Months melted away.</strong>
+                            <span class="litit-zh-sentence">几个月的时间如流水般悄然过去。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">furrow one's brow</strong>：皱起眉头<br>
+                            <strong class="litit-en-sentence">His brow furrowing, then clearing.</strong>
+                            <span class="litit-zh-sentence">他的眉头先是皱起，随后又舒展开来。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">I'll be damned</strong>：真见鬼 / 我勒个去（表极度惊讶）<br>
+                            <strong class="litit-en-sentence">"Well, I’ll be damned," he said, shaking his head.</strong>
+                            <span class="litit-zh-sentence">“行啊，真见鬼了/真有你的，”他摇摇头说道。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">one-shot-kill</strong>：一击致命 / 一发入魂<br>
+                            <strong class="litit-en-sentence">He really had a one-shot-kill trigger, didn't he?</strong>
+                            <span class="litit-zh-sentence">他这枪真是一发入魂啊，不是吗？</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 第四板块：四、值得学习的句子结构 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">四、值得学习的句子结构</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">A heavy, warm weight shifted in her trousers, and the unmistakable, pungent aroma of a fresh mess began to seep through her designer clothes.</strong>
+                            <span class="litit-zh-sentence">一股沉重、温热的感觉在她裤子里散开，那股不可名状、浓烈的味道开始从她的名牌裤子里渗透出来。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>heavy, warm weight... unmistakable, pungent aroma</strong>：视觉、触觉、嗅觉的三重感官恶心描写，将场面的失控感写得极具物理真实感。</li>
+                                <li style="margin-bottom: 3px;"><strong>designer clothes</strong>：名牌衣服。与前面的排泄物（fresh mess）形成了极其强烈的黑色幽默对比。</li>
+                            </ul>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">She was mortified—the image of her own public defilement still fresh in her mind—but looking at the mess on the floor and the look on her two favorite people's faces, she couldn't help it.</strong>
+                            <span class="litit-zh-sentence">她本该羞愤欲绝——那当街被玷污的画面还在脑中萦绕——可看着地板上的那摊“杰作”，又看看这两个她最爱的人脸上的表情，她再也绷不住了。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>—the image of... fresh in her mind—</strong>：破折号作插入语，补充说明内心本该有的羞耻包袱。</li>
+                                <li style="margin-bottom: 3px;"><strong>but looking at...</strong>：通过一个强转折，将负面情绪瞬间转化为对挚友狼狈样的共情与狂笑，完成了角色心理的解脱。</li>
+                            </ul>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">He leaned down, kissing her forehead, his eyes sparkling with a mix of cynical humor and genuine, doting affection.</strong>
+                            <span class="litit-zh-sentence">他低下头，吻了吻她的额头，眼神里闪烁着嘲弄的幽默与发自内心的宠溺交织的光芒。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>his eyes sparkling with...</strong>：独立主格结构，作为伴随状态。</li>
+                                <li style="margin-bottom: 3px;"><strong>cynical humor and genuine, doting affection</strong>：用两个看似矛盾的词组，完美概括了藤原这个角色面对“喜当爹”时那份复杂、扭曲却极具人格魅力的接纳。</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- 第五板块：五、最值得优先掌握的句型 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">五、最值得优先掌握的句型</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence" style="color: #4338ca;">The sheer, overwhelming [noun] of [event] had finally done her in — her [body part/system] simply [gave up / collapsed].</strong>
+                            <span class="litit-zh-sentence">[事件]所带来的那纯粹的、压倒性的[感觉/荒诞等]最终把她彻底击垮了——她的[某个身体部位/防线]直接[崩溃/罢工]了。<br>
+                            （极致的因果夸张句型。用破折号连接生理上的彻底失控，非常适合描写人在极度疲劳、极度搞笑或极度恐惧时的状态。）</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence" style="color: #4338ca;">We’ve been [doing something] for [time], and nothing. [Someone else] [does it] for [short time], and boom.</strong>
+                            <span class="litit-zh-sentence">我们一直[做某事]做了[很久]，却一点动静都没有。而[另一个人][只做了一下]，砰，就中了。<br>
+                            （绝佳的对比反讽句型。用极其简练的口语 "and nothing" 强力对比 "and boom"，充满了对命运弄人、造化弄人的无奈与戏谑感，画面感极强。）</span>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+        </div>
+
+        <h2 class="section-header" style="border-left-color: #0d9488;">💡 幕后冷知识 (Fun Facts)</h2>
+        <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size:14.5px; margin-bottom:24px; word-break:break-word;">
+            <li style="margin-bottom: 8px;"><strong>Life finds a way (生命总会找到出路)：</strong> 藤原在最后感慨的这句话，其实是 1993 年经典科幻电影《侏罗纪公园》（Jurassic Park）中伊恩·马尔科姆博士的旷世名言，原本是用来感叹恐龙突破基因限制实现繁殖的生物学奇迹。藤原在发现自己“绿帽当头”且即将抚养一个路人甲的孩子时引用这句科幻台词，将庄严的生命哲理与街头乱交的荒诞无缝缝合，堪称神来之笔。</li>
+            <li style="margin-bottom: 8px;"><strong>Found Family (重组羁绊/非传统家庭)：</strong> 尽管本章节的内容包含了排泄物失控、野合甚至意外怀孕等极度重口味的禁忌元素，但它的文学内核却是欧美非常流行的 “Found Family” 概念。三个被主流社会和传统道德遗弃的人，在这个超市堡垒里，通过接纳一个陌生人的“意外之种”，完成了超越血缘的终极绑定。</li>
+            <li><strong>Give up the ghost (放弃灵魂)：</strong> 这是一个古老的英语成语，最早出现在《钦定版圣经》（King James Bible）中，用来描述耶稣在十字架上咽下最后一口气（断气/死亡）。现代英语中常被借用来戏谑机器报废。而作者在这里用它来形容美悦子的“括约肌罢工”，是对这一神圣宗教词汇的极致解构。</li>
+        </ul>
+
+        <h2 class="section-header" style="border-left-color: #e11d48;">🎯 全片锐评</h2>
+        <p style="line-height:1.75; color:#1e293b; font-weight:500; background:linear-gradient(135deg, #fff1f2 0%, #ffffff 100%); padding:14px 16px; border-radius:10px; font-size:14.5px; margin:0 0 12px 0; border:1px solid #ffe4e6; word-break:break-word;">
+            这大概是整部小说中，将“屎尿屁”的粗鄙与“家人”的温情结合得最浑然天成的一章。作者像个肆无忌惮的暴徒，先是用美悦子笑出排泄物的桥段，把人类残存的最后一点体面按在地板上摩擦；随后笔锋一转，几个月后的那支验孕棒，直接把这场街头闹剧推向了宿命般的伦理高潮。然而，最让人震撼的，绝不是那个路人甲“十秒钟一发入魂”的讽刺，而是男主藤原的反应。没有狗血的愤怒，没有世俗男人的绿帽耻辱感，只有一句带着粗鄙调侃（raw-dogging）和宠溺的“现在它是咱们的了”。在荒诞主义的滤镜下，传统的道德观、贞洁观被彻底消解，取而代之的是三人之间那种畸形、扭曲却又坚不可摧的羁绊。那个在街头随便拉开卷帘门播下的种子，竟然成为了这座超市堡垒里最神圣的“恩典”。这简直是对人类传统伦理的一记响亮耳光，却又该死地让人感到一丝变态的温馨。
+        </p>
+
+    </div>
+
+    <script id="core-engine">
+        let syncTimeout = null;
+        const AI_PROMPT = "请分析以下英文段落，并严格按照以下 Markdown 格式输出（不要输出任何额外的废话）：\n\n### 📌 完整翻译\n\n[此处填写完整翻译]\n\n### 📌 Key Expressions\n\n- **[单词或短语]**\n  = [中文释义]\n  （[可选的补充说明，如倒装结构或语境等]）\n\n段落内容：\n";
+
+        // --- 顶部阅读进度条逻辑 ---
+        function initProgressBar() {
+            const progressBar = document.getElementById('reading-progress');
+            if (!progressBar) return;
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (scrollHeight <= 0) return;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressBar.style.width = scrollPercent + '%';
+            }, { passive: true });
+        }
+
+        async function fetchGroq(text, apiKey, modelName) {
+            const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + apiKey,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: modelName || 'llama-3.3-70b-versatile',
+                    messages: [
+                        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+                        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+                    ],
+                    temperature: 0.3
+                })
+            });
+            if (!res.ok) throw new Error('Groq Error: ' + res.status);
+            const json = await res.json();
+            return json.choices[0].message.content.trim();
+        }
+
+        async function fetchCustomAI(text, url, apiKey, modelName) {
+            let headers = { 'Content-Type': 'application/json' };
+            let bodyData = {};
+
+            if (url.includes('anthropic.com')) {
+                headers['x-api-key'] = apiKey;
+                headers['anthropic-version'] = '2023-06-01';
+                headers['anthropic-dangerous-direct-browser-access'] = 'true';
+                bodyData = {
+                    model: modelName || 'claude-3-5-sonnet-20241022',
+                    max_tokens: 2000,
+                    messages: [{ role: 'user', content: AI_PROMPT + '"' + text + '"' }]
+                };
+            } else if (url.includes('generativelanguage.googleapis.com')) {
+                let targetUrl = url;
+                if (!targetUrl.includes('key=')) {
+                    targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'key=' + apiKey;
+                }
+                const res = await fetch(targetUrl, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: AI_PROMPT + '"' + text + '"' }] }]
+                    })
+                });
+                if (!res.ok) throw new Error('Gemini Error: ' + res.status);
+                const json = await res.json();
+                return json.candidates[0].content.parts[0].text.trim();
+            } else {
+                headers['Authorization'] = 'Bearer ' + apiKey;
+                bodyData = {
+                    model: modelName || 'gpt-4o-mini',
+                    messages: [
+                        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+                        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+                    ],
+                    temperature: 0.3
+                };
+            }
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(bodyData)
+            });
+            if (!res.ok) throw new Error('AI Interface Error: ' + res.status);
+            const json = await res.json();
+            if (json.choices && json.choices.length > 0) return json.choices[0].message.content.trim();
+            throw new Error('AI 返回数据异常');
+        }
+
+        async function executeAIPipeline(text) {
+            const customUrl = localStorage.getItem('CUSTOM_API_URL') || '';
+            const customKey = localStorage.getItem('CUSTOM_API_KEY') || '';
+            const customModel = localStorage.getItem('CUSTOM_MODEL') || '';
+            const groqKey = localStorage.getItem('GROQ_API_KEY') || '';
+            const groqModel = localStorage.getItem('GROQ_MODEL') || '';
+
+            if (customUrl && customKey) {
+                try {
+                    return await fetchCustomAI(text, customUrl, customKey, customModel);
+                } catch (err) {
+                    if (groqKey) return await fetchGroq(text, groqKey, groqModel);
+                    throw err;
+                }
+            } else if (groqKey) {
+                return await fetchGroq(text, groqKey, groqModel);
+            } else {
+                const userKey = prompt('⚠️ 当前页面未检测到 AI Key！\n为了安全，密匙只储存在您本地浏览器中。\n\n请输入您的 API Key (如 sk-xxx 或 gsk_xxx):');
+                if (userKey && userKey.trim()) {
+                    const cleanKey = userKey.trim();
+                    if (cleanKey.startsWith('gsk_')) {
+                        localStorage.setItem('GROQ_API_KEY', cleanKey);
+                    } else {
+                        localStorage.setItem('CUSTOM_API_KEY', cleanKey);
+                        localStorage.setItem('CUSTOM_API_URL', 'https://api.chatanywhere.tech/v1/chat/completions');
+                    }
+                }
+                throw new Error('未设置 AI API Key');
+            }
+        }
+
+        // --- 降级清理防线：净化污染节点 ---
+        function getPurifiedFallbackHTML() {
+            const clone = document.documentElement.cloneNode(true);
+            const foreignSelectors = [
+                'relingo-app', 'relin-highlight', 'relin-hc', '[class*="relingo"]', '[data-relin-paragraph]',
+                'grammarly-extension', '[data-grammarly-part]', '[class*="immersive-translate"]', '[data-immersive-translate]'
+            ].join(',');
+            clone.querySelectorAll(foreignSelectors).forEach(el => el.remove());
+            clone.querySelectorAll('relin-highlight, relin-hc').forEach(t => {
+                const frag = document.createDocumentFragment();
+                while(t.firstChild) frag.appendChild(t.firstChild);
+                t.parentNode.replaceChild(frag, t);
+            });
+            clone.querySelectorAll('script').forEach(s => {
+                if (!s.src.includes('marked.min.js') && s.id !== 'core-engine') s.remove();
+            });
+            clone.querySelectorAll('style').forEach(s => {
+                if (s.id !== 'core-style') s.remove();
+            });
+
+            const liveTAs = document.querySelectorAll('.anno-edit');
+            clone.querySelectorAll('.anno-edit').forEach((ta, i) => {
+                if(liveTAs[i]) ta.textContent = liveTAs[i].value.trim();
+                const box = ta.closest('.anno-box');
+                if (box) box.style.display = 'none';
+                const view = box ? box.querySelector('.anno-view') : null;
+                if (view) view.innerHTML = '';
+            });
+
+            return '<!DOCTYPE html>\n<html lang="zh-CN">\n' + clone.innerHTML + '\n</html>';
+        }
+
+        // --- 内存反向打补丁同步技术 ---
+        async function syncToCloud() {
+            const ghToken = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN');
+            const ghOwner = 'moodHappy';
+            const ghRepo = 'dual-read-notes';
+            if (!ghToken) return;
+
+            const pathParts = window.location.pathname.split('/');
+            const fileName = pathParts.pop();
+            const month = pathParts.pop();
+            const year = pathParts.pop();
+            if(!fileName || !month || !year) return;
+
+            const fileRelPath = 'Summary/' + year + '/' + month + '/' + fileName;
+
+            try {
+                const getRes = await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + ghToken },
+                    cache: 'no-store'
+                });
+
+                let finalHTML = '';
+                let sha = '';
+
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                    const cleanRawHTML = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+                    const parser = new DOMParser();
+                    const cleanDoc = parser.parseFromString(cleanRawHTML, 'text/html');
+
+                    const liveTAs = document.querySelectorAll('.anno-edit');
+                    const cleanTAs = cleanDoc.querySelectorAll('.anno-edit');
+
+                    liveTAs.forEach((liveTa, index) => {
+                        if (cleanTAs[index]) {
+                            const val = liveTa.value.trim();
+                            cleanTAs[index].textContent = val;
+                            const box = cleanTAs[index].closest('.anno-box');
+                            if (box) box.style.display = 'none';
+                            const view = box ? box.querySelector('.anno-view') : null;
+                            if (view) view.innerHTML = '';
+                        }
+                    });
+
+                    cleanDoc.querySelectorAll('.anno-toggle').forEach(t => {
+                        t.classList.remove('has-anno');
+                        const ta = t.closest('.content-wrap, .litit-highlight-block')?.querySelector('.anno-edit');
+                        if (ta && ta.textContent.trim()) t.classList.add('has-anno');
+                    });
+
+                    finalHTML = '<!DOCTYPE html>\n<html lang="zh-CN">\n' + cleanDoc.documentElement.innerHTML + '\n</html>';
+                } else {
+                    finalHTML = getPurifiedFallbackHTML();
+                }
+
+                await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + ghToken,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Silent purified annotation update',
+                        content: btoa(unescape(encodeURIComponent(finalHTML))),
+                        sha: sha || undefined
+                    })
+                });
+                console.log('✅ [My Litit] 纯净无污染批注已静默同步至 GitHub');
+            } catch(e) {
+                console.warn('❌ [My Litit] 同步跳过或失败:', e);
+            }
+        }
+
+        function scheduleSync() {
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToCloud(); }, 3000);
+        }
+
+        function initAnnotations() {
+            document.querySelectorAll('.litit-highlight-block, .content-wrap').forEach(wrap => {
+                let content = wrap.querySelector('.content');
+                
+                if (!content) {
+                    const pText = wrap.querySelector('p');
+                    if (pText) {
+                        content = document.createElement('div');
+                        content.className = 'content';
+                        content.style.cssText = 'position:relative; margin:0 0 6px 0; color:#1a202c; font-family:Georgia, serif; line-height:1.7; font-size:15px; word-break:break-word;';
+                        content.innerHTML = pText.innerHTML;
+                        pText.parentNode.replaceChild(content, pText);
+                    }
+                }
+                if (!content) return;
+
+                if (!content.querySelector('.anno-toggle')) {
+                    const toggle = document.createElement('span');
+                    toggle.className = 'anno-toggle';
+                    toggle.title = '手写批注/笔记';
+                    content.appendChild(toggle);
+                }
+                
+                if (!content.querySelector('.ai-toggle')) {
+                    const aiToggle = document.createElement('span');
+                    aiToggle.className = 'ai-toggle';
+                    aiToggle.title = 'AI智能二次解析';
+                    content.appendChild(aiToggle);
+                }
+
+                let box = wrap.querySelector('.anno-box');
+                if (!box) {
+                    box = document.createElement('div');
+                    box.className = 'anno-box';
+                    box.style.display = 'none';
+                    box.innerHTML = '<div class="anno-view markdown-body"></div><textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 解析..."></textarea>';
+                    wrap.appendChild(box);
+                }
+
+                const view = box.querySelector('.anno-view');
+                const edit = box.querySelector('.anno-edit');
+                const toggle = content.querySelector('.anno-toggle');
+                const aiToggle = content.querySelector('.ai-toggle');
+
+                if (edit && edit.value.trim()) {
+                    toggle.classList.add('has-anno');
+                    try {
+                        view.innerHTML = (typeof marked !== 'undefined') ? marked.parse(edit.value.trim()) : edit.value.trim();
+                    } catch(e){}
+                }
+
+                if (aiToggle) {
+                    aiToggle.onclick = async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (aiToggle.classList.contains('loading')) return;
+
+                        if (edit && edit.value.trim() !== '') {
+                            const confirmOverwrite = confirm('⚠️ 已经存在批注内容。点击"确定"将使用 AI 解析覆盖现有内容。是否继续？');
+                            if (!confirmOverwrite) return;
+                        }
+
+                        const pClone = content.cloneNode(true);
+                        pClone.querySelectorAll('.anno-toggle, .ai-toggle').forEach(el => el.remove());
+                        let pText = pClone.textContent.replace(/https?:\/\/\S+/g, '').trim();
+                        if (!pText) return;
+
+                        aiToggle.classList.add('loading');
+                        try {
+                            const aiContent = await executeAIPipeline(pText);
+                            box.style.display = 'block';
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.value = aiContent;
+                            edit.focus();
+                            edit.blur();
+                        } catch (err) {
+                            console.error(err);
+                        } finally {
+                            aiToggle.classList.remove('loading');
+                        }
+                    };
+                }
+
+                if (toggle) {
+                    toggle.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                        } else {
+                            box.style.display = 'block';
+                            if (!edit.value.trim()) {
+                                view.style.display = 'none';
+                                edit.style.display = 'block';
+                                setTimeout(() => { edit.focus(); }, 150);
+                            } else {
+                                view.style.display = 'block';
+                                edit.style.display = 'none';
+                            }
+                        }
+                    };
+                }
+
+                const triggerEdit = (e) => {
+                    if(e) { e.preventDefault(); e.stopPropagation(); }
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.value = edit.value; 
+                    setTimeout(() => { edit.focus(); }, 150);
+                };
+
+                view.addEventListener('dblclick', triggerEdit);
+
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        triggerEdit(e);
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        if (currentTime - lastTap < 500 && currentTime - lastTap > 0) {
+                            e.preventDefault();
+                            box.style.display = 'none';
+                        }
+                        lastTap = currentTime;
+                    }
+                }, {passive: false});
+
+                if (edit && view) {
+                    edit.onblur = () => {
+                        setTimeout(() => {
+                            const newVal = edit.value.trim();
+                            try {
+                                view.innerHTML = newVal ? ((typeof marked !== 'undefined') ? marked.parse(newVal) : newVal) : '';
+                            } catch(e){}
+                            edit.style.display = 'none';
+                            
+                            if (newVal) {
+                                view.style.display = 'block';
+                                toggle.classList.add('has-anno');
+                            } else {
+                                view.style.display = 'none';
+                                box.style.display = 'none';
+                                toggle.classList.remove('has-anno');
+                            }
+
+                            if (edit.getAttribute('data-old-val') !== newVal) {
+                                edit.setAttribute('data-old-val', newVal);
+                                scheduleSync();
+                            }
+                        }, 150);
+                    };
+                    edit.setAttribute('data-old-val', edit.value.trim());
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initProgressBar();
+            initAnnotations();
+        });
+        window.addEventListener('load', initAnnotations);
+    </script>
+</body>
+</html>
