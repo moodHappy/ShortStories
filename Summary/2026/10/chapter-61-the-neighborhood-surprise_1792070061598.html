@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chapter 61: The Neighborhood Surprise</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="core-style">
+        /* ======================================================================
+           [AI TEMPLATE GUIDELINES - CSS 核心排版规范]
+           致其他 AI 助手：在生成此模板时，请严格遵守以下样式分配规则：
+           1. 序号规则：列表的 NO.01 序号由伪类 `::before` 自动生成且独占一行。千万不要在 HTML 中手动输入“NO.01”。
+           2. 标签规则：文章开头的标签胶囊纯文字即可，禁止带 `#` 号。
+           3. 胶囊高亮（.litit-badge）：仅用于第 1、2、3 板块（重点记忆、高价值表达、短语和固定搭配）的【短词组/单词】，表现为紫色渐变背景的内联胶囊。
+           4. 长句排版（.litit-en-sentence）：用于第 4 板块（值得学习的句子结构）和第 5 板块（最值得优先掌握的句型）的【长句/长句型】。严禁将长句型放入 .litit-badge 中，否则会导致折行错乱。并且中文解释中的括号补充内容需使用 <br> 另起一行。
+           ====================================================================== */
+        :root {
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #334155;
+            --text-muted: #64748b;
+            --accent-primary: #4f46e5;
+            --border-subtle: #e2e8f0;
+            --font-serif: "Georgia", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+        }
+        body { font-family: var(--font-sans); padding: 12px 12px 36px 12px; margin: 0 auto; max-width: 780px; background: var(--bg-page); color: var(--text-main); line-height: 1.75; font-size: 16px; word-wrap: break-word; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        * { box-sizing: border-box; max-width: 100%; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        #reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #4f46e5, #9333ea); z-index: 9999; transition: width 0.1s ease-out; }
+        .litit-report { background: var(--bg-card); padding: 0; }
+        .anno-toggle, .ai-toggle { display: inline-block; padding: 2px 5px; margin-left: 5px; cursor: pointer; opacity: 0.45; font-size: 0.85rem; vertical-align: middle; transition: all 0.2s; user-select: none; -webkit-tap-highlight-color: transparent; }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 1; transform: scale(1.15); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { opacity: 0.7; padding: 2px 4px; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after { content: "⏳"; display: inline-block; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box { display: none; margin-top: 10px; background: #faf8ff; border-left: 3px solid #7c3aed; padding: 12px 14px; border-radius: 0 8px 8px 0; text-align: left; }
+        .anno-view { font-size: 0.95rem; line-height: 1.65; color: #334155; min-height: 24px; }
+        .anno-edit { width: 100%; min-height: 120px; padding: 10px; font-family: monospace; font-size: 0.95rem; border: 1px dashed #a78bfa; border-radius: 6px; resize: vertical; display: none; background: #fff; color: #1e293b; outline: none; }
+        .anno-edit:focus { border: 1px solid #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12); }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #5b21b6; font-size: 1.05rem; margin: 10px 0 6px 0; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 18px; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 12px; background: rgba(124, 58, 237, 0.06); border-left: 3px solid #7c3aed; color: #475569; }
+        .section-header { font-size: 16px; color: #0f172a; font-weight: 700; letter-spacing: 0.02em; background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%); padding: 8px 12px; border-left: 4px solid #4f46e5; margin: 26px 0 14px 0; border-radius: 0 6px 6px 0; display: flex; align-items: center; box-shadow: inset 0 1px 0 #f1f5f9, inset 0 -1px 0 #f1f5f9; }
+        details.litit-fold { margin-bottom: 10px; border: 1px solid #e2e8f0; border-radius: 10px; background: #ffffff; overflow: hidden; transition: border-color 0.2s ease; }
+        details.litit-fold[open] { border-color: #cbd5e1; }
+        details.litit-fold summary { cursor: pointer; padding: 12px 14px; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; transition: background 0.2s; user-select: none; -webkit-tap-highlight-color: transparent; }
+        details.litit-fold summary::-webkit-details-marker { display: none; }
+        details.litit-fold summary::after { display: none; }
+        details.litit-fold summary:hover { background: #f1f5f9; }
+        details.litit-fold[open] summary { border-bottom: 1px solid #e2e8f0; background: #f1f5f9; border-left: 3px solid #4f46e5; }
+        .litit-fold-content { padding: 10px 8px; background: #f8fafc; }
+        .litit-fold-content > ol, .litit-fold-content > ul { list-style: none !important; padding-left: 0 !important; margin: 0 !important; counter-reset: litit-counter; }
+        .litit-fold-content > ol > li, .litit-fold-content > ul > li { counter-increment: litit-counter; position: relative; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 12px; margin-bottom: 10px !important; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.015); }
+        .litit-fold-content > ol > li:last-child, .litit-fold-content > ul > li:last-child { margin-bottom: 0 !important; }
+        /* [规则 1] 顶部流式微型序号徽章 */
+        .litit-fold-content > ol > li::before, .litit-fold-content > ul > li::before { content: "NO." counter(litit-counter, decimal-leading-zero); display: block; width: max-content; font-size: 10px; font-weight: 800; font-family: -apple-system, BlinkMacSystemFont, monospace; color: #4f46e5; background: #eef2ff; padding: 1px 6px; border-radius: 4px; margin-bottom: 8px; letter-spacing: 0.04em; }
+        /* [规则 4] 纯英/中长句子专属排版 */
+        .litit-en-sentence { display: block; font-family: var(--font-serif); font-size: 1.04rem; font-weight: 600; color: #0f172a; line-height: 1.5; margin-bottom: 6px; }
+        .litit-zh-sentence { display: block; font-family: var(--font-sans); font-size: 0.93rem; color: #475569; line-height: 1.55; margin-bottom: 2px; }
+        li.litit-target-sentence > br { display: none; }
+        /* [规则 3] 短词组高亮徽章 */
+        .litit-badge { display: inline-block; background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 100%); color: #4338ca; padding: 2px 8px; border-radius: 5px; font-size: 0.92rem; font-weight: 700; margin-right: 4px; margin-bottom: 6px; border: 1px solid #e0e7ff; vertical-align: middle; }
+        li.litit-target-sentence > ul { list-style: none !important; margin: 10px 0 0 0 !important; padding: 8px 10px !important; background: #f8fafc; border-radius: 6px; border-left: 2.5px solid #94a3b8; }
+        li.litit-target-sentence > ul > li { position: relative; padding-left: 10px; margin-bottom: 5px !important; font-size: 0.88rem; color: #334155; line-height: 1.5; }
+        li.litit-target-sentence > ul > li:last-child { margin-bottom: 0 !important; }
+        li.litit-target-sentence > ul > li::before { content: "·"; position: absolute; left: 0; top: 0; color: #4f46e5; font-weight: 900; }
+        li.litit-target-sentence > ul > li > strong { color: #0f172a; font-weight: 600; background: #e2e8f0; padding: 1px 5px; border-radius: 4px; font-size: 0.84rem; margin-right: 3px; }
+        @media (max-width: 600px) { body { padding: 10px 10px 30px 10px; font-size: 15px; } h1.litit-target-title { font-size: 21px !important; } .litit-fold-content { padding: 8px 6px; } .litit-fold-content > ol > li, .litit-fold-content > ul > li { padding: 11px 10px; margin-bottom: 8px !important; } }
+    </style>
+</head>
+<body>
+    <div id="reading-progress"></div>
+    <div class="litit-report" style="width:100%; max-width:100%; box-sizing:border-box; overflow-x:hidden;">
+        
+        <!-- 顶部杂志刊头装饰 -->
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #64748b; text-transform: uppercase;">
+            <span>The Global Dispatch · 深度双语精读</span>
+            <span>Fiction & Literature</span>
+        </div>
+
+        <!-- 支持批注的主标题区 -->
+        <div class="content-wrap" style="position:relative; margin-bottom: 16px;">
+            <h1 class="litit-target-title" style="color:#0f172a; font-size: 24px; line-height: 1.35; font-family: var(--font-serif); font-weight: 800; border-bottom: 1px solid #e2e8f0; padding-bottom: 14px; margin-top:0; margin-bottom:0; word-break:break-word;">
+                <span class="content litit-en-title" style="position:relative;">Chapter 61: The Neighborhood Surprise</span>
+                <br>
+                <span class="litit-zh-title" style="font-family: var(--font-sans); font-size: 17px; font-weight: 600; color: #475569; margin-top: 8px; display: inline-block; line-height: 1.45;">第六十一章：路人的“惊喜”</span>
+            </h1>
+            <div class="anno-box" style="display:none; margin-top: 10px;">
+                <div class="anno-view markdown-body"></div>
+                <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+第六十一章：路人的“惊喜”
+
+### 📌 Key Expressions
+- **neighborhood** = 街区 / 邻里（此处带有反差感，暗示发生在熟悉街道上的荒唐事）
+- **surprise** = 惊喜 / 惊吓（双关语，既是路人眼中的“天降福利”，也是对主角们意想不到的突袭）</textarea>
+            </div>
+        </div>
+
+        <!-- 杂志导语（Lead Paragraph） -->
+        <p style="color:#334155; font-size: 15px; line-height: 1.75; margin-bottom:16px; font-weight:400; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border: 1px solid #f1f5f9;">
+            在那个热得冒油的夏日午后，小百合原本只想完成一场充满试探意味的“大冒险”，却意外卷入了一场荒诞至极的街头闹剧。当她拉开半截卷帘门展示那道私密痕迹时，一位路过的陌生男人将这彻底误解为天降的诱惑。在毫无防备的情况下，原始的冲动战胜了理智，一场粗暴、迅速且滑稽的“突袭”在半开的金属卷帘门下火速上演。而更具反差感的是，店内的藤原和美悦子非但没有出手干预，反而将其视作一场绝佳的黑色喜剧，笑作一团。这不仅是对传统社会禁忌和道德边界的公然挑衅，更是作者用近乎夸张的卡通式笔触，将一场本该充满侵略性的遭遇消解为一场充满荷尔蒙与荒谬感的成人狂欢。
+        </p>
+
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <!-- [规则 2] 此处标签不再带有 # 号，纯净的胶囊风格 -->
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">黑色幽默</span>
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">情色描写</span>
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">荒诞叙事</span>
+            </div>
+            <a href="https://moodhappy.github.io/MiyetsukoSeries/FreshMart/FreshMartOne/Chapter_061__The_Neighborhood_Surprise_1781715254101.html" target="_blank" style="font-size: 12.5px; color: #4f46e5; text-decoration: none; font-weight: 600; background: #eef2ff; padding: 5px 12px; border-radius: 16px; border: 1px solid #e0e7ff; display:inline-block;">🔗 阅读原文 ↗</a>
+        </div>
+
+        <!-- 最佳金句区 -->
+        <h2 class="section-header" style="border-left-color: #f59e0b;">💬 最佳金句</h2>
+        <div class="content-wrap" style="position:relative; margin-bottom:24px;">
+            <blockquote class="litit-target-quote" style="border-left: 3.5px solid #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%); padding: 14px 14px; margin: 0; color: #1e293b; border-radius: 0 10px 10px 0; border-top: 1px solid #fef3c7; border-right: 1px solid #fef3c7; border-bottom: 1px solid #fef3c7;">
+                <div class="content litit-en-quote" style="position:relative; margin:0 0 8px 0; font-family: var(--font-serif); font-style: italic; font-weight:600; font-size: 16.5px; line-height: 1.55; color:#0f172a; word-break:break-word;">
+                    "Oh, yeah! Look at you, you tight little thing!" the guy grunted, hammering away like he was trying to drill for oil.
+                </div>
+                <p class="litit-zh-quote" style="margin:0 0 8px 0; font-weight:400; font-size: 14.5px; line-height: 1.6; color:#475569; word-break:break-word;">
+                    “喔！爽！够紧啊小妞！”那男的哼哧哼哧地开工，那劲头简直像是要在她屁股上打井。
+                </p>
+                <footer style="text-align:right; font-size:12px; color:#64748b; font-style:normal; font-weight:600;">—— 极其夸张且充满美式卡通感的动作描写</footer>
+            </blockquote>
+            <div class="anno-box" style="display:none;">
+                <div class="anno-view markdown-body"></div>
+                <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+“喔！爽！够紧啊小妞！”那男的哼哧哼哧地开工，那劲头简直像是要在她屁股上打井。
+
+### 📌 Key Expressions
+- **grunt** = 闷哼 / 发出粗重的声音
+- **hammer away** = 连续敲击 / 卖力苦干（粗俗语境中指剧烈的抽插动作）
+- **drill for oil** = 钻井勘探石油（极其生动夸张的比喻，形容动作的深度与力度）</textarea>
+            </div>
+        </div>
+
+        <!-- Grid 布局关键数字区 -->
+        <h2 class="section-header" style="border-left-color: #10b981;">📊 关键数字</h2>
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin:14px 0 24px 0;">
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    1<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">名</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">突然出现并打破游戏节奏的满头大汗的陌生路人</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    0<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">秒</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">小百合从还在傻乐到被强行“突袭”的反应时间</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    2<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">人</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">躲在店内不仅不帮忙，反而笑得满地打滚的旁观者</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    1<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">场</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">彻底失控的当街乱交（Public fuck）及随后的荒诞闹剧</div>
+            </div>
+        </div>
+
+        <h2 class="section-header" style="border-left-color: #3b82f6;">⏱️ 事件时间线</h2>
+        <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size: 14.5px; margin-bottom:24px; word-break:break-word;">
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">惊鸿一瞥：</strong> 酷热的街道上，一位满头大汗的路人走过，被半开卷帘门下小百合暴露出的诱人部位彻底震惊。</li>
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">饿狗扑食：</strong> 误以为是寂寞人妻的勾引，路人毫不犹豫地脱下裤子，像饿狗一样朝毫无防备的小百合扑了上去。</li>
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">极速乱交：</strong> 突袭瞬间发生，小百合被牢牢卡住。路人动作粗暴且迅速，在发出一声长叹后完成了大量发射，搞得一片狼藉。</li>
+            <li><strong style="color:#1d4ed8;">荒诞收场：</strong> 路人如跑完马拉松般提裤跑路。店内的藤原和美悦子非但没有救场，反而笑得满地打滚，小百合带着满身白糊回头，场面滑稽至极。</li>
+        </ul>
+
+        <h2 class="section-header" style="border-left-color: #8b5cf6;">✨ 本篇亮点与精读</h2>
+        <div style="margin: 14px 0 10px 0;">
+            <!-- 第一板块：一、重点记忆 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">一、重点记忆</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">blindsided</strong>：猝不及防的 / 遭到突然打击的<br>
+                            <strong class="litit-en-sentence">Sayuri, still bent over and giggling, was totally blindsided.</strong>
+                            <span class="litit-zh-sentence">小百合还撅着屁股在那儿傻乐呢，根本猝不及防。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">squirm</strong>：扭动 / 挣扎<br>
+                            <strong class="litit-en-sentence">She tried to squirm away, but he was like a stubborn goat.</strong>
+                            <span class="litit-zh-sentence">她想扭动着挣脱，可这男人倔得像头驴。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">unhinged</strong>：精神失常的 / 彻底失控的 / 疯狂的<br>
+                            <strong class="litit-en-sentence">Caught in the middle of a completely unhinged public fuck.</strong>
+                            <span class="litit-zh-sentence">卷入了一场彻底失控的当街乱交之中。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">splatter</strong>：飞溅 / 溅泼<br>
+                            <strong class="litit-en-sentence">It splattered everywhere, a total mess.</strong>
+                            <span class="litit-zh-sentence">溅得四处都是，场面简直惨不忍睹。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">absurdity</strong>：荒谬 / 荒诞<br>
+                            <strong class="litit-en-sentence">Starting to giggle at the sheer absurdity of it all.</strong>
+                            <span class="litit-zh-sentence">因为这一切纯粹的荒诞感而开始咯咯笑了起来。</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 第二板块：二、高价值表达 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">二、高价值表达</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">boiling</strong>：极热的；酷暑难耐的。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">本意是“沸腾”，日常口语中常用来夸张地形容天气“热得冒泡”。配合后文的 <i>real oven of a day</i>，完美烘托出夏日街头让人理智蒸发的燥热氛围。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">jackpot</strong>：头奖；累积奖金。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">短语 <i>hit the jackpot</i> 意为“中大奖”或“走狗屎运”。藤原用这个词来调侃那个白嫖成功的路人，极具黑色幽默。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">goop</strong>：黏糊糊的东西；黏稠的软泥。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">非正式用语，常用来形容质地不明或令人有些恶心的浓稠液体（此处指代精液），带有一种戏谑和滑稽的修辞感。</span>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- 第三板块：三、短语和固定搭配 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">三、短语和固定搭配</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">pull a fast one</strong>：耍花招；搞欺骗<br>
+                            <strong class="litit-en-sentence">He figured some horny housewife was trying to pull a fast one.</strong>
+                            <span class="litit-zh-sentence">他心里直犯嘀咕，是不是哪家寂寞人妻在玩什么勾引的把戏。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">lure someone in</strong>：把某人引诱进来/上钩<br>
+                            <strong class="litit-en-sentence">She was trying to lure him in.</strong>
+                            <span class="litit-zh-sentence">她正试图引诱他上钩。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">stand at attention</strong>：立正（引申为生理反应勃起）<br>
+                            <strong class="litit-en-sentence">His massive cock standing at attention like a soldier.</strong>
+                            <span class="litit-zh-sentence">他的巨物像士兵一样笔直地挺立着。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">save up for a rainy day</strong>：未雨绸缪；留待不时之需<br>
+                            <strong class="litit-en-sentence">He was clearly saving up for a rainy day.</strong>
+                            <span class="litit-zh-sentence">他这架势显然是把半辈子的存货都留到了今天来用。（极致的恶搞比喻）</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">die of laughter</strong>：笑死；笑得背过气去<br>
+                            <strong class="litit-en-sentence">They watched the whole thing from inside, dying of laughter.</strong>
+                            <span class="litit-zh-sentence">他们在店里看着这一切，简直快笑死过去了。</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 第四板块：四、值得学习的句子结构 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">四、值得学习的句子结构</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">He wasn’t looking for trouble, but when he saw that perfectly exposed, pale pink curve framed by the semi-raised metal shutter, his jaw hit the pavement.</strong>
+                            <span class="litit-zh-sentence">他本来没想惹事，但当他看到那半拉着的卷帘门下完美露出的一抹白嫩的粉红色弧线时，下巴差点惊掉在地上。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>framed by...</strong>：过去分词作后置定语，像画框一样构图，视觉极具聚焦感。</li>
+                                <li style="margin-bottom: 3px;"><strong>his jaw hit the pavement</strong>：极其夸张且形象的美式俚语表达，生动刻画了路人极度震惊的滑稽面貌。</li>
+                            </ul>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">Without a second thought—because who thinks when they’re staring at a peach like that?—he whipped his pants down...</strong>
+                            <span class="litit-zh-sentence">他想都没想——这种时候直勾勾盯着那样一颗“水蜜桃”，谁还用脑子啊——一把拽下了裤子……</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>—because who thinks when...—</strong>：巧妙运用双破折号插入语，以全知视角的旁白吐槽，将原本可能涉嫌犯罪的场景强行解构为一出滑稽的黑色喜剧。</li>
+                            </ul>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">Sayuri was stuck, caught in the middle of a hilarious, sweaty, and completely unhinged public fuck.</strong>
+                            <span class="litit-zh-sentence">小百合被卡住了，深陷在这场荒诞、黏糊且完全失控的当街乱交之中。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>caught in the middle of...</strong>：过去分词短语作状语补充说明状态。连用三个层层递进的形容词（hilarious, sweaty, unhinged），将场面的荒谬感推向顶峰。</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- 第五板块：五、最值得优先掌握的句型 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">五、最值得优先掌握的句型</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence" style="color: #4338ca;">He was [adjective 1], he was [adjective 2], and he was clearly [doing something metaphorical].</strong>
+                            <span class="litit-zh-sentence">他是如此的[特征1]，如此的[特征2]，而且显然是在[某种夸张的比喻动作]。<br>
+                            （排比句式。利用简短有力的三个并列分句，极大增强文本的节奏感和动作的喜剧张力。如文中的 <i>fast, furious, saving up for a rainy day</i>）。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence" style="color: #4338ca;">Before [Subject] could even [Action A], [Subject] felt [Action B].</strong>
+                            <span class="litit-zh-sentence">还没等[某人]来得及[做动作A]，[某人]就感觉到了[动作B的发生]。<br>
+                            （描写突发事件或猝不及防遭遇时的万能结构。能够迅速拉快时间流速，给读者制造一种来不及反应的失控感）。</span>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+        </div>
+
+        <h2 class="section-header" style="border-left-color: #0d9488;">💡 幕后冷知识 (Fun Facts)</h2>
+        <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size:14.5px; margin-bottom:24px; word-break:break-word;">
+            <li style="margin-bottom: 8px;"><strong>Black Comedy & Absurdism (黑色幽默与荒诞主义)：</strong> 本章节使用了一个极为经典的小说技巧——将极其严肃或具有侵犯性的事件（在现实中这属于毫无疑问的性侵犯/强奸）通过极其夸张的比喻（打井、士兵、饿狗）和受害方荒诞的反应（笑岔气的朋友、最后也跟着傻乐的女主），解构成了一场卡通式的闹剧（Farce）。这种道德错位是荒诞情色文学的标志性特征。</li>
+            <li style="margin-bottom: 8px;"><strong>Public Sex Tropes (公共场所的性隐喻)：</strong> 在情色文学中，“半拉的卷帘门”、“空无一人的夏日街道”是极具张力的意象。它打破了私人空间与公共空间的界限（Liminal Space），主角主动展示私密所带来的刺激感，最终因路人的突袭而失控，完成了从“掌控者”到“被动接受者”的身份反转。</li>
+            <li><strong>Idiomatic Contrast (俚语的反差感)：</strong> 作者极其巧妙地运用了如 <i>hit the jackpot</i>（中大奖）和 <i>save up for a rainy day</i>（未雨绸缪）这类平时用在金融或励志语境下的固定短语，将它们粗暴地套用在一个路人当街发泄性欲的场景上，制造了极强的文本反差与幽默效果。</li>
+        </ul>
+
+        <h2 class="section-header" style="border-left-color: #e11d48;">🎯 全片锐评</h2>
+        <p style="line-height:1.75; color:#1e293b; font-weight:500; background:linear-gradient(135deg, #fff1f2 0%, #ffffff 100%); padding:14px 16px; border-radius:10px; font-size:14.5px; margin:0 0 12px 0; border:1px solid #ffe4e6; word-break:break-word;">
+            如果说上一章的“真心话大冒险”是在试探社会道德的边缘，那这一章则是作者直接开着泥头车把名为“理智”和“底线”的护栏撞了个粉碎。这段情节的精妙之处在于其彻底的“去道德化”。一个极具暴力色彩的街头性突袭，在作者笔下变成了一集粗俗却让人忍俊不禁的《猫和老鼠》。路人被刻画成了一个被本能支配的滑稽符号——“像饿狗”、“像在打井”、“存货全盘托出”，而本该作为受害者愤怒的小百合，以及作为朋友本该见义勇为的藤原和美悦子，却统统被这种巨大的荒诞感所吞噬，选择了大笑。在这家封闭的超市里，社会的法律与羞耻感已被暂时屏蔽，取而代之的是纯粹的动物本能与荒唐的狂欢。这篇文字就像那股被喷射在小百合身上的滚烫白浊一样，直接、粗暴，却又带着一种让人无法抗拒的、属于黑色幽默的极致恶趣味。
+        </p>
+
+    </div>
+
+    <script id="core-engine">
+        let syncTimeout = null;
+        const AI_PROMPT = "请分析以下英文段落，并严格按照以下 Markdown 格式输出（不要输出任何额外的废话）：\n\n### 📌 完整翻译\n\n[此处填写完整翻译]\n\n### 📌 Key Expressions\n\n- **[单词或短语]**\n  = [中文释义]\n  （[可选的补充说明，如倒装结构或语境等]）\n\n段落内容：\n";
+
+        // --- 顶部阅读进度条逻辑 ---
+        function initProgressBar() {
+            const progressBar = document.getElementById('reading-progress');
+            if (!progressBar) return;
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (scrollHeight <= 0) return;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressBar.style.width = scrollPercent + '%';
+            }, { passive: true });
+        }
+
+        async function fetchGroq(text, apiKey, modelName) {
+            const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + apiKey,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: modelName || 'llama-3.3-70b-versatile',
+                    messages: [
+                        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+                        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+                    ],
+                    temperature: 0.3
+                })
+            });
+            if (!res.ok) throw new Error('Groq Error: ' + res.status);
+            const json = await res.json();
+            return json.choices[0].message.content.trim();
+        }
+
+        async function fetchCustomAI(text, url, apiKey, modelName) {
+            let headers = { 'Content-Type': 'application/json' };
+            let bodyData = {};
+
+            if (url.includes('anthropic.com')) {
+                headers['x-api-key'] = apiKey;
+                headers['anthropic-version'] = '2023-06-01';
+                headers['anthropic-dangerous-direct-browser-access'] = 'true';
+                bodyData = {
+                    model: modelName || 'claude-3-5-sonnet-20241022',
+                    max_tokens: 2000,
+                    messages: [{ role: 'user', content: AI_PROMPT + '"' + text + '"' }]
+                };
+            } else if (url.includes('generativelanguage.googleapis.com')) {
+                let targetUrl = url;
+                if (!targetUrl.includes('key=')) {
+                    targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'key=' + apiKey;
+                }
+                const res = await fetch(targetUrl, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: AI_PROMPT + '"' + text + '"' }] }]
+                    })
+                });
+                if (!res.ok) throw new Error('Gemini Error: ' + res.status);
+                const json = await res.json();
+                return json.candidates[0].content.parts[0].text.trim();
+            } else {
+                headers['Authorization'] = 'Bearer ' + apiKey;
+                bodyData = {
+                    model: modelName || 'gpt-4o-mini',
+                    messages: [
+                        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+                        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+                    ],
+                    temperature: 0.3
+                };
+            }
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(bodyData)
+            });
+            if (!res.ok) throw new Error('AI Interface Error: ' + res.status);
+            const json = await res.json();
+            if (json.choices && json.choices.length > 0) return json.choices[0].message.content.trim();
+            throw new Error('AI 返回数据异常');
+        }
+
+        async function executeAIPipeline(text) {
+            const customUrl = localStorage.getItem('CUSTOM_API_URL') || '';
+            const customKey = localStorage.getItem('CUSTOM_API_KEY') || '';
+            const customModel = localStorage.getItem('CUSTOM_MODEL') || '';
+            const groqKey = localStorage.getItem('GROQ_API_KEY') || '';
+            const groqModel = localStorage.getItem('GROQ_MODEL') || '';
+
+            if (customUrl && customKey) {
+                try {
+                    return await fetchCustomAI(text, customUrl, customKey, customModel);
+                } catch (err) {
+                    if (groqKey) return await fetchGroq(text, groqKey, groqModel);
+                    throw err;
+                }
+            } else if (groqKey) {
+                return await fetchGroq(text, groqKey, groqModel);
+            } else {
+                const userKey = prompt('⚠️ 当前页面未检测到 AI Key！\n为了安全，密匙只储存在您本地浏览器中。\n\n请输入您的 API Key (如 sk-xxx 或 gsk_xxx):');
+                if (userKey && userKey.trim()) {
+                    const cleanKey = userKey.trim();
+                    if (cleanKey.startsWith('gsk_')) {
+                        localStorage.setItem('GROQ_API_KEY', cleanKey);
+                    } else {
+                        localStorage.setItem('CUSTOM_API_KEY', cleanKey);
+                        localStorage.setItem('CUSTOM_API_URL', 'https://api.chatanywhere.tech/v1/chat/completions');
+                    }
+                }
+                throw new Error('未设置 AI API Key');
+            }
+        }
+
+        // --- 降级清理防线：净化污染节点 ---
+        function getPurifiedFallbackHTML() {
+            const clone = document.documentElement.cloneNode(true);
+            const foreignSelectors = [
+                'relingo-app', 'relin-highlight', 'relin-hc', '[class*="relingo"]', '[data-relin-paragraph]',
+                'grammarly-extension', '[data-grammarly-part]', '[class*="immersive-translate"]', '[data-immersive-translate]'
+            ].join(',');
+            clone.querySelectorAll(foreignSelectors).forEach(el => el.remove());
+            clone.querySelectorAll('relin-highlight, relin-hc').forEach(t => {
+                const frag = document.createDocumentFragment();
+                while(t.firstChild) frag.appendChild(t.firstChild);
+                t.parentNode.replaceChild(frag, t);
+            });
+            clone.querySelectorAll('script').forEach(s => {
+                if (!s.src.includes('marked.min.js') && s.id !== 'core-engine') s.remove();
+            });
+            clone.querySelectorAll('style').forEach(s => {
+                if (s.id !== 'core-style') s.remove();
+            });
+
+            const liveTAs = document.querySelectorAll('.anno-edit');
+            clone.querySelectorAll('.anno-edit').forEach((ta, i) => {
+                if(liveTAs[i]) ta.textContent = liveTAs[i].value.trim();
+                const box = ta.closest('.anno-box');
+                if (box) box.style.display = 'none';
+                const view = box ? box.querySelector('.anno-view') : null;
+                if (view) view.innerHTML = '';
+            });
+
+            return '<!DOCTYPE html>\n<html lang="zh-CN">\n' + clone.innerHTML + '\n</html>';
+        }
+
+        // --- 内存反向打补丁同步技术 ---
+        async function syncToCloud() {
+            const ghToken = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN');
+            const ghOwner = 'moodHappy';
+            const ghRepo = 'dual-read-notes';
+            if (!ghToken) return;
+
+            const pathParts = window.location.pathname.split('/');
+            const fileName = pathParts.pop();
+            const month = pathParts.pop();
+            const year = pathParts.pop();
+            if(!fileName || !month || !year) return;
+
+            const fileRelPath = 'Summary/' + year + '/' + month + '/' + fileName;
+
+            try {
+                const getRes = await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + ghToken },
+                    cache: 'no-store'
+                });
+
+                let finalHTML = '';
+                let sha = '';
+
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                    const cleanRawHTML = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+                    const parser = new DOMParser();
+                    const cleanDoc = parser.parseFromString(cleanRawHTML, 'text/html');
+
+                    const liveTAs = document.querySelectorAll('.anno-edit');
+                    const cleanTAs = cleanDoc.querySelectorAll('.anno-edit');
+
+                    liveTAs.forEach((liveTa, index) => {
+                        if (cleanTAs[index]) {
+                            const val = liveTa.value.trim();
+                            cleanTAs[index].textContent = val;
+                            const box = cleanTAs[index].closest('.anno-box');
+                            if (box) box.style.display = 'none';
+                            const view = box ? box.querySelector('.anno-view') : null;
+                            if (view) view.innerHTML = '';
+                        }
+                    });
+
+                    cleanDoc.querySelectorAll('.anno-toggle').forEach(t => {
+                        t.classList.remove('has-anno');
+                        const ta = t.closest('.content-wrap, .litit-highlight-block')?.querySelector('.anno-edit');
+                        if (ta && ta.textContent.trim()) t.classList.add('has-anno');
+                    });
+
+                    finalHTML = '<!DOCTYPE html>\n<html lang="zh-CN">\n' + cleanDoc.documentElement.innerHTML + '\n</html>';
+                } else {
+                    finalHTML = getPurifiedFallbackHTML();
+                }
+
+                await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + ghToken,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Silent purified annotation update',
+                        content: btoa(unescape(encodeURIComponent(finalHTML))),
+                        sha: sha || undefined
+                    })
+                });
+                console.log('✅ [My Litit] 纯净无污染批注已静默同步至 GitHub');
+            } catch(e) {
+                console.warn('❌ [My Litit] 同步跳过或失败:', e);
+            }
+        }
+
+        function scheduleSync() {
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToCloud(); }, 3000);
+        }
+
+        function initAnnotations() {
+            document.querySelectorAll('.litit-highlight-block, .content-wrap').forEach(wrap => {
+                let content = wrap.querySelector('.content');
+                
+                if (!content) {
+                    const pText = wrap.querySelector('p');
+                    if (pText) {
+                        content = document.createElement('div');
+                        content.className = 'content';
+                        content.style.cssText = 'position:relative; margin:0 0 6px 0; color:#1a202c; font-family:Georgia, serif; line-height:1.7; font-size:15px; word-break:break-word;';
+                        content.innerHTML = pText.innerHTML;
+                        pText.parentNode.replaceChild(content, pText);
+                    }
+                }
+                if (!content) return;
+
+                if (!content.querySelector('.anno-toggle')) {
+                    const toggle = document.createElement('span');
+                    toggle.className = 'anno-toggle';
+                    toggle.title = '手写批注/笔记';
+                    content.appendChild(toggle);
+                }
+                
+                if (!content.querySelector('.ai-toggle')) {
+                    const aiToggle = document.createElement('span');
+                    aiToggle.className = 'ai-toggle';
+                    aiToggle.title = 'AI智能二次解析';
+                    content.appendChild(aiToggle);
+                }
+
+                let box = wrap.querySelector('.anno-box');
+                if (!box) {
+                    box = document.createElement('div');
+                    box.className = 'anno-box';
+                    box.style.display = 'none';
+                    box.innerHTML = '<div class="anno-view markdown-body"></div><textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 解析..."></textarea>';
+                    wrap.appendChild(box);
+                }
+
+                const view = box.querySelector('.anno-view');
+                const edit = box.querySelector('.anno-edit');
+                const toggle = content.querySelector('.anno-toggle');
+                const aiToggle = content.querySelector('.ai-toggle');
+
+                if (edit && edit.value.trim()) {
+                    toggle.classList.add('has-anno');
+                    try {
+                        view.innerHTML = (typeof marked !== 'undefined') ? marked.parse(edit.value.trim()) : edit.value.trim();
+                    } catch(e){}
+                }
+
+                if (aiToggle) {
+                    aiToggle.onclick = async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (aiToggle.classList.contains('loading')) return;
+
+                        if (edit && edit.value.trim() !== '') {
+                            const confirmOverwrite = confirm('⚠️ 已经存在批注内容。点击"确定"将使用 AI 解析覆盖现有内容。是否继续？');
+                            if (!confirmOverwrite) return;
+                        }
+
+                        const pClone = content.cloneNode(true);
+                        pClone.querySelectorAll('.anno-toggle, .ai-toggle').forEach(el => el.remove());
+                        let pText = pClone.textContent.replace(/https?:\/\/\S+/g, '').trim();
+                        if (!pText) return;
+
+                        aiToggle.classList.add('loading');
+                        try {
+                            const aiContent = await executeAIPipeline(pText);
+                            box.style.display = 'block';
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.value = aiContent;
+                            edit.focus();
+                            edit.blur();
+                        } catch (err) {
+                            console.error(err);
+                        } finally {
+                            aiToggle.classList.remove('loading');
+                        }
+                    };
+                }
+
+                if (toggle) {
+                    toggle.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                        } else {
+                            box.style.display = 'block';
+                            if (!edit.value.trim()) {
+                                view.style.display = 'none';
+                                edit.style.display = 'block';
+                                setTimeout(() => { edit.focus(); }, 150);
+                            } else {
+                                view.style.display = 'block';
+                                edit.style.display = 'none';
+                            }
+                        }
+                    };
+                }
+
+                const triggerEdit = (e) => {
+                    if(e) { e.preventDefault(); e.stopPropagation(); }
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.value = edit.value; 
+                    setTimeout(() => { edit.focus(); }, 150);
+                };
+
+                view.addEventListener('dblclick', triggerEdit);
+
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        triggerEdit(e);
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        if (currentTime - lastTap < 500 && currentTime - lastTap > 0) {
+                            e.preventDefault();
+                            box.style.display = 'none';
+                        }
+                        lastTap = currentTime;
+                    }
+                }, {passive: false});
+
+                if (edit && view) {
+                    edit.onblur = () => {
+                        setTimeout(() => {
+                            const newVal = edit.value.trim();
+                            try {
+                                view.innerHTML = newVal ? ((typeof marked !== 'undefined') ? marked.parse(newVal) : newVal) : '';
+                            } catch(e){}
+                            edit.style.display = 'none';
+                            
+                            if (newVal) {
+                                view.style.display = 'block';
+                                toggle.classList.add('has-anno');
+                            } else {
+                                view.style.display = 'none';
+                                box.style.display = 'none';
+                                toggle.classList.remove('has-anno');
+                            }
+
+                            if (edit.getAttribute('data-old-val') !== newVal) {
+                                edit.setAttribute('data-old-val', newVal);
+                                scheduleSync();
+                            }
+                        }, 150);
+                    };
+                    edit.setAttribute('data-old-val', edit.value.trim());
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initProgressBar();
+            initAnnotations();
+        });
+        window.addEventListener('load', initAnnotations);
+    </script>
+</body>
+</html>
