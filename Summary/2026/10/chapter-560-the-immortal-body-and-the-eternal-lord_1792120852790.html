@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chapter 560: The Immortal Body and the Eternal Lord</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="core-style">
+        /* ======================================================================
+           [AI TEMPLATE GUIDELINES - CSS 核心排版规范]
+           致其他 AI 助手：在生成此模板时，请严格遵守以下样式分配规则：
+           1. 序号规则：列表的 NO.01 序号由伪类 `::before` 自动生成且独占一行。千万不要在 HTML 中手动输入“NO.01”。
+           2. 标签规则：文章开头的标签胶囊纯文字即可，禁止带 `#` 号。
+           3. 胶囊高亮（.litit-badge）：仅用于第 1、2、3 板块（重点记忆、高价值表达、短语和固定搭配）的【短词组/单词】，表现为紫色渐变背景的内联胶囊。
+           4. 长句排版（.litit-en-sentence）：用于第 4 板块（值得学习的句子结构）和第 5 板块（最值得优先掌握的句型）的【长句/长句型】。严禁将长句型放入 .litit-badge 中，否则会导致折行错乱。并且中文解释中的括号补充内容需使用 <br> 另起一行。
+           ====================================================================== */
+        :root {
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #334155;
+            --text-muted: #64748b;
+            --accent-primary: #4f46e5;
+            --border-subtle: #e2e8f0;
+            --font-serif: "Georgia", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+        }
+        body { font-family: var(--font-sans); padding: 12px 12px 36px 12px; margin: 0 auto; max-width: 780px; background: var(--bg-page); color: var(--text-main); line-height: 1.75; font-size: 16px; word-wrap: break-word; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        * { box-sizing: border-box; max-width: 100%; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        #reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #4f46e5, #9333ea); z-index: 9999; transition: width 0.1s ease-out; }
+        .litit-report { background: var(--bg-card); padding: 0; }
+        .anno-toggle, .ai-toggle { display: inline-block; padding: 2px 5px; margin-left: 5px; cursor: pointer; opacity: 0.45; font-size: 0.85rem; vertical-align: middle; transition: all 0.2s; user-select: none; -webkit-tap-highlight-color: transparent; }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 1; transform: scale(1.15); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { opacity: 0.7; padding: 2px 4px; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after { content: "⏳"; display: inline-block; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box { display: none; margin-top: 10px; background: #faf8ff; border-left: 3px solid #7c3aed; padding: 12px 14px; border-radius: 0 8px 8px 0; text-align: left; }
+        .anno-view { font-size: 0.95rem; line-height: 1.65; color: #334155; min-height: 24px; }
+        .anno-edit { width: 100%; min-height: 120px; padding: 10px; font-family: monospace; font-size: 0.95rem; border: 1px dashed #a78bfa; border-radius: 6px; resize: vertical; display: none; background: #fff; color: #1e293b; outline: none; }
+        .anno-edit:focus { border: 1px solid #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12); }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #5b21b6; font-size: 1.05rem; margin: 10px 0 6px 0; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 18px; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 12px; background: rgba(124, 58, 237, 0.06); border-left: 3px solid #7c3aed; color: #475569; }
+        .section-header { font-size: 16px; color: #0f172a; font-weight: 700; letter-spacing: 0.02em; background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%); padding: 8px 12px; border-left: 4px solid #4f46e5; margin: 26px 0 14px 0; border-radius: 0 6px 6px 0; display: flex; align-items: center; box-shadow: inset 0 1px 0 #f1f5f9, inset 0 -1px 0 #f1f5f9; }
+        details.litit-fold { margin-bottom: 10px; border: 1px solid #e2e8f0; border-radius: 10px; background: #ffffff; overflow: hidden; transition: border-color 0.2s ease; }
+        details.litit-fold[open] { border-color: #cbd5e1; }
+        details.litit-fold summary { cursor: pointer; padding: 12px 14px; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; transition: background 0.2s; user-select: none; -webkit-tap-highlight-color: transparent; }
+        details.litit-fold summary::-webkit-details-marker { display: none; }
+        details.litit-fold summary::after { display: none; }
+        details.litit-fold summary:hover { background: #f1f5f9; }
+        details.litit-fold[open] summary { border-bottom: 1px solid #e2e8f0; background: #f1f5f9; border-left: 3px solid #4f46e5; }
+        .litit-fold-content { padding: 10px 8px; background: #f8fafc; }
+        .litit-fold-content > ol, .litit-fold-content > ul { list-style: none !important; padding-left: 0 !important; margin: 0 !important; counter-reset: litit-counter; }
+        .litit-fold-content > ol > li, .litit-fold-content > ul > li { counter-increment: litit-counter; position: relative; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 12px; margin-bottom: 10px !important; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.015); }
+        .litit-fold-content > ol > li:last-child, .litit-fold-content > ul > li:last-child { margin-bottom: 0 !important; }
+        /* [规则 1] 顶部流式微型序号徽章 */
+        .litit-fold-content > ol > li::before, .litit-fold-content > ul > li::before { content: "NO." counter(litit-counter, decimal-leading-zero); display: block; width: max-content; font-size: 10px; font-weight: 800; font-family: -apple-system, BlinkMacSystemFont, monospace; color: #4f46e5; background: #eef2ff; padding: 1px 6px; border-radius: 4px; margin-bottom: 8px; letter-spacing: 0.04em; }
+        /* [规则 4] 纯英/中长句子专属排版 */
+        .litit-en-sentence { display: block; font-family: var(--font-serif); font-size: 1.04rem; font-weight: 600; color: #0f172a; line-height: 1.5; margin-bottom: 6px; }
+        .litit-zh-sentence { display: block; font-family: var(--font-sans); font-size: 0.93rem; color: #475569; line-height: 1.55; margin-bottom: 2px; }
+        li.litit-target-sentence > br { display: none; }
+        /* [规则 3] 短词组高亮徽章 */
+        .litit-badge { display: inline-block; background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 100%); color: #4338ca; padding: 2px 8px; border-radius: 5px; font-size: 0.92rem; font-weight: 700; margin-right: 4px; margin-bottom: 6px; border: 1px solid #e0e7ff; vertical-align: middle; }
+        li.litit-target-sentence > ul { list-style: none !important; margin: 10px 0 0 0 !important; padding: 8px 10px !important; background: #f8fafc; border-radius: 6px; border-left: 2.5px solid #94a3b8; }
+        li.litit-target-sentence > ul > li { position: relative; padding-left: 10px; margin-bottom: 5px !important; font-size: 0.88rem; color: #334155; line-height: 1.5; }
+        li.litit-target-sentence > ul > li:last-child { margin-bottom: 0 !important; }
+        li.litit-target-sentence > ul > li::before { content: "·"; position: absolute; left: 0; top: 0; color: #4f46e5; font-weight: 900; }
+        li.litit-target-sentence > ul > li > strong { color: #0f172a; font-weight: 600; background: #e2e8f0; padding: 1px 5px; border-radius: 4px; font-size: 0.84rem; margin-right: 3px; }
+        @media (max-width: 600px) { body { padding: 10px 10px 30px 10px; font-size: 15px; } h1.litit-target-title { font-size: 21px !important; } .litit-fold-content { padding: 8px 6px; } .litit-fold-content > ol > li, .litit-fold-content > ul > li { padding: 11px 10px; margin-bottom: 8px !important; } }
+    </style>
+</head>
+<body>
+    <div id="reading-progress"></div>
+    <div class="litit-report" style="width:100%; max-width:100%; box-sizing:border-box; overflow-x:hidden;">
+        
+        <!-- 顶部杂志刊头装饰 -->
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #64748b; text-transform: uppercase;">
+            <span>The Global Dispatch · 深度双语精读</span>
+            <span>Fiction & Literature</span>
+        </div>
+
+        <!-- 支持批注的主标题区 -->
+        <div class="content-wrap" style="position:relative; margin-bottom: 16px;">
+            <h1 class="litit-target-title" style="color:#0f172a; font-size: 24px; line-height: 1.35; font-family: var(--font-serif); font-weight: 800; border-bottom: 1px solid #e2e8f0; padding-bottom: 14px; margin-top:0; margin-bottom:0; word-break:break-word;">
+                <span class="content litit-en-title" style="position:relative;">Chapter 560: The Immortal Body and the Eternal Lord</span>
+                <br>
+                <span class="litit-zh-title" style="font-family: var(--font-sans); font-size: 17px; font-weight: 600; color: #475569; margin-top: 8px; display: inline-block; line-height: 1.45;">第五百六十章：不朽之身与永恒之主</span>
+            </h1>
+            <div class="anno-box" style="display:none; margin-top: 10px;">
+                <div class="anno-view markdown-body"></div>
+                <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+第五百六十章：不朽之身与永恒之主
+
+### 📌 Key Expressions
+- **immortal** = 不朽的 / 长生不老的
+- **eternal** = 永恒的 / 永远的</textarea>
+            </div>
+        </div>
+
+        <!-- 杂志导语（Lead Paragraph） -->
+        <p style="color:#334155; font-size: 15px; line-height: 1.75; margin-bottom:16px; font-weight:400; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border: 1px solid #f1f5f9;">
+            在这个极端荒谬且充满解构主义的科幻章节中，藤原帝国已经进化为能够收割星系能量的“三级文明”。基因编辑和纳米技术赐予了统治者不朽的寿命，但在这硬核的科幻外衣下，整个宇宙的政治逻辑却倒退回了最野蛮的绝对父权专制。十八岁的皇子带着庄严的孝道首次觐见生母，迎来的却是一场世界观的粉碎：他的母亲千夏被皇帝的技术永远“冻结”在了一个只会吃零食、胸部大得离谱的十八岁少女状态，且她唯一的帝国职责就是作为皇帝专属的长生不老“奶牛”。本章通过极具视觉冲击力的荒诞对比，借用小百合“科幻专制帝国里极其美妙的悲剧”的台词，无情地讽刺了无论科技如何登峰造极，某些统治阶级（或男性狂想）对女性身体的绝对物化与掌控欲依然古老且根深蒂固。这是一场将严肃的星际政治与极致的恶趣味完美杂糅的黑色喜剧。
+        </p>
+
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <!-- [规则 2] 此处标签不再带有 # 号，纯净的胶囊风格 -->
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">科幻荒诞</span>
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">黑色幽默</span>
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">阶级与权力</span>
+            </div>
+            <a href="https://moodhappy.github.io/MiyetsukoSeries/FreshMart/FreshMartThree/Chapter_560__The_Immortal_Body_and_the_Eternal_Lor_1792117187653.html" target="_blank" style="font-size: 12.5px; color: #4f46e5; text-decoration: none; font-weight: 600; background: #eef2ff; padding: 5px 12px; border-radius: 16px; border: 1px solid #e0e7ff; display:inline-block;">🔗 阅读原文 ↗</a>
+        </div>
+
+        <!-- 最佳金句区 -->
+        <h2 class="section-header" style="border-left-color: #f59e0b;">💬 最佳金句</h2>
+        <div class="content-wrap" style="position:relative; margin-bottom:24px;">
+            <blockquote class="litit-target-quote" style="border-left: 3.5px solid #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%); padding: 14px 14px; margin: 0; color: #1e293b; border-radius: 0 10px 10px 0; border-top: 1px solid #fef3c7; border-right: 1px solid #fef3c7; border-bottom: 1px solid #fef3c7;">
+                <div class="content litit-en-quote" style="position:relative; margin:0 0 8px 0; font-family: var(--font-serif); font-style: italic; font-weight:600; font-size: 16.5px; line-height: 1.55; color:#0f172a; word-break:break-word;">
+                    "I am the Eternal Lord. She is my eternal dairy cow. You were evicted from her womb 18 years ago because your lease expired."
+                </div>
+                <p class="litit-zh-quote" style="margin:0 0 8px 0; font-weight:400; font-size: 14.5px; line-height: 1.6; color:#475569; word-break:break-word;">
+                    “朕，是永恒之主。她，是朕永恒的专属奶牛。十八年前你就因为子宫租约到期被无情地驱逐出去了。”
+                </p>
+                <footer style="text-align:right; font-size:12px; color:#64748b; font-style:normal; font-weight:600;">—— 藤原对皇子宣告绝对主权的暴君式发言</footer>
+            </blockquote>
+            <div class="anno-box" style="display:none;">
+                <div class="anno-view markdown-body"></div>
+                <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+“朕，是永恒之主。她，是朕永恒的专属奶牛。十八年前你就因为子宫租约到期被无情地驱逐出去了。”
+
+### 📌 Key Expressions
+- **Eternal Lord** = 永恒之主（带有一种带有宗教和神性色彩的自负称呼）
+- **evict** = 驱逐 / 赶出（常用于房东赶走租客，用在这里形容生育过程充满了反人性的物化色彩）
+- **lease expired** = 租约到期（将母亲的子宫物化为可租赁的器官，极致的暴君逻辑）</textarea>
+            </div>
+        </div>
+
+        <!-- Grid 布局关键数字区 -->
+        <h2 class="section-header" style="border-left-color: #10b981;">📊 关键数字</h2>
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin:14px 0 24px 0;">
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    III<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">级</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">藤原帝国达到的宇宙文明高度（能够操控星系能量）</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    18<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">岁</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">皇子的真实年龄，也是千夏被永远冻结的生理与心理年龄</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    500<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">毫升</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">千夏接到死命令需要在今晚前产出的“特供奶昔”量</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    0<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">次</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">小百合等人经历衰老的秒数，她们被“审美圣旨”彻底剥夺了成长权</div>
+            </div>
+        </div>
+
+        <h2 class="section-header" style="border-left-color: #3b82f6;">⏱️ 事件时间线</h2>
+        <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size: 14.5px; margin-bottom:24px; word-break:break-word;">
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">背景设定：</strong> 藤原帝国成为三级文明，消灭了死亡与衰老，但政治体制依然是防范后宫干政和弑父篡位的绝对专制主义。</li>
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">庄严觐见：</strong> 十八岁的皇子满怀传统的孝道与敬意，首次被获准进入大殿觐见自己的生母千夏。</li>
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">世界观崩塌：</strong> 皇子发现母亲并非端庄的太后，而是个一边吃薯片一边抱怨要给皇帝挤奶的“十八岁清澈愚蠢少女”。</li>
+            <li><strong style="color:#1d4ed8;">暴君宣告：</strong> 后宫女人们对此习以为常并发出嘲弄。最终，藤原以宇宙霸主的姿态打破了皇子的伦理幻想，宣示了对千夏肉体的绝对所有权。</li>
+        </ul>
+
+        <h2 class="section-header" style="border-left-color: #8b5cf6;">✨ 本篇亮点与精读</h2>
+        <div style="margin: 14px 0 10px 0;">
+            <!-- 第一板块：一、重点记忆 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">一、重点记忆</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">eradicate</strong>：彻底消灭 / 根除<br>
+                            <strong class="litit-en-sentence">Breakthroughs have completely eradicated death, aging, and disease.</strong>
+                            <span class="litit-zh-sentence">突破性进展已经彻底消灭了死亡、衰老和疾病。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">autocracy</strong>：专制 / 独裁统治<br>
+                            <strong class="litit-en-sentence">The logic remained anchored in the most absolute centralized autocracy.</strong>
+                            <span class="litit-zh-sentence">政治逻辑依然锚定在最绝对的中央集权专制主义上。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">filial piety</strong>：孝道 / 孝顺<br>
+                            <strong class="litit-en-sentence">His heart pounding with solemn filial piety.</strong>
+                            <span class="litit-zh-sentence">他的心因为庄严的孝道而怦怦直跳。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">dowager</strong>：皇太后 / 贵妇<br>
+                            <strong class="litit-en-sentence">He expected to see a dignified, mature dowager figure.</strong>
+                            <span class="litit-zh-sentence">他满心以为会看到一位端庄、成熟的太后级长辈。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">debauchery</strong>：荒淫 / 堕落<br>
+                            <strong class="litit-en-sentence">His dark eyes gleaming with profound debauchery.</strong>
+                            <span class="litit-zh-sentence">他漆黑的双眼里闪烁着极深的荒淫。</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 第二板块：二、高价值表达 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">二、高价值表达</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">jarring contrast</strong>：令人不适的反差 / 极大的反差。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;"><i>jarring</i> 本意是“声音刺耳”，常用来形容对比时表现出一种强烈的、几乎让人产生生理或认知不适的荒谬感（如高级科幻与低级野蛮的对比）。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">battle-hardened</strong>：身经百战的；久经沙场的。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">字面意为“在战斗中变得坚硬”。文中被小百合用来修饰皇子未来会成长为一个成熟的男人，以此强烈对比女性被永远“软禁”在娇嫩状态的悲剧。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">purr</strong>：（猫的）咕噜声 / 软糯地娇语。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">这里用于形容小百合说话时的语气，极具成熟女性的慵懒与魅惑感，远比单纯的 <i>say</i> 或 <i>speak</i> 更有画面张力。</span>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- 第三板块：三、短语和固定搭配 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">三、短语和固定搭配</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">be anchored in</strong>：锚定于 / 扎根于<br>
+                            <strong class="litit-en-sentence">The political logic remained strictly anchored in the most ancient autocracy.</strong>
+                            <span class="litit-zh-sentence">政治逻辑依然死死锚定在最古老的专制主义上。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">pop out</strong>：突然生出 / 蹦出来（极不严肃的表达）<br>
+                            <strong class="litit-en-sentence">You're the kid I popped out back then, right?</strong>
+                            <span class="litit-zh-sentence">你就是我当年生出来的那个小鬼对吧？</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">pump milk</strong>：挤奶（指用吸奶器等物理方式）<br>
+                            <strong class="litit-en-sentence">The Boss ordered me to pump another 500 milliliters.</strong>
+                            <span class="litit-zh-sentence">老板命令我再挤500毫升出来。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">frozen eternally in</strong>：被永恒地冻结在……（状态）<br>
+                            <strong class="litit-en-sentence">We are frozen eternally in our most physically ripe forms.</strong>
+                            <span class="litit-zh-sentence">我们被永恒地冻结在了肉体最成熟的状态。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">pay one's respects to</strong>：向……请安 / 致敬<br>
+                            <strong class="litit-en-sentence">Now, pay your respects to your teenaged mother.</strong>
+                            <span class="litit-zh-sentence">现在，赶紧给你这位少女模样的母妃请安。</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 第四板块：四、值得学习的句子结构 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">四、值得学习的句子结构</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">Following the ancient, paranoid laws of the imperial court, the prince had been taken from the harem the moment he was born, raised in a heavily guarded external palace to prevent any Oedipal coups or maternal interference in state affairs.</strong>
+                            <span class="litit-zh-sentence">遵循着古代宫廷那种充满被害妄想症的铁律，皇子在降生的那一刻起就被抱出了后宫，养在戒备森严的外廷，以防止任何形式的恋母情结政变或后宫干政。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>Following...</strong>：现在分词短语作状语，交代大背景。</li>
+                                <li style="margin-bottom: 3px;"><strong>the moment he was born</strong>：相当于 <i>as soon as</i>，作为时间状语连词，强调动作极其无情的即时性。</li>
+                                <li style="margin-bottom: 3px;"><strong>to prevent any...</strong>：动词不定式表目的。将“Oedipal coups”（俄狄浦斯政变）这种高端心理学/政治词汇用于此处，荒诞感极强。</li>
+                            </ul>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">He looked up, expecting to see a dignified, mature dowager figure. Instead, he saw his "mother"—Chika—sprawled undignifiedly across the velvet sofa, munching loudly on a bag of imported spicy chips.</strong>
+                            <span class="litit-zh-sentence">他抬起头，满心以为会看到一位端庄、成熟的太后级长辈。然而，他看到的却是他的“母亲”——千夏——正极其毫无仪态地瘫在天鹅绒沙发上，嘎吱嘎吱地大嚼着一袋进口麻辣薯片。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>expecting to see...</strong>：伴随状语，表现出皇子传统的刻板印象。</li>
+                                <li style="margin-bottom: 3px;"><strong>Instead, he saw... sprawled... munching...</strong>：<i>Instead</i> 形成强烈的反差转折，使用 <i>saw sb. + done/doing</i> 结构，将千夏毫无体统、极其鲜活的动作描绘得栩栩如生。</li>
+                            </ul>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">You will eventually grow up, study interstellar politics, and mature into a battle-hardened man. But we? We are forever trapped by the Emperor's aesthetic decrees, frozen eternally in our most physically ripe, delightfully corrupt forms.</strong>
+                            <span class="litit-zh-sentence">你最终会长大成人，学习星际政治，成熟为一个身经百战的男人。但是我们呢？我们被皇帝陛下的审美圣旨永远囚禁了，被永恒地冻结在了我们肉体最成熟、最娇艳也最堕落的状态里。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>frozen eternally in...</strong>：过去分词短语作补充说明（状语），修饰 <i>trapped</i> 的结果状态。</li>
+                                <li style="margin-bottom: 3px;"><strong>delightfully corrupt</strong>：“令人愉悦的堕落”。这是一种绝妙的矛盾修辞法（Oxymoron），一针见血地点透了这种由极权男性凝视所打造的科幻后宫的本质。</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- 第五板块：五、最值得优先掌握的句型 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">五、最值得优先掌握的句型</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence" style="color: #4338ca;">Yet, in a hilariously jarring contrast to [Noun/Reality], the [Subject] remained strictly anchored in [State/Concept].</strong>
+                            <span class="litit-zh-sentence">然而，与[某种现实/事物]形成极其可笑且荒谬反差的是，[主语]却依然死死锚定在[某种状态/概念]上。<br>
+                            （极佳的对比批判句型。非常适合用于雅思写作或高端评论中，用来讽刺表面现象与本质逻辑之间的巨大割裂感，比如科技的进步与人性的倒退。）</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence" style="color: #4338ca;">[Subject] looked entirely unbothered by the sheer [adjective] horror he had inflicted upon [Target].</strong>
+                            <span class="litit-zh-sentence">对于自己给[某人]造成的这种纯粹的[形容词]心理阴影/恐惧，[主语]看起来毫不介意。<br>
+                            （非常高级的心理与权力描写句式。用 unbothered 表现出统治者或加害者的傲慢与漠视，inflict upon 则是极具压迫感的动词搭配，适用于描绘暴君或极度自恋的角色。）</span>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+        </div>
+
+        <h2 class="section-header" style="border-left-color: #0d9488;">💡 幕后冷知识 (Fun Facts)</h2>
+        <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size:14.5px; margin-bottom:24px; word-break:break-word;">
+            <li style="margin-bottom: 8px;"><strong>Type III Civilization (三级文明)：</strong> 来源于卡尔达肖夫指数（Kardashev scale），这是一种用来衡量宇宙文明技术等级的假想尺度。一级文明能控制所在行星的全部能量，二级文明能控制其母恒星（戴森球 Dyson Sphere 即为其标志），而三级文明则能控制整个星系的能量。文章用最硬核宏大的科幻设定，来包装最恶俗荒诞的后宫乱象，是极致的文本解构主义。</li>
+            <li style="margin-bottom: 8px;"><strong>Oedipal Coup (俄狄浦斯式政变)：</strong> 来源于希腊神话俄狄浦斯（Oedipus，杀父娶母）。这里指代后宫中皇子长大后可能因为恋母情结或为了夺权而推翻父亲的统治。防范“后宫干政（maternal interference）”是中国古代封建王朝（如汉、清）的真实铁律，甚至衍生出了“子贵母死”（儿子被立为太子，生母必须赐死）这种极其残酷的防范制度。</li>
+            <li><strong>Oxymoron (矛盾修辞法)：</strong> 小百合台词中的 "beautiful tragedy" (美妙的悲剧) 和 "delightfully corrupt" (愉悦的堕落) 是文学中非常经典的矛盾修辞。它完美地诠释了这群被男权极权剥夺了“时间流动权力”的女性，在享受永葆青春这恩赐的同时，所承受的如同宠物、标本一般的悲哀。</li>
+        </ul>
+
+        <h2 class="section-header" style="border-left-color: #e11d48;">🎯 全片锐评</h2>
+        <p style="line-height:1.75; color:#1e293b; font-weight:500; background:linear-gradient(135deg, #fff1f2 0%, #ffffff 100%); padding:14px 16px; border-radius:10px; font-size:14.5px; margin:0 0 12px 0; border:1px solid #ffe4e6; word-break:break-word;">
+            这是一篇将“科幻宏大叙事”与“极度下半身恶趣味”缝合得天衣无缝的黑色幽默神作。作者巧妙地利用了一个令人窒息的科幻设定：当男人的权力膨胀到可以收割银河系、甚至消灭了死亡时，他们会创造出怎样的高级文明？答案是：毫无进步。他们只是把科技当成了最高级的福尔马林，用来把自己的女人们永远泡在18岁、大胸部、只会挤奶和吃零食的“处女/荡妇”双重叠加态里。文中最讽刺的莫过于那个满怀“庄严孝道”来觐见的皇子，他代表着人类正常伦理的最后一点体面，却被那个吃着薯片的亲娘和端着红酒的暴君亲爹按在地上无情摩擦。藤原那句“她的胸部属于国家财产”，不仅是渣男语录的终极形态，更是对绝对专制主义如何将女性物化、甚至将子嗣视为玩物的精准侧写。科技在狂飙，但权力的春药和男性的控制欲，依然在宇宙尽头的沙发上发着酸臭的霉。
+        </p>
+
+    </div>
+
+    <script id="core-engine">
+        let syncTimeout = null;
+        const AI_PROMPT = "请分析以下英文段落，并严格按照以下 Markdown 格式输出（不要输出任何额外的废话）：\n\n### 📌 完整翻译\n\n[此处填写完整翻译]\n\n### 📌 Key Expressions\n\n- **[单词或短语]**\n  = [中文释义]\n  （[可选的补充说明，如倒装结构或语境等]）\n\n段落内容：\n";
+
+        // --- 顶部阅读进度条逻辑 ---
+        function initProgressBar() {
+            const progressBar = document.getElementById('reading-progress');
+            if (!progressBar) return;
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (scrollHeight <= 0) return;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressBar.style.width = scrollPercent + '%';
+            }, { passive: true });
+        }
+
+        async function fetchGroq(text, apiKey, modelName) {
+            const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + apiKey,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: modelName || 'llama-3.3-70b-versatile',
+                    messages: [
+                        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+                        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+                    ],
+                    temperature: 0.3
+                })
+            });
+            if (!res.ok) throw new Error('Groq Error: ' + res.status);
+            const json = await res.json();
+            return json.choices[0].message.content.trim();
+        }
+
+        async function fetchCustomAI(text, url, apiKey, modelName) {
+            let headers = { 'Content-Type': 'application/json' };
+            let bodyData = {};
+
+            if (url.includes('anthropic.com')) {
+                headers['x-api-key'] = apiKey;
+                headers['anthropic-version'] = '2023-06-01';
+                headers['anthropic-dangerous-direct-browser-access'] = 'true';
+                bodyData = {
+                    model: modelName || 'claude-3-5-sonnet-20241022',
+                    max_tokens: 2000,
+                    messages: [{ role: 'user', content: AI_PROMPT + '"' + text + '"' }]
+                };
+            } else if (url.includes('generativelanguage.googleapis.com')) {
+                let targetUrl = url;
+                if (!targetUrl.includes('key=')) {
+                    targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'key=' + apiKey;
+                }
+                const res = await fetch(targetUrl, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: AI_PROMPT + '"' + text + '"' }] }]
+                    })
+                });
+                if (!res.ok) throw new Error('Gemini Error: ' + res.status);
+                const json = await res.json();
+                return json.candidates[0].content.parts[0].text.trim();
+            } else {
+                headers['Authorization'] = 'Bearer ' + apiKey;
+                bodyData = {
+                    model: modelName || 'gpt-4o-mini',
+                    messages: [
+                        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+                        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+                    ],
+                    temperature: 0.3
+                };
+            }
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(bodyData)
+            });
+            if (!res.ok) throw new Error('AI Interface Error: ' + res.status);
+            const json = await res.json();
+            if (json.choices && json.choices.length > 0) return json.choices[0].message.content.trim();
+            throw new Error('AI 返回数据异常');
+        }
+
+        async function executeAIPipeline(text) {
+            const customUrl = localStorage.getItem('CUSTOM_API_URL') || '';
+            const customKey = localStorage.getItem('CUSTOM_API_KEY') || '';
+            const customModel = localStorage.getItem('CUSTOM_MODEL') || '';
+            const groqKey = localStorage.getItem('GROQ_API_KEY') || '';
+            const groqModel = localStorage.getItem('GROQ_MODEL') || '';
+
+            if (customUrl && customKey) {
+                try {
+                    return await fetchCustomAI(text, customUrl, customKey, customModel);
+                } catch (err) {
+                    if (groqKey) return await fetchGroq(text, groqKey, groqModel);
+                    throw err;
+                }
+            } else if (groqKey) {
+                return await fetchGroq(text, groqKey, groqModel);
+            } else {
+                const userKey = prompt('⚠️ 当前页面未检测到 AI Key！\n为了安全，密匙只储存在您本地浏览器中。\n\n请输入您的 API Key (如 sk-xxx 或 gsk_xxx):');
+                if (userKey && userKey.trim()) {
+                    const cleanKey = userKey.trim();
+                    if (cleanKey.startsWith('gsk_')) {
+                        localStorage.setItem('GROQ_API_KEY', cleanKey);
+                    } else {
+                        localStorage.setItem('CUSTOM_API_KEY', cleanKey);
+                        localStorage.setItem('CUSTOM_API_URL', 'https://api.chatanywhere.tech/v1/chat/completions');
+                    }
+                }
+                throw new Error('未设置 AI API Key');
+            }
+        }
+
+        // --- 降级清理防线：净化污染节点 ---
+        function getPurifiedFallbackHTML() {
+            const clone = document.documentElement.cloneNode(true);
+            const foreignSelectors = [
+                'relingo-app', 'relin-highlight', 'relin-hc', '[class*="relingo"]', '[data-relin-paragraph]',
+                'grammarly-extension', '[data-grammarly-part]', '[class*="immersive-translate"]', '[data-immersive-translate]'
+            ].join(',');
+            clone.querySelectorAll(foreignSelectors).forEach(el => el.remove());
+            clone.querySelectorAll('relin-highlight, relin-hc').forEach(t => {
+                const frag = document.createDocumentFragment();
+                while(t.firstChild) frag.appendChild(t.firstChild);
+                t.parentNode.replaceChild(frag, t);
+            });
+            clone.querySelectorAll('script').forEach(s => {
+                if (!s.src.includes('marked.min.js') && s.id !== 'core-engine') s.remove();
+            });
+            clone.querySelectorAll('style').forEach(s => {
+                if (s.id !== 'core-style') s.remove();
+            });
+
+            const liveTAs = document.querySelectorAll('.anno-edit');
+            clone.querySelectorAll('.anno-edit').forEach((ta, i) => {
+                if(liveTAs[i]) ta.textContent = liveTAs[i].value.trim();
+                const box = ta.closest('.anno-box');
+                if (box) box.style.display = 'none';
+                const view = box ? box.querySelector('.anno-view') : null;
+                if (view) view.innerHTML = '';
+            });
+
+            return '<!DOCTYPE html>\n<html lang="zh-CN">\n' + clone.innerHTML + '\n</html>';
+        }
+
+        // --- 内存反向打补丁同步技术 ---
+        async function syncToCloud() {
+            const ghToken = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN');
+            const ghOwner = 'moodHappy';
+            const ghRepo = 'dual-read-notes';
+            if (!ghToken) return;
+
+            const pathParts = window.location.pathname.split('/');
+            const fileName = pathParts.pop();
+            const month = pathParts.pop();
+            const year = pathParts.pop();
+            if(!fileName || !month || !year) return;
+
+            const fileRelPath = 'Summary/' + year + '/' + month + '/' + fileName;
+
+            try {
+                const getRes = await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + ghToken },
+                    cache: 'no-store'
+                });
+
+                let finalHTML = '';
+                let sha = '';
+
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                    const cleanRawHTML = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+                    const parser = new DOMParser();
+                    const cleanDoc = parser.parseFromString(cleanRawHTML, 'text/html');
+
+                    const liveTAs = document.querySelectorAll('.anno-edit');
+                    const cleanTAs = cleanDoc.querySelectorAll('.anno-edit');
+
+                    liveTAs.forEach((liveTa, index) => {
+                        if (cleanTAs[index]) {
+                            const val = liveTa.value.trim();
+                            cleanTAs[index].textContent = val;
+                            const box = cleanTAs[index].closest('.anno-box');
+                            if (box) box.style.display = 'none';
+                            const view = box ? box.querySelector('.anno-view') : null;
+                            if (view) view.innerHTML = '';
+                        }
+                    });
+
+                    cleanDoc.querySelectorAll('.anno-toggle').forEach(t => {
+                        t.classList.remove('has-anno');
+                        const ta = t.closest('.content-wrap, .litit-highlight-block')?.querySelector('.anno-edit');
+                        if (ta && ta.textContent.trim()) t.classList.add('has-anno');
+                    });
+
+                    finalHTML = '<!DOCTYPE html>\n<html lang="zh-CN">\n' + cleanDoc.documentElement.innerHTML + '\n</html>';
+                } else {
+                    finalHTML = getPurifiedFallbackHTML();
+                }
+
+                await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + ghToken,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Silent purified annotation update',
+                        content: btoa(unescape(encodeURIComponent(finalHTML))),
+                        sha: sha || undefined
+                    })
+                });
+                console.log('✅ [My Litit] 纯净无污染批注已静默同步至 GitHub');
+            } catch(e) {
+                console.warn('❌ [My Litit] 同步跳过或失败:', e);
+            }
+        }
+
+        function scheduleSync() {
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToCloud(); }, 3000);
+        }
+
+        function initAnnotations() {
+            document.querySelectorAll('.litit-highlight-block, .content-wrap').forEach(wrap => {
+                let content = wrap.querySelector('.content');
+                
+                if (!content) {
+                    const pText = wrap.querySelector('p');
+                    if (pText) {
+                        content = document.createElement('div');
+                        content.className = 'content';
+                        content.style.cssText = 'position:relative; margin:0 0 6px 0; color:#1a202c; font-family:Georgia, serif; line-height:1.7; font-size:15px; word-break:break-word;';
+                        content.innerHTML = pText.innerHTML;
+                        pText.parentNode.replaceChild(content, pText);
+                    }
+                }
+                if (!content) return;
+
+                if (!content.querySelector('.anno-toggle')) {
+                    const toggle = document.createElement('span');
+                    toggle.className = 'anno-toggle';
+                    toggle.title = '手写批注/笔记';
+                    content.appendChild(toggle);
+                }
+                
+                if (!content.querySelector('.ai-toggle')) {
+                    const aiToggle = document.createElement('span');
+                    aiToggle.className = 'ai-toggle';
+                    aiToggle.title = 'AI智能二次解析';
+                    content.appendChild(aiToggle);
+                }
+
+                let box = wrap.querySelector('.anno-box');
+                if (!box) {
+                    box = document.createElement('div');
+                    box.className = 'anno-box';
+                    box.style.display = 'none';
+                    box.innerHTML = '<div class="anno-view markdown-body"></div><textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 解析..."></textarea>';
+                    wrap.appendChild(box);
+                }
+
+                const view = box.querySelector('.anno-view');
+                const edit = box.querySelector('.anno-edit');
+                const toggle = content.querySelector('.anno-toggle');
+                const aiToggle = content.querySelector('.ai-toggle');
+
+                if (edit && edit.value.trim()) {
+                    toggle.classList.add('has-anno');
+                    try {
+                        view.innerHTML = (typeof marked !== 'undefined') ? marked.parse(edit.value.trim()) : edit.value.trim();
+                    } catch(e){}
+                }
+
+                if (aiToggle) {
+                    aiToggle.onclick = async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (aiToggle.classList.contains('loading')) return;
+
+                        if (edit && edit.value.trim() !== '') {
+                            const confirmOverwrite = confirm('⚠️ 已经存在批注内容。点击"确定"将使用 AI 解析覆盖现有内容。是否继续？');
+                            if (!confirmOverwrite) return;
+                        }
+
+                        const pClone = content.cloneNode(true);
+                        pClone.querySelectorAll('.anno-toggle, .ai-toggle').forEach(el => el.remove());
+                        let pText = pClone.textContent.replace(/https?:\/\/\S+/g, '').trim();
+                        if (!pText) return;
+
+                        aiToggle.classList.add('loading');
+                        try {
+                            const aiContent = await executeAIPipeline(pText);
+                            box.style.display = 'block';
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.value = aiContent;
+                            edit.focus();
+                            edit.blur();
+                        } catch (err) {
+                            console.error(err);
+                        } finally {
+                            aiToggle.classList.remove('loading');
+                        }
+                    };
+                }
+
+                if (toggle) {
+                    toggle.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                        } else {
+                            box.style.display = 'block';
+                            if (!edit.value.trim()) {
+                                view.style.display = 'none';
+                                edit.style.display = 'block';
+                                setTimeout(() => { edit.focus(); }, 150);
+                            } else {
+                                view.style.display = 'block';
+                                edit.style.display = 'none';
+                            }
+                        }
+                    };
+                }
+
+                const triggerEdit = (e) => {
+                    if(e) { e.preventDefault(); e.stopPropagation(); }
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.value = edit.value; 
+                    setTimeout(() => { edit.focus(); }, 150);
+                };
+
+                view.addEventListener('dblclick', triggerEdit);
+
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        triggerEdit(e);
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        if (currentTime - lastTap < 500 && currentTime - lastTap > 0) {
+                            e.preventDefault();
+                            box.style.display = 'none';
+                        }
+                        lastTap = currentTime;
+                    }
+                }, {passive: false});
+
+                if (edit && view) {
+                    edit.onblur = () => {
+                        setTimeout(() => {
+                            const newVal = edit.value.trim();
+                            try {
+                                view.innerHTML = newVal ? ((typeof marked !== 'undefined') ? marked.parse(newVal) : newVal) : '';
+                            } catch(e){}
+                            edit.style.display = 'none';
+                            
+                            if (newVal) {
+                                view.style.display = 'block';
+                                toggle.classList.add('has-anno');
+                            } else {
+                                view.style.display = 'none';
+                                box.style.display = 'none';
+                                toggle.classList.remove('has-anno');
+                            }
+
+                            if (edit.getAttribute('data-old-val') !== newVal) {
+                                edit.setAttribute('data-old-val', newVal);
+                                scheduleSync();
+                            }
+                        }, 150);
+                    };
+                    edit.setAttribute('data-old-val', edit.value.trim());
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initProgressBar();
+            initAnnotations();
+        });
+        window.addEventListener('load', initAnnotations);
+    </script>
+</body>
+</html>
