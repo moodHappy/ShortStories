@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chapter 562: The Ascension of the Succubus Queen</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="core-style">
+        /* ======================================================================
+           [AI TEMPLATE GUIDELINES - CSS 核心排版规范]
+           已严格遵守：
+           1. 序号规则：NO.01 由伪类 `::before` 自动生成。
+           2. 标签规则：无 # 号纯文字胶囊。
+           3. 胶囊高亮：.litit-badge 仅用于 1、2、3 板块。
+           4. 长句排版：4、5 板块使用块级长句，中文解释括号用 <br> 另起一行，严禁混用 .litit-badge。
+           ====================================================================== */
+        :root {
+            --bg-page: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #334155;
+            --text-muted: #64748b;
+            --accent-primary: #4f46e5;
+            --border-subtle: #e2e8f0;
+            --font-serif: "Georgia", "Charter", "Source Han Serif SC", "Noto Serif CJK SC", serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+        }
+        body { font-family: var(--font-sans); padding: 12px 12px 36px 12px; margin: 0 auto; max-width: 780px; background: var(--bg-page); color: var(--text-main); line-height: 1.75; font-size: 16px; word-wrap: break-word; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        * { box-sizing: border-box; max-width: 100%; }
+        img { max-width: 100%; height: auto; border-radius: 8px; }
+        #reading-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #4f46e5, #9333ea); z-index: 9999; transition: width 0.1s ease-out; }
+        .litit-report { background: var(--bg-card); padding: 0; }
+        .anno-toggle, .ai-toggle { display: inline-block; padding: 2px 5px; margin-left: 5px; cursor: pointer; opacity: 0.45; font-size: 0.85rem; vertical-align: middle; transition: all 0.2s; user-select: none; -webkit-tap-highlight-color: transparent; }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 1; transform: scale(1.15); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { opacity: 0.7; padding: 2px 4px; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after { content: "⏳"; display: inline-block; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box { display: none; margin-top: 10px; background: #faf8ff; border-left: 3px solid #7c3aed; padding: 12px 14px; border-radius: 0 8px 8px 0; text-align: left; }
+        .anno-view { font-size: 0.95rem; line-height: 1.65; color: #334155; min-height: 24px; }
+        .anno-edit { width: 100%; min-height: 120px; padding: 10px; font-family: monospace; font-size: 0.95rem; border: 1px dashed #a78bfa; border-radius: 6px; resize: vertical; display: none; background: #fff; color: #1e293b; outline: none; }
+        .anno-edit:focus { border: 1px solid #7c3aed; box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12); }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #5b21b6; font-size: 1.05rem; margin: 10px 0 6px 0; border-bottom: 1px dashed #ddd6fe; padding-bottom: 4px; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 18px; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 12px; background: rgba(124, 58, 237, 0.06); border-left: 3px solid #7c3aed; color: #475569; }
+        .section-header { font-size: 16px; color: #0f172a; font-weight: 700; letter-spacing: 0.02em; background: linear-gradient(90deg, #f8fafc 0%, #ffffff 100%); padding: 8px 12px; border-left: 4px solid #4f46e5; margin: 26px 0 14px 0; border-radius: 0 6px 6px 0; display: flex; align-items: center; box-shadow: inset 0 1px 0 #f1f5f9, inset 0 -1px 0 #f1f5f9; }
+        details.litit-fold { margin-bottom: 10px; border: 1px solid #e2e8f0; border-radius: 10px; background: #ffffff; overflow: hidden; transition: border-color 0.2s ease; }
+        details.litit-fold[open] { border-color: #cbd5e1; }
+        details.litit-fold summary { cursor: pointer; padding: 12px 14px; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; transition: background 0.2s; user-select: none; -webkit-tap-highlight-color: transparent; }
+        details.litit-fold summary::-webkit-details-marker { display: none; }
+        details.litit-fold summary::after { display: none; }
+        details.litit-fold summary:hover { background: #f1f5f9; }
+        details.litit-fold[open] summary { border-bottom: 1px solid #e2e8f0; background: #f1f5f9; border-left: 3px solid #4f46e5; }
+        .litit-fold-content { padding: 10px 8px; background: #f8fafc; }
+        .litit-fold-content > ol, .litit-fold-content > ul { list-style: none !important; padding-left: 0 !important; margin: 0 !important; counter-reset: litit-counter; }
+        .litit-fold-content > ol > li, .litit-fold-content > ul > li { counter-increment: litit-counter; position: relative; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 12px; margin-bottom: 10px !important; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.015); }
+        .litit-fold-content > ol > li:last-child, .litit-fold-content > ul > li:last-child { margin-bottom: 0 !important; }
+        /* [规则 1] 顶部流式微型序号徽章 */
+        .litit-fold-content > ol > li::before, .litit-fold-content > ul > li::before { content: "NO." counter(litit-counter, decimal-leading-zero); display: block; width: max-content; font-size: 10px; font-weight: 800; font-family: -apple-system, BlinkMacSystemFont, monospace; color: #4f46e5; background: #eef2ff; padding: 1px 6px; border-radius: 4px; margin-bottom: 8px; letter-spacing: 0.04em; }
+        /* [规则 4] 纯英/中长句子专属排版 */
+        .litit-en-sentence { display: block; font-family: var(--font-serif); font-size: 1.04rem; font-weight: 600; color: #0f172a; line-height: 1.5; margin-bottom: 6px; }
+        .litit-zh-sentence { display: block; font-family: var(--font-sans); font-size: 0.93rem; color: #475569; line-height: 1.55; margin-bottom: 2px; }
+        li.litit-target-sentence > br { display: none; }
+        /* [规则 3] 短词组高亮徽章 */
+        .litit-badge { display: inline-block; background: linear-gradient(135deg, #eef2ff 0%, #f3e8ff 100%); color: #4338ca; padding: 2px 8px; border-radius: 5px; font-size: 0.92rem; font-weight: 700; margin-right: 4px; margin-bottom: 6px; border: 1px solid #e0e7ff; vertical-align: middle; }
+        li.litit-target-sentence > ul { list-style: none !important; margin: 10px 0 0 0 !important; padding: 8px 10px !important; background: #f8fafc; border-radius: 6px; border-left: 2.5px solid #94a3b8; }
+        li.litit-target-sentence > ul > li { position: relative; padding-left: 10px; margin-bottom: 5px !important; font-size: 0.88rem; color: #334155; line-height: 1.5; }
+        li.litit-target-sentence > ul > li:last-child { margin-bottom: 0 !important; }
+        li.litit-target-sentence > ul > li::before { content: "·"; position: absolute; left: 0; top: 0; color: #4f46e5; font-weight: 900; }
+        li.litit-target-sentence > ul > li > strong { color: #0f172a; font-weight: 600; background: #e2e8f0; padding: 1px 5px; border-radius: 4px; font-size: 0.84rem; margin-right: 3px; }
+        @media (max-width: 600px) { body { padding: 10px 10px 30px 10px; font-size: 15px; } h1.litit-target-title { font-size: 21px !important; } .litit-fold-content { padding: 8px 6px; } .litit-fold-content > ol > li, .litit-fold-content > ul > li { padding: 11px 10px; margin-bottom: 8px !important; } }
+    </style>
+</head>
+<body>
+    <div id="reading-progress"></div>
+    <div class="litit-report" style="width:100%; max-width:100%; box-sizing:border-box; overflow-x:hidden;">
+        
+        <!-- 顶部杂志刊头装饰 -->
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #64748b; text-transform: uppercase;">
+            <span>The Global Dispatch · 深度双语精读</span>
+            <span>Fiction & Literature</span>
+        </div>
+
+        <!-- 支持批注的主标题区 -->
+        <div class="content-wrap" style="position:relative; margin-bottom: 16px;">
+            <h1 class="litit-target-title" style="color:#0f172a; font-size: 24px; line-height: 1.35; font-family: var(--font-serif); font-weight: 800; border-bottom: 1px solid #e2e8f0; padding-bottom: 14px; margin-top:0; margin-bottom:0; word-break:break-word;">
+                <span class="content litit-en-title" style="position:relative;">Chapter 562: The Ascension of the Succubus Queen</span>
+                <br>
+                <span class="litit-zh-title" style="font-family: var(--font-sans); font-size: 17px; font-weight: 600; color: #475569; margin-top: 8px; display: inline-block; line-height: 1.45;">第五百六十二章：魅魔女王的登基</span>
+            </h1>
+            <div class="anno-box" style="display:none; margin-top: 10px;">
+                <div class="anno-view markdown-body"></div>
+                <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+第五百六十二章：魅魔女王的登基 / 魅魔女王的继位
+
+### 📌 Key Expressions
+- **ascension** = 登基 / 继位 / 升天（带有强烈的君主、神性色彩，与魅魔这个物种搭配在一起极具反差感）
+- **succubus** = 魅魔（西方神话中吸食男性精气的女恶魔）</textarea>
+            </div>
+        </div>
+
+        <!-- 杂志导语（Lead Paragraph） -->
+        <p style="color:#334155; font-size: 15px; line-height: 1.75; margin-bottom:16px; font-weight:400; background: #f8fafc; padding: 12px 14px; border-radius: 8px; border: 1px solid #f1f5f9;">
+            伴随着浓烈的硫磺味与昂贵催情香水的交织，起居殿的午后宁静被一个突如其来的地狱传送门彻底打破。盲眼、爱吃饼干的小铃，因为魔界老王“腰椎间盘突出”无法处理公文，戏剧性地被召回地狱继承王位，即将成为令人闻风丧胆的魅魔女王。面对这种宇宙级别的跨维度升迁，藤原大帝没有丝毫的担忧，反而在一秒内完成了令人喷饭的地缘政治优先级重组——他狂热地将此视作一次对“全员魅魔”维度的合法“国事访问”。后宫女人们更是展现了令人叹为观止的脑洞：小百合满脑子都是垄断魅魔进出口贸易的宏观经济学；千夏恐慌自己的奶牛合同会被卖给地狱黑帮；而美悦子则打算去进修恶魔的“刑讯（调教）流程”以丰富卧室生活。当全家浩浩荡荡抵达地狱，面对骷髅王座下数以百万计的绝美恶魔大军时，藤原彻底撕下了虚伪的面具。他当众解开腰带，自封“王夫”，并大言不惭地宣告要对全魅魔界的劳动力进行一次旷日持久的“高强度体能大检查”。这不仅是一场荒诞的成人冒险，更是对严肃政治术语最淋漓尽致的亵渎。
+        </p>
+
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                <!-- [规则 2] 此处标签不再带有 # 号，纯净的胶囊风格 -->
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">奇幻荒诞</span>
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">地缘政治恶搞</span>
+                <span style="background:#f1f5f9; color:#334155; padding:4px 10px; border-radius:16px; font-size:12px; font-weight:600;">下半身狂想</span>
+            </div>
+            <a href="https://moodhappy.github.io/MiyetsukoSeries/FreshMart/FreshMartThree/Chapter_562__The_Ascension_of_the_Succubus_Queen_1792127865561.html" target="_blank" style="font-size: 12.5px; color: #4f46e5; text-decoration: none; font-weight: 600; background: #eef2ff; padding: 5px 12px; border-radius: 16px; border: 1px solid #e0e7ff; display:inline-block;">🔗 阅读原文 ↗</a>
+        </div>
+
+        <!-- 最佳金句区 -->
+        <h2 class="section-header" style="border-left-color: #f59e0b;">💬 最佳金句</h2>
+        <div class="content-wrap" style="position:relative; margin-bottom:24px;">
+            <blockquote class="litit-target-quote" style="border-left: 3.5px solid #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%); padding: 14px 14px; margin: 0; color: #1e293b; border-radius: 0 10px 10px 0; border-top: 1px solid #fef3c7; border-right: 1px solid #fef3c7; border-bottom: 1px solid #fef3c7;">
+                <div class="content litit-en-quote" style="position:relative; margin:0 0 8px 0; font-family: var(--font-serif); font-style: italic; font-weight:600; font-size: 16.5px; line-height: 1.55; color:#0f172a; word-break:break-word;">
+                    "Since my little demon has officially ascended as the Queen, it is my absolute sovereign duty to officially declare myself the 'Demon King Consort'!... Someone fetch me a silken whip, we are going to be here a very, very long time!"
+                </div>
+                <p class="litit-zh-quote" style="margin:0 0 8px 0; font-weight:400; font-size: 14.5px; line-height: 1.6; color:#475569; word-break:break-word;">
+                    “既然朕的小恶魔已经正式登基成了女王，那么朕就有绝对的主权责任，正式宣布自己成为‘魅魔王夫’！……来个人给朕拿条丝绸鞭子来，咱们要在这里待上很长、很长一段时间了！”
+                </p>
+                <footer style="text-align:right; font-size:12px; color:#64748b; font-style:normal; font-weight:600;">—— 藤原面对全维度魅魔时极其无耻霸道的“政治宣告”</footer>
+            </blockquote>
+            <div class="anno-box" style="display:none;">
+                <div class="anno-view markdown-body"></div>
+                <textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 智能解析...">### 📌 完整翻译
+“既然朕的小恶魔已经正式登基成了女王，那么朕就有绝对的主权责任，正式宣布自己成为‘魅魔王夫’！……来个人给朕拿条丝绸鞭子来，咱们要在这里待上很长、很长一段时间了！”
+
+### 📌 Key Expressions
+- **sovereign duty** = 主权责任（将下半身的狂想包装成国家责任，极其不要脸）
+- **Consort** = 王夫 / 亲王（专指女王的丈夫）
+- **commandeer** = 征用 / 强行接管（带有军事色彩的掠夺）</textarea>
+            </div>
+        </div>
+
+        <!-- Grid 布局关键数字区 -->
+        <h2 class="section-header" style="border-left-color: #10b981;">📊 关键数字</h2>
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin:14px 0 24px 0;">
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    1<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">个</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">突然出现在波斯地毯上方、散发着硫磺与香水味的传送门</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    0.01<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">秒</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">藤原听闻这是魅魔维度后，重组地缘政治优先级的速度</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    1<span style="font-size:14px; margin-left:2px; font-family: var(--font-sans); font-weight:600;">周</span>
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">小百合预计垄断魅魔夜生活进出口贸易后撑爆国库的时间</div>
+            </div>
+            <div style="background:#ffffff; border:1px solid #e2e8f0; padding:14px 10px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center;">
+                <div style="font-size:26px; color:#4f46e5; font-weight:800; margin-bottom:4px; line-height:1.1; font-family: var(--font-serif);">
+                    1,000,000+
+                </div>
+                <div style="font-size:12px; color:#64748b; font-weight:500; line-height:1.4;">在地狱王座大厅迎接小铃登基的、衣不蔽体的恶魔大军数量</div>
+            </div>
+        </div>
+
+        <h2 class="section-header" style="border-left-color: #3b82f6;">⏱️ 事件时间线</h2>
+        <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size: 14.5px; margin-bottom:24px; word-break:break-word;">
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">异变突生：</strong> 大起居殿内，一道散发着硫磺与催情香水味的传送门撕裂空气，老魔王因腰椎间盘突出传位给小铃的卷轴降落。</li>
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">狂热决策：</strong> 藤原听闻这是魅魔维度，瞬间被暴君狂热点燃，将一次下流的寻欢包装成伟大的“国事访问”与“回娘家”。</li>
+            <li style="margin-bottom: 6px;"><strong style="color:#1d4ed8;">各怀鬼胎：</strong> 面对地狱之旅，小百合盘算垄断夜生活税收，千夏恐慌沦为全地狱的奶牛，美悦子则打算去进修拷问技巧。</li>
+            <li><strong style="color:#1d4ed8;">荒诞登基：</strong> 全家穿越抵达骷髅王座。面对百万臣服的绝美魅魔，藤原解开腰带，大言不惭地宣布自己成为“王夫”，并要对全界劳动力进行“体能检查”。</li>
+        </ul>
+
+        <h2 class="section-header" style="border-left-color: #8b5cf6;">✨ 本篇亮点与精读</h2>
+        <div style="margin: 14px 0 10px 0;">
+            <!-- 第一板块：一、重点记忆 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">一、重点记忆</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">aphrodisiac</strong>：催情的 / 春药<br>
+                            <strong class="litit-en-sentence">A portal smelling heavily of shockingly expensive aphrodisiac perfume ripped open.</strong>
+                            <span class="litit-zh-sentence">一个散发着浓烈、极其昂贵催情香水味的传送门被撕开了。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">absurd</strong>：荒谬的 / 荒唐的<br>
+                            <strong class="litit-en-sentence">The idea was profoundly absurd.</strong>
+                            <span class="litit-zh-sentence">这个想法令人感到深深的荒谬。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">monopolize</strong>：垄断 / 独占<br>
+                            <strong class="litit-en-sentence">If we can monopolize the import-export trade of the succubus nightlife sector...</strong>
+                            <span class="litit-zh-sentence">如果我们能彻底垄断魅魔夜生活产业的进出口贸易……</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">scantily clad</strong>：衣不蔽体的 / 穿着暴光的<br>
+                            <strong class="litit-en-sentence">Overflowing with millions of breathtakingly beautiful, scantily clad demons.</strong>
+                            <span class="litit-zh-sentence">里面挤满了数以百万计美得惊心动魄、衣不蔽体的恶魔。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">horde</strong>：一大群 / 游牧部落（此处指恶魔大军）<br>
+                            <strong class="litit-en-sentence">The demon horde chanted.</strong>
+                            <span class="litit-zh-sentence">恶魔大军齐声高呼。</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 第二板块：二、高价值表达 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">二、高价值表达</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">throw one's back out</strong>：闪了腰；拉伤背部。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">极其日常且带着中老年色彩的口语表达。用来描述统治整个魔界的老王退位的理由，极大地消解了地狱设定的严肃性与恐怖感。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">geopolitical priorities</strong>：地缘政治优先级。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">宏大的国际政治术语。作者用它来形容藤原因为听说满世界都是魅魔而瞬间决定的跨维旅行，将荒淫包装成了最高国家机密战略，极具黑色幽默。</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-badge">maiden home</strong>：娘家。<br>
+                            <span class="litit-zh-sentence" style="margin-top: 4px;">非常接地气的称呼。将恐怖的黑暗维度、地狱深渊轻描淡写地称为小铃的“娘家”，制造了强烈的文本反差。</span>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- 第三板块：三、短语和固定搭配 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">三、短语和固定搭配</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ul style="list-style-type: square; margin: 0; padding-left: 18px; line-height: 1.6;">
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">perk up</strong>：精神起来 / 竖起耳朵（充满活力）<br>
+                            <strong class="litit-en-sentence">Blind Rin immediately perked up.</strong>
+                            <span class="litit-zh-sentence">盲人小铃立刻精神了起来。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">ascend the throne</strong>：登基 / 继承王位<br>
+                            <strong class="litit-en-sentence">He's summoning Rin back to the underworld to ascend the throne!</strong>
+                            <span class="litit-zh-sentence">他正召唤小铃回地狱去继承王位呢！</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">state visit</strong>：国事访问<br>
+                            <strong class="litit-en-sentence">The Emperor is going on an official state visit to his in-laws!</strong>
+                            <span class="litit-zh-sentence">皇帝陛下现在就要对亲家的领地进行一次正式的国事访问！</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">drop to its knees</strong>：跪倒在地 / 屈服<br>
+                            <strong class="litit-en-sentence">The entire dimension dropped to its knees in absolute, fearful submission.</strong>
+                            <span class="litit-zh-sentence">整个维度都瞬间跪倒在地，展现出绝对的、充满恐惧的臣服。</span>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 10px;">
+                            <strong class="litit-badge">all hail</strong>：万岁 / 恭迎（用于高呼口号）<br>
+                            <strong class="litit-en-sentence">"All hail Queen Rin!" the demon horde chanted.</strong>
+                            <span class="litit-zh-sentence">“恭迎小铃女王！”恶魔大军齐声高呼。</span>
+                        </li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- 第四板块：四、值得学习的句子结构 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">四、值得学习的句子结构</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">The lazy afternoon peace of the grand salon was abruptly interrupted when a portal smelling heavily of brimstone, sulfur, and shockingly expensive aphrodisiac perfume ripped open above the Persian rug.</strong>
+                            <span class="litit-zh-sentence">大起居殿那慵懒的午后宁静被突然打破了。一个散发着浓烈硫磺味、地狱烈火气息以及极其昂贵的催情香水味的传送门，在波斯地毯上方被硬生生撕开。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>when a portal... ripped open</strong>：用 <i>when</i> 引导的时间状语从句表达动作的突然介入。</li>
+                                <li style="margin-bottom: 3px;"><strong>smelling heavily of...</strong>：现在分词短语作后置定语修饰 portal，将“地狱”元素（硫磺）与“淫靡”元素（催情香水）极其恶搞地杂糅在一起。</li>
+                            </ul>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">The idea of this sweet, cookie-munching menace ruling over an entire dimension of dark magic and eternal suffering was profoundly absurd.</strong>
+                            <span class="litit-zh-sentence">一想到这个整天抱着饼干啃、甜美又危险的小灾星即将统治一整座充满黑魔法与永恒折磨的异次元维度，所有人都感到一种深深的荒谬。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>The idea of [A] ruling over [B] was profoundly absurd.</strong>：极其精妙的反差陈述句。A 端的 <i>cookie-munching menace</i>（抱着饼干啃的小灾星）与 B 端的 <i>dark magic and eternal suffering</i>（黑魔法与永恒折磨）形成了完美的文学张力。</li>
+                            </ul>
+                        </li>
+                        <li class="litit-target-sentence" style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence">When little Rin skipped happily up the bone staircase and plopped her small, bouncy body onto the colossal Skull Throne, the entire dimension dropped to its knees in absolute, fearful submission.</strong>
+                            <span class="litit-zh-sentence">当小铃一蹦一跳地开心地走上白骨阶梯，将她那娇小、充满弹性的身躯“吧唧”一声摔进巨大的骷髅王座时，整个维度都瞬间跪倒在地，展现出绝对的、充满恐惧的臣服。</span>
+                            <ul style="list-style-type: circle; margin: 4px 0 0 0; padding-left: 16px;">
+                                <li style="margin-bottom: 3px;"><strong>skipped... and plopped...</strong>：极具童话感、卡通感的活泼动词。</li>
+                                <li style="margin-bottom: 3px;"><strong>the entire dimension dropped to its knees...</strong>：主句的动作极其宏大庄严，与从句中小铃孩子气的表现形成了极强的画面张力。</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+
+            <!-- 第五板块：五、最值得优先掌握的句型 -->
+            <details class="litit-fold">
+                <summary>
+                    <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">五、最值得优先掌握的句型</h3>
+                </summary>
+                <div class="litit-fold-content">
+                    <ol style="margin: 0; padding-left: 18px;">
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence" style="color: #4338ca;">A [place/realm] where [Feature A] is the primary currency and the local population specializes in [Action B]... If we can monopolize [Industry], the [Treasury/Bank] will overflow within a week.</strong>
+                            <span class="litit-zh-sentence">一个以[特征A]为主要货币、且当地居民全都精通[动作B]的[国度/地方]……如果我们能彻底垄断[某产业]，[国库/金库]不出一个星期就会被彻底撑爆。<br>
+                            （极具资本家/政治家色彩的宏大野心句型。用极其理性的经济学术语去拆解、掠夺一个全新的环境或维度，非常适合反乌托邦或黑色幽默题材。）</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <strong class="litit-en-sentence" style="color: #4338ca;">Since [Event A] has officially occurred, it is my absolute sovereign duty to officially declare myself [Title B]! And as the new [Title B], I am commandeering this entire [Entity/Realm]!</strong>
+                            <span class="litit-zh-sentence">既然[事件A]已经正式发生，那么朕就有绝对的主权责任，正式宣布自己成为[头衔B]！而作为新任[头衔B]，朕现在宣布彻底征收这整片[实体/领土]！<br>
+                            （无耻政客/暴君的经典强盗逻辑。用“主权责任”这种最伟光正的词汇，来掩盖最不要脸的侵略、掠夺或强占意图。）</span>
+                        </li>
+                    </ol>
+                </div>
+            </details>
+        </div>
+
+        <h2 class="section-header" style="border-left-color: #0d9488;">💡 幕后冷知识 (Fun Facts)</h2>
+        <ul style="padding-left:18px; line-height:1.8; color:#334155; font-size:14.5px; margin-bottom:24px; word-break:break-word;">
+            <li style="margin-bottom: 8px;"><strong>Succubus (魅魔)：</strong> 中世纪西方神话中，在梦中以女性形象引诱男性的恶魔（对应的男性恶魔叫 Incubus）。在现代奇幻与次文化中，魅魔通常被描绘为头戴双角、长着蝙蝠翅膀和桃心尾巴，且极其美艳、以吸食精气（情欲）为生的种族。小铃继承魅魔女王的王位，意味着她掌控了全宇宙最庞大的“风俗产业”核心。</li>
+            <li style="margin-bottom: 8px;"><strong>Political Euphemisms (政治委婉语)：</strong> 作者在这章将“政治委婉语”的讽刺艺术玩到了极致。把下流的跨维度寻欢作乐包装成“official state visit”（正式的国事访问），把满脑子的淫欲发泄称为“comprehensive physical inspection”（全面的体能大检查）。这种用高级词汇解构低级本能的手法，是黑色幽默的灵魂。</li>
+            <li><strong>The Skull Throne (骷髅王座)：</strong> 奇幻文学或游戏中魔王、暴君的标准配置（如《战锤40K》中的颅骨王座）。当一个永远笑嘻嘻、爱吃饼干、扎着双马尾的盲眼小恶魔（小铃）蹦跶上去坐着时，形成了一种极度反差萌（Moe）的魔幻现实主义奇观。</li>
+        </ul>
+
+        <h2 class="section-header" style="border-left-color: #e11d48;">🎯 全片锐评</h2>
+        <p style="line-height:1.75; color:#1e293b; font-weight:500; background:linear-gradient(135deg, #fff1f2 0%, #ffffff 100%); padding:14px 16px; border-radius:10px; font-size:14.5px; margin:0 0 12px 0; border:1px solid #ffe4e6; word-break:break-word;">
+            这章文字简直是一场披着宏大科幻与奇幻设定的政治脱口秀，同时又毫无廉耻地驶入了下半身的快车道。当一个充斥着地狱烈火、苦难与黑魔法的维度，因为老魔王的“腰间盘突出”而不得不让位给一个“抱着饼干傻乐的双马尾萝莉”时，史诗感就已经被扯得粉碎了。而藤原大帝那秒级变脸的地缘政治优先级更是绝杀——面对未知的地狱深渊，普通人会恐惧，而一个暴君只看到了“全宇宙最大的合法后宫”。更讽刺的是，伴随着这次“回娘家”的旅程，小百合在算计进出口关税，千夏在担忧自己从皇家奶牛变成全地狱的免费公用食堂，美悦子甚至想要引进地狱的刑讯技术来实现产业升级。每个人都在这套荒谬的逻辑里展现着极致的利己主义。当藤原站在白骨王座下，一边解开裤腰带一边大喊要对数百万魅魔进行“体能大检查”时，他彻底将男权独裁者的贪婪、霸道和下流推向了神坛。这是一种对伟光正叙事的顶级亵渎，也是一篇看得人血压升高却又忍不住狂笑的爽文极品。
+        </p>
+
+    </div>
+
+    <script id="core-engine">
+        let syncTimeout = null;
+        const AI_PROMPT = "请分析以下英文段落，并严格按照以下 Markdown 格式输出（不要输出任何额外的废话）：\n\n### 📌 完整翻译\n\n[此处填写完整翻译]\n\n### 📌 Key Expressions\n\n- **[单词或短语]**\n  = [中文释义]\n  （[可选的补充说明，如倒装结构或语境等]）\n\n段落内容：\n";
+
+        // --- 顶部阅读进度条逻辑 ---
+        function initProgressBar() {
+            const progressBar = document.getElementById('reading-progress');
+            if (!progressBar) return;
+            window.addEventListener('scroll', () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                if (scrollHeight <= 0) return;
+                const scrollPercent = (scrollTop / scrollHeight) * 100;
+                progressBar.style.width = scrollPercent + '%';
+            }, { passive: true });
+        }
+
+        async function fetchGroq(text, apiKey, modelName) {
+            const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + apiKey,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: modelName || 'llama-3.3-70b-versatile',
+                    messages: [
+                        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+                        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+                    ],
+                    temperature: 0.3
+                })
+            });
+            if (!res.ok) throw new Error('Groq Error: ' + res.status);
+            const json = await res.json();
+            return json.choices[0].message.content.trim();
+        }
+
+        async function fetchCustomAI(text, url, apiKey, modelName) {
+            let headers = { 'Content-Type': 'application/json' };
+            let bodyData = {};
+
+            if (url.includes('anthropic.com')) {
+                headers['x-api-key'] = apiKey;
+                headers['anthropic-version'] = '2023-06-01';
+                headers['anthropic-dangerous-direct-browser-access'] = 'true';
+                bodyData = {
+                    model: modelName || 'claude-3-5-sonnet-20241022',
+                    max_tokens: 2000,
+                    messages: [{ role: 'user', content: AI_PROMPT + '"' + text + '"' }]
+                };
+            } else if (url.includes('generativelanguage.googleapis.com')) {
+                let targetUrl = url;
+                if (!targetUrl.includes('key=')) {
+                    targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'key=' + apiKey;
+                }
+                const res = await fetch(targetUrl, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: AI_PROMPT + '"' + text + '"' }] }]
+                    })
+                });
+                if (!res.ok) throw new Error('Gemini Error: ' + res.status);
+                const json = await res.json();
+                return json.candidates[0].content.parts[0].text.trim();
+            } else {
+                headers['Authorization'] = 'Bearer ' + apiKey;
+                bodyData = {
+                    model: modelName || 'gpt-4o-mini',
+                    messages: [
+                        { role: 'system', content: 'You are an English teacher. Output EXACTLY in the requested Markdown format.' },
+                        { role: 'user', content: AI_PROMPT + '"' + text + '"' }
+                    ],
+                    temperature: 0.3
+                };
+            }
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(bodyData)
+            });
+            if (!res.ok) throw new Error('AI Interface Error: ' + res.status);
+            const json = await res.json();
+            if (json.choices && json.choices.length > 0) return json.choices[0].message.content.trim();
+            throw new Error('AI 返回数据异常');
+        }
+
+        async function executeAIPipeline(text) {
+            const customUrl = localStorage.getItem('CUSTOM_API_URL') || '';
+            const customKey = localStorage.getItem('CUSTOM_API_KEY') || '';
+            const customModel = localStorage.getItem('CUSTOM_MODEL') || '';
+            const groqKey = localStorage.getItem('GROQ_API_KEY') || '';
+            const groqModel = localStorage.getItem('GROQ_MODEL') || '';
+
+            if (customUrl && customKey) {
+                try {
+                    return await fetchCustomAI(text, customUrl, customKey, customModel);
+                } catch (err) {
+                    if (groqKey) return await fetchGroq(text, groqKey, groqModel);
+                    throw err;
+                }
+            } else if (groqKey) {
+                return await fetchGroq(text, groqKey, groqModel);
+            } else {
+                const userKey = prompt('⚠️ 当前页面未检测到 AI Key！\n为了安全，密匙只储存在您本地浏览器中。\n\n请输入您的 API Key (如 sk-xxx 或 gsk_xxx):');
+                if (userKey && userKey.trim()) {
+                    const cleanKey = userKey.trim();
+                    if (cleanKey.startsWith('gsk_')) {
+                        localStorage.setItem('GROQ_API_KEY', cleanKey);
+                    } else {
+                        localStorage.setItem('CUSTOM_API_KEY', cleanKey);
+                        localStorage.setItem('CUSTOM_API_URL', 'https://api.chatanywhere.tech/v1/chat/completions');
+                    }
+                }
+                throw new Error('未设置 AI API Key');
+            }
+        }
+
+        // --- 降级清理防线：净化污染节点 ---
+        function getPurifiedFallbackHTML() {
+            const clone = document.documentElement.cloneNode(true);
+            const foreignSelectors = [
+                'relingo-app', 'relin-highlight', 'relin-hc', '[class*="relingo"]', '[data-relin-paragraph]',
+                'grammarly-extension', '[data-grammarly-part]', '[class*="immersive-translate"]', '[data-immersive-translate]'
+            ].join(',');
+            clone.querySelectorAll(foreignSelectors).forEach(el => el.remove());
+            clone.querySelectorAll('relin-highlight, relin-hc').forEach(t => {
+                const frag = document.createDocumentFragment();
+                while(t.firstChild) frag.appendChild(t.firstChild);
+                t.parentNode.replaceChild(frag, t);
+            });
+            clone.querySelectorAll('script').forEach(s => {
+                if (!s.src.includes('marked.min.js') && s.id !== 'core-engine') s.remove();
+            });
+            clone.querySelectorAll('style').forEach(s => {
+                if (s.id !== 'core-style') s.remove();
+            });
+
+            const liveTAs = document.querySelectorAll('.anno-edit');
+            clone.querySelectorAll('.anno-edit').forEach((ta, i) => {
+                if(liveTAs[i]) ta.textContent = liveTAs[i].value.trim();
+                const box = ta.closest('.anno-box');
+                if (box) box.style.display = 'none';
+                const view = box ? box.querySelector('.anno-view') : null;
+                if (view) view.innerHTML = '';
+            });
+
+            return '<!DOCTYPE html>\n<html lang="zh-CN">\n' + clone.innerHTML + '\n</html>';
+        }
+
+        // --- 内存反向打补丁同步技术 ---
+        async function syncToCloud() {
+            const ghToken = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN');
+            const ghOwner = 'moodHappy';
+            const ghRepo = 'dual-read-notes';
+            if (!ghToken) return;
+
+            const pathParts = window.location.pathname.split('/');
+            const fileName = pathParts.pop();
+            const month = pathParts.pop();
+            const year = pathParts.pop();
+            if(!fileName || !month || !year) return;
+
+            const fileRelPath = 'Summary/' + year + '/' + month + '/' + fileName;
+
+            try {
+                const getRes = await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + ghToken },
+                    cache: 'no-store'
+                });
+
+                let finalHTML = '';
+                let sha = '';
+
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                    const cleanRawHTML = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+                    const parser = new DOMParser();
+                    const cleanDoc = parser.parseFromString(cleanRawHTML, 'text/html');
+
+                    const liveTAs = document.querySelectorAll('.anno-edit');
+                    const cleanTAs = cleanDoc.querySelectorAll('.anno-edit');
+
+                    liveTAs.forEach((liveTa, index) => {
+                        if (cleanTAs[index]) {
+                            const val = liveTa.value.trim();
+                            cleanTAs[index].textContent = val;
+                            const box = cleanTAs[index].closest('.anno-box');
+                            if (box) box.style.display = 'none';
+                            const view = box ? box.querySelector('.anno-view') : null;
+                            if (view) view.innerHTML = '';
+                        }
+                    });
+
+                    cleanDoc.querySelectorAll('.anno-toggle').forEach(t => {
+                        t.classList.remove('has-anno');
+                        const ta = t.closest('.content-wrap, .litit-highlight-block')?.querySelector('.anno-edit');
+                        if (ta && ta.textContent.trim()) t.classList.add('has-anno');
+                    });
+
+                    finalHTML = '<!DOCTYPE html>\n<html lang="zh-CN">\n' + cleanDoc.documentElement.innerHTML + '\n</html>';
+                } else {
+                    finalHTML = getPurifiedFallbackHTML();
+                }
+
+                await fetch('https://api.github.com/repos/' + ghOwner + '/' + ghRepo + '/contents/' + fileRelPath, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + ghToken,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Silent purified annotation update',
+                        content: btoa(unescape(encodeURIComponent(finalHTML))),
+                        sha: sha || undefined
+                    })
+                });
+                console.log('✅ [My Litit] 纯净无污染批注已静默同步至 GitHub');
+            } catch(e) {
+                console.warn('❌ [My Litit] 同步跳过或失败:', e);
+            }
+        }
+
+        function scheduleSync() {
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToCloud(); }, 3000);
+        }
+
+        function initAnnotations() {
+            document.querySelectorAll('.litit-highlight-block, .content-wrap').forEach(wrap => {
+                let content = wrap.querySelector('.content');
+                
+                if (!content) {
+                    const pText = wrap.querySelector('p');
+                    if (pText) {
+                        content = document.createElement('div');
+                        content.className = 'content';
+                        content.style.cssText = 'position:relative; margin:0 0 6px 0; color:#1a202c; font-family:Georgia, serif; line-height:1.7; font-size:15px; word-break:break-word;';
+                        content.innerHTML = pText.innerHTML;
+                        pText.parentNode.replaceChild(content, pText);
+                    }
+                }
+                if (!content) return;
+
+                if (!content.querySelector('.anno-toggle')) {
+                    const toggle = document.createElement('span');
+                    toggle.className = 'anno-toggle';
+                    toggle.title = '手写批注/笔记';
+                    content.appendChild(toggle);
+                }
+                
+                if (!content.querySelector('.ai-toggle')) {
+                    const aiToggle = document.createElement('span');
+                    aiToggle.className = 'ai-toggle';
+                    aiToggle.title = 'AI智能二次解析';
+                    content.appendChild(aiToggle);
+                }
+
+                let box = wrap.querySelector('.anno-box');
+                if (!box) {
+                    box = document.createElement('div');
+                    box.className = 'anno-box';
+                    box.style.display = 'none';
+                    box.innerHTML = '<div class="anno-view markdown-body"></div><textarea class="anno-edit" style="display:none;" placeholder="在此写下笔记或使用 AI 解析..."></textarea>';
+                    wrap.appendChild(box);
+                }
+
+                const view = box.querySelector('.anno-view');
+                const edit = box.querySelector('.anno-edit');
+                const toggle = content.querySelector('.anno-toggle');
+                const aiToggle = content.querySelector('.ai-toggle');
+
+                if (edit && edit.value.trim()) {
+                    toggle.classList.add('has-anno');
+                    try {
+                        view.innerHTML = (typeof marked !== 'undefined') ? marked.parse(edit.value.trim()) : edit.value.trim();
+                    } catch(e){}
+                }
+
+                if (aiToggle) {
+                    aiToggle.onclick = async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (aiToggle.classList.contains('loading')) return;
+
+                        if (edit && edit.value.trim() !== '') {
+                            const confirmOverwrite = confirm('⚠️ 已经存在批注内容。点击"确定"将使用 AI 解析覆盖现有内容。是否继续？');
+                            if (!confirmOverwrite) return;
+                        }
+
+                        const pClone = content.cloneNode(true);
+                        pClone.querySelectorAll('.anno-toggle, .ai-toggle').forEach(el => el.remove());
+                        let pText = pClone.textContent.replace(/https?:\/\/\S+/g, '').trim();
+                        if (!pText) return;
+
+                        aiToggle.classList.add('loading');
+                        try {
+                            const aiContent = await executeAIPipeline(pText);
+                            box.style.display = 'block';
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.value = aiContent;
+                            edit.focus();
+                            edit.blur();
+                        } catch (err) {
+                            console.error(err);
+                        } finally {
+                            aiToggle.classList.remove('loading');
+                        }
+                    };
+                }
+
+                if (toggle) {
+                    toggle.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                        } else {
+                            box.style.display = 'block';
+                            if (!edit.value.trim()) {
+                                view.style.display = 'none';
+                                edit.style.display = 'block';
+                                setTimeout(() => { edit.focus(); }, 150);
+                            } else {
+                                view.style.display = 'block';
+                                edit.style.display = 'none';
+                            }
+                        }
+                    };
+                }
+
+                const triggerEdit = (e) => {
+                    if(e) { e.preventDefault(); e.stopPropagation(); }
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.value = edit.value; 
+                    setTimeout(() => { edit.focus(); }, 150);
+                };
+
+                view.addEventListener('dblclick', triggerEdit);
+
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        triggerEdit(e);
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        if (currentTime - lastTap < 500 && currentTime - lastTap > 0) {
+                            e.preventDefault();
+                            box.style.display = 'none';
+                        }
+                        lastTap = currentTime;
+                    }
+                }, {passive: false});
+
+                if (edit && view) {
+                    edit.onblur = () => {
+                        setTimeout(() => {
+                            const newVal = edit.value.trim();
+                            try {
+                                view.innerHTML = newVal ? ((typeof marked !== 'undefined') ? marked.parse(newVal) : newVal) : '';
+                            } catch(e){}
+                            edit.style.display = 'none';
+                            
+                            if (newVal) {
+                                view.style.display = 'block';
+                                toggle.classList.add('has-anno');
+                            } else {
+                                view.style.display = 'none';
+                                box.style.display = 'none';
+                                toggle.classList.remove('has-anno');
+                            }
+
+                            if (edit.getAttribute('data-old-val') !== newVal) {
+                                edit.setAttribute('data-old-val', newVal);
+                                scheduleSync();
+                            }
+                        }, 150);
+                    };
+                    edit.setAttribute('data-old-val', edit.value.trim());
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initProgressBar();
+            initAnnotations();
+        });
+        window.addEventListener('load', initAnnotations);
+    </script>
+</body>
+</html>
