@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Preview of the CPC’s Fifth Plenum: Why the Pre-Meeting Anti-Corruption Crackdown? What Comes Next in the Drive for Party Discipline?</title>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <style>
+        body { font-family: "Noto Serif SC", "Songti SC", STSong, "Microsoft YaHei", serif; max-width: 800px; margin: 0 auto; padding: 50px 24px; font-size: 20px; line-height: 1.8; letter-spacing: 0.05em; background-color: #F8F4E6; color: #4A3F35; } h1 { text-align: left !important; font-size: 28px; margin-bottom: 0.5em; font-weight: bold; border-bottom: 1px solid #D5CBBB; padding-bottom: 20px; color: #2C241B; } p { margin-bottom: 1.5em; text-indent: 2em; text-align: justify; }
+        body { padding-top: 70px !important; transition: padding-top 0.3s cubic-bezier(0.4,0,0.2,1); }
+        body.bar-hidden { padding-top: 20px !important; }
+        .reader-bar { position: fixed; top: 0; left: 0; right: 0; min-height: 50px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 1px 8px rgba(0,0,0,0.08); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px; }
+        .reader-bar.hidden { transform: translateY(-100%); }
+        .reader-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+        .reader-btn { background: #E5E5EA; color: #1C1C1E; border: none; padding: 6px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: transform 0.1s, background 0.2s; }
+        .reader-btn:active { transform: scale(0.95); }
+        #content-container { transition: font-size 0.2s; }
+        .zh-para { transition: filter 0.3s ease, opacity 0.3s ease; }
+        .global-blur-enabled .zh-para { cursor: pointer; }
+        .global-blur-enabled .zh-para.blurred { filter: blur(0.35em); opacity: 0.5; user-select: none; }
+        .global-blur-enabled .zh-para.blurred:hover { filter: blur(0.2em); opacity: 0.7; }
+        body.highlights-enabled .tm-word.is-highlight { color: #FF3B30 !important; font-weight: 700; background-color: rgba(255, 59, 48, 0.05); border-radius: 3px; padding: 0 2px; }
+        .dict-enabled .tm-word { cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; border-radius: 3px; }
+        .dict-enabled .tm-word:hover, .dict-enabled .tm-word[aria-expanded="true"] { background-color: #E3F2FD; color: #1565C0 !important; }
+        .tippy-box[data-theme~='light-border'] { background-color: #fff; color: #333; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        .tippy-box[data-theme~='light-border'][data-placement^='top'] > .tippy-arrow::before { border-top-color: #ccc; }
+        .tippy-box[data-theme~='light-border'][data-placement^='bottom'] > .tippy-arrow::before { border-bottom-color: #ccc; }
+        .tippy-content { padding: 8px; }
+        .dict-popup { text-align: left; font-size: 14px; line-height: 1.4; max-width: 280px; min-width: 200px; color: #333; font-family: -apple-system, sans-serif; }
+        .dict-header-row { border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 6px; }
+        .dict-word-line { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+        .dict-head-word { font-weight: bold; color: #D32F2F; font-size: 18px; }
+        .dict-ipa { font-family: sans-serif; color: #666; font-size: 13px; background: #f0f0f0; padding: 0 4px; border-radius: 4px; }
+        .dict-speaker-btn { display: inline-flex; cursor: pointer; color: #1976D2; padding: 2px; border-radius: 50%; transition: background 0.2s; }
+        .dict-speaker-btn:hover { background-color: rgba(25, 118, 210, 0.1); }
+        .dict-speaker-btn svg { width: 18px; height: 18px; pointer-events: none; }
+        .dict-speaker-btn.playing { color: #E91E63; animation: tm-pulse 1s infinite; }
+        .dict-tags-row { margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px; align-items: center;}
+        .dict-tag { background: #F0F4F8; color: #476582; font-size: 11px; padding: 2px 6px; border-radius: 4px; border: 1px solid #D9E2EC; font-weight: 500; }
+        .dict-tag.star-tag { color: #F59E0B; background: #FEF3C7; border-color: #FDE68A; letter-spacing: 1px; padding: 2px 4px; }
+        .dict-tag.cefr-A1 { background: #E8F5E9; color: #2E7D32; border-color: #C8E6C9; }
+        .dict-tag.cefr-A2 { background: #E0F2F1; color: #00695C; border-color: #B2DFDB; }
+        .dict-tag.cefr-B1 { background: #FFF8E1; color: #F57F17; border-color: #FFECB3; }
+        .dict-tag.cefr-B2 { background: #FFF3E0; color: #E65100; border-color: #FFE0B2; }
+        .dict-tag.cefr-C1 { background: #FCE4EC; color: #C2185B; border-color: #F8BBD0; }
+        .dict-tag.cefr-C2 { background: #F3E5F5; color: #7B1FA2; border-color: #E1BEE7; }
+        .dict-basic-trans { font-size: 14px; color: #444; margin-top: 4px; }
+        .dict-pos-block { margin-bottom: 4px; }
+        .dict-pos-tag { font-style: italic; color: #1976D2; font-weight: bold; font-size: 12px; margin-right: 4px; }
+        .dict-def-list { margin: 0; padding: 0; list-style: none; display: inline; }
+        .dict-def-item { display: inline; }
+        .dict-def-item::after { content: "; "; color: #999; }
+        .dict-def-item:last-child::after { content: ""; }
+        .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
+        @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
+    <div class="reader-bar hidden" id="top-bar">
+        <div class="reader-controls">
+            <button class="reader-btn" onclick="adjustFont(-0.1)">A-</button>
+            <button class="reader-btn" onclick="adjustFont(0.1)">A+</button>
+            <button id="blur-btn" class="reader-btn" style="background:#AF52DE; color:white;" onclick="toggleBlur()">模糊: 开</button>
+            <button id="hl-btn" class="reader-btn" style="background:#FF3B30; color:white;" onclick="toggleHighlight()">高亮: 开</button>
+            <button id="dict-btn" class="reader-btn" style="background:#34C759; color:white;" onclick="toggleDict()">查词: 开</button>
+        </div>
+    </div>
+    <div id="content-container">
+    <h1 style="text-align: left !important;">Preview of the CPC’s Fifth Plenum: Why the Pre-Meeting Anti-Corruption Crackdown? What Comes Next in the Drive for Party Discipline?</h1>
+    <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/10/23 22:03:29</div>
+    <div style="text-align: left !important; margin-top: -0.8em; margin-bottom: 2em; font-size: 0.9em; opacity: 0.8;">
+        <a href="https://www.bbc.com/zhongwen/articles/ckx2q587wvrqo/simp" target="_blank" style="color: inherit; text-decoration: none; border-bottom: 1px solid currentColor;">🔗 阅读原文</a>
+    </div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中共五中全会前瞻：会前为何密集“打虎”？未来怎样“从严治党”？</p>
+    <p>The Fifth Plenary Session of the 20th Central Committee of the Communist Party of China (CPC), known as the Fifth Plenum, will be held in Beijing from October 26 to 29. Its theme is “full and rigorous Party self-governance.” Taking place in the year before the 21st Party Congress, the meeting has drawn attention amid a renewed anti-corruption drive and a series of high-ranking officials being brought down. Observers are watching to see how the CPC assesses its anti-corruption record and whether it is laying the groundwork for next year’s leadership reshuffle.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中共第二十届中央委员会第五次全体会议（五中全会）将于10月26日至29日在北京召开，主题为“全面从严治党”。这是二十一大前一年举行的全会，在反腐持续升温、高级官员接连落马的背景下，外界关注中共如何总结过去的反腐成果，以及是否为明年换届铺路。</p>
+    <p>In the months leading up to the meeting, the anti-corruption campaign intensified once again. On August 27, Ye Jianchun, governor of Jiangxi Province, was placed under investigation. On October 13, Huang Qifan, a former mayor of Chongqing who had already retired, was also announced to be under investigation. The number of centrally administered officials brought down in recent years has continued to rise.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">会前数月，反腐行动再度密集。8月27日，江西省长叶建春被查；10月13日，已退休的前重庆市长黄奇帆也被宣布接受调查。近年落马的中管干部人数持续攀升。</p>
+    <p>Andrew Wedeman, a professor of political science at Georgia State University who has long studied Chinese politics and anti-corruption campaigns, told BBC Chinese that the number of “tigers” investigated in recent years has repeatedly reached new highs, while the intensity and pace of the campaign have far exceeded those of any previous period. “This means two things: first, the campaign has indeed caught a lot of people; second, it has failed to act as an effective deterrent.”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">美国乔治亚州立大学政治学教授安德鲁·魏德曼（Andrew Wedeman）长期研究中国政治与反腐运动。他对BBC中文表示，近几年被查的“老虎”数量屡创新高，反腐的力度和速度远超以往任何时期。“这意味着两件事：第一，反腐运动确实抓到了很多人；第二，它并没有成功发挥威慑作用。”</p>
+    <p>Analysts believe Beijing is using the pre-plenum crackdown to further discipline the bureaucracy and address personnel issues ahead of the 21st Party Congress. Yet, after 13 years of anti-corruption efforts, three key questions remain unanswered: Can Xi Jinping make the bureaucracy operate according to his wishes? Has corruption declined, and has the campaign effectively deterred misconduct? And do retired officials still have any room to feel secure?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">分析人士认为，北京正透过会前的反腐行动，进一步整顿官僚体系，并处理二十一大前的人事问题。但十三年反腐之后，仍有三个关键问题没有答案：习近平能否让官僚体系真正按他的意志运作？十三年反腐后，腐败是否减少、威慑是否有效？退休官员是否仍有安全空间？</p>
+    <p>Party-Building: From Formulating Policy to Implementing It</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“党建”主题：从制定政策到落实政策</p>
+    <p>By convention, the Fifth Plenum would normally focus on the next five-year plan. However, the postponement of the Third Plenum pushed back the agendas of the Fourth and Fifth Plenums in turn. The Fourth Plenum has already reviewed and approved recommendations for the 15th Five-Year Plan, so the Fifth Plenum will take up Party-building issues that would ordinarily be addressed at the Sixth Plenum. The authorities have confirmed that the meeting will deliberate on the “Decision of the CPC Central Committee on Major Issues Concerning the Sustained Advancement of Full and Rigorous Party Self-Governance.”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">按照惯例，五中全会本应聚焦下一个五年规划。但本届三中全会延迟，四中、五中全会的议题依次顺延。四中全会已审议通过“十五五”规划建议，五中全会因此承接通常属于六中全会的党建议题。官方已明确，会议将审议《中共中央关于持之以恒推进全面从严治党若干重大问题的决定》。</p>
+    <p>Wedeman believes this reflects a shift in Xi’s priorities: his main concern is no longer simply formulating new policies, but ensuring that they are implemented. In recent years, Xi has repeatedly criticised local officials for paying lip service to central directives while acting otherwise, and for pursuing their own agendas. In Wedeman’s view, Beijing wants to address not only corruption, but also the bureaucracy’s ability to carry out policy.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">魏德曼认为，这反映习近平当前最关注的已不只是制定新政策，而是如何确保政策得以落实。习近平近年多次批评地方官员“阳奉阴违”、“自行其是”。在魏德曼看来，北京真正希望解决的不只是腐败，更是官僚体系的执行力。</p>
+    <p>Neil Thomas, a fellow specialising in Chinese politics at the Asia Society Policy Institute, predicted in an email to BBC Chinese that several changes could follow the plenum: tighter oversight of major projects and public spending, stronger accountability mechanisms for Party committee secretaries, greater use of big data to detect corruption, stricter supervision of local officials, and expanded powers for disciplinary inspection bodies.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">亚洲协会政策研究所中国政治研究员牛犇（Neil Thomas）在发给BBC中文的电邮中预测，全会后可能出现几项变化：重大项目和财政支出的监管加强，党委书记的问责机制强化，更多利用大数据查处腐败，地方官员面对更严格的监管，纪检部门的权力进一步扩大。</p>
+    <p>He cautioned, however, that such a stringent accountability system could make grassroots officials even more reluctant to take risks.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过他也提醒，如此严厉的问责制度，可能令基层官员更不愿承担风险。</p>
+    <p>End of the featured section</p>
+    <p>Thirteen Years of Anti-Corruption: How Will the Party Continue Its Crackdown?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">十三年反腐，如何继续“从严治党”</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">After Xi Jinping came to power in late 2012, the CPC launched an all-out anti-corruption campaign. The slogan “打虎拍蝇” — literally, “swatting tigers and flies” — became a familiar part of China’s political vocabulary. “Tigers” generally refers to centrally administered officials at or above the vice-ministerial level, while “flies” refers to corrupt lower-level officials.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中共反腐在习近平2012年底上台之后，开启“风暴”模式，“打虎拍蝇”成为中国人耳熟能详的政治语码。“老虎”通常指中央管理的副部级以上官员；“苍蝇”指查处基层腐败官员。</p>
+    <p>The number of centrally administered officials brought down has continued to climb in recent years. According to figures released by the Central Commission for Discipline Inspection (CCDI), 181 centrally administered officials were placed under review and investigation in 2025, nearly double the 92 recorded in 2024. During the same period, investigations were opened into 41,000 officials at the county and division levels and 137,000 at the township and section levels.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">落马的中管官员人数近年持续攀升，根据中纪委披露，2025 年立案审查调查的中管干部181人，比2024年的92人增加近一倍。同期立案县处级干部4.1万人，立案乡科级干部13.7万人。</p>
+    <p>“Over the past decade or more, Xi Jinping’s anti-corruption campaign has accumulated remarkable results, but he has not won the war,” Wedeman said. He pointed out that the goal of anti-corruption efforts is not merely to investigate and punish offenders, but also to create a deterrent: those involved in corruption should stop, while those not yet involved should be afraid to cross the line. The persistently high number of senior officials brought down suggests that this deterrent effect has fallen short of expectations. Many of the “tigers” brought down today, he said, were already involved in corruption when they held mid-level positions. Some had been engaged in corrupt activities for ten or fifteen years, during which they not only evaded investigation but continued to rise through the ranks.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">魏德曼说：“过去十几年里，习近平的反腐运动累积了惊人的战果，但他并没有赢得这场战争。”他指出，反腐的目的不只是查处，更在形成威慑，让涉腐者收手，让未涉腐者不敢越界，但高官落马数量长期居高不下，说明这一效果没有达到预期。他说，许多今天落马的“老虎”，在中层任上就已涉腐，有的持续十年、十五年，期间不仅逃过查处，还一路升迁。</p>
+    <p>As for the claim that corruption has worsened despite the crackdown, Wedeman does not believe the campaign itself has generated more corruption. A more accurate assessment, he argues, is that 13 years of high-pressure anti-corruption efforts have still failed to fundamentally change officials’ patterns of behaviour.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于外界所说的“越反越腐”，他并不认为是反腐催生了更多腐败。更准确的说法是，十三年高压反腐，仍未完全改变官员的行为模式。</p>
+    <p>How Do You Choose Officials from a “Contaminated Pool”?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">被污染的池子中，如何选人？</p>
+    <p>Wedeman believes Xi is no longer dealing primarily with officials promoted under his predecessors. “What he really has to confront now is corruption among those who have been promoted during his own tenure.” Wedeman describes Xi as removing fallen “tigers” and promoting newcomers to replace them, only to find that he is choosing candidates from a pool that has already been contaminated. In his view, the problem may not lie solely with individual officials or particular factions, but with the entire system for selecting and promoting cadres.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">魏德曼认为，习近平如今面对的，已不再主要是前任时期提拔的官员。“现在他真正不得不面对的，是那些在他任内被提拔上来的人当中的腐败问题。”他形容，习近平把落马的“老虎”清除，再提拔新人接替，却发现自己是在一个已被污染的池子里挑人。在他看来，问题未必只存在于个别官员或特定派系，而可能与整个干部选拔机制有关。</p>
+    <p>He has also noticed that public confessions published by many disgraced officials in recent years follow strikingly similar narratives. They begin with ideals and a commitment to serving the people, describe how the institutional environment gradually influenced them, and end with corruption followed by repentance after their downfall. Wedeman argues that these formulaic confessions reflect an official tendency to attribute corruption to individual moral failings. But if so many officials tell almost identical stories, can the problem really be reduced to personal morality alone?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">他还留意到，许多落马官员近年公开发表的忏悔录，叙事高度相似：从怀抱理想、服务人民开始，进入体制后逐步受环境影响，最终走向腐败，落马后完成悔悟。他认为，这种公式化的自白，反映官方倾向把腐败归因于个人道德失守。但如果大量官员讲述几乎相同的故事，问题是否仅在个人道德？</p>
+    <p>Wedeman argues that rapid economic growth and marketisation following the launch of reform and opening-up have altered the incentives facing officials. Compared with the collectivism and spirit of self-sacrifice emphasised during the Mao era, many officials today are more inclined to consider their personal interests, families and future career prospects. Xi has sought to restore officials’ sense of obedience and mission through ideological education and Party-building initiatives, but Wedeman believes these efforts have had limited effect.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">他分析，改革开放后的经济高速增长和市场化，改变了官员的激励方式。相比毛泽东时代强调的集体主义和奉献精神，如今许多官员更倾向于把个人、家庭和未来发展纳入考量。习近平透过意识形态教育和党建工作，试图重建官员的服从意识与使命感，但魏德曼认为效果并不明显。</p>
+    <p>Thomas similarly argues that anti-corruption has become a continuing mechanism for organisational discipline rather than simply a struggle between political factions. The Fifth Plenum’s renewed emphasis on full and rigorous Party self-governance therefore raises an unavoidable question: can the CPC change the institutional environment and bureaucratic culture that foster corruption, or can it only keep the system running through increasingly strict supervision and punishment?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">牛犇同样认为，反腐如今已是持续性的组织整顿机制，而不再是派系斗争。于是，五中全会再次强调“全面从严治党”，一个难以回避的问题是：中共能否改变滋生腐败的制度环境和官僚文化，还是只能继续靠更严格的监督与惩罚维持运转？</p>
+    <p>Is There No Longer Any Such Thing as a “Safe Landing”?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“安全着陆”不再存在？</p>
+    <p>Ahead of the plenum, Ye Jianchun and Huang Qifan, who had previously worked with Bo Xilai, were successively placed under investigation. Their cases have prompted discussion over whether the notion of a “safe landing” for retired officials has disappeared.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">会前，叶建春、曾与薄熙来共事的黄奇帆相继被查，外界讨论“安全着陆”是否已不复存在。</p>
+    <p>Jiangnan Zhu, an associate professor in the Department of Politics and Public Administration at the University of Hong Kong, said the latest wave of investigations sends a signal that retirement or departure from office does not guarantee a safe landing. It also indicates that the central leadership has no intention of easing its anti-corruption campaign.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">香港大学政治与公共行政学系副教授朱江南表示，目前这一轮密集的反腐传递出即使退休、离任也没有所谓安全着陆的讯号，表达中央反腐没有放松的意图。</p>
+    <p>Wedeman said he had never believed that a genuine safe landing existed within the CPC’s officialdom. He cited Chen Xitong, who fell from power in 1995, Chen Liangyu in 2006, and later cases involving Zhou Yongkang and Bo Xilai as examples.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">魏德曼说，他从不相信中共官场存在真正的安全着陆，1995年的陈希同、2006年的陈良宇，以及后来的周永康、薄熙来都是例证。</p>
+    <p>As for why Huang Qifan has come under investigation, Wedeman said it is difficult to determine at this stage. The case could be related to his time in Chongqing, his earlier career in Shanghai, his financial-sector connections after retirement, or it could simply be a case of making a political example of someone.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">至于黄奇帆为何落马，他认为目前很难判断：可能与重庆任期有关，可能与上海时期有关，可能与退休后的金融圈人脉有关，也可能纯粹是“政治祭旗”。</p>
+    <p>Thomas, meanwhile, regards Huang as a technocrat. Huang’s downfall, Thomas argues, suggests that the current anti-corruption campaign has moved beyond traditional factional divisions, focusing instead on political loyalty, risk control and organisational discipline.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">牛犇则认为，黄奇帆是专业技术官僚，他的落马显示当下的反腐已超越传统派系划分，更聚焦政治忠诚、风险控制和组织纪律。</p>
+    <p>The Fifth Plenum will also offer an important opportunity to observe personnel manoeuvres ahead of the 21st Party Congress. Several Central Committee members have been brought down in recent years, and some Politburo positions are vacant. Whether these posts will be filled or otherwise rearranged is a key question for outside observers.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">五中全会也是观察二十一大前人事布局的重要窗口。近年多名中央委员落马，部分政治局职位出现空缺，这些位置是否会有新安排，是外界关注的焦点。</p>
+    <p>China’s political system still has no clearly identified successor to Xi. Both Wedeman and Thomas believe this reflects a dilemma facing Xi: not designating a successor helps him maintain his authority, while naming one could allow a new centre of power to emerge prematurely.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此外，中国政坛至今没有明确的接班人。魏德曼和牛犇都认为，这反映习近平面临两难：不指定接班人有助维持权威，指定接班人则可能提前形成新的权力中心。</p>    </div>
+    <script>
+        var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
+        var prefs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { font: 1.0, dictEnabled: true, barHidden: true, highlightEnabled: true, blurEnabled: true };
+        var bar = document.getElementById('top-bar');
+        var content = document.getElementById('content-container');
+        var dictBtn = document.getElementById('dict-btn');
+        var hlBtn = document.getElementById('hl-btn');
+        var blurBtn = document.getElementById('blur-btn');
+        function applyPrefs() {
+            content.style.fontSize = prefs.font + 'em';
+            if (prefs.barHidden) { bar.classList.add('hidden'); document.body.classList.add('bar-hidden'); } else { bar.classList.remove('hidden'); document.body.classList.remove('bar-hidden'); }
+            if (prefs.dictEnabled) { document.body.classList.add('dict-enabled'); dictBtn.innerText = "查词: 开"; dictBtn.style.background = "#34C759"; dictBtn.style.color = "#fff"; } else { document.body.classList.remove('dict-enabled'); dictBtn.innerText = "查词: 关"; dictBtn.style.background = "#E5E5EA"; dictBtn.style.color = "#1C1C1E"; }
+            if (prefs.highlightEnabled) { document.body.classList.add('highlights-enabled'); hlBtn.innerText = "高亮: 开"; hlBtn.style.background = "#FF3B30"; hlBtn.style.color = "#fff"; } else { document.body.classList.remove('highlights-enabled'); hlBtn.innerText = "高亮: 关"; hlBtn.style.background = "#E5E5EA"; hlBtn.style.color = "#1C1C1E"; }
+            if (prefs.blurEnabled) { document.body.classList.add('global-blur-enabled'); blurBtn.innerText = "模糊: 开"; blurBtn.style.background = "#AF52DE"; blurBtn.style.color = "#fff"; document.querySelectorAll('.zh-para').forEach(function(el){el.classList.add('blurred');}); } else { document.body.classList.remove('global-blur-enabled'); blurBtn.innerText = "模糊: 关"; blurBtn.style.background = "#E5E5EA"; blurBtn.style.color = "#1C1C1E"; }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+        }
+        document.addEventListener('dblclick', function(e) {
+            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para')) return;
+            prefs.barHidden = !prefs.barHidden; applyPrefs();
+        });
+        function adjustFont(delta) { prefs.font = Math.max(0.6, Math.min(2.0, prefs.font + delta)); applyPrefs(); }
+        function toggleDict() { prefs.dictEnabled = !prefs.dictEnabled; applyPrefs(); }
+        function toggleHighlight() { prefs.highlightEnabled = !prefs.highlightEnabled; applyPrefs(); }
+        function toggleBlur() { prefs.blurEnabled = !prefs.blurEnabled; applyPrefs(); }
+        window.addEventListener('DOMContentLoaded', function() {
+            applyPrefs(); var savedScroll = localStorage.getItem(STORAGE_KEY + '_scroll');
+            if (savedScroll) { setTimeout(function(){ window.scrollTo(0, parseFloat(savedScroll)); }, 150); }
+        });
+        var scrollTimer;
+        window.addEventListener('scroll', function() {
+            if (scrollTimer) clearTimeout(scrollTimer); scrollTimer = setTimeout(function(){ localStorage.setItem(STORAGE_KEY + '_scroll', window.scrollY); }, 300);
+        });
+        var highlightWords = new Set();
+        async function initCloudHighlights() {
+            var cacheKey = 'bio_remote_hl_words_v2'; var cached = localStorage.getItem(cacheKey); var now = Date.now();
+            if (cached) { try { var parsed = JSON.parse(cached); if (now - parsed.time < 24 * 60 * 60 * 1000 && Array.isArray(parsed.data)) { highlightWords = new Set(parsed.data); applyHighlightsToDOM(); return; } } catch(e){} }
+            try {
+                var urls = ['https://raw.githubusercontent.com/moodHappy/HelloWorld/refs/heads/master/Notes/one.txt','https://ghproxy.net/https://raw.githubusercontent.com/moodHappy/HelloWorld/refs/heads/master/Notes/one.txt','https://fastly.jsdelivr.net/gh/moodHappy/HelloWorld@master/Notes/one.txt'];
+                var text = ''; for (var i=0; i<urls.length; i++) { try { var res = await fetch(urls[i]); if (res.ok) { text = await res.text(); if (text && !text.includes('<html') && !text.includes('Cloudflare')) break; } } catch(err){} }
+                if (!text) throw new Error(); var arr = text.split('\n').map(function(w){return w.trim().toLowerCase();}).filter(function(w){return w;});
+                if (arr.length > 0) { highlightWords = new Set(arr); localStorage.setItem(cacheKey, JSON.stringify({data: arr, time: now})); applyHighlightsToDOM(); }
+            } catch(e){}
+        }
+        function applyHighlightsToDOM() {
+            if(highlightWords.size === 0) return;
+            document.querySelectorAll('.tm-word').forEach(function(span){ if(highlightWords.has(span.textContent.trim().toLowerCase())) span.classList.add('is-highlight'); });
+        }
+        var GM_getValue = function(key, def) { var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; };
+        var GM_setValue = function(key, val) { localStorage.setItem(key, JSON.stringify(val)); };
+        (function() {
+            function fetchWithTimeout(url, options = {}, timeout = 3000) { const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeout); return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer)); }
+            var ttsConfig = { voices: ["en-US-AdamNeural", "en-US-AriaNeural", "en-US-AnaNeural", "en-US-JennyNeural", "en-US-GuyNeural"], apis: [ { url: "https://read-aloud-bay.vercel.app/api/synthesis", type: "read-aloud" }, { url: "https://libre-tts-nu.vercel.app/api/tts", type: "libre" } ] };
+            var globalResultCache = GM_getValue('tm_dict_cache', {}); var saveTimeout = null;
+            function saveToGlobalCache(wordKey, resultData) { globalResultCache[wordKey] = resultData; var keys = Object.keys(globalResultCache); if (keys.length > 2000) delete globalResultCache[keys[0]]; clearTimeout(saveTimeout); saveTimeout = setTimeout(function(){ GM_setValue('tm_dict_cache', globalResultCache); }, 1500); }
+            var cefrStaticCache = {};
+            function initCEFRStaticDict() {
+                var staticUrls = ["https://fastly.jsdelivr.net/gh/winterdl/oxford-5000-vocabulary-audio-definition@main/data/oxford_5000.json","https://cdn.jsdelivr.net/gh/winterdl/oxford-5000-vocabulary-audio-definition@main/data/oxford_5000.json"];
+                var idx = 0; var tryFetch = function() { if (idx >= staticUrls.length) return; fetch(staticUrls[idx++]).then(function(r){return r.json();}).then(function(data){ if (Array.isArray(data)) data.forEach(function(item){ if (item.word && item.cefr) cefrStaticCache[item.word.toLowerCase()] = item.cefr.toUpperCase(); }); }).catch(tryFetch); };
+                tryFetch();
+            }
+            async function fetchCEFR(word) {
+                var w = word.toLowerCase(); if (cefrStaticCache[w]) return cefrStaticCache[w];
+                const targetUrl = 'https://dictionary.cambridge.org/dictionary/english/' + encodeURIComponent(w);
+                const proxies = [ targetUrl, 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl) ];
+                const tryProxy = async (proxy) => { const res = await fetchWithTimeout(proxy, {}, 2500); if (!res.ok) throw new Error(); const text = await res.text(); var match = text.match(/(?:epp-xref|dxref)[^>]*>\s*([A-C][1-2])\s*<\/span>/i) || text.match(/title="CEFR[^>]*>\s*([A-C][1-2])\s*<\/span>/i); if (match && match[1]) { cefrStaticCache[w] = match[1].toUpperCase(); return cefrStaticCache[w]; } return null; };
+                try { return await Promise.any(proxies.map(p => tryProxy(p))); } catch(e) { return null; }
+            }
+            async function fetchTranslation(text) { try { const res = await fetchWithTimeout('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&dt=bd&q=' + encodeURIComponent(text), {}, 3500); if (!res.ok) throw new Error(); return await res.json(); } catch(e) { return [[['查询超时或网络错误']]]; } }
+            async function fetchPhonetics(text) { try { const res = await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(text), {}, 2500); if (!res.ok) return null; const data = await res.json(); if (data && data.length > 0) { const pObj = data[0].phonetics.find(p => p.text) || data[0]; return pObj.text || null; } return null; } catch(e) { return null; } }
+            async function fetchWordLevel(text) {
+                const targetUrl = 'https://dict.youdao.com/jsonapi?q=' + encodeURIComponent(text);
+                const proxies = [ 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl), 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl) ];
+                const tryProxy = async (proxy) => { const res = await fetchWithTimeout(proxy, {}, 2000); if (!res.ok) throw new Error(); const data = await res.json(); var result = { stars: 0, tags: [] }; if (data.ec && data.ec.exam_type) result.tags = data.ec.exam_type; if (data.collins && data.collins.collins_entries && data.collins.collins_entries.length > 0) { var starStr = data.collins.collins_entries[0].star; if (starStr) { var parsedNum = parseInt(String(starStr).replace(/[^0-9]/g, ''), 10); result.stars = isNaN(parsedNum) ? 0 : parsedNum; } } return result; };
+                try { return await Promise.any(proxies.map(p => tryProxy(p))); } catch (e) { return { stars: 0, tags: [] }; }
+            }
+            var globalAudioPlayer = null; var currentPlayingBtn = null;
+            function initAudioPlayer() { if (!globalAudioPlayer) { globalAudioPlayer = document.createElement('audio'); globalAudioPlayer.style.display = 'none'; document.body.appendChild(globalAudioPlayer); } }
+            function playTTS(apiIndex, text, voice, btn) {
+                if (apiIndex >= ttsConfig.apis.length) { if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing'); return; }
+                if (currentPlayingBtn && currentPlayingBtn !== btn) currentPlayingBtn.classList.remove('playing');
+                currentPlayingBtn = btn; btn.classList.add('playing'); var api = ttsConfig.apis[apiIndex]; var params = new URLSearchParams();
+                if (api.type === "read-aloud") { params.append("text", text); params.append("voiceName", voice); } else { params.append("t", text); params.append("v", voice); params.append("r", "0"); params.append("p", "0"); }
+                globalAudioPlayer.src = api.url + '?' + params.toString(); globalAudioPlayer.onended = function() { if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing'); };
+                globalAudioPlayer.onerror = function() { playTTS(apiIndex + 1, text, voice, btn); }; var p = globalAudioPlayer.play(); if (p !== undefined) p.catch(function(){ playTTS(apiIndex + 1, text, voice, btn); });
+                }
+            function wrapTextNodesToWord(rootNode) {
+                var ignoreTags = new Set(['SCRIPT', 'STYLE', 'BUTTON', 'A']);
+                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
+                var nodesToWrap = []; let currNode; while ((currNode = walker.nextNode())) { nodesToWrap.push(currNode); }
+                nodesToWrap.forEach(function(textNode) {
+                    var text = textNode.nodeValue; var fragment = document.createDocumentFragment(); var lastIndex = 0;
+                    text.replace(/\b([a-zA-Z'-]+)\b/g, function(match, p1, offset) { if (offset > lastIndex) fragment.appendChild(document.createTextNode(text.substring(lastIndex, offset))); var span = document.createElement('span'); span.className = 'tm-word'; span.textContent = match; fragment.appendChild(span); lastIndex = offset + match.length; return match; });
+                    if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.substring(lastIndex))); if (fragment.childNodes.length > 0) textNode.parentNode.replaceChild(fragment, textNode);
+                });
+            }
+            function formatDictData(originalWord, data) {
+                var transData = data.transData; var ipaText = data.ipaText; var levelData = data.levelData; var cefrLevel = data.cefrLevel; var tagsHtml = '';
+                if (cefrLevel || (levelData && (levelData.stars > 0 || (levelData.tags && levelData.tags.length > 0)))) {
+                    tagsHtml += '<div class="dict-tags-row">'; if (levelData && levelData.stars > 0) tagsHtml += '<span class="dict-tag star-tag">' + '★'.repeat(levelData.stars) + '☆'.repeat(5 - levelData.stars) + '</span>'; if (cefrLevel) tagsHtml += '<span class="dict-tag cefr-' + cefrLevel + '">CEFR ' + cefrLevel + '</span>'; if (levelData && levelData.tags) levelData.tags.forEach(function(tag){ tagsHtml += '<span class="dict-tag">' + tag + '</span>'; }); tagsHtml += '</div>';
+                }
+                var basicTrans = (transData && transData[0] && transData[0][0]) ? transData[0][0][0] : '';
+                var html = '<div class="dict-header-row"><div class="dict-word-line"><span class="dict-head-word Casting">' + originalWord + '</span>' + (ipaText ? '<span class="dict-ipa">' + ipaText + '</span>' : '') + '<span class="dict-speaker-btn" data-word="' + originalWord.replace(/"/g, '&quot;') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></span></div>' + tagsHtml + '<div class="dict-basic-trans">' + basicTrans + '</div></div>';
+                var dictEntries = transData ? transData[1] : null;
+                if (dictEntries && dictEntries.length > 0) {
+                    html += '<div class="dict-details">'; dictEntries.forEach(function(entry){ var pos = entry[0]; var displayDefs = entry[1].slice(0, 3); html += '<div class="dict-pos-block"><span class="dict-pos-tag">' + pos + '.</span><ul class="dict-def-list">'; displayDefs.forEach(function(def){ html += '<li class="dict-def-item">' + def + '</li>'; }); html += '</ul></div>'; }); html += '</div>';
+                } else if (!basicTrans) { html += '<div style="padding:5px; color:#666; font-size:13px;">无释义结果...</div>'; }
+                return html;
+            }
+            function setupTippyDelegate() {
+                tippy.delegate(document.body, { 
+                    target: '.tm-word', trigger: 'click', interactive: true, theme: 'light-border', placement: 'bottom', appendTo: function(){return document.body;}, maxWidth: 320,
+                    onShow: function(instance) {
+                        if (!document.body.classList.contains('dict-enabled')) return false;
+                        var word = instance.reference.innerText.trim(); var wordKey = word.toLowerCase();
+                        var renderContent = function(data) { if (instance.reference.innerText.trim() !== word) return; var contentDiv = document.createElement('div'); contentDiv.className = 'dict-popup'; contentDiv.innerHTML = formatDictData(word, data); ['mousedown', 'touchstart', 'click'].forEach(function(evt){ contentDiv.addEventListener(evt, function(e){e.stopPropagation();}, { capture: true }); }); var btn = contentDiv.querySelector('.dict-speaker-btn'); if (btn) { btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); var text = btn.getAttribute('data-word'); if (!text || btn.classList.contains('playing')) return; playTTS(0, text.trim(), ttsConfig.voices[Math.floor(Math.random() * ttsConfig.voices.length)], btn); }); } instance.setContent(contentDiv); };
+                        if (globalResultCache[wordKey]) { renderContent(globalResultCache[wordKey]); } else {
+                            var loadingDiv = document.createElement('div'); loadingDiv.className = 'dict-popup'; loadingDiv.innerHTML = '<div class="dict-loading">极速查询中...</div>'; instance.setContent(loadingDiv);
+                            Promise.all([fetchTranslation(word), fetchPhonetics(word), fetchWordLevel(word), fetchCEFR(word)]).then(function(arr){ var resultData = { transData: arr[0], ipaText: arr[1], levelData: arr[2], cefrLevel: arr[3] }; saveToGlobalCache(wordKey, resultData); if (instance.state.isVisible) renderContent(resultData); });
+                        }
+                    }
+                });
+            }
+            setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
+        })();
+    </script>
+</body>
+</html>
