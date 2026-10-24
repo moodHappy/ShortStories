@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kim Jong Un’s Visit to China: What Does the New Yalu River Bridge Reveal About China–North Korea Ties?</title>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <style>
+        body { font-family: "Noto Serif SC", "Songti SC", STSong, "Microsoft YaHei", serif; max-width: 800px; margin: 0 auto; padding: 50px 24px; font-size: 20px; line-height: 1.8; letter-spacing: 0.05em; background-color: #FFFFFF; color: #333333; } h1 { text-align: left !important; font-size: 28px; margin-bottom: 0.5em; font-weight: bold; border-bottom: 1px solid #E0E0E0; padding-bottom: 20px; color: #000000; } p { margin-bottom: 1.5em; text-indent: 2em; text-align: justify; }
+        body { padding-top: 70px !important; transition: padding-top 0.3s cubic-bezier(0.4,0,0.2,1); }
+        body.bar-hidden { padding-top: 20px !important; }
+        .reader-bar { position: fixed; top: 0; left: 0; right: 0; min-height: 50px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 1px 8px rgba(0,0,0,0.08); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px; }
+        .reader-bar.hidden { transform: translateY(-100%); }
+        .reader-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+        .reader-btn { background: #E5E5EA; color: #1C1C1E; border: none; padding: 6px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: transform 0.1s, background 0.2s; }
+        .reader-btn:active { transform: scale(0.95); }
+        #content-container { transition: font-size 0.2s; }
+        .zh-para { transition: filter 0.3s ease, opacity 0.3s ease; }
+        .global-blur-enabled .zh-para { cursor: pointer; }
+        .global-blur-enabled .zh-para.blurred { filter: blur(0.35em); opacity: 0.5; user-select: none; }
+        .global-blur-enabled .zh-para.blurred:hover { filter: blur(0.2em); opacity: 0.7; }
+        body.highlights-enabled .tm-word.is-highlight { color: #FF3B30 !important; font-weight: 700; background-color: rgba(255, 59, 48, 0.05); border-radius: 3px; padding: 0 2px; }
+        .dict-enabled .tm-word { cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; border-radius: 3px; }
+        .dict-enabled .tm-word:hover, .dict-enabled .tm-word[aria-expanded="true"] { background-color: #E3F2FD; color: #1565C0 !important; }
+        .tippy-box[data-theme~='light-border'] { background-color: #fff; color: #333; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        .tippy-box[data-theme~='light-border'][data-placement^='top'] > .tippy-arrow::before { border-top-color: #ccc; }
+        .tippy-box[data-theme~='light-border'][data-placement^='bottom'] > .tippy-arrow::before { border-bottom-color: #ccc; }
+        .tippy-content { padding: 8px; }
+        .dict-popup { text-align: left; font-size: 14px; line-height: 1.4; max-width: 280px; min-width: 200px; color: #333; font-family: -apple-system, sans-serif; }
+        .dict-header-row { border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 6px; }
+        .dict-word-line { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+        .dict-head-word { font-weight: bold; color: #D32F2F; font-size: 18px; }
+        .dict-ipa { font-family: sans-serif; color: #666; font-size: 13px; background: #f0f0f0; padding: 0 4px; border-radius: 4px; }
+        .dict-speaker-btn { display: inline-flex; cursor: pointer; color: #1976D2; padding: 2px; border-radius: 50%; transition: background 0.2s; }
+        .dict-speaker-btn:hover { background-color: rgba(25, 118, 210, 0.1); }
+        .dict-speaker-btn svg { width: 18px; height: 18px; pointer-events: none; }
+        .dict-speaker-btn.playing { color: #E91E63; animation: tm-pulse 1s infinite; }
+        .dict-tags-row { margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px; align-items: center;}
+        .dict-tag { background: #F0F4F8; color: #476582; font-size: 11px; padding: 2px 6px; border-radius: 4px; border: 1px solid #D9E2EC; font-weight: 500; }
+        .dict-tag.star-tag { color: #F59E0B; background: #FEF3C7; border-color: #FDE68A; letter-spacing: 1px; padding: 2px 4px; }
+        .dict-tag.cefr-A1 { background: #E8F5E9; color: #2E7D32; border-color: #C8E6C9; }
+        .dict-tag.cefr-A2 { background: #E0F2F1; color: #00695C; border-color: #B2DFDB; }
+        .dict-tag.cefr-B1 { background: #FFF8E1; color: #F57F17; border-color: #FFECB3; }
+        .dict-tag.cefr-B2 { background: #FFF3E0; color: #E65100; border-color: #FFE0B2; }
+        .dict-tag.cefr-C1 { background: #FCE4EC; color: #C2185B; border-color: #F8BBD0; }
+        .dict-tag.cefr-C2 { background: #F3E5F5; color: #7B1FA2; border-color: #E1BEE7; }
+        .dict-basic-trans { font-size: 14px; color: #444; margin-top: 4px; }
+        .dict-pos-block { margin-bottom: 4px; }
+        .dict-pos-tag { font-style: italic; color: #1976D2; font-weight: bold; font-size: 12px; margin-right: 4px; }
+        .dict-def-list { margin: 0; padding: 0; list-style: none; display: inline; }
+        .dict-def-item { display: inline; }
+        .dict-def-item::after { content: "; "; color: #999; }
+        .dict-def-item:last-child::after { content: ""; }
+        .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
+        @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    </style>
+</head>
+<body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
+    <div class="reader-bar hidden" id="top-bar">
+        <div class="reader-controls">
+            <button class="reader-btn" onclick="adjustFont(-0.1)">A-</button>
+            <button class="reader-btn" onclick="adjustFont(0.1)">A+</button>
+            <button id="blur-btn" class="reader-btn" style="background:#AF52DE; color:white;" onclick="toggleBlur()">模糊: 开</button>
+            <button id="hl-btn" class="reader-btn" style="background:#FF3B30; color:white;" onclick="toggleHighlight()">高亮: 开</button>
+            <button id="dict-btn" class="reader-btn" style="background:#34C759; color:white;" onclick="toggleDict()">查词: 开</button>
+        </div>
+    </div>
+    <div id="content-container">
+    <h1 style="text-align: left !important;">Kim Jong Un’s Visit to China: What Does the New Yalu River Bridge Reveal About China–North Korea Ties?</h1>
+    <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/10/24 23:56:37</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">金正恩访华：新鸭绿江大桥背后，中朝关系释放什么信号？</p>
+    <p>October 24, 2026</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">2026年10月24日</p>
+    <p>North Korean leader Kim Jong Un visited Dandong, a Chinese border city in Liaoning Province, on October 24, crossing the newly opened New Yalu River Bridge. Wang Huning, a member of the Standing Committee of the Political Bureau of the Communist Party of China Central Committee and chairman of the Chinese People’s Political Consultative Conference, accompanied Kim during visits to local sites, including facilities commemorating the Korean War. Wang also saw Kim off as he departed for North Korea.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">朝鲜最高领导人金正恩于2026年10月24日访问中国辽宁省边境城市丹东，经新近通车的新鸭绿江大桥进入中国。中共中央政治局常委、全国政协主席王沪宁陪同金正恩参观当地有关设施，包括抗美援朝纪念设施。金正恩离开中国返回朝鲜时，王沪宁也前往桥头送行。</p>
+    <p>The visit came just over a year after Kim traveled to Beijing in September 2025 to attend events marking the 80th anniversary of the victory in the Chinese People’s War of Resistance Against Japanese Aggression and the World Anti-Fascist War. Unlike that high-profile visit to the Chinese capital, this trip focused on the border city of Dandong. Its timing, shortly after the opening of the new bridge and on the eve of the anniversary of the Chinese People’s Volunteers entering the Korean War, has drawn international attention.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此次访问距离金正恩2025年9月赴北京出席中国人民抗日战争暨世界反法西斯战争胜利80周年纪念活动，仅一年多时间。与上次在中国首都进行的高规格访问不同，此次行程集中在边境城市丹东。访问恰逢新鸭绿江大桥通车不久、又临近中国人民志愿军入朝作战纪念日，因此引起国际社会关注。</p>
+    <p>The visit sends at least three signals: high-level engagement between Beijing and Pyongyang is continuing; new infrastructure could create opportunities for closer economic cooperation; and both countries are using their shared history to reinforce political ties.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此次访问至少释放出三个信号：中朝高层交往仍在持续；新的基础设施可能为深化经贸合作创造条件；双方也在借助共同的历史记忆，进一步巩固政治联系。</p>
+    <p>1. From Beijing to Dandong: A Visit Rich in Symbolism</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">一、从北京到丹东：一次具有象征意义的访问</p>
+    <p>One of the most striking details was Kim’s decision to enter China via the New Yalu River Bridge.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此次访问最引人注目的细节之一，是金正恩选择经新鸭绿江大桥进入中国。</p>
+    <p>The bridge, which connects Dandong with the North Korean city of Sinuiju, is approximately three kilometers long. Completed in 2014, it remained unused for years because of delays involving infrastructure and border facilities on the North Korean side. It finally opened to traffic in October 2026.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">这座大桥连接中国丹东与朝鲜新义州，全长约3公里。大桥于2014年建成，但由于朝鲜一侧的配套基础设施和口岸设施建设等问题，多年来一直未能投入使用，直到2026年10月才正式通车。</p>
+    <p>The opening of the bridge represents a significant development in cross-border transportation. Kim’s visit shortly after its opening linked the infrastructure project directly with high-level diplomacy.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">大桥通车标志着中朝跨境交通取得重要进展。金正恩在大桥开放后不久便经由该桥访华，也使这一基础设施项目与高层外交直接联系起来。</p>
+    <p>The bridge may eventually facilitate freight transportation and expand trade between the two countries. Yet its symbolic importance should not be confused with immediate economic results. Actual trade growth will depend on customs procedures, transport demand, economic conditions in North Korea and subsequent policy decisions by both governments.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">这座大桥未来有望改善货物运输条件，扩大两国贸易。然而，象征意义并不等于立刻产生经济成果。贸易能否真正增长，仍取决于海关通关程序、运输需求、朝鲜经济状况以及两国政府后续的政策安排。</p>
+    <p>2. Wang Huning’s Role: What Political Signals Are Being Sent?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">二、王沪宁出面接待：释放了哪些政治信号？</p>
+    <p>According to Chinese state media, Wang Huning conveyed Chinese President Xi Jinping’s greetings to Kim. Wang said China was willing to use the opening of the New Yalu River Bridge as an opportunity to expand people-to-people exchanges and economic cooperation, while strengthening strategic communication and coordination.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">据中国官方媒体报道，王沪宁向金正恩转达了中国国家主席习近平的问候。王沪宁表示，中方愿以新鸭绿江大桥开通为契机，拓展人员往来和经贸合作，加强战略沟通与协调。</p>
+    <p>Kim, in turn, asked Wang to convey his greetings to Xi. He expressed North Korea’s willingness to preserve the historical friendship between the two countries and expand practical cooperation. Kim also referred to the 65th anniversary of the signing of the Treaty of Friendship, Cooperation and Mutual Assistance between China and North Korea in 2026.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">金正恩也请王沪宁转达他对习近平的问候，并表示朝方愿意传承两国历史友谊、拓展务实合作。他还提及2026年是《朝中友好合作互助条约》签订65周年。</p>
+    <p>These statements indicate that both sides want to build on their historical relationship while advancing political communication and economic cooperation.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">这些表态表明，双方希望在既有历史关系的基础上，继续推进政治沟通与经济合作。</p>
+    <p>However, the publicly reported itinerary does not establish that Kim met Xi during this visit. Nor should the trip automatically be described as a formal summit between the two leaders. The distinction matters because diplomatic symbolism, official meetings and concrete policy agreements are not the same thing.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过，公开报道的行程并未证实金正恩此次访华期间与习近平会面，也不宜直接将此次行程描述为两国领导人举行的正式峰会。这一区别十分重要，因为外交象征、正式会谈与具体政策协议并不是一回事。</p>
+    <p>3. Korean War Commemoration: History as a Diplomatic Bond</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">三、纪念抗美援朝：历史仍是中朝关系的重要纽带</p>
+    <p>Kim’s visit took place on October 24, one day before the anniversary of the Chinese People’s Volunteers entering the Korean War on October 25, 1950. During the visit, he paid tribute at a monument commemorating the Chinese forces and visited a museum dedicated to the war.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">金正恩此次访问发生在10月24日，也就是中国人民志愿军于1950年10月25日入朝作战纪念日的前一天。访问期间，他向纪念中国人民志愿军的纪念设施致敬，并参观了抗美援朝纪念馆。</p>
+    <p>According to Chinese state media, a floral tribute presented by Kim carried an inscription honoring the Chinese People’s Volunteers who fought in the war. He also presented the museum with historical photographs bearing a personal inscription.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">据中国官方媒体报道，金正恩敬献的花篮缎带上写有缅怀中国人民志愿军烈士的文字。他还向纪念馆赠送了附有亲笔题词的历史照片。</p>
+    <p>For China, the Korean War remains an important part of national historical memory. For North Korea, China’s military support during the conflict is a significant element of the countries’ traditional relationship.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于中国而言，抗美援朝战争是国家历史记忆的重要组成部分；对于朝鲜而言，中国在战争期间提供的军事支持，也是两国传统关系的重要内容。</p>
+    <p>The commemoration therefore serves more than a historical purpose. By emphasizing their shared wartime experience, the two governments reinforce a political narrative of friendship and cooperation that can support their present-day relationship.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">因此，这次纪念活动不仅具有历史意义。通过强调共同的战争经历，两国政府也在强化有关友谊与合作的政治叙事，为当下的双边关系提供历史依据。</p>
+    <p>Nevertheless, shared history cannot resolve every contemporary disagreement. The two countries must still coordinate their interests on economic development, security and the wider regional situation.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过，共同的历史并不能解决当下所有分歧。两国仍需在经济发展、安全问题和更广泛的地区局势等方面协调彼此利益。</p>
+    <p>4. The New Bridge: Can Economic Cooperation Gain Momentum?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">四、新鸭绿江大桥：中朝经贸合作能否提速？</p>
+    <p>The bridge’s practical impact may prove more important over time than its symbolic significance.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">从长期来看，大桥的实际作用可能比其象征意义更值得关注。</p>
+    <p>China has long been North Korea’s most important trading partner and a major source of economic support. North Korea’s limited external economic links, international sanctions and the effects of border controls during the COVID-19 pandemic have all affected cross-border commerce.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">长期以来，中国一直是朝鲜最重要的贸易伙伴，也是其重要的经济支持来源。朝鲜对外经济联系有限、面临国际制裁，以及新冠疫情期间边境管控造成的影响，都曾制约跨境贸易。</p>
+    <p>The New Yalu River Bridge is approximately 3,026 meters long and is designed to accommodate freight and container transportation. With supporting infrastructure and border facilities becoming operational, it could improve the movement of goods between Dandong and Sinuiju.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">新鸭绿江大桥全长约3026米，具备承载货运和集装箱运输的条件。随着配套基础设施和口岸设施逐步投入使用，大桥有望改善丹东与新义州之间的货物流通。</p>
+    <p>For North Korea, improved transport links with China could support domestic production, infrastructure development and access to imported goods. For northeastern China, the restoration and expansion of cross-border transportation could create opportunities for trade and logistics businesses.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于朝鲜而言，改善对华交通联系有助于支持国内生产、基础设施建设和进口商品流通。对于中国东北地区而言，跨境交通的恢复与扩展则可能为贸易和物流企业创造新的机会。</p>
+    <p>However, greater transport capacity does not automatically translate into a substantial increase in trade. The actual outcome will depend on customs arrangements, business demand, transportation services and the broader sanctions environment.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">然而，运输能力的提升并不意味着贸易额必然大幅增长。实际效果仍取决于海关安排、市场需求、运输服务以及更广泛的国际制裁环境。</p>
+    <p>Sustained increases in cargo volumes, improvements in trade statistics and the implementation of concrete cooperation projects will be needed to determine whether the bridge becomes a major driver of bilateral economic relations.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">要判断这座大桥能否成为推动双边经贸关系的重要引擎，还需要观察货运量是否持续增长、贸易数据是否改善，以及双方是否落实具体合作项目。</p>
+    <p>5. China, Russia and North Korea’s Diplomatic Strategy</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">五、中国、俄罗斯与朝鲜的外交布局</p>
+    <p>The visit also took place against the backdrop of expanding military and political cooperation between North Korea and Russia in recent years. At the same time, China remains one of North Korea’s most important economic partners.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此次访问还发生在一个重要的国际背景之下：近年来，朝鲜与俄罗斯不断深化军事和政治合作。与此同时，中国仍然是朝鲜最重要的经济伙伴之一。</p>
+    <p>This creates a diplomatic landscape in which Pyongyang maintains relationships with both Beijing and Moscow, although the two relationships serve different purposes.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">在这样的外交格局下，平壤同时维持与北京和莫斯科的关系，但这两种关系所发挥的作用并不完全相同。</p>
+    <p>For North Korea, closer cooperation with Russia and the preservation of ties with China are not necessarily mutually exclusive. Russia offers opportunities for cooperation in certain security and military fields, while China plays a distinct role in trade, geographic connectivity and economic support.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于朝鲜而言，加强与俄罗斯的合作，并不必然意味着削弱对华关系。俄罗斯在特定安全和军事领域提供合作机会，而中国则在贸易、地理联系和经济支持方面发挥着不同的作用。</p>
+    <p>For Beijing, maintaining high-level communication with Pyongyang, stabilizing the border region and expanding economic links are all matters of practical importance. A major deterioration in conditions on the Korean Peninsula could affect China’s northeastern border security and the wider regional diplomatic environment.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于北京而言，保持与平壤的高层沟通、稳定边境地区以及扩大经济联系，都具有现实意义。朝鲜半岛局势如果发生重大恶化，可能影响中国东北边境安全和更广泛的地区外交环境。</p>
+    <p>Kim’s visit can therefore be viewed as a sign that North Korea continues to attach importance to its relationship with China. But one short visit is insufficient to establish that Pyongyang is shifting its strategic focus away from Russia or fundamentally changing its overall foreign policy.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">因此，金正恩此次访问可以被视为朝鲜继续重视对华关系的一个信号。但仅凭一次短暂访问，还不足以证明平壤正在将战略重心从俄罗斯转向中国，或从根本上改变其整体外交政策。</p>
+    <p>6. The United States and the Korean Peninsula: Is There Room for Diplomacy?</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">六、美国与朝鲜半岛：外交对话是否存在新空间？</p>
+    <p>Relations between the United States and North Korea remain another important factor in assessing the visit.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">美朝关系仍然是评估此次访问时不可忽视的另一个重要因素。</p>
+    <p>US President Donald Trump has previously expressed interest in renewing contact with Kim. China is also scheduled to host the Asia-Pacific Economic Cooperation Economic Leaders’ Meeting in Shenzhen in November 2026, creating a potential setting for international diplomatic engagement.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">美国总统唐纳德·特朗普此前曾表达与金正恩恢复接触的意愿。中国还计划于2026年11月在深圳举办亚太经合组织领导人非正式会议，这为国际外交互动提供了一个潜在场合。</p>
+    <p>However, as of October 24, publicly available information does not confirm that Trump and Kim will meet during the APEC gathering. Whether North Korea is prepared to resume dialogue, and whether any renewed engagement could produce substantive progress, remain uncertain.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过，截至10月24日，公开信息尚未证实特朗普与金正恩将在亚太经合组织会议期间会面。朝鲜是否准备恢复对话，以及新一轮接触能否取得实质进展，目前仍存在不确定性。</p>
+    <p>A stable China–North Korea relationship could provide Beijing with more effective channels of communication on Korean Peninsula issues. But this does not mean China can unilaterally determine Pyongyang’s policies, nor does it establish that North Korea will make concessions on its nuclear program.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中朝关系保持稳定，可能使北京在朝鲜半岛事务中拥有更加顺畅的沟通渠道。但这并不意味着中国能够单方面决定平壤的政策，也不能据此认定朝鲜会在核计划问题上作出让步。</p>
+    <p>The key question is not simply whether diplomatic visits take place, but whether sustained communication can be established and whether the parties involved are willing to take concrete steps on security, sanctions and dialogue.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">真正关键的问题不仅在于外交访问是否举行，更在于能否建立持续沟通，以及有关各方是否愿意在安全、制裁和对话条件等问题上采取具体行动。</p>
+    <p>Conclusion: The Significance of the Visit Will Depend on What Comes Next</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">结语：此次访问的意义，最终取决于后续行动</p>
+    <p>Kim Jong Un’s visit to China was brief, but it touched on several important issues: historical commemoration, cross-border transportation, economic cooperation and regional security.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">金正恩此次访华时间短暂，却涉及多个重要议题，包括历史纪念、跨境交通、经贸合作与地区安全。</p>
+    <p>The public statements from both sides indicate a willingness to preserve traditional ties, strengthen political communication and expand practical cooperation. The opening of the New Yalu River Bridge provides a more concrete infrastructure basis for pursuing those objectives.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">双方公开表态显示，两国有意维护传统友好关系、加强政治沟通并拓展务实合作。新鸭绿江大桥的通车，则为实现这些目标提供了更加具体的基础设施条件。</p>
+    <p>Yet the actual consequences of the visit remain to be seen. Whether the bridge generates sustained trade growth, whether high-level exchanges continue and whether the two countries coordinate more closely on regional security will all require further evidence.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">然而，此次访问的实际影响仍有待观察。大桥能否带来持续的贸易增长，高层交往能否继续，以及两国是否会在地区安全问题上加强协调，都需要后续事实加以验证。</p>
+    <p>Rather than interpreting the trip as proof of a dramatic strategic shift, it is more prudent to view it as an effort to advance economic cooperation and strategic communication within an established bilateral relationship.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">与其将此次行程视为双边战略发生重大转折的证据，不如将其理解为双方在既有双边关系框架内，进一步推动经贸合作与战略沟通的一项举措。</p>
+    <p>The most important developments to watch are changes in cross-border trade, the next round of high-level exchanges and whether the visit contributes to new diplomatic opportunities on the Korean Peninsula.</p>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">接下来最值得关注的是中朝边境贸易的变化、双方下一轮高层互动，以及此次访问是否会为朝鲜半岛局势带来新的外交空间。</p>    </div>
+    <script>
+        var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
+        var prefs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { font: 1.0, dictEnabled: true, barHidden: true, highlightEnabled: true, blurEnabled: true };
+        var bar = document.getElementById('top-bar');
+        var content = document.getElementById('content-container');
+        var dictBtn = document.getElementById('dict-btn');
+        var hlBtn = document.getElementById('hl-btn');
+        var blurBtn = document.getElementById('blur-btn');
+        function applyPrefs() {
+            content.style.fontSize = prefs.font + 'em';
+            if (prefs.barHidden) { bar.classList.add('hidden'); document.body.classList.add('bar-hidden'); } else { bar.classList.remove('hidden'); document.body.classList.remove('bar-hidden'); }
+            if (prefs.dictEnabled) { document.body.classList.add('dict-enabled'); dictBtn.innerText = "查词: 开"; dictBtn.style.background = "#34C759"; dictBtn.style.color = "#fff"; } else { document.body.classList.remove('dict-enabled'); dictBtn.innerText = "查词: 关"; dictBtn.style.background = "#E5E5EA"; dictBtn.style.color = "#1C1C1E"; }
+            if (prefs.highlightEnabled) { document.body.classList.add('highlights-enabled'); hlBtn.innerText = "高亮: 开"; hlBtn.style.background = "#FF3B30"; hlBtn.style.color = "#fff"; } else { document.body.classList.remove('highlights-enabled'); hlBtn.innerText = "高亮: 关"; hlBtn.style.background = "#E5E5EA"; hlBtn.style.color = "#1C1C1E"; }
+            if (prefs.blurEnabled) { document.body.classList.add('global-blur-enabled'); blurBtn.innerText = "模糊: 开"; blurBtn.style.background = "#AF52DE"; blurBtn.style.color = "#fff"; document.querySelectorAll('.zh-para').forEach(function(el){el.classList.add('blurred');}); } else { document.body.classList.remove('global-blur-enabled'); blurBtn.innerText = "模糊: 关"; blurBtn.style.background = "#E5E5EA"; blurBtn.style.color = "#1C1C1E"; }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+        }
+        document.addEventListener('dblclick', function(e) {
+            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para')) return;
+            prefs.barHidden = !prefs.barHidden; applyPrefs();
+        });
+        function adjustFont(delta) { prefs.font = Math.max(0.6, Math.min(2.0, prefs.font + delta)); applyPrefs(); }
+        function toggleDict() { prefs.dictEnabled = !prefs.dictEnabled; applyPrefs(); }
+        function toggleHighlight() { prefs.highlightEnabled = !prefs.highlightEnabled; applyPrefs(); }
+        function toggleBlur() { prefs.blurEnabled = !prefs.blurEnabled; applyPrefs(); }
+        window.addEventListener('DOMContentLoaded', function() {
+            applyPrefs(); var savedScroll = localStorage.getItem(STORAGE_KEY + '_scroll');
+            if (savedScroll) { setTimeout(function(){ window.scrollTo(0, parseFloat(savedScroll)); }, 150); }
+        });
+        var scrollTimer;
+        window.addEventListener('scroll', function() {
+            if (scrollTimer) clearTimeout(scrollTimer); scrollTimer = setTimeout(function(){ localStorage.setItem(STORAGE_KEY + '_scroll', window.scrollY); }, 300);
+        });
+        var highlightWords = new Set();
+        async function initCloudHighlights() {
+            var cacheKey = 'bio_remote_hl_words_v2'; var cached = localStorage.getItem(cacheKey); var now = Date.now();
+            if (cached) { try { var parsed = JSON.parse(cached); if (now - parsed.time < 24 * 60 * 60 * 1000 && Array.isArray(parsed.data)) { highlightWords = new Set(parsed.data); applyHighlightsToDOM(); return; } } catch(e){} }
+            try {
+                var urls = ['https://raw.githubusercontent.com/moodHappy/HelloWorld/refs/heads/master/Notes/one.txt','https://ghproxy.net/https://raw.githubusercontent.com/moodHappy/HelloWorld/refs/heads/master/Notes/one.txt','https://fastly.jsdelivr.net/gh/moodHappy/HelloWorld@master/Notes/one.txt'];
+                var text = ''; for (var i=0; i<urls.length; i++) { try { var res = await fetch(urls[i]); if (res.ok) { text = await res.text(); if (text && !text.includes('<html') && !text.includes('Cloudflare')) break; } } catch(err){} }
+                if (!text) throw new Error(); var arr = text.split('\n').map(function(w){return w.trim().toLowerCase();}).filter(function(w){return w;});
+                if (arr.length > 0) { highlightWords = new Set(arr); localStorage.setItem(cacheKey, JSON.stringify({data: arr, time: now})); applyHighlightsToDOM(); }
+            } catch(e){}
+        }
+        function applyHighlightsToDOM() {
+            if(highlightWords.size === 0) return;
+            document.querySelectorAll('.tm-word').forEach(function(span){ if(highlightWords.has(span.textContent.trim().toLowerCase())) span.classList.add('is-highlight'); });
+        }
+        var GM_getValue = function(key, def) { var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; };
+        var GM_setValue = function(key, val) { localStorage.setItem(key, JSON.stringify(val)); };
+        (function() {
+            function fetchWithTimeout(url, options = {}, timeout = 3000) { const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeout); return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer)); }
+            var ttsConfig = { voices: ["en-US-AdamNeural", "en-US-AriaNeural", "en-US-AnaNeural", "en-US-JennyNeural", "en-US-GuyNeural"], apis: [ { url: "https://read-aloud-bay.vercel.app/api/synthesis", type: "read-aloud" }, { url: "https://libre-tts-nu.vercel.app/api/tts", type: "libre" } ] };
+            var globalResultCache = GM_getValue('tm_dict_cache', {}); var saveTimeout = null;
+            function saveToGlobalCache(wordKey, resultData) { globalResultCache[wordKey] = resultData; var keys = Object.keys(globalResultCache); if (keys.length > 2000) delete globalResultCache[keys[0]]; clearTimeout(saveTimeout); saveTimeout = setTimeout(function(){ GM_setValue('tm_dict_cache', globalResultCache); }, 1500); }
+            var cefrStaticCache = {};
+            function initCEFRStaticDict() {
+                var staticUrls = ["https://fastly.jsdelivr.net/gh/winterdl/oxford-5000-vocabulary-audio-definition@main/data/oxford_5000.json","https://cdn.jsdelivr.net/gh/winterdl/oxford-5000-vocabulary-audio-definition@main/data/oxford_5000.json"];
+                var idx = 0; var tryFetch = function() { if (idx >= staticUrls.length) return; fetch(staticUrls[idx++]).then(function(r){return r.json();}).then(function(data){ if (Array.isArray(data)) data.forEach(function(item){ if (item.word && item.cefr) cefrStaticCache[item.word.toLowerCase()] = item.cefr.toUpperCase(); }); }).catch(tryFetch); };
+                tryFetch();
+            }
+            async function fetchCEFR(word) {
+                var w = word.toLowerCase(); if (cefrStaticCache[w]) return cefrStaticCache[w];
+                const targetUrl = 'https://dictionary.cambridge.org/dictionary/english/' + encodeURIComponent(w);
+                const proxies = [ targetUrl, 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl) ];
+                const tryProxy = async (proxy) => { const res = await fetchWithTimeout(proxy, {}, 2500); if (!res.ok) throw new Error(); const text = await res.text(); var match = text.match(/(?:epp-xref|dxref)[^>]*>\s*([A-C][1-2])\s*<\/span>/i) || text.match(/title="CEFR[^>]*>\s*([A-C][1-2])\s*<\/span>/i); if (match && match[1]) { cefrStaticCache[w] = match[1].toUpperCase(); return cefrStaticCache[w]; } return null; };
+                try { return await Promise.any(proxies.map(p => tryProxy(p))); } catch(e) { return null; }
+            }
+            async function fetchTranslation(text) { try { const res = await fetchWithTimeout('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&dt=bd&q=' + encodeURIComponent(text), {}, 3500); if (!res.ok) throw new Error(); return await res.json(); } catch(e) { return [[['查询超时或网络错误']]]; } }
+            async function fetchPhonetics(text) { try { const res = await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(text), {}, 2500); if (!res.ok) return null; const data = await res.json(); if (data && data.length > 0) { const pObj = data[0].phonetics.find(p => p.text) || data[0]; return pObj.text || null; } return null; } catch(e) { return null; } }
+            async function fetchWordLevel(text) {
+                const targetUrl = 'https://dict.youdao.com/jsonapi?q=' + encodeURIComponent(text);
+                const proxies = [ 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl), 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl) ];
+                const tryProxy = async (proxy) => { const res = await fetchWithTimeout(proxy, {}, 2000); if (!res.ok) throw new Error(); const data = await res.json(); var result = { stars: 0, tags: [] }; if (data.ec && data.ec.exam_type) result.tags = data.ec.exam_type; if (data.collins && data.collins.collins_entries && data.collins.collins_entries.length > 0) { var starStr = data.collins.collins_entries[0].star; if (starStr) { var parsedNum = parseInt(String(starStr).replace(/[^0-9]/g, ''), 10); result.stars = isNaN(parsedNum) ? 0 : parsedNum; } } return result; };
+                try { return await Promise.any(proxies.map(p => tryProxy(p))); } catch (e) { return { stars: 0, tags: [] }; }
+            }
+            var globalAudioPlayer = null; var currentPlayingBtn = null;
+            function initAudioPlayer() { if (!globalAudioPlayer) { globalAudioPlayer = document.createElement('audio'); globalAudioPlayer.style.display = 'none'; document.body.appendChild(globalAudioPlayer); } }
+            function playTTS(apiIndex, text, voice, btn) {
+                if (apiIndex >= ttsConfig.apis.length) { if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing'); return; }
+                if (currentPlayingBtn && currentPlayingBtn !== btn) currentPlayingBtn.classList.remove('playing');
+                currentPlayingBtn = btn; btn.classList.add('playing'); var api = ttsConfig.apis[apiIndex]; var params = new URLSearchParams();
+                if (api.type === "read-aloud") { params.append("text", text); params.append("voiceName", voice); } else { params.append("t", text); params.append("v", voice); params.append("r", "0"); params.append("p", "0"); }
+                globalAudioPlayer.src = api.url + '?' + params.toString(); globalAudioPlayer.onended = function() { if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing'); };
+                globalAudioPlayer.onerror = function() { playTTS(apiIndex + 1, text, voice, btn); }; var p = globalAudioPlayer.play(); if (p !== undefined) p.catch(function(){ playTTS(apiIndex + 1, text, voice, btn); });
+                }
+            function wrapTextNodesToWord(rootNode) {
+                var ignoreTags = new Set(['SCRIPT', 'STYLE', 'BUTTON', 'A']);
+                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
+                var nodesToWrap = []; let currNode; while ((currNode = walker.nextNode())) { nodesToWrap.push(currNode); }
+                nodesToWrap.forEach(function(textNode) {
+                    var text = textNode.nodeValue; var fragment = document.createDocumentFragment(); var lastIndex = 0;
+                    text.replace(/\b([a-zA-Z'-]+)\b/g, function(match, p1, offset) { if (offset > lastIndex) fragment.appendChild(document.createTextNode(text.substring(lastIndex, offset))); var span = document.createElement('span'); span.className = 'tm-word'; span.textContent = match; fragment.appendChild(span); lastIndex = offset + match.length; return match; });
+                    if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.substring(lastIndex))); if (fragment.childNodes.length > 0) textNode.parentNode.replaceChild(fragment, textNode);
+                });
+            }
+            function formatDictData(originalWord, data) {
+                var transData = data.transData; var ipaText = data.ipaText; var levelData = data.levelData; var cefrLevel = data.cefrLevel; var tagsHtml = '';
+                if (cefrLevel || (levelData && (levelData.stars > 0 || (levelData.tags && levelData.tags.length > 0)))) {
+                    tagsHtml += '<div class="dict-tags-row">'; if (levelData && levelData.stars > 0) tagsHtml += '<span class="dict-tag star-tag">' + '★'.repeat(levelData.stars) + '☆'.repeat(5 - levelData.stars) + '</span>'; if (cefrLevel) tagsHtml += '<span class="dict-tag cefr-' + cefrLevel + '">CEFR ' + cefrLevel + '</span>'; if (levelData && levelData.tags) levelData.tags.forEach(function(tag){ tagsHtml += '<span class="dict-tag">' + tag + '</span>'; }); tagsHtml += '</div>';
+                }
+                var basicTrans = (transData && transData[0] && transData[0][0]) ? transData[0][0][0] : '';
+                var html = '<div class="dict-header-row"><div class="dict-word-line"><span class="dict-head-word Casting">' + originalWord + '</span>' + (ipaText ? '<span class="dict-ipa">' + ipaText + '</span>' : '') + '<span class="dict-speaker-btn" data-word="' + originalWord.replace(/"/g, '&quot;') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></span></div>' + tagsHtml + '<div class="dict-basic-trans">' + basicTrans + '</div></div>';
+                var dictEntries = transData ? transData[1] : null;
+                if (dictEntries && dictEntries.length > 0) {
+                    html += '<div class="dict-details">'; dictEntries.forEach(function(entry){ var pos = entry[0]; var displayDefs = entry[1].slice(0, 3); html += '<div class="dict-pos-block"><span class="dict-pos-tag">' + pos + '.</span><ul class="dict-def-list">'; displayDefs.forEach(function(def){ html += '<li class="dict-def-item">' + def + '</li>'; }); html += '</ul></div>'; }); html += '</div>';
+                } else if (!basicTrans) { html += '<div style="padding:5px; color:#666; font-size:13px;">无释义结果...</div>'; }
+                return html;
+            }
+            function setupTippyDelegate() {
+                tippy.delegate(document.body, { 
+                    target: '.tm-word', trigger: 'click', interactive: true, theme: 'light-border', placement: 'bottom', appendTo: function(){return document.body;}, maxWidth: 320,
+                    onShow: function(instance) {
+                        if (!document.body.classList.contains('dict-enabled')) return false;
+                        var word = instance.reference.innerText.trim(); var wordKey = word.toLowerCase();
+                        var renderContent = function(data) { if (instance.reference.innerText.trim() !== word) return; var contentDiv = document.createElement('div'); contentDiv.className = 'dict-popup'; contentDiv.innerHTML = formatDictData(word, data); ['mousedown', 'touchstart', 'click'].forEach(function(evt){ contentDiv.addEventListener(evt, function(e){e.stopPropagation();}, { capture: true }); }); var btn = contentDiv.querySelector('.dict-speaker-btn'); if (btn) { btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); var text = btn.getAttribute('data-word'); if (!text || btn.classList.contains('playing')) return; playTTS(0, text.trim(), ttsConfig.voices[Math.floor(Math.random() * ttsConfig.voices.length)], btn); }); } instance.setContent(contentDiv); };
+                        if (globalResultCache[wordKey]) { renderContent(globalResultCache[wordKey]); } else {
+                            var loadingDiv = document.createElement('div'); loadingDiv.className = 'dict-popup'; loadingDiv.innerHTML = '<div class="dict-loading">极速查询中...</div>'; instance.setContent(loadingDiv);
+                            Promise.all([fetchTranslation(word), fetchPhonetics(word), fetchWordLevel(word), fetchCEFR(word)]).then(function(arr){ var resultData = { transData: arr[0], ipaText: arr[1], levelData: arr[2], cefrLevel: arr[3] }; saveToGlobalCache(wordKey, resultData); if (instance.state.isVisible) renderContent(resultData); });
+                        }
+                    }
+                });
+            }
+            setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
+        })();
+    </script>
+</body>
+</html>
