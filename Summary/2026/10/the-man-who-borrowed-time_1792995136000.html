@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
+<html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Man Who Borrowed Time</title>
@@ -77,11 +76,107 @@
         .ss-nav-link:hover { background: #f3dccf; }
         .sync-status { position: fixed; top: 14px; right: 16px; z-index: 2000; padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: bold; display: none; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.18); font-family: -apple-system, sans-serif; text-indent: 0; }
     </style>
-</head>
+<style id="matrix-core-styles">
+        .para-wrap { position: relative; margin-bottom: 1.5em; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle, .ai-toggle {
+            display: inline-flex;
+            margin-left: 6px;
+            cursor: pointer;
+            opacity: 0.2;
+            font-size: 0.8rem;
+            vertical-align: middle;
+            transition: all 0.2s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .anno-toggle:hover, .ai-toggle:hover { opacity: 0.8; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .ai-toggle { margin-left: 4px; opacity: 0.5; }
+        .ai-toggle::after { content: "🤖"; }
+        .ai-toggle.loading::after {
+            content: "⏳";
+            display: inline-block;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .anno-box {
+            display: none;
+            margin-top: 10px;
+            background: #f8f6ff;
+            border-left: 4px solid #8e7cc3;
+            padding: 12px 16px;
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .anno-view {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #4a4a4a;
+            min-height: 24px;
+            font-family: -apple-system, sans-serif;
+            text-align: left;
+            text-indent: 0;
+        }
+        .anno-edit {
+            width: 100%;
+            min-height: 120px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px dashed #8e7cc3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            resize: vertical;
+            display: none;
+            background: #fff;
+            color: #333;
+            outline: none;
+            text-align: left;
+            -webkit-appearance: none;
+        }
+        .anno-edit:focus {
+            border: 1px solid #8e7cc3;
+            box-shadow: 0 0 0 3px rgba(142,124,195,0.1);
+        }
+        .markdown-body p { margin-top: 0; margin-bottom: 8px; text-indent: 0; }
+        .markdown-body p:last-child { margin-bottom: 0; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 {
+            color: #8e7cc3;
+            font-size: 1.15rem;
+            margin: 10px 0 8px 0;
+            border-bottom: 1px dashed #e0d8f0;
+            padding-bottom: 4px;
+        }
+        .markdown-body blockquote {
+            margin: 0 0 10px 0;
+            padding: 10px 15px;
+            background: rgba(142,124,195,0.1);
+            border-left: 4px solid #8e7cc3;
+            color: #555;
+        }
+        #matrix-sync-status {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: none;
+            z-index: 2147483647;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+    </style></head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
-            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href="../../../index.html?date=2026-10-26"">🔙 日历</button>
+            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href=" ..="" index.html?date="2026-10-26&quot;&quot;">🔙 日历</button>
             <button class="reader-btn" onclick="adjustFont(-0.1)">A-</button>
             <button class="reader-btn" onclick="adjustFont(0.1)">A+</button>
             <button id="blur-btn" class="reader-btn" style="background:#AF52DE; color:white;" onclick="toggleBlur()">模糊: 开</button>
@@ -94,20 +189,64 @@
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/10/26 14:12:16</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">借时间的人</p>
     <div class="para-wrap">
-    <p>Every morning, an old man stood outside the train station, selling small glass bottles filled with golden light. He claimed that each bottle contained one extra hour of life. Most people laughed at him, but one rainy afternoon, a young woman bought a bottle. She had just lost her job, her boyfriend, and almost all hope. That night, she opened the bottle, and the golden light floated into the air. Suddenly, she found herself sitting at her childhood dinner table, listening to her mother laugh.<span class="anno-toggle"></span></p>
+    <p>Every morning, an old man stood outside the train station, selling small glass bottles filled with golden light. He claimed that each bottle contained one extra hour of life. Most people laughed at him, but one rainy afternoon, a young woman bought a bottle. She had just lost her job, her boyfriend, and almost all hope. That night, she opened the bottle, and the golden light floated into the air. Suddenly, she found herself sitting at her childhood dinner table, listening to her mother laugh.<span class="anno-toggle has-anno"></span></p>
     <div class="anno-box" style="display:none;">
-        <div class="anno-view markdown-body"></div>
-        <textarea class="anno-edit" style="display:none;"></textarea>
+        <div class="anno-view markdown-body"><h3>📌 简析</h3>
+<p><strong>故事大意：</strong>
+一位老人每天在火车站外出售装着金色光芒的玻璃瓶，声称每瓶都能带来额外的一小时生命。大多数人都嘲笑他，但一个刚刚失业、失恋、几乎失去所有希望的年轻女人买下了一瓶。当晚，她打开瓶子，金光飘散，随后竟回到了童年时代的餐桌旁，听着母亲的笑声。</p>
+<p><strong>Key Expressions</strong></p>
+<ul>
+<li><strong>stand outside the train station</strong> = 站在火车站外</li>
+<li><strong>be filled with</strong> = 装满；充满</li>
+<li><strong>golden light</strong> = 金色的光芒</li>
+<li><strong>claim that...</strong> = 声称……</li>
+<li><strong>contain one extra hour of life</strong> = 包含额外的一小时生命</li>
+<li><strong>laugh at sb.</strong> = 嘲笑某人</li>
+<li><strong>one rainy afternoon</strong> = 一个下雨的午后</li>
+<li><strong>lose her job / boyfriend / hope</strong> = 失去工作／男友／希望</li>
+<li><strong>almost all hope</strong> = 几乎所有希望</li>
+<li><strong>float into the air</strong> = 飘向空中</li>
+<li><strong>find oneself doing sth.</strong> = 发现自己竟在做某事；不知不觉发现自己处于某种情境中</li>
+<li><strong>one's childhood dinner table</strong> = 某人童年时的餐桌</li>
+<li><strong>listen to sb. do sth.</strong> = 听某人做某事；这里的 <strong>laugh</strong> 表示听见母亲笑出声</li>
+</ul>
+<p><strong>写作特点：</strong></p>
+<ul>
+<li><strong>对比</strong>：前面用 <em>Most people laughed at him</em> 表现人们的不相信，突出女主角购买瓶子的不同选择。</li>
+<li><strong>情绪铺垫</strong>：<em>lost her job, her boyfriend, and almost all hope</em> 连续列出失去的东西，强调她当时的绝望。</li>
+<li><strong>结尾反转</strong>：她期待的或许是额外的一小时生命，得到的却是童年记忆中的温暖。金色光芒可能象征珍贵的回忆、慰藉，或重新找回希望。</li>
+</ul>
+</div>
+        <textarea class="anno-edit" style="display:none;">### 📌 简析
+
+**故事大意：**
+一位老人每天在火车站外出售装着金色光芒的玻璃瓶，声称每瓶都能带来额外的一小时生命。大多数人都嘲笑他，但一个刚刚失业、失恋、几乎失去所有希望的年轻女人买下了一瓶。当晚，她打开瓶子，金光飘散，随后竟回到了童年时代的餐桌旁，听着母亲的笑声。
+
+**Key Expressions**
+
+- **stand outside the train station** = 站在火车站外
+- **be filled with** = 装满；充满
+- **golden light** = 金色的光芒
+- **claim that...** = 声称……
+- **contain one extra hour of life** = 包含额外的一小时生命
+- **laugh at sb.** = 嘲笑某人
+- **one rainy afternoon** = 一个下雨的午后
+- **lose her job / boyfriend / hope** = 失去工作／男友／希望
+- **almost all hope** = 几乎所有希望
+- **float into the air** = 飘向空中
+- **find oneself doing sth.** = 发现自己竟在做某事；不知不觉发现自己处于某种情境中
+- **one's childhood dinner table** = 某人童年时的餐桌
+- **listen to sb. do sth.** = 听某人做某事；这里的 **laugh** 表示听见母亲笑出声
+
+**写作特点：**
+
+- **对比**：前面用 *Most people laughed at him* 表现人们的不相信，突出女主角购买瓶子的不同选择。
+- **情绪铺垫**：*lost her job, her boyfriend, and almost all hope* 连续列出失去的东西，强调她当时的绝望。
+- **结尾反转**：她期待的或许是额外的一小时生命，得到的却是童年记忆中的温暖。金色光芒可能象征珍贵的回忆、慰藉，或重新找回希望。</textarea>
     </div>
 </div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">每天早晨，一位老人都会站在火车站外，出售装着金色光芒的小玻璃瓶。他声称，每个瓶子里都装着额外的一小时生命。大多数人都嘲笑他，但一个下雨的下午，一位年轻女人买下了一个瓶子。她刚刚失去了工作、男友，几乎也失去了所有希望。那天晚上，她打开瓶子，金色的光芒飘向空中。突然间，她发现自己坐在童年时的餐桌旁，听着母亲的笑声。</p>
-    <div class="para-wrap">
-    <p>When she woke up the next morning, the bottle was empty, but something inside her had changed. Her problems hadn't disappeared, and her mother was still gone. Yet she finally understood what the old man had been selling. It wasn't more time. It was a reminder that even an ordinary hour could become priceless if you truly paid attention to it. The next morning, she returned to the station to thank him, but the old man was nowhere to be found. In his place stood a little boy, selling tiny bottles of golden light.<span class="anno-toggle"></span></p>
-    <div class="anno-box" style="display:none;">
-        <div class="anno-view markdown-body"></div>
-        <textarea class="anno-edit" style="display:none;"></textarea>
-    </div>
-</div>
+    <p>When she woke up the next morning, the bottle was empty, but something inside her had changed. Her problems hadn't disappeared, and her mother was still gone. Yet she finally understood what the old man had been selling. It wasn't more time. It was a reminder that even an ordinary hour could become priceless if you truly paid attention to it. The next morning, she returned to the station to thank him, but the old man was nowhere to be found. In his place stood a little boy, selling tiny bottles of golden light.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">第二天早晨醒来时，瓶子已经空了，但她的内心发生了某种变化。她的烦恼并没有消失，母亲也依然不在人世。然而，她终于明白了老人真正出售的东西。那并不是更多的时间，而是在提醒人们：只要你真正用心感受，即使平凡的一小时，也能变得无比珍贵。第二天早晨，她回到火车站想向老人道谢，却发现老人不见了。取而代之的是一个小男孩，他正出售着一只只装满金色光芒的小瓶子。</p>    </div>
     <script>
         var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
@@ -509,5 +648,55 @@
             initBlurToggle();
         }
     </script>
-</body>
-</html>
+
+<script id="matrix-static-script">
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (document.documentElement.getAttribute('data-matrix-active') === 'true' || window.__MATRIX_ENGINE_ACTIVE__) return;
+
+                const isNewTpl = !!document.getElementById('en-container');
+                document.querySelectorAll('.para-wrap').forEach(wrap => {
+                    const toggle = wrap.querySelector('.anno-toggle');
+                    const box = wrap.querySelector('.anno-box');
+                    const view = wrap.querySelector('.anno-view');
+                    if (!toggle || !box || !view) return;
+
+                    toggle.onclick = (e) => {
+                        e.stopPropagation();
+                        if (box.style.display === 'block') {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            box.style.display = 'block';
+                            view.style.display = 'block';
+                        }
+                    };
+
+                    let touchStartX = 0; let touchStartY = 0; let activeFingers = 0;
+                    view.addEventListener('touchstart', e => {
+                        activeFingers = e.touches.length;
+                        if ((!isNewTpl && activeFingers === 2) || (isNewTpl && (activeFingers === 1 || activeFingers === 3))) {
+                            touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+                        } else { activeFingers = 0; }
+                    }, {passive: true});
+
+                    view.addEventListener('touchmove', e => {
+                        if (!activeFingers) return;
+                        const diffX = touchStartX - e.touches[0].clientX;
+                        const diffY = Math.abs(touchStartY - e.touches[0].clientY);
+                        if (diffY > 40) { activeFingers = 0; return; }
+                        const isSwipeCloseGesture = isNewTpl ? (activeFingers === 1) : (activeFingers === 2);
+                        if (isSwipeCloseGesture && diffX > 60) {
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            activeFingers = 0;
+                        }
+                    }, {passive: true});
+
+                    view.addEventListener('touchend', e => {
+                        if (e.touches.length === 0) activeFingers = 0;
+                    }, {passive: true});
+                });
+            }, 500);
+        });
+    </script></body></html>
