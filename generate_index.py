@@ -12,8 +12,14 @@ tz_utc_8 = timezone(timedelta(hours=8))
 AUTO_PUSH_GITHUB = True      # 生成后是否自动调用 git commit & push
 # ==========================================
 
-# 注入到文章 <head> 中的批注与状态栏样式（兼容首行缩进 2em 的小说排版）
-ANNO_STYLE_BLOCK = """    <style id="ss-anno-style">
+
+def safe_js_json(obj):
+    """将 Python 对象序列化为安全的 JS 字面量，转义 </ 防止浏览器提前闭合 <script> 标签"""
+    return json.dumps(obj, ensure_ascii=False).replace("</", "<\\/")
+
+
+# 注入到转换器格式文章 <head> 中的批注样式（兼容 2em 首行缩进）
+ANNO_STYLE_BLOCK = r"""    <style id="ss-anno-style">
         .para-wrap { margin-bottom: 1.5em; position: relative; }
         .para-wrap > p { margin-bottom: 0 !important; }
         .anno-toggle { display: inline-flex; margin-left: 6px; cursor: pointer; opacity: 0.25; font-size: 0.75em; vertical-align: middle; transition: all 0.2s; user-select: none; text-indent: 0; }
@@ -35,9 +41,8 @@ ANNO_STYLE_BLOCK = """    <style id="ss-anno-style">
         .sync-status { position: fixed; top: 14px; right: 16px; z-index: 2000; padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: bold; display: none; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.18); font-family: -apple-system, sans-serif; text-indent: 0; }
     </style>"""
 
-# 注入到文章底部的批注交互与 GitHub 自动同步引擎（支持自动剥离运行期 .tm-word 保持源码纯净）
-MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 同步中...</span>
-    <script id="matrix-engine">
+# 注入到文章底部的通用批注交互与 GitHub 同步引擎（向下兼容所有新老格式）
+MATRIX_ENGINE_SCRIPT = r"""    <script id="matrix-engine">
         const GH_OWNER = "moodHappy";
         const GH_REPO = "ShortStories";
 
@@ -51,10 +56,21 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
             return btoa(bin);
         }
 
+        function ensureSyncStatusBadge() {
+            let badge = document.getElementById('sync-status');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.id = 'sync-status';
+                badge.className = 'sync-status';
+                badge.innerText = '📡 同步中...';
+                document.body.appendChild(badge);
+            }
+            return badge;
+        }
+
         let syncTimeout = null;
         function scheduleSync() {
-            const statusMsg = document.getElementById('sync-status');
-            if (!statusMsg) return;
+            const statusMsg = ensureSyncStatusBadge();
             statusMsg.style.display = 'inline-block';
             statusMsg.style.backgroundColor = '#f39c12';
             statusMsg.innerText = '⏳ 更改已记录，5秒后自动同步...';
@@ -65,6 +81,7 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
         }
 
         function initAnnotations() {
+            ensureSyncStatusBadge();
             document.querySelectorAll('.para-wrap').forEach(wrap => {
                 const view = wrap.querySelector('.anno-view');
                 const edit = wrap.querySelector('.anno-edit');
@@ -91,8 +108,10 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
                             edit.style.display = 'block';
                             edit.focus();
                         } else {
-                            if (typeof marked !== 'undefined' && !view.innerHTML.trim()) {
+                            if (typeof marked !== 'undefined') {
                                 view.innerHTML = marked.parse(edit.value.trim());
+                            } else {
+                                view.innerText = edit.value.trim();
                             }
                             view.style.display = 'block';
                             edit.style.display = 'none';
@@ -106,7 +125,6 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
                     edit.focus();
                 };
 
-                // 桌面端：右键点击已渲染的批注进入编辑；双击批注收起面板
                 view.addEventListener('contextmenu', e => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -118,7 +136,6 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
                     wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 });
 
-                // 移动端：双指轻触进入编辑；单指双击收起面板
                 let lastTap = 0;
                 view.addEventListener('touchstart', e => {
                     if (e.touches.length === 2) {
@@ -159,13 +176,22 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
             });
         }
 
+        function initBlurToggle() {
+            // 兼容旧版没有内联 onclick 的 .zh-para 段落
+            document.querySelectorAll('.zh-para').forEach(para => {
+                if (!para.getAttribute('onclick')) {
+                    para.onclick = () => para.classList.toggle('revealed');
+                }
+            });
+        }
+
         function reconstructSelfHTML() {
             const clone = document.documentElement.cloneNode(true);
 
             // 1. 移除运行期由查词/语音生成的临时 DOM 节点
             clone.querySelectorAll('audio, [data-tippy-root], .tippy-box').forEach(el => el.remove());
 
-            // 2. 剥离运行期包裹的 span.tm-word，还原纯文本段落，防止保存后重复包裹
+            // 2. 剥离转换器格式在运行期动态包裹的 span.tm-word，还原纯文本段落
             const contentContainer = clone.querySelector('#content-container');
             if (contentContainer) {
                 contentContainer.style.fontSize = '';
@@ -189,7 +215,7 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
                 if (contentContainer) p.classList.add('blurred');
             });
 
-            // 4. 将当前页面所有批注内容写入克隆 DOM 的 textarea 中
+            // 4. 将当前页面所有批注内容同步写入克隆 DOM 的 textarea 中
             const liveWraps = document.querySelectorAll('.para-wrap');
             const cloneWraps = clone.querySelectorAll('.para-wrap');
             liveWraps.forEach((liveWrap, idx) => {
@@ -226,16 +252,16 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
                 statusEl.innerText = '📡 同步中...';
             }
 
-            return '<!DOCTYPE html>\\n' + clone.outerHTML;
+            return '<!DOCTYPE html>\n' + clone.outerHTML;
         }
 
         async function syncToGitHub() {
             const token = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN') || localStorage.getItem('EXT_GH_TOKEN') || localStorage.getItem('NYT_GH_TOKEN');
             if (!token) {
-                alert('缺少 GitHub Token，无法同步批注！\\n\\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');
+                alert('缺少 GitHub Token，无法同步批注！\n\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');
                 return;
             }
-            const statusMsg = document.getElementById('sync-status');
+            const statusMsg = ensureSyncStatusBadge();
             statusMsg.style.display = 'inline-block';
             statusMsg.style.backgroundColor = '#2ea44f';
             statusMsg.innerText = '📡 同步中...';
@@ -243,7 +269,7 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
             const pureHtml = reconstructSelfHTML();
             const decodedPath = decodeURIComponent(window.location.pathname);
             const sumIdx = decodedPath.indexOf('Summary/');
-            const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.replace(/^\\/+/, '');
+            const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.replace(/^\/+/, '');
 
             try {
                 const base64Html = toBase64(pureHtml);
@@ -282,19 +308,19 @@ MATRIX_ENGINE_SCRIPT = """    <span class="sync-status" id="sync-status">📡 �
         }
 
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initAnnotations);
+            document.addEventListener('DOMContentLoaded', () => {
+                initAnnotations();
+                initBlurToggle();
+            });
         } else {
             initAnnotations();
+            initBlurToggle();
         }
     </script>"""
 
 
 def extract_article_datetime(html_content):
-    """
-    同时支持两种日期格式提取：
-    1. 转换器格式：发布时间：2026/10/26 13:51:14 (支持 / 或 -)
-    2. 简报格式：📅 2026-09-20 20:25
-    """
+    """提取文章内部的『发布时间：2026/10/26 13:51:14』或『📅 2026-09-20 20:25』"""
     match = re.search(
         r"(?:发布时间[：:]\s*|📅\s*)(\d{4})[-/](\d{1,2})[-/](\d{1,2})(?:\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?",
         html_content
@@ -315,12 +341,7 @@ def extract_article_datetime(html_content):
 
 def adapt_article_for_shortstories(content, f_year, f_month, f_day, time_str, rel_path):
     """
-    自动将转换器生成的 HTML（如 The Man Who Borrowed Time）升级为可批注、可返回对应日期日历的格式：
-    1. 注入 marked.min.js 与批注样式 (#ss-anno-style)
-    2. 为 #content-container 中的所有英文段落自动包裹 .para-wrap 与 🔴 批注框（自动跳过 .zh-para）
-    3. 隔离 wrapTextNodesToWord 查词脚本与全局双击事件，防止破坏批注框
-    4. 在『发布时间：...』旁及顶部 #top-bar 注入『🔙 返回日历』按钮，并携带 ?date=YYYY-M-D 参数
-    5. 注入 #matrix-engine 自动保存批注到 ShortStories 仓库
+    向下兼容地为各类文章注入/修复批注系统与返回对应日历日期的链接
     """
     original = content
 
@@ -336,13 +357,20 @@ def adapt_article_for_shortstories(content, f_year, f_month, f_day, time_str, re
             1
         )
 
-    # 2. 注入批注 CSS 样式
-    if 'id="ss-anno-style"' not in content and ".anno-toggle" not in content and "</head>" in content:
+    # 2. 注入或升级批注 CSS 样式 (#ss-anno-style)
+    if 'id="ss-anno-style"' in content:
+        content = re.sub(
+            r'<style id="ss-anno-style">[\s\S]*?</style>',
+            lambda _: ANNO_STYLE_BLOCK.strip(),
+            content
+        )
+    elif ".anno-toggle" not in content and "</head>" in content:
         content = content.replace("</head>", f"{ANNO_STYLE_BLOCK}\n</head>", 1)
 
-    # 3. 为正文中所有非 .zh-para 的英文 <p> 包裹 .para-wrap 和批注框（仅处理 <script> 之前的正文区）
+    # 3. 为正文中尚未包裹 .para-wrap 的英文 <p> 段落包裹批注框（自动跳过 .zh-para）
     if 'class="para-wrap"' not in content:
-        body_script_idx = content.find("<script", content.find("<body"))
+        body_pos = content.find("<body")
+        body_script_idx = content.find("<script", body_pos) if body_pos != -1 else -1
         if body_script_idx == -1:
             body_script_idx = len(content)
         head_and_body = content[:body_script_idx]
@@ -378,7 +406,7 @@ def adapt_article_for_shortstories(content, f_year, f_month, f_day, time_str, re
             "e.target.classList.contains('zh-para') || e.target.closest('.anno-box') || e.target.closest('.anno-toggle')"
         )
 
-    # 5. 在『发布时间：...』所在行注入/更新『🔙 返回日历』链接
+    # 5. 在『发布时间：...』旁及顶部 #top-bar 注入/更新『🔙 返回日历』链接
     if "ss-nav-link" not in content:
         content = re.sub(
             r"(发布时间[：:]\s*\d{4}[-/]\d{1,2}[-/]\d{1,2}(?:\s+\d{1,2}:\d{1,2}(?::\d{1,2})?)?)",
@@ -393,7 +421,6 @@ def adapt_article_for_shortstories(content, f_year, f_month, f_day, time_str, re
             content
         )
 
-    # 在顶部 #top-bar 控制栏中也加入『🔙 日历』按钮
     if 'class="reader-controls"' in content and "ss-top-back-btn" not in content:
         content = content.replace(
             '<div class="reader-controls">',
@@ -407,33 +434,21 @@ def adapt_article_for_shortstories(content, f_year, f_month, f_day, time_str, re
             content
         )
 
-    # 兼容旧版 .meta 结构的返回链接与配置
+    # 兼容旧版 .meta 结构的返回链接
     content = re.sub(
         r'href=["\'](?:\.\./|\./)*index\.html(?:\?[^"\']*)?["\']',
         f'href="{target_back_href}"',
         content
     )
-    content = re.sub(
-        r'const\s+GH_REPO\s*=\s*["\'].*?["\']\s*;',
-        'const GH_REPO = "ShortStories";',
-        content
-    )
-    if "LITIT_GH_TOKEN" not in content and "localStorage.getItem('GH_TOKEN')" in content:
-        content = content.replace(
-            "localStorage.getItem('GH_TOKEN')",
-            "localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN')"
-        )
-    old_path_snippet = "const fileRelPath = path.substring(path.indexOf('docs/'));"
-    new_path_snippet = (
-        "const decodedPath = decodeURIComponent(path); "
-        "const sumIdx = decodedPath.indexOf('Summary/'); "
-        "const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.substring(decodedPath.indexOf('docs/'));"
-    )
-    if old_path_snippet in content:
-        content = content.replace(old_path_snippet, new_path_snippet)
 
-    # 6. 注入 #matrix-engine 批注同步脚本
-    if 'id="matrix-engine"' not in content and "</body>" in content:
+    # 6. 注入或自动修复升级 #matrix-engine 批注同步脚本
+    if 'id="matrix-engine"' in content:
+        content = re.sub(
+            r'<script id="matrix-engine">[\s\S]*?</script>',
+            lambda _: MATRIX_ENGINE_SCRIPT.strip(),
+            content
+        )
+    elif "</body>" in content:
         content = content.replace("</body>", f"{MATRIX_ENGINE_SCRIPT}\n</body>", 1)
 
     return content, (content != original)
@@ -449,14 +464,13 @@ def slugify_title(title_text):
 
 
 def scan_summary_notes():
-    """扫描 Summary/ 目录及其子目录下的所有 HTML 文件，自动注入批注引擎并按文章日期构建日历索引"""
+    """扫描 Summary/ 目录及其子目录下的所有 HTML 简报文件，构建日历索引数据（100% 向下兼容）"""
     archive_data = {}
     total_count = 0
     patched_count = 0
 
     if not os.path.exists(SUMMARY_DIR):
-        print(f"⚠️ 找不到 '{SUMMARY_DIR}' 目录，正在自动创建...")
-        os.makedirs(SUMMARY_DIR, exist_ok=True)
+        print(f"⚠️ 找不到 '{SUMMARY_DIR}' 目录，请确认目录路径！")
         return archive_data, 0
 
     all_html_files = []
@@ -478,15 +492,16 @@ def scan_summary_notes():
         title_match = re.search(r"<title[^>]*>(.*?)</title>", content, re.IGNORECASE | re.DOTALL)
         raw_html_title = re.sub(r"<[^>]+>", "", title_match.group(1)).strip() if title_match else ""
 
+        # 严格保持原有文件名解析逻辑: 英文标识符_timestamp.html
         match = re.search(r"^(.*)_(\d{10,13})\.html$", file_name)
-        article_dt = extract_article_datetime(content)
-
         if match:
             raw_title = match.group(1)
             ts_ms = int(match.group(2))
             dt = datetime.fromtimestamp(ts_ms / 1000.0, tz=tz_utc_8)
         else:
+            # 降级：优先读取文章内『发布时间』，若无则使用文件系统修改时间
             raw_title = slugify_title(raw_html_title or file_name.replace(".html", ""))
+            article_dt = extract_article_datetime(content)
             if article_dt:
                 dt = article_dt
                 ts_ms = int(dt.timestamp() * 1000)
@@ -495,21 +510,13 @@ def scan_summary_notes():
                 ts_ms = int(mtime * 1000)
                 dt = datetime.fromtimestamp(mtime, tz=tz_utc_8)
 
-            target_dir = os.path.join(SUMMARY_DIR, str(dt.year), str(dt.month))
-            os.makedirs(target_dir, exist_ok=True)
-            new_file_path = os.path.join(target_dir, f"{raw_title}_{ts_ms}.html")
-            if os.path.abspath(file_full_path) != os.path.abspath(new_file_path):
-                shutil.move(file_full_path, new_file_path)
-                file_full_path = new_file_path
-                print(f"📂 已自动按文章『发布时间』归档至: {file_full_path}")
-
         rel_path = file_full_path.replace("\\", "/")
         f_year = str(dt.year)
         f_month = str(dt.month)
         f_day = str(dt.day)
         time_str = dt.strftime("%H:%M")
 
-        # 🔑 自动为文章注入批注系统与返回对应日期的链接
+        # 自动为文章注入/修复批注引擎与返回日历链接
         patched_content, is_modified = adapt_article_for_shortstories(
             content, f_year, f_month, f_day, time_str, rel_path
         )
@@ -519,7 +526,7 @@ def scan_summary_notes():
                     f.write(patched_content)
                 patched_count += 1
             except Exception as e:
-                print(f"⚠️ 自动注入批注写入失败 {file_full_path}: {e}")
+                print(f"⚠️ 自动更新文章失败 {file_full_path}: {e}")
 
         html_title = raw_html_title if raw_html_title else raw_title
         if len(html_title) > 60:
@@ -544,7 +551,7 @@ def scan_summary_notes():
         total_count += 1
 
     if patched_count > 0:
-        print(f"🛠️ 已自动为 {patched_count} 篇文章注入批注引擎与日历定位链接！")
+        print(f"🛠️ 已自动升级/修复 {patched_count} 篇文章的批注引擎！")
 
     for y in archive_data:
         for m in archive_data[y]:
@@ -555,10 +562,11 @@ def scan_summary_notes():
 
 
 def generate_hub_html(archive_data):
-    """生成高级文学风格的日历 WebApp (index.html)，内嵌前端自动批注注入器"""
-    json_data = json.dumps(archive_data, ensure_ascii=False)
-    anno_style_js_str = json.dumps(ANNO_STYLE_BLOCK, ensure_ascii=False)
-    matrix_engine_js_str = json.dumps(MATRIX_ENGINE_SCRIPT, ensure_ascii=False)
+    """生成高级文学风格的日历 WebApp (index.html)"""
+    # 🔑 核心修复：使用 safe_js_json 将所有 </ 转义为 <\/，彻底杜绝 </script> 提前闭合页面脚本
+    json_data = safe_js_json(archive_data)
+    anno_style_js_str = safe_js_json(ANNO_STYLE_BLOCK)
+    matrix_engine_js_str = safe_js_json(MATRIX_ENGINE_SCRIPT)
 
     html_template = r"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -697,20 +705,20 @@ def generate_hub_html(archive_data):
     <div class="modal-overlay" id="uploadModal">
         <div class="modal-content">
             <h3 class="modal-title">📤 隐秘发布终端</h3>
-            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">直接粘贴转换工具生成的 HTML，系统将自动提取『发布时间』、注入 🔴 段落批注引擎并推送至对应日期。</p>
+            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">智能识别文章『发布时间』并自动注入 🔴 段落批注引擎推送至远端仓库。</p>
             
             <div class="form-group">
                 <label>英文标识符 (自动从源码 &lt;title&gt; 提取)</label>
                 <input type="text" id="upFilename" placeholder="粘贴下方源码后自动生成...">
             </div>
             <div class="form-group">
-                <label>归档日期与时间 (自动识别『发布时间』或跟随当前选中日历)</label>
+                <label>归档日期与时间 (自动提取文章『发布时间』或跟随当前选中日历)</label>
                 <input type="datetime-local" id="upDateTime" step="1">
                 <div class="date-hint" id="dateHint">✨ 已自动识别并匹配文章内的发布时间！</div>
             </div>
             <div class="form-group">
                 <label>短篇小说 HTML 源码</label>
-                <textarea id="upContent" placeholder="在此粘贴转换工具生成的完整 HTML 代码..."></textarea>
+                <textarea id="upContent" placeholder="在此粘贴小说完整 HTML 代码..."></textarea>
             </div>
 
             <div class="modal-actions">
@@ -724,7 +732,7 @@ def generate_hub_html(archive_data):
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-content">
             <h3 class="modal-title">⚙️ 核心配置中心</h3>
-            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">设置后在阅读页面中点击 🔴 添加批注即可自动同步保存至 GitHub。</p>
+            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">设置后在阅读页面中点击 🔴 添加批注即可自动同步保存。</p>
             
             <div class="form-group">
                 <label>GitHub Personal Token</label>
@@ -783,7 +791,7 @@ def generate_hub_html(archive_data):
             filterText: ''
         };
 
-        // 🔑 支持从文章内点击『🔙 返回日历』时通过 ?date=YYYY-M-D 精准跳回文章所属日期
+        // 支持从文章点击『🔙 返回日历』时通过 ?date=YYYY-M-D 跳回文章对应日期
         (function applyUrlDateParam() {
             const params = new URLSearchParams(window.location.search);
             const dateStr = params.get('date');
@@ -804,22 +812,19 @@ def generate_hub_html(archive_data):
             return `${AppState.year}-${pad2(AppState.month)}-${pad2(AppState.day)}T${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}`;
         }
 
-        // 🚀 浏览器端自动注入引擎：将转换工具生成的 HTML 自动植入 🔴 批注系统、防冲突过滤与日历返回链接
+        // 浏览器端自动注入引擎：为转换器生成的 HTML 自动挂载 🔴 批注系统与返回日历链接
         function adaptHtmlForShortStories(rawHtml, yearStr, monthStr, dayStr) {
             let html = rawHtml;
             const targetBackHref = `../../../index.html?date=${yearStr}-${monthStr}-${dayStr}`;
 
-            // 1. 注入 marked.min.js
-            if (!html.includes('marked.min.js') && html.includes('</head>')) {
-                html = html.replace('</head>', '    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\/script>\n</head>');
+            if (!html.includes('marked.min.js') && html.includes('<\/head>')) {
+                html = html.replace('<\/head>', '    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\/script>\n<\/head>');
             }
 
-            // 2. 注入批注 CSS
-            if (!html.includes('id="ss-anno-style"') && !html.includes('.anno-toggle') && html.includes('</head>')) {
-                html = html.replace('</head>', ANNO_STYLE_TEMPLATE + '\n</head>');
+            if (!html.includes('id="ss-anno-style"') && !html.includes('.anno-toggle') && html.includes('<\/head>')) {
+                html = html.replace('<\/head>', ANNO_STYLE_TEMPLATE + '\n<\/head>');
             }
 
-            // 3. 为正文中所有英文 <p> 段落包裹 .para-wrap 与 🔴 批注框（自动跳过 .zh-para）
             if (!html.includes('class="para-wrap"')) {
                 const bodyIdx = html.indexOf('<body');
                 let scriptIdx = bodyIdx !== -1 ? html.indexOf('<script', bodyIdx) : -1;
@@ -831,17 +836,16 @@ def generate_hub_html(archive_data):
                 beforeScript = beforeScript.replace(/<p\b([^>]*)>([\s\S]*?)<\/p>/gi, function(fullMatch, attrs, inner) {
                     if (attrs.includes('zh-para') || inner.includes('anno-toggle')) return fullMatch;
                     return '<div class="para-wrap">\n' +
-                        '    <p' + attrs + '>' + inner + '<span class="anno-toggle"></span></p>\n' +
+                        '    <p' + attrs + '>' + inner + '<span class="anno-toggle"><\/span><\/p>\n' +
                         '    <div class="anno-box" style="display:none;">\n' +
-                        '        <div class="anno-view markdown-body"></div>\n' +
-                        '        <textarea class="anno-edit" style="display:none;"></textarea>\n' +
-                        '    </div>\n' +
-                        '</div>';
+                        '        <div class="anno-view markdown-body"><\/div>\n' +
+                        '        <textarea class="anno-edit" style="display:none;"><\/textarea>\n' +
+                        '    <\/div>\n' +
+                        '<\/div>';
                 });
                 html = beforeScript + afterScript;
             }
 
-            // 4. 隔离 wrapTextNodesToWord 查词包裹与全局双击顶栏事件，防止干扰批注框
             if (html.includes("parent.closest('.zh-para')") && !html.includes("parent.closest('.anno-box')")) {
                 html = html.replace(
                     "parent.closest('.zh-para')",
@@ -855,11 +859,10 @@ def generate_hub_html(archive_data):
                 );
             }
 
-            // 5. 在『发布时间：...』旁及顶部 #top-bar 注入『🔙 返回日历』按钮
             if (!html.includes('ss-nav-link')) {
                 html = html.replace(
                     /(发布时间[：:]\s*\d{4}[-/]\d{1,2}[-/]\d{1,2}(?:\s+\d{1,2}:\d{1,2}(?::\d{1,2})?)?)/,
-                    `$1 <a href="${targetBackHref}" class="ss-nav-link">🔙 返回日历</a>`
+                    `$1 <a href="${targetBackHref}" class="ss-nav-link">🔙 返回日历<\/a>`
                 );
             } else {
                 html = html.replace(
@@ -871,17 +874,15 @@ def generate_hub_html(archive_data):
             if (html.includes('class="reader-controls"') && !html.includes('ss-top-back-btn')) {
                 html = html.replace(
                     '<div class="reader-controls">',
-                    `<div class="reader-controls">\n            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href='${targetBackHref}'">🔙 日历</button>`
+                    `<div class="reader-controls">\n            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href='${targetBackHref}'">🔙 日历<\/button>`
                 );
             }
 
-            // 兼容旧版 .meta 模板
             html = html.replace(/href=["'](?:\.\.\/|\.\/)*index\.html(?:\?[^"']*)?["']/g, `href="${targetBackHref}"`);
             html = html.replace(/const\s+GH_REPO\s*=\s*["'].*?["']\s*;/g, 'const GH_REPO = "ShortStories";');
 
-            // 6. 注入 #matrix-engine 批注同步引擎
-            if (!html.includes('id="matrix-engine"') && html.includes('</body>')) {
-                html = html.replace('</body>', MATRIX_ENGINE_TEMPLATE + '\n</body>');
+            if (!html.includes('id="matrix-engine"') && html.includes('<\/body>')) {
+                html = html.replace('<\/body>', MATRIX_ENGINE_TEMPLATE + '\n<\/body>');
             }
 
             return html;
@@ -955,7 +956,7 @@ def generate_hub_html(archive_data):
                         filtered.forEach((note, index) => {
                             const wrapper = document.createElement('div'); wrapper.className = 'note-item-wrapper';
                             const a = document.createElement('a'); a.href = note.path; a.className = 'note-item';
-                            a.innerHTML = `<span class="note-title">${note.title}</span>`;
+                            a.innerHTML = `<span class="note-title">${note.title}<\/span>`;
                             wrapper.appendChild(a);
 
                             const delBtn = document.createElement('button'); delBtn.className = 'delete-btn'; delBtn.innerHTML = '🗑️';
@@ -974,10 +975,10 @@ def generate_hub_html(archive_data):
                             wrapper.appendChild(delBtn); notesList.appendChild(wrapper);
                         });
                     } else {
-                        notesList.innerHTML = '<div class="empty-state">未找到匹配的小说 🔍</div>';
+                        notesList.innerHTML = '<div class="empty-state">未找到匹配的小说 🔍<\/div>';
                     }
                 } else {
-                    notesList.innerHTML = '<div class="empty-state">当日暂无短篇小说 📖</div>';
+                    notesList.innerHTML = '<div class="empty-state">当日暂无短篇小说 📖<\/div>';
                 }
             } catch (err) { console.error(err); }
         }
@@ -1021,7 +1022,6 @@ def generate_hub_html(archive_data):
         /* ================= 核心发布功能 ================= */
         document.getElementById('closeUploadBtn').addEventListener('click', () => { document.getElementById('uploadModal').style.display = 'none'; });
         
-        // 🚀 粘贴源码后自动提取 <title> 及『发布时间：2026/10/26 13:51:14』
         document.getElementById('upContent').addEventListener('input', (e) => {
             const content = e.target.value;
             const titleMatch = content.match(/<title[^>]*>(.*?)<\/title>/i);
@@ -1042,7 +1042,6 @@ def generate_hub_html(archive_data):
                 document.getElementById('upFilename').value = '';
             }
 
-            // 匹配『发布时间：2026/10/26 13:51:14』或『📅 2026-09-20 20:25』
             const dateMatch = content.match(/(?:发布时间[：:]\s*|📅\s*)(\d{4})[-/](\d{1,2})[-/](\d{1,2})(?:\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?/);
             const dateHint = document.getElementById('dateHint');
             if (dateMatch) {
@@ -1081,9 +1080,7 @@ def generate_hub_html(archive_data):
             const timeStr = pad2(targetDate.getHours()) + ':' + pad2(targetDate.getMinutes());
             const ts = targetDate.getTime();
             
-            // 🔑 自动将转换器生成的 HTML 升级为带 🔴 批注与日历返回链接的格式
             const adaptedContent = adaptHtmlForShortStories(rawContent, yearStr, monthStr, dayStr);
-
             const fullPath = `Summary/${yearStr}/${monthStr}/${filename}_${ts}.html`;
             
             try {
@@ -1091,7 +1088,6 @@ def generate_hub_html(archive_data):
                 loadingBar.style.width = '20%';
                 document.getElementById('saveUploadBtn').innerText = "推送中...";
                 
-                // 1. 推送注入批注后的 HTML 文件到仓库
                 const base64Content = btoa(unescape(encodeURIComponent(adaptedContent)));
                 const resUpload = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${fullPath}`, {
                     method: 'PUT',
@@ -1102,7 +1098,6 @@ def generate_hub_html(archive_data):
                 if(!resUpload.ok) throw new Error("文件推送失败");
                 loadingBar.style.width = '60%';
 
-                // 2. 提取 <title> 更新索引
                 let displayTitleMatch = adaptedContent.match(/<title[^>]*>(.*?)<\/title>/i);
                 let htmlTitle = displayTitleMatch ? displayTitleMatch[1].replace(/<[^>]+>/g, '').trim() : "未命名小说";
                 
@@ -1122,21 +1117,20 @@ def generate_hub_html(archive_data):
                     rawTitle: filename
                 });
 
-                // 跳转日历到文章所属的日期并重绘
                 AppState.year = targetDate.getFullYear();
                 AppState.month = targetDate.getMonth() + 1;
                 AppState.day = targetDate.getDate();
                 initSelects();
                 forceRender();
 
-                // 3. 同步更新云端 index.html
                 const idxRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/index.html`, { headers: { 'Authorization': `Bearer ${ghToken}` } });
                 const idxData = await idxRes.json();
                 const idxContent = decodeURIComponent(escape(atob(idxData.content.replace(/\s/g, ''))));
                 
                 const dataStart = idxContent.indexOf('/*DATA_START*/') + 14;
                 const dataEnd = idxContent.indexOf('/*DATA_END*/');
-                const newIdxContent = idxContent.substring(0, dataStart) + JSON.stringify(archiveData) + idxContent.substring(dataEnd);
+                const safeArchiveJson = JSON.stringify(archiveData).replace(/<\//g, '<\\/');
+                const newIdxContent = idxContent.substring(0, dataStart) + safeArchiveJson + idxContent.substring(dataEnd);
                 
                 loadingBar.style.width = '85%';
                 await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/index.html`, { 
@@ -1150,7 +1144,7 @@ def generate_hub_html(archive_data):
                 
                 document.getElementById('uploadModal').style.display = 'none';
                 document.getElementById('saveUploadBtn').innerText = "推送至云端 🚀";
-                alert(`🎉 发布成功！已自动注入 🔴 批注系统并归档至 ${yearStr}-${pad2(monthStr)}-${pad2(dayStr)}。`);
+                alert(`🎉 发布成功！小说已归档至 ${yearStr}-${pad2(monthStr)}-${pad2(dayStr)}。`);
                 
             } catch (e) {
                 console.error(e);
@@ -1179,7 +1173,7 @@ def generate_hub_html(archive_data):
             localStorage.setItem('LITIT_CUSTOM_API_KEY', document.getElementById('cfgCustomKey').value.trim());
             localStorage.setItem('LITIT_CUSTOM_MODEL', document.getElementById('cfgCustomModel').value.trim());
             document.getElementById('settingsModal').style.display = 'none';
-            alert('配置已保存在本地浏览器！');
+            alert('配置已保存在本地浏览器（已通过专属前缀隔离）！');
         });
 
         async function syncDeleteToGithub(fileRelPath) {
@@ -1200,7 +1194,8 @@ def generate_hub_html(archive_data):
                 
                 const dataStart = idxContent.indexOf('/*DATA_START*/') + 14;
                 const dataEnd = idxContent.indexOf('/*DATA_END*/');
-                const newIdxContent = idxContent.substring(0, dataStart) + JSON.stringify(archiveData) + idxContent.substring(dataEnd);
+                const safeArchiveJson = JSON.stringify(archiveData).replace(/<\//g, '<\\/');
+                const newIdxContent = idxContent.substring(0, dataStart) + safeArchiveJson + idxContent.substring(dataEnd);
                 
                 loadingBar.style.width = '90%';
                 await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/index.html`, { method: 'PUT', headers: { 'Authorization': `Bearer ${ghToken}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ message: `Update index.html after deletion`, content: btoa(unescape(encodeURIComponent(newIdxContent))), sha: idxData.sha }) });
@@ -1240,7 +1235,7 @@ def git_push_to_github():
             print("ℹ️ 没有发现需要推播的更新。")
             return
 
-        subprocess.run(["git", "commit", "-m", "Auto-update ShortStories calendar index & inject annotation engine"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "commit", "-m", "Fix index.html script escaping & backward-compatible annotations"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         subprocess.run(["git", "push"], check=True)
         print("✅ 成功同步推送到 GitHub！网页版日历约在 1 分钟后更新可见。")
     except subprocess.CalledProcessError as e:
