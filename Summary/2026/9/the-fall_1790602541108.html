@@ -321,10 +321,21 @@
             return btoa(bin);
         }
 
+        function ensureSyncStatusBadge() {
+            let badge = document.getElementById('sync-status');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.id = 'sync-status';
+                badge.className = 'sync-status';
+                badge.innerText = '📡 同步中...';
+                document.body.appendChild(badge);
+            }
+            return badge;
+        }
+
         let syncTimeout = null;
         function scheduleSync() {
-            const statusMsg = document.getElementById('sync-status');
-            if (!statusMsg) return;
+            const statusMsg = ensureSyncStatusBadge();
             statusMsg.style.display = 'inline-block';
             statusMsg.style.backgroundColor = '#f39c12';
             statusMsg.innerText = '⏳ 更改已记录，5秒后自动同步...';
@@ -335,6 +346,7 @@
         }
 
         function initAnnotations() {
+            ensureSyncStatusBadge();
             document.querySelectorAll('.para-wrap').forEach(wrap => {
                 const view = wrap.querySelector('.anno-view');
                 const edit = wrap.querySelector('.anno-edit');
@@ -361,8 +373,10 @@
                             edit.style.display = 'block';
                             edit.focus();
                         } else {
-                            if (typeof marked !== 'undefined' && !view.innerHTML.trim()) {
+                            if (typeof marked !== 'undefined') {
                                 view.innerHTML = marked.parse(edit.value.trim());
+                            } else {
+                                view.innerText = edit.value.trim();
                             }
                             view.style.display = 'block';
                             edit.style.display = 'none';
@@ -376,7 +390,6 @@
                     edit.focus();
                 };
 
-                // 桌面端：右键点击已渲染的批注进入编辑；双击批注收起面板
                 view.addEventListener('contextmenu', e => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -388,7 +401,6 @@
                     wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 });
 
-                // 移动端：双指轻触进入编辑；单指双击收起面板
                 let lastTap = 0;
                 view.addEventListener('touchstart', e => {
                     if (e.touches.length === 2) {
@@ -429,13 +441,22 @@
             });
         }
 
+        function initBlurToggle() {
+            // 兼容旧版没有内联 onclick 的 .zh-para 段落
+            document.querySelectorAll('.zh-para').forEach(para => {
+                if (!para.getAttribute('onclick')) {
+                    para.onclick = () => para.classList.toggle('revealed');
+                }
+            });
+        }
+
         function reconstructSelfHTML() {
             const clone = document.documentElement.cloneNode(true);
 
             // 1. 移除运行期由查词/语音生成的临时 DOM 节点
             clone.querySelectorAll('audio, [data-tippy-root], .tippy-box').forEach(el => el.remove());
 
-            // 2. 剥离运行期包裹的 span.tm-word，还原纯文本段落，防止保存后重复包裹
+            // 2. 剥离转换器格式在运行期动态包裹的 span.tm-word，还原纯文本段落
             const contentContainer = clone.querySelector('#content-container');
             if (contentContainer) {
                 contentContainer.style.fontSize = '';
@@ -459,7 +480,7 @@
                 if (contentContainer) p.classList.add('blurred');
             });
 
-            // 4. 将当前页面所有批注内容写入克隆 DOM 的 textarea 中
+            // 4. 将当前页面所有批注内容同步写入克隆 DOM 的 textarea 中
             const liveWraps = document.querySelectorAll('.para-wrap');
             const cloneWraps = clone.querySelectorAll('.para-wrap');
             liveWraps.forEach((liveWrap, idx) => {
@@ -505,7 +526,7 @@
                 alert('缺少 GitHub Token，无法同步批注！\n\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');
                 return;
             }
-            const statusMsg = document.getElementById('sync-status');
+            const statusMsg = ensureSyncStatusBadge();
             statusMsg.style.display = 'inline-block';
             statusMsg.style.backgroundColor = '#2ea44f';
             statusMsg.innerText = '📡 同步中...';
@@ -552,9 +573,13 @@
         }
 
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initAnnotations);
+            document.addEventListener('DOMContentLoaded', () => {
+                initAnnotations();
+                initBlurToggle();
+            });
         } else {
             initAnnotations();
+            initBlurToggle();
         }
     </script>
 </body>
