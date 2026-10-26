@@ -55,10 +55,33 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="ss-anno-style">
+        .para-wrap { margin-bottom: 1.5em; position: relative; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle { display: inline-flex; margin-left: 6px; cursor: pointer; opacity: 0.25; font-size: 0.75em; vertical-align: middle; transition: all 0.2s; user-select: none; text-indent: 0; }
+        .anno-toggle:hover { opacity: 0.85; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .anno-box { display: none; margin-top: 10px; background: #f8f6ff; border-left: 4px solid #8e7cc3; padding: 12px 16px; border-radius: 0 6px 6px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-indent: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .anno-view { font-size: 0.9em; line-height: 1.6; color: #4a4a4a; min-height: 24px; text-indent: 0; text-align: left; }
+        .anno-edit { width: 100%; min-height: 110px; padding: 10px; font-family: monospace; font-size: 0.85em; border: 1px dashed #8e7cc3; border-radius: 6px; box-sizing: border-box; resize: vertical; display: none; background: #fff; color: #333; outline: none; text-indent: 0; }
+        .anno-edit:focus { border: 1px solid #8e7cc3; box-shadow: 0 0 0 3px rgba(142,124,195,0.15); }
+        .markdown-body p { margin-top: 0 !important; margin-bottom: 8px !important; text-indent: 0 !important; text-align: left !important; }
+        .markdown-body p:last-child { margin-bottom: 0 !important; }
+        .markdown-body p:empty { display: none; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #8e7cc3; font-size: 1.05em; margin: 10px 0 6px 0; border-bottom: 1px dashed #e0d8f0; padding-bottom: 4px; text-align: left !important; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 20px; text-indent: 0; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 14px; background: rgba(142,124,195,0.1); border-left: 4px solid #8e7cc3; color: #555; text-indent: 0; }
+        .ss-nav-link { color: #b85c38; text-decoration: none; background: #faede6; padding: 2px 10px; border-radius: 6px; font-weight: 600; font-size: 0.92em; margin-left: 12px; display: inline-block; transition: background 0.2s; text-indent: 0; }
+        .ss-nav-link:hover { background: #f3dccf; }
+        .sync-status { position: fixed; top: 14px; right: 16px; z-index: 2000; padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: bold; display: none; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.18); font-family: -apple-system, sans-serif; text-indent: 0; }
+    </style>
 </head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
+            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href="../../../index.html?date=2026-10-24"">🔙 日历</button>
             <button class="reader-btn" onclick="adjustFont(-0.1)">A-</button>
             <button class="reader-btn" onclick="adjustFont(0.1)">A+</button>
             <button id="blur-btn" class="reader-btn" style="background:#AF52DE; color:white;" onclick="toggleBlur()">模糊: 开</button>
@@ -70,95 +93,365 @@
     <h1 style="text-align: left !important;">Kim Jong Un’s Visit to China: What Does the New Yalu River Bridge Reveal About China–North Korea Ties?</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/10/24 23:56:37</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">金正恩访华：新鸭绿江大桥背后，中朝关系释放什么信号？</p>
-    <p>October 24, 2026</p>
+    <div class="para-wrap">
+    <p>October 24, 2026<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">2026年10月24日</p>
-    <p>North Korean leader Kim Jong Un visited Dandong, a Chinese border city in Liaoning Province, on October 24, crossing the newly opened New Yalu River Bridge. Wang Huning, a member of the Standing Committee of the Political Bureau of the Communist Party of China Central Committee and chairman of the Chinese People’s Political Consultative Conference, accompanied Kim during visits to local sites, including facilities commemorating the Korean War. Wang also saw Kim off as he departed for North Korea.</p>
+    <div class="para-wrap">
+    <p>North Korean leader Kim Jong Un visited Dandong, a Chinese border city in Liaoning Province, on October 24, crossing the newly opened New Yalu River Bridge. Wang Huning, a member of the Standing Committee of the Political Bureau of the Communist Party of China Central Committee and chairman of the Chinese People’s Political Consultative Conference, accompanied Kim during visits to local sites, including facilities commemorating the Korean War. Wang also saw Kim off as he departed for North Korea.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">朝鲜最高领导人金正恩于2026年10月24日访问中国辽宁省边境城市丹东，经新近通车的新鸭绿江大桥进入中国。中共中央政治局常委、全国政协主席王沪宁陪同金正恩参观当地有关设施，包括抗美援朝纪念设施。金正恩离开中国返回朝鲜时，王沪宁也前往桥头送行。</p>
-    <p>The visit came just over a year after Kim traveled to Beijing in September 2025 to attend events marking the 80th anniversary of the victory in the Chinese People’s War of Resistance Against Japanese Aggression and the World Anti-Fascist War. Unlike that high-profile visit to the Chinese capital, this trip focused on the border city of Dandong. Its timing, shortly after the opening of the new bridge and on the eve of the anniversary of the Chinese People’s Volunteers entering the Korean War, has drawn international attention.</p>
+    <div class="para-wrap">
+    <p>The visit came just over a year after Kim traveled to Beijing in September 2025 to attend events marking the 80th anniversary of the victory in the Chinese People’s War of Resistance Against Japanese Aggression and the World Anti-Fascist War. Unlike that high-profile visit to the Chinese capital, this trip focused on the border city of Dandong. Its timing, shortly after the opening of the new bridge and on the eve of the anniversary of the Chinese People’s Volunteers entering the Korean War, has drawn international attention.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此次访问距离金正恩2025年9月赴北京出席中国人民抗日战争暨世界反法西斯战争胜利80周年纪念活动，仅一年多时间。与上次在中国首都进行的高规格访问不同，此次行程集中在边境城市丹东。访问恰逢新鸭绿江大桥通车不久、又临近中国人民志愿军入朝作战纪念日，因此引起国际社会关注。</p>
-    <p>The visit sends at least three signals: high-level engagement between Beijing and Pyongyang is continuing; new infrastructure could create opportunities for closer economic cooperation; and both countries are using their shared history to reinforce political ties.</p>
+    <div class="para-wrap">
+    <p>The visit sends at least three signals: high-level engagement between Beijing and Pyongyang is continuing; new infrastructure could create opportunities for closer economic cooperation; and both countries are using their shared history to reinforce political ties.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此次访问至少释放出三个信号：中朝高层交往仍在持续；新的基础设施可能为深化经贸合作创造条件；双方也在借助共同的历史记忆，进一步巩固政治联系。</p>
-    <p>1. From Beijing to Dandong: A Visit Rich in Symbolism</p>
+    <div class="para-wrap">
+    <p>1. From Beijing to Dandong: A Visit Rich in Symbolism<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">一、从北京到丹东：一次具有象征意义的访问</p>
-    <p>One of the most striking details was Kim’s decision to enter China via the New Yalu River Bridge.</p>
+    <div class="para-wrap">
+    <p>One of the most striking details was Kim’s decision to enter China via the New Yalu River Bridge.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此次访问最引人注目的细节之一，是金正恩选择经新鸭绿江大桥进入中国。</p>
-    <p>The bridge, which connects Dandong with the North Korean city of Sinuiju, is approximately three kilometers long. Completed in 2014, it remained unused for years because of delays involving infrastructure and border facilities on the North Korean side. It finally opened to traffic in October 2026.</p>
+    <div class="para-wrap">
+    <p>The bridge, which connects Dandong with the North Korean city of Sinuiju, is approximately three kilometers long. Completed in 2014, it remained unused for years because of delays involving infrastructure and border facilities on the North Korean side. It finally opened to traffic in October 2026.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">这座大桥连接中国丹东与朝鲜新义州，全长约3公里。大桥于2014年建成，但由于朝鲜一侧的配套基础设施和口岸设施建设等问题，多年来一直未能投入使用，直到2026年10月才正式通车。</p>
-    <p>The opening of the bridge represents a significant development in cross-border transportation. Kim’s visit shortly after its opening linked the infrastructure project directly with high-level diplomacy.</p>
+    <div class="para-wrap">
+    <p>The opening of the bridge represents a significant development in cross-border transportation. Kim’s visit shortly after its opening linked the infrastructure project directly with high-level diplomacy.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">大桥通车标志着中朝跨境交通取得重要进展。金正恩在大桥开放后不久便经由该桥访华，也使这一基础设施项目与高层外交直接联系起来。</p>
-    <p>The bridge may eventually facilitate freight transportation and expand trade between the two countries. Yet its symbolic importance should not be confused with immediate economic results. Actual trade growth will depend on customs procedures, transport demand, economic conditions in North Korea and subsequent policy decisions by both governments.</p>
+    <div class="para-wrap">
+    <p>The bridge may eventually facilitate freight transportation and expand trade between the two countries. Yet its symbolic importance should not be confused with immediate economic results. Actual trade growth will depend on customs procedures, transport demand, economic conditions in North Korea and subsequent policy decisions by both governments.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">这座大桥未来有望改善货物运输条件，扩大两国贸易。然而，象征意义并不等于立刻产生经济成果。贸易能否真正增长，仍取决于海关通关程序、运输需求、朝鲜经济状况以及两国政府后续的政策安排。</p>
-    <p>2. Wang Huning’s Role: What Political Signals Are Being Sent?</p>
+    <div class="para-wrap">
+    <p>2. Wang Huning’s Role: What Political Signals Are Being Sent?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">二、王沪宁出面接待：释放了哪些政治信号？</p>
-    <p>According to Chinese state media, Wang Huning conveyed Chinese President Xi Jinping’s greetings to Kim. Wang said China was willing to use the opening of the New Yalu River Bridge as an opportunity to expand people-to-people exchanges and economic cooperation, while strengthening strategic communication and coordination.</p>
+    <div class="para-wrap">
+    <p>According to Chinese state media, Wang Huning conveyed Chinese President Xi Jinping’s greetings to Kim. Wang said China was willing to use the opening of the New Yalu River Bridge as an opportunity to expand people-to-people exchanges and economic cooperation, while strengthening strategic communication and coordination.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">据中国官方媒体报道，王沪宁向金正恩转达了中国国家主席习近平的问候。王沪宁表示，中方愿以新鸭绿江大桥开通为契机，拓展人员往来和经贸合作，加强战略沟通与协调。</p>
-    <p>Kim, in turn, asked Wang to convey his greetings to Xi. He expressed North Korea’s willingness to preserve the historical friendship between the two countries and expand practical cooperation. Kim also referred to the 65th anniversary of the signing of the Treaty of Friendship, Cooperation and Mutual Assistance between China and North Korea in 2026.</p>
+    <div class="para-wrap">
+    <p>Kim, in turn, asked Wang to convey his greetings to Xi. He expressed North Korea’s willingness to preserve the historical friendship between the two countries and expand practical cooperation. Kim also referred to the 65th anniversary of the signing of the Treaty of Friendship, Cooperation and Mutual Assistance between China and North Korea in 2026.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">金正恩也请王沪宁转达他对习近平的问候，并表示朝方愿意传承两国历史友谊、拓展务实合作。他还提及2026年是《朝中友好合作互助条约》签订65周年。</p>
-    <p>These statements indicate that both sides want to build on their historical relationship while advancing political communication and economic cooperation.</p>
+    <div class="para-wrap">
+    <p>These statements indicate that both sides want to build on their historical relationship while advancing political communication and economic cooperation.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">这些表态表明，双方希望在既有历史关系的基础上，继续推进政治沟通与经济合作。</p>
-    <p>However, the publicly reported itinerary does not establish that Kim met Xi during this visit. Nor should the trip automatically be described as a formal summit between the two leaders. The distinction matters because diplomatic symbolism, official meetings and concrete policy agreements are not the same thing.</p>
+    <div class="para-wrap">
+    <p>However, the publicly reported itinerary does not establish that Kim met Xi during this visit. Nor should the trip automatically be described as a formal summit between the two leaders. The distinction matters because diplomatic symbolism, official meetings and concrete policy agreements are not the same thing.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过，公开报道的行程并未证实金正恩此次访华期间与习近平会面，也不宜直接将此次行程描述为两国领导人举行的正式峰会。这一区别十分重要，因为外交象征、正式会谈与具体政策协议并不是一回事。</p>
-    <p>3. Korean War Commemoration: History as a Diplomatic Bond</p>
+    <div class="para-wrap">
+    <p>3. Korean War Commemoration: History as a Diplomatic Bond<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">三、纪念抗美援朝：历史仍是中朝关系的重要纽带</p>
-    <p>Kim’s visit took place on October 24, one day before the anniversary of the Chinese People’s Volunteers entering the Korean War on October 25, 1950. During the visit, he paid tribute at a monument commemorating the Chinese forces and visited a museum dedicated to the war.</p>
+    <div class="para-wrap">
+    <p>Kim’s visit took place on October 24, one day before the anniversary of the Chinese People’s Volunteers entering the Korean War on October 25, 1950. During the visit, he paid tribute at a monument commemorating the Chinese forces and visited a museum dedicated to the war.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">金正恩此次访问发生在10月24日，也就是中国人民志愿军于1950年10月25日入朝作战纪念日的前一天。访问期间，他向纪念中国人民志愿军的纪念设施致敬，并参观了抗美援朝纪念馆。</p>
-    <p>According to Chinese state media, a floral tribute presented by Kim carried an inscription honoring the Chinese People’s Volunteers who fought in the war. He also presented the museum with historical photographs bearing a personal inscription.</p>
+    <div class="para-wrap">
+    <p>According to Chinese state media, a floral tribute presented by Kim carried an inscription honoring the Chinese People’s Volunteers who fought in the war. He also presented the museum with historical photographs bearing a personal inscription.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">据中国官方媒体报道，金正恩敬献的花篮缎带上写有缅怀中国人民志愿军烈士的文字。他还向纪念馆赠送了附有亲笔题词的历史照片。</p>
-    <p>For China, the Korean War remains an important part of national historical memory. For North Korea, China’s military support during the conflict is a significant element of the countries’ traditional relationship.</p>
+    <div class="para-wrap">
+    <p>For China, the Korean War remains an important part of national historical memory. For North Korea, China’s military support during the conflict is a significant element of the countries’ traditional relationship.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于中国而言，抗美援朝战争是国家历史记忆的重要组成部分；对于朝鲜而言，中国在战争期间提供的军事支持，也是两国传统关系的重要内容。</p>
-    <p>The commemoration therefore serves more than a historical purpose. By emphasizing their shared wartime experience, the two governments reinforce a political narrative of friendship and cooperation that can support their present-day relationship.</p>
+    <div class="para-wrap">
+    <p>The commemoration therefore serves more than a historical purpose. By emphasizing their shared wartime experience, the two governments reinforce a political narrative of friendship and cooperation that can support their present-day relationship.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">因此，这次纪念活动不仅具有历史意义。通过强调共同的战争经历，两国政府也在强化有关友谊与合作的政治叙事，为当下的双边关系提供历史依据。</p>
-    <p>Nevertheless, shared history cannot resolve every contemporary disagreement. The two countries must still coordinate their interests on economic development, security and the wider regional situation.</p>
+    <div class="para-wrap">
+    <p>Nevertheless, shared history cannot resolve every contemporary disagreement. The two countries must still coordinate their interests on economic development, security and the wider regional situation.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过，共同的历史并不能解决当下所有分歧。两国仍需在经济发展、安全问题和更广泛的地区局势等方面协调彼此利益。</p>
-    <p>4. The New Bridge: Can Economic Cooperation Gain Momentum?</p>
+    <div class="para-wrap">
+    <p>4. The New Bridge: Can Economic Cooperation Gain Momentum?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">四、新鸭绿江大桥：中朝经贸合作能否提速？</p>
-    <p>The bridge’s practical impact may prove more important over time than its symbolic significance.</p>
+    <div class="para-wrap">
+    <p>The bridge’s practical impact may prove more important over time than its symbolic significance.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">从长期来看，大桥的实际作用可能比其象征意义更值得关注。</p>
-    <p>China has long been North Korea’s most important trading partner and a major source of economic support. North Korea’s limited external economic links, international sanctions and the effects of border controls during the COVID-19 pandemic have all affected cross-border commerce.</p>
+    <div class="para-wrap">
+    <p>China has long been North Korea’s most important trading partner and a major source of economic support. North Korea’s limited external economic links, international sanctions and the effects of border controls during the COVID-19 pandemic have all affected cross-border commerce.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">长期以来，中国一直是朝鲜最重要的贸易伙伴，也是其重要的经济支持来源。朝鲜对外经济联系有限、面临国际制裁，以及新冠疫情期间边境管控造成的影响，都曾制约跨境贸易。</p>
-    <p>The New Yalu River Bridge is approximately 3,026 meters long and is designed to accommodate freight and container transportation. With supporting infrastructure and border facilities becoming operational, it could improve the movement of goods between Dandong and Sinuiju.</p>
+    <div class="para-wrap">
+    <p>The New Yalu River Bridge is approximately 3,026 meters long and is designed to accommodate freight and container transportation. With supporting infrastructure and border facilities becoming operational, it could improve the movement of goods between Dandong and Sinuiju.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">新鸭绿江大桥全长约3026米，具备承载货运和集装箱运输的条件。随着配套基础设施和口岸设施逐步投入使用，大桥有望改善丹东与新义州之间的货物流通。</p>
-    <p>For North Korea, improved transport links with China could support domestic production, infrastructure development and access to imported goods. For northeastern China, the restoration and expansion of cross-border transportation could create opportunities for trade and logistics businesses.</p>
+    <div class="para-wrap">
+    <p>For North Korea, improved transport links with China could support domestic production, infrastructure development and access to imported goods. For northeastern China, the restoration and expansion of cross-border transportation could create opportunities for trade and logistics businesses.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于朝鲜而言，改善对华交通联系有助于支持国内生产、基础设施建设和进口商品流通。对于中国东北地区而言，跨境交通的恢复与扩展则可能为贸易和物流企业创造新的机会。</p>
-    <p>However, greater transport capacity does not automatically translate into a substantial increase in trade. The actual outcome will depend on customs arrangements, business demand, transportation services and the broader sanctions environment.</p>
+    <div class="para-wrap">
+    <p>However, greater transport capacity does not automatically translate into a substantial increase in trade. The actual outcome will depend on customs arrangements, business demand, transportation services and the broader sanctions environment.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">然而，运输能力的提升并不意味着贸易额必然大幅增长。实际效果仍取决于海关安排、市场需求、运输服务以及更广泛的国际制裁环境。</p>
-    <p>Sustained increases in cargo volumes, improvements in trade statistics and the implementation of concrete cooperation projects will be needed to determine whether the bridge becomes a major driver of bilateral economic relations.</p>
+    <div class="para-wrap">
+    <p>Sustained increases in cargo volumes, improvements in trade statistics and the implementation of concrete cooperation projects will be needed to determine whether the bridge becomes a major driver of bilateral economic relations.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">要判断这座大桥能否成为推动双边经贸关系的重要引擎，还需要观察货运量是否持续增长、贸易数据是否改善，以及双方是否落实具体合作项目。</p>
-    <p>5. China, Russia and North Korea’s Diplomatic Strategy</p>
+    <div class="para-wrap">
+    <p>5. China, Russia and North Korea’s Diplomatic Strategy<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">五、中国、俄罗斯与朝鲜的外交布局</p>
-    <p>The visit also took place against the backdrop of expanding military and political cooperation between North Korea and Russia in recent years. At the same time, China remains one of North Korea’s most important economic partners.</p>
+    <div class="para-wrap">
+    <p>The visit also took place against the backdrop of expanding military and political cooperation between North Korea and Russia in recent years. At the same time, China remains one of North Korea’s most important economic partners.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此次访问还发生在一个重要的国际背景之下：近年来，朝鲜与俄罗斯不断深化军事和政治合作。与此同时，中国仍然是朝鲜最重要的经济伙伴之一。</p>
-    <p>This creates a diplomatic landscape in which Pyongyang maintains relationships with both Beijing and Moscow, although the two relationships serve different purposes.</p>
+    <div class="para-wrap">
+    <p>This creates a diplomatic landscape in which Pyongyang maintains relationships with both Beijing and Moscow, although the two relationships serve different purposes.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">在这样的外交格局下，平壤同时维持与北京和莫斯科的关系，但这两种关系所发挥的作用并不完全相同。</p>
-    <p>For North Korea, closer cooperation with Russia and the preservation of ties with China are not necessarily mutually exclusive. Russia offers opportunities for cooperation in certain security and military fields, while China plays a distinct role in trade, geographic connectivity and economic support.</p>
+    <div class="para-wrap">
+    <p>For North Korea, closer cooperation with Russia and the preservation of ties with China are not necessarily mutually exclusive. Russia offers opportunities for cooperation in certain security and military fields, while China plays a distinct role in trade, geographic connectivity and economic support.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于朝鲜而言，加强与俄罗斯的合作，并不必然意味着削弱对华关系。俄罗斯在特定安全和军事领域提供合作机会，而中国则在贸易、地理联系和经济支持方面发挥着不同的作用。</p>
-    <p>For Beijing, maintaining high-level communication with Pyongyang, stabilizing the border region and expanding economic links are all matters of practical importance. A major deterioration in conditions on the Korean Peninsula could affect China’s northeastern border security and the wider regional diplomatic environment.</p>
+    <div class="para-wrap">
+    <p>For Beijing, maintaining high-level communication with Pyongyang, stabilizing the border region and expanding economic links are all matters of practical importance. A major deterioration in conditions on the Korean Peninsula could affect China’s northeastern border security and the wider regional diplomatic environment.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于北京而言，保持与平壤的高层沟通、稳定边境地区以及扩大经济联系，都具有现实意义。朝鲜半岛局势如果发生重大恶化，可能影响中国东北边境安全和更广泛的地区外交环境。</p>
-    <p>Kim’s visit can therefore be viewed as a sign that North Korea continues to attach importance to its relationship with China. But one short visit is insufficient to establish that Pyongyang is shifting its strategic focus away from Russia or fundamentally changing its overall foreign policy.</p>
+    <div class="para-wrap">
+    <p>Kim’s visit can therefore be viewed as a sign that North Korea continues to attach importance to its relationship with China. But one short visit is insufficient to establish that Pyongyang is shifting its strategic focus away from Russia or fundamentally changing its overall foreign policy.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">因此，金正恩此次访问可以被视为朝鲜继续重视对华关系的一个信号。但仅凭一次短暂访问，还不足以证明平壤正在将战略重心从俄罗斯转向中国，或从根本上改变其整体外交政策。</p>
-    <p>6. The United States and the Korean Peninsula: Is There Room for Diplomacy?</p>
+    <div class="para-wrap">
+    <p>6. The United States and the Korean Peninsula: Is There Room for Diplomacy?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">六、美国与朝鲜半岛：外交对话是否存在新空间？</p>
-    <p>Relations between the United States and North Korea remain another important factor in assessing the visit.</p>
+    <div class="para-wrap">
+    <p>Relations between the United States and North Korea remain another important factor in assessing the visit.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">美朝关系仍然是评估此次访问时不可忽视的另一个重要因素。</p>
-    <p>US President Donald Trump has previously expressed interest in renewing contact with Kim. China is also scheduled to host the Asia-Pacific Economic Cooperation Economic Leaders’ Meeting in Shenzhen in November 2026, creating a potential setting for international diplomatic engagement.</p>
+    <div class="para-wrap">
+    <p>US President Donald Trump has previously expressed interest in renewing contact with Kim. China is also scheduled to host the Asia-Pacific Economic Cooperation Economic Leaders’ Meeting in Shenzhen in November 2026, creating a potential setting for international diplomatic engagement.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">美国总统唐纳德·特朗普此前曾表达与金正恩恢复接触的意愿。中国还计划于2026年11月在深圳举办亚太经合组织领导人非正式会议，这为国际外交互动提供了一个潜在场合。</p>
-    <p>However, as of October 24, publicly available information does not confirm that Trump and Kim will meet during the APEC gathering. Whether North Korea is prepared to resume dialogue, and whether any renewed engagement could produce substantive progress, remain uncertain.</p>
+    <div class="para-wrap">
+    <p>However, as of October 24, publicly available information does not confirm that Trump and Kim will meet during the APEC gathering. Whether North Korea is prepared to resume dialogue, and whether any renewed engagement could produce substantive progress, remain uncertain.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过，截至10月24日，公开信息尚未证实特朗普与金正恩将在亚太经合组织会议期间会面。朝鲜是否准备恢复对话，以及新一轮接触能否取得实质进展，目前仍存在不确定性。</p>
-    <p>A stable China–North Korea relationship could provide Beijing with more effective channels of communication on Korean Peninsula issues. But this does not mean China can unilaterally determine Pyongyang’s policies, nor does it establish that North Korea will make concessions on its nuclear program.</p>
+    <div class="para-wrap">
+    <p>A stable China–North Korea relationship could provide Beijing with more effective channels of communication on Korean Peninsula issues. But this does not mean China can unilaterally determine Pyongyang’s policies, nor does it establish that North Korea will make concessions on its nuclear program.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中朝关系保持稳定，可能使北京在朝鲜半岛事务中拥有更加顺畅的沟通渠道。但这并不意味着中国能够单方面决定平壤的政策，也不能据此认定朝鲜会在核计划问题上作出让步。</p>
-    <p>The key question is not simply whether diplomatic visits take place, but whether sustained communication can be established and whether the parties involved are willing to take concrete steps on security, sanctions and dialogue.</p>
+    <div class="para-wrap">
+    <p>The key question is not simply whether diplomatic visits take place, but whether sustained communication can be established and whether the parties involved are willing to take concrete steps on security, sanctions and dialogue.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">真正关键的问题不仅在于外交访问是否举行，更在于能否建立持续沟通，以及有关各方是否愿意在安全、制裁和对话条件等问题上采取具体行动。</p>
-    <p>Conclusion: The Significance of the Visit Will Depend on What Comes Next</p>
+    <div class="para-wrap">
+    <p>Conclusion: The Significance of the Visit Will Depend on What Comes Next<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">结语：此次访问的意义，最终取决于后续行动</p>
-    <p>Kim Jong Un’s visit to China was brief, but it touched on several important issues: historical commemoration, cross-border transportation, economic cooperation and regional security.</p>
+    <div class="para-wrap">
+    <p>Kim Jong Un’s visit to China was brief, but it touched on several important issues: historical commemoration, cross-border transportation, economic cooperation and regional security.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">金正恩此次访华时间短暂，却涉及多个重要议题，包括历史纪念、跨境交通、经贸合作与地区安全。</p>
-    <p>The public statements from both sides indicate a willingness to preserve traditional ties, strengthen political communication and expand practical cooperation. The opening of the New Yalu River Bridge provides a more concrete infrastructure basis for pursuing those objectives.</p>
+    <div class="para-wrap">
+    <p>The public statements from both sides indicate a willingness to preserve traditional ties, strengthen political communication and expand practical cooperation. The opening of the New Yalu River Bridge provides a more concrete infrastructure basis for pursuing those objectives.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">双方公开表态显示，两国有意维护传统友好关系、加强政治沟通并拓展务实合作。新鸭绿江大桥的通车，则为实现这些目标提供了更加具体的基础设施条件。</p>
-    <p>Yet the actual consequences of the visit remain to be seen. Whether the bridge generates sustained trade growth, whether high-level exchanges continue and whether the two countries coordinate more closely on regional security will all require further evidence.</p>
+    <div class="para-wrap">
+    <p>Yet the actual consequences of the visit remain to be seen. Whether the bridge generates sustained trade growth, whether high-level exchanges continue and whether the two countries coordinate more closely on regional security will all require further evidence.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">然而，此次访问的实际影响仍有待观察。大桥能否带来持续的贸易增长，高层交往能否继续，以及两国是否会在地区安全问题上加强协调，都需要后续事实加以验证。</p>
-    <p>Rather than interpreting the trip as proof of a dramatic strategic shift, it is more prudent to view it as an effort to advance economic cooperation and strategic communication within an established bilateral relationship.</p>
+    <div class="para-wrap">
+    <p>Rather than interpreting the trip as proof of a dramatic strategic shift, it is more prudent to view it as an effort to advance economic cooperation and strategic communication within an established bilateral relationship.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">与其将此次行程视为双边战略发生重大转折的证据，不如将其理解为双方在既有双边关系框架内，进一步推动经贸合作与战略沟通的一项举措。</p>
-    <p>The most important developments to watch are changes in cross-border trade, the next round of high-level exchanges and whether the visit contributes to new diplomatic opportunities on the Korean Peninsula.</p>
+    <div class="para-wrap">
+    <p>The most important developments to watch are changes in cross-border trade, the next round of high-level exchanges and whether the visit contributes to new diplomatic opportunities on the Korean Peninsula.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">接下来最值得关注的是中朝边境贸易的变化、双方下一轮高层互动，以及此次访问是否会为朝鲜半岛局势带来新的外交空间。</p>    </div>
     <script>
         var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
@@ -177,7 +470,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
         }
         document.addEventListener('dblclick', function(e) {
-            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para')) return;
+            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para') || e.target.closest('.anno-box') || e.target.closest('.anno-toggle')) return;
             prefs.barHidden = !prefs.barHidden; applyPrefs();
         });
         function adjustFont(delta) { prefs.font = Math.max(0.6, Math.min(2.0, prefs.font + delta)); applyPrefs(); }
@@ -247,7 +540,7 @@
                 }
             function wrapTextNodesToWord(rootNode) {
                 var ignoreTags = new Set(['SCRIPT', 'STYLE', 'BUTTON', 'A']);
-                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
+                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para') || parent.closest('.anno-box') || parent.closest('.anno-toggle') || parent.closest('.ss-nav-link')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
                 var nodesToWrap = []; let currNode; while ((currNode = walker.nextNode())) { nodesToWrap.push(currNode); }
                 nodesToWrap.forEach(function(textNode) {
                     var text = textNode.nodeValue; var fragment = document.createDocumentFragment(); var lastIndex = 0;
@@ -284,6 +577,257 @@
             }
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
+    </script>
+    <span class="sync-status" id="sync-status">📡 同步中...</span>
+    <script id="matrix-engine">
+        const GH_OWNER = "moodHappy";
+        const GH_REPO = "ShortStories";
+
+        function toBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            let bin = '';
+            const chunkSize = 0x8000;
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+                bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+            }
+            return btoa(bin);
+        }
+
+        let syncTimeout = null;
+        function scheduleSync() {
+            const statusMsg = document.getElementById('sync-status');
+            if (!statusMsg) return;
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#f39c12';
+            statusMsg.innerText = '⏳ 更改已记录，5秒后自动同步...';
+            statusMsg.style.cursor = 'default';
+            statusMsg.onclick = null;
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToGitHub(); }, 5000);
+        }
+
+        function initAnnotations() {
+            document.querySelectorAll('.para-wrap').forEach(wrap => {
+                const view = wrap.querySelector('.anno-view');
+                const edit = wrap.querySelector('.anno-edit');
+                const toggle = wrap.querySelector('.anno-toggle');
+                const box = wrap.querySelector('.anno-box');
+                if (!edit || !toggle || !view || !box) return;
+
+                const rawText = edit.value.trim();
+                if (rawText) {
+                    toggle.classList.add('has-anno');
+                    if (typeof marked !== 'undefined') { view.innerHTML = marked.parse(rawText); }
+                    else { view.innerText = rawText; }
+                }
+
+                toggle.onclick = (e) => {
+                    e.stopPropagation();
+                    if (box.style.display === 'block') {
+                        box.style.display = 'none';
+                        wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        box.style.display = 'block';
+                        if (!edit.value.trim()) {
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.focus();
+                        } else {
+                            if (typeof marked !== 'undefined' && !view.innerHTML.trim()) {
+                                view.innerHTML = marked.parse(edit.value.trim());
+                            }
+                            view.style.display = 'block';
+                            edit.style.display = 'none';
+                        }
+                    }
+                };
+
+                const triggerEdit = () => {
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.focus();
+                };
+
+                // 桌面端：右键点击已渲染的批注进入编辑；双击批注收起面板
+                view.addEventListener('contextmenu', e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    triggerEdit();
+                });
+                view.addEventListener('dblclick', e => {
+                    e.stopPropagation();
+                    box.style.display = 'none';
+                    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+
+                // 移动端：双指轻触进入编辑；单指双击收起面板
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        e.stopPropagation();
+                        triggerEdit();
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        const tapLength = currentTime - lastTap;
+                        if (tapLength < 500 && tapLength > 0) {
+                            e.stopPropagation();
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        lastTap = currentTime;
+                    }
+                }, { passive: true });
+
+                edit.onblur = () => {
+                    const newVal = edit.value.trim();
+                    try {
+                        view.innerHTML = newVal ? (typeof marked !== 'undefined' ? marked.parse(newVal) : newVal) : '';
+                    } catch (e) {}
+                    edit.style.display = 'none';
+                    if (newVal) {
+                        view.style.display = 'block';
+                        toggle.classList.add('has-anno');
+                    } else {
+                        view.style.display = 'none';
+                        box.style.display = 'none';
+                        toggle.classList.remove('has-anno');
+                    }
+                    if (edit.getAttribute('data-old-val') !== newVal) {
+                        edit.setAttribute('data-old-val', newVal);
+                        scheduleSync();
+                    }
+                };
+                edit.setAttribute('data-old-val', rawText);
+            });
+        }
+
+        function reconstructSelfHTML() {
+            const clone = document.documentElement.cloneNode(true);
+
+            // 1. 移除运行期由查词/语音生成的临时 DOM 节点
+            clone.querySelectorAll('audio, [data-tippy-root], .tippy-box').forEach(el => el.remove());
+
+            // 2. 剥离运行期包裹的 span.tm-word，还原纯文本段落，防止保存后重复包裹
+            const contentContainer = clone.querySelector('#content-container');
+            if (contentContainer) {
+                contentContainer.style.fontSize = '';
+                contentContainer.querySelectorAll('span.tm-word').forEach(span => {
+                    span.replaceWith(document.createTextNode(span.textContent));
+                });
+                contentContainer.normalize();
+            }
+
+            // 3. 复位 body 与阅读控制栏默认状态，恢复中文段落默认模糊
+            const bodyEl = clone.querySelector('body');
+            if (bodyEl && contentContainer) {
+                bodyEl.className = 'bar-hidden global-blur-enabled dict-enabled highlights-enabled';
+            }
+            const topBar = clone.querySelector('#top-bar');
+            if (topBar) {
+                topBar.className = 'reader-bar hidden';
+            }
+            clone.querySelectorAll('.zh-para').forEach(p => {
+                p.classList.remove('revealed');
+                if (contentContainer) p.classList.add('blurred');
+            });
+
+            // 4. 将当前页面所有批注内容写入克隆 DOM 的 textarea 中
+            const liveWraps = document.querySelectorAll('.para-wrap');
+            const cloneWraps = clone.querySelectorAll('.para-wrap');
+            liveWraps.forEach((liveWrap, idx) => {
+                const cloneWrap = cloneWraps[idx];
+                if (!cloneWrap) return;
+                const liveEdit = liveWrap.querySelector('.anno-edit');
+                const rawVal = liveEdit ? liveEdit.value.trim() : '';
+
+                const cloneToggle = cloneWrap.querySelector('.anno-toggle');
+                const cloneBox = cloneWrap.querySelector('.anno-box');
+                const cloneView = cloneWrap.querySelector('.anno-view');
+                const cloneEdit = cloneWrap.querySelector('.anno-edit');
+
+                if (cloneToggle) {
+                    if (rawVal) cloneToggle.classList.add('has-anno');
+                    else cloneToggle.classList.remove('has-anno');
+                }
+                if (cloneBox) cloneBox.style.display = 'none';
+                if (cloneView) {
+                    cloneView.innerHTML = '';
+                    cloneView.style.display = 'none';
+                }
+                if (cloneEdit) {
+                    cloneEdit.textContent = rawVal;
+                    cloneEdit.style.display = 'none';
+                    cloneEdit.removeAttribute('data-old-val');
+                }
+            });
+
+            // 5. 隐藏同步状态胶囊
+            const statusEl = clone.querySelector('#sync-status');
+            if (statusEl) {
+                statusEl.style.display = 'none';
+                statusEl.innerText = '📡 同步中...';
+            }
+
+            return '<!DOCTYPE html>\n' + clone.outerHTML;
+        }
+
+        async function syncToGitHub() {
+            const token = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN') || localStorage.getItem('EXT_GH_TOKEN') || localStorage.getItem('NYT_GH_TOKEN');
+            if (!token) {
+                alert('缺少 GitHub Token，无法同步批注！\n\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');
+                return;
+            }
+            const statusMsg = document.getElementById('sync-status');
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#2ea44f';
+            statusMsg.innerText = '📡 同步中...';
+
+            const pureHtml = reconstructSelfHTML();
+            const decodedPath = decodeURIComponent(window.location.pathname);
+            const sumIdx = decodedPath.indexOf('Summary/');
+            const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.replace(/^\/+/, '');
+
+            try {
+                const base64Html = toBase64(pureHtml);
+                const apiUrl = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + fileRelPath;
+                const getRes = await fetch(apiUrl + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    cache: 'no-store'
+                });
+                if (!getRes.ok) throw new Error('API Rate limit or File not found: ' + fileRelPath);
+                const fileData = await getRes.json();
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Auto-save annotation', content: base64Html, sha: fileData.sha })
+                });
+                if (putRes.ok) {
+                    statusMsg.style.backgroundColor = '#2ea44f';
+                    statusMsg.innerText = '✅ 云端已同步';
+                    setTimeout(() => {
+                        if (statusMsg.innerText === '✅ 云端已同步') statusMsg.style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Put failed');
+                }
+            } catch (e) {
+                console.error(e);
+                statusMsg.style.backgroundColor = '#e74c3c';
+                statusMsg.innerText = '❌ 同步失败 (点击重试)';
+                statusMsg.style.cursor = 'pointer';
+                statusMsg.onclick = () => {
+                    statusMsg.onclick = null;
+                    statusMsg.style.cursor = 'default';
+                    syncToGitHub();
+                };
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAnnotations);
+        } else {
+            initAnnotations();
+        }
     </script>
 </body>
 </html>

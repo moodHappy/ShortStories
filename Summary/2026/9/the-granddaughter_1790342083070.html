@@ -55,10 +55,33 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="ss-anno-style">
+        .para-wrap { margin-bottom: 1.5em; position: relative; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle { display: inline-flex; margin-left: 6px; cursor: pointer; opacity: 0.25; font-size: 0.75em; vertical-align: middle; transition: all 0.2s; user-select: none; text-indent: 0; }
+        .anno-toggle:hover { opacity: 0.85; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .anno-box { display: none; margin-top: 10px; background: #f8f6ff; border-left: 4px solid #8e7cc3; padding: 12px 16px; border-radius: 0 6px 6px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-indent: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .anno-view { font-size: 0.9em; line-height: 1.6; color: #4a4a4a; min-height: 24px; text-indent: 0; text-align: left; }
+        .anno-edit { width: 100%; min-height: 110px; padding: 10px; font-family: monospace; font-size: 0.85em; border: 1px dashed #8e7cc3; border-radius: 6px; box-sizing: border-box; resize: vertical; display: none; background: #fff; color: #333; outline: none; text-indent: 0; }
+        .anno-edit:focus { border: 1px solid #8e7cc3; box-shadow: 0 0 0 3px rgba(142,124,195,0.15); }
+        .markdown-body p { margin-top: 0 !important; margin-bottom: 8px !important; text-indent: 0 !important; text-align: left !important; }
+        .markdown-body p:last-child { margin-bottom: 0 !important; }
+        .markdown-body p:empty { display: none; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #8e7cc3; font-size: 1.05em; margin: 10px 0 6px 0; border-bottom: 1px dashed #e0d8f0; padding-bottom: 4px; text-align: left !important; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 20px; text-indent: 0; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 14px; background: rgba(142,124,195,0.1); border-left: 4px solid #8e7cc3; color: #555; text-indent: 0; }
+        .ss-nav-link { color: #b85c38; text-decoration: none; background: #faede6; padding: 2px 10px; border-radius: 6px; font-weight: 600; font-size: 0.92em; margin-left: 12px; display: inline-block; transition: background 0.2s; text-indent: 0; }
+        .ss-nav-link:hover { background: #f3dccf; }
+        .sync-status { position: fixed; top: 14px; right: 16px; z-index: 2000; padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: bold; display: none; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.18); font-family: -apple-system, sans-serif; text-indent: 0; }
+    </style>
 </head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
+            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href="../../../index.html?date=2026-9-25"">🔙 日历</button>
             <button class="reader-btn" onclick="adjustFont(-0.1)">A-</button>
             <button class="reader-btn" onclick="adjustFont(0.1)">A+</button>
             <button id="blur-btn" class="reader-btn" style="background:#AF52DE; color:white;" onclick="toggleBlur()">模糊: 开</button>
@@ -70,51 +93,189 @@
     <h1 style="text-align: left !important;">The Granddaughter</h1>
     <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/9/25 21:14:32</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">外孙女</p>
-    <p>Mira did not sleep the night she brought the photograph downstairs.</p>
+    <div class="para-wrap">
+    <p>Mira did not sleep the night she brought the photograph downstairs.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉把照片带到楼下的那个晚上，她没有睡着。</p>
-    <p>She sat on the edge of her childhood bed in the guest room, the old print resting on her knee, and stared at the young man who had never grown old. Thomas, 1944. The smile was careless, almost arrogant, the kind of smile that belonged to someone who still believed the future would wait for him. On the back, in faded ink: Come back to me.</p>
+    <div class="para-wrap">
+    <p>She sat on the edge of her childhood bed in the guest room, the old print resting on her knee, and stared at the young man who had never grown old. Thomas, 1944. The smile was careless, almost arrogant, the kind of smile that belonged to someone who still believed the future would wait for him. On the back, in faded ink: Come back to me.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她坐在客房里那张童年床的边缘，旧照片搁在膝上，盯着那个从未变老的年轻人。托马斯，1944年。笑容漫不经心，近乎傲慢，是那种仍相信未来会等他的人的笑容。背面褪色的墨水写着：回到我身边。</p>
-    <p>Her grandmother’s words kept circling.</p>
+    <div class="para-wrap">
+    <p>Her grandmother’s words kept circling.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">祖母的话一直在她脑海里打转。</p>
-    <p>Your father had his eyes. The only man who ever really fucked me.</p>
+    <div class="para-wrap">
+    <p>Your father had his eyes. The only man who ever really fucked me.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">你父亲有他的眼睛。唯一真正操过我的男人。</p>
-    <p>Mira had laughed at first, the way people laugh when the ground shifts under their feet. Then the laughter died. She looked at the photograph again, then at her own reflection in the dark window. The same clear, bright shape around the eyes. The same stubborn set of the mouth she had always been told came from her father.</p>
+    <div class="para-wrap">
+    <p>Mira had laughed at first, the way people laugh when the ground shifts under their feet. Then the laughter died. She looked at the photograph again, then at her own reflection in the dark window. The same clear, bright shape around the eyes. The same stubborn set of the mouth she had always been told came from her father.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉起初笑了，像人在脚下的地面移动时会发出的那种笑。随后笑声消失了。她又看了看照片，再看向黑暗窗户里自己的倒影。眼周同样清晰明亮的轮廓。嘴角同样固执的弧度，她一直被告知那来自父亲。</p>
-    <p>She was twenty-six, tired, and newly single. The last man she had slept with had left three weeks earlier, taking his toothbrush and the half-finished bottle of wine. She had not cried. She had simply stood in the doorway and watched him go, the same way she always watched them go—one foot already out the door in her mind.</p>
+    <div class="para-wrap">
+    <p>She was twenty-six, tired, and newly single. The last man she had slept with had left three weeks earlier, taking his toothbrush and the half-finished bottle of wine. She had not cried. She had simply stood in the doorway and watched him go, the same way she always watched them go—one foot already out the door in her mind.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她二十六岁，疲惫，刚恢复单身。上一个跟她上床的男人三周前离开，带走了牙刷和半瓶没喝完的酒。她没有哭。她只是站在门口看着他走，就像她总是看着他们走一样——心里已经有一只脚跨出了门。</p>
-    <p>That night, after Eleanor finally drifted into uneasy sleep, Mira locked herself in the bathroom and undressed in front of the mirror. She looked at her body the way she imagined Thomas had once looked at Eleanor’s: possessive, hungry, already half-aware it might be the last time. She touched her own breasts, slower than usual, remembering the way her grandmother’s voice had gone soft and filthy when she spoke of the only man who had ever truly fucked her. Mira’s fingers slid lower. She closed her eyes and let the story rewrite itself across her skin.</p>
+    <div class="para-wrap">
+    <p>That night, after Eleanor finally drifted into uneasy sleep, Mira locked herself in the bathroom and undressed in front of the mirror. She looked at her body the way she imagined Thomas had once looked at Eleanor’s: possessive, hungry, already half-aware it might be the last time. She touched her own breasts, slower than usual, remembering the way her grandmother’s voice had gone soft and filthy when she spoke of the only man who had ever truly fucked her. Mira’s fingers slid lower. She closed her eyes and let the story rewrite itself across her skin.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那天夜里，等埃莉诺终于不安地睡着后，米拉把自己锁进浴室，在镜子前脱掉衣服。她看着自己的身体，想象托马斯曾怎样看着埃莉诺的身体：占有、饥渴，已经隐约知道这可能是最后一次。她触摸自己的乳房，比平时更慢，想起祖母提到那个唯一真正操过她的男人时，声音变得柔软而下流。米拉的手指往下滑。她闭上眼睛，让故事在自己的皮肤上重新书写。</p>
-    <p>She came quietly, biting the side of her hand, the photograph still waiting on the bed outside.</p>
+    <div class="para-wrap">
+    <p>She came quietly, biting the side of her hand, the photograph still waiting on the bed outside.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她安静地高潮了，咬着手侧，照片仍在外面的床上等着。</p>
-    <p>The next Sunday she returned. And the Sunday after that.</p>
+    <div class="para-wrap">
+    <p>The next Sunday she returned. And the Sunday after that.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">下一个周日她又来了。再下一个周日也是。</p>
-    <p>Eleanor did not always remember her name, but she always remembered the photograph. Sometimes, when the light fell just right across the window, the old woman would smile the same young, sad, impossibly tender smile Mira had seen only once before.</p>
+    <div class="para-wrap">
+    <p>Eleanor did not always remember her name, but she always remembered the photograph. Sometimes, when the light fell just right across the window, the old woman would smile the same young, sad, impossibly tender smile Mira had seen only once before.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">埃莉诺并不总记得她的名字，却总记得那张照片。有时，当光线恰到好处地落在窗上，老妇人会露出米拉只见过一次的那种年轻、悲伤、出奇温柔的微笑。</p>
-    <p>“He’ll come back,” Eleanor would say.</p>
+    <div class="para-wrap">
+    <p>“He’ll come back,” Eleanor would say.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“他会回来的。”埃莉诺会说。</p>
-    <p>Mira would take her hand and answer, soft but certain:</p>
+    <div class="para-wrap">
+    <p>Mira would take her hand and answer, soft but certain:<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉会握住她的手，轻声却坚定地回答：</p>
-    <p>“He already did.”</p>
+    <div class="para-wrap">
+    <p>“He already did.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“他已经回来了。”</p>
-    <p>On the third Sunday, Mira brought a small digital recorder. She sat beside the bed and asked, carefully, about the night before the train. Eleanor’s eyes cleared for almost twenty minutes. She spoke of coal smoke and damp wool, of being pushed to her knees, of the wet heat between her breasts, of the way Thomas had fucked her like a man who already knew he was halfway to dying. She did not soften the words. Mira recorded every one of them.</p>
+    <div class="para-wrap">
+    <p>On the third Sunday, Mira brought a small digital recorder. She sat beside the bed and asked, carefully, about the night before the train. Eleanor’s eyes cleared for almost twenty minutes. She spoke of coal smoke and damp wool, of being pushed to her knees, of the wet heat between her breasts, of the way Thomas had fucked her like a man who already knew he was halfway to dying. She did not soften the words. Mira recorded every one of them.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">第三个周日，米拉带了一个小型录音笔。她坐在床边，小心地问起火车离开前的那个夜晚。埃莉诺的眼睛清醒了将近二十分钟。她说起煤烟与潮湿的羊毛，说起被按跪下去，说起乳间的湿热，说起托马斯怎样像一个已经知道自己半只脚踏进死亡的人那样操她。她没有把词语说得温柔。米拉把每一个字都录了下来。</p>
-    <p>That night, alone in the guest room, Mira listened to the recording twice. Then she opened her laptop and began to write.</p>
+    <div class="para-wrap">
+    <p>That night, alone in the guest room, Mira listened to the recording twice. Then she opened her laptop and began to write.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">那天夜里，独自在客房里，米拉把录音听了两遍。然后她打开笔记本电脑，开始写。</p>
-    <p>She wrote about a young woman who had taken everything a doomed soldier could give her—mouth, breasts, cunt—and kept the only part that could outlive him. She wrote about the son who never knew, the granddaughter who finally did, and the long, unbroken line of blood that had refused to end when the telegram said it should.</p>
+    <div class="para-wrap">
+    <p>She wrote about a young woman who had taken everything a doomed soldier could give her—mouth, breasts, cunt—and kept the only part that could outlive him. She wrote about the son who never knew, the granddaughter who finally did, and the long, unbroken line of blood that had refused to end when the telegram said it should.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她写一个年轻女人如何接住一个注定要死的士兵能给她的一切——嘴、乳房、下体——并留下唯一能比他活得更久的部分。她写那个从不知晓的儿子，写终于知道的外孙女，写那条在电报宣告终结时却拒绝结束的、绵长而未曾断裂的血脉。</p>
-    <p>When she finished the first draft, dawn was already pressing against the curtains. Mira saved the file under a single word:</p>
+    <div class="para-wrap">
+    <p>When she finished the first draft, dawn was already pressing against the curtains. Mira saved the file under a single word:<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">当她写完初稿时，黎明已经压在窗帘上。米拉把文件存成一个词：</p>
-    <p>Thomas.</p>
+    <div class="para-wrap">
+    <p>Thomas.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">托马斯。</p>
-    <p>She closed the laptop, lay back on the bed, and for the first time in years did not keep one foot out the door.</p>
+    <div class="para-wrap">
+    <p>She closed the laptop, lay back on the bed, and for the first time in years did not keep one foot out the door.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她合上电脑，躺回床上，这么多年来第一次，没有把一只脚留在门外。</p>
-    <p>Somewhere down the hall, Eleanor murmured in her sleep.</p>
+    <div class="para-wrap">
+    <p>Somewhere down the hall, Eleanor murmured in her sleep.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">走廊尽头，埃莉诺在睡梦中喃喃自语。</p>
-    <p>Mira smiled into the dark.</p>
+    <div class="para-wrap">
+    <p>Mira smiled into the dark.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">米拉对着黑暗笑了。</p>
-    <p>The story was no longer only her grandmother’s.</p>
+    <div class="para-wrap">
+    <p>The story was no longer only her grandmother’s.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">这故事不再只属于她的祖母。</p>
-    <p>It was hers now, too.</p>
+    <div class="para-wrap">
+    <p>It was hers now, too.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">现在，它也属于她。</p>    </div>
     <script>
         var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
@@ -133,7 +294,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
         }
         document.addEventListener('dblclick', function(e) {
-            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para')) return;
+            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para') || e.target.closest('.anno-box') || e.target.closest('.anno-toggle')) return;
             prefs.barHidden = !prefs.barHidden; applyPrefs();
         });
         function adjustFont(delta) { prefs.font = Math.max(0.6, Math.min(2.0, prefs.font + delta)); applyPrefs(); }
@@ -203,7 +364,7 @@
                 }
             function wrapTextNodesToWord(rootNode) {
                 var ignoreTags = new Set(['SCRIPT', 'STYLE', 'BUTTON', 'A']);
-                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
+                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para') || parent.closest('.anno-box') || parent.closest('.anno-toggle') || parent.closest('.ss-nav-link')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
                 var nodesToWrap = []; let currNode; while ((currNode = walker.nextNode())) { nodesToWrap.push(currNode); }
                 nodesToWrap.forEach(function(textNode) {
                     var text = textNode.nodeValue; var fragment = document.createDocumentFragment(); var lastIndex = 0;
@@ -240,6 +401,257 @@
             }
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
+    </script>
+    <span class="sync-status" id="sync-status">📡 同步中...</span>
+    <script id="matrix-engine">
+        const GH_OWNER = "moodHappy";
+        const GH_REPO = "ShortStories";
+
+        function toBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            let bin = '';
+            const chunkSize = 0x8000;
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+                bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+            }
+            return btoa(bin);
+        }
+
+        let syncTimeout = null;
+        function scheduleSync() {
+            const statusMsg = document.getElementById('sync-status');
+            if (!statusMsg) return;
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#f39c12';
+            statusMsg.innerText = '⏳ 更改已记录，5秒后自动同步...';
+            statusMsg.style.cursor = 'default';
+            statusMsg.onclick = null;
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToGitHub(); }, 5000);
+        }
+
+        function initAnnotations() {
+            document.querySelectorAll('.para-wrap').forEach(wrap => {
+                const view = wrap.querySelector('.anno-view');
+                const edit = wrap.querySelector('.anno-edit');
+                const toggle = wrap.querySelector('.anno-toggle');
+                const box = wrap.querySelector('.anno-box');
+                if (!edit || !toggle || !view || !box) return;
+
+                const rawText = edit.value.trim();
+                if (rawText) {
+                    toggle.classList.add('has-anno');
+                    if (typeof marked !== 'undefined') { view.innerHTML = marked.parse(rawText); }
+                    else { view.innerText = rawText; }
+                }
+
+                toggle.onclick = (e) => {
+                    e.stopPropagation();
+                    if (box.style.display === 'block') {
+                        box.style.display = 'none';
+                        wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        box.style.display = 'block';
+                        if (!edit.value.trim()) {
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.focus();
+                        } else {
+                            if (typeof marked !== 'undefined' && !view.innerHTML.trim()) {
+                                view.innerHTML = marked.parse(edit.value.trim());
+                            }
+                            view.style.display = 'block';
+                            edit.style.display = 'none';
+                        }
+                    }
+                };
+
+                const triggerEdit = () => {
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.focus();
+                };
+
+                // 桌面端：右键点击已渲染的批注进入编辑；双击批注收起面板
+                view.addEventListener('contextmenu', e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    triggerEdit();
+                });
+                view.addEventListener('dblclick', e => {
+                    e.stopPropagation();
+                    box.style.display = 'none';
+                    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+
+                // 移动端：双指轻触进入编辑；单指双击收起面板
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        e.stopPropagation();
+                        triggerEdit();
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        const tapLength = currentTime - lastTap;
+                        if (tapLength < 500 && tapLength > 0) {
+                            e.stopPropagation();
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        lastTap = currentTime;
+                    }
+                }, { passive: true });
+
+                edit.onblur = () => {
+                    const newVal = edit.value.trim();
+                    try {
+                        view.innerHTML = newVal ? (typeof marked !== 'undefined' ? marked.parse(newVal) : newVal) : '';
+                    } catch (e) {}
+                    edit.style.display = 'none';
+                    if (newVal) {
+                        view.style.display = 'block';
+                        toggle.classList.add('has-anno');
+                    } else {
+                        view.style.display = 'none';
+                        box.style.display = 'none';
+                        toggle.classList.remove('has-anno');
+                    }
+                    if (edit.getAttribute('data-old-val') !== newVal) {
+                        edit.setAttribute('data-old-val', newVal);
+                        scheduleSync();
+                    }
+                };
+                edit.setAttribute('data-old-val', rawText);
+            });
+        }
+
+        function reconstructSelfHTML() {
+            const clone = document.documentElement.cloneNode(true);
+
+            // 1. 移除运行期由查词/语音生成的临时 DOM 节点
+            clone.querySelectorAll('audio, [data-tippy-root], .tippy-box').forEach(el => el.remove());
+
+            // 2. 剥离运行期包裹的 span.tm-word，还原纯文本段落，防止保存后重复包裹
+            const contentContainer = clone.querySelector('#content-container');
+            if (contentContainer) {
+                contentContainer.style.fontSize = '';
+                contentContainer.querySelectorAll('span.tm-word').forEach(span => {
+                    span.replaceWith(document.createTextNode(span.textContent));
+                });
+                contentContainer.normalize();
+            }
+
+            // 3. 复位 body 与阅读控制栏默认状态，恢复中文段落默认模糊
+            const bodyEl = clone.querySelector('body');
+            if (bodyEl && contentContainer) {
+                bodyEl.className = 'bar-hidden global-blur-enabled dict-enabled highlights-enabled';
+            }
+            const topBar = clone.querySelector('#top-bar');
+            if (topBar) {
+                topBar.className = 'reader-bar hidden';
+            }
+            clone.querySelectorAll('.zh-para').forEach(p => {
+                p.classList.remove('revealed');
+                if (contentContainer) p.classList.add('blurred');
+            });
+
+            // 4. 将当前页面所有批注内容写入克隆 DOM 的 textarea 中
+            const liveWraps = document.querySelectorAll('.para-wrap');
+            const cloneWraps = clone.querySelectorAll('.para-wrap');
+            liveWraps.forEach((liveWrap, idx) => {
+                const cloneWrap = cloneWraps[idx];
+                if (!cloneWrap) return;
+                const liveEdit = liveWrap.querySelector('.anno-edit');
+                const rawVal = liveEdit ? liveEdit.value.trim() : '';
+
+                const cloneToggle = cloneWrap.querySelector('.anno-toggle');
+                const cloneBox = cloneWrap.querySelector('.anno-box');
+                const cloneView = cloneWrap.querySelector('.anno-view');
+                const cloneEdit = cloneWrap.querySelector('.anno-edit');
+
+                if (cloneToggle) {
+                    if (rawVal) cloneToggle.classList.add('has-anno');
+                    else cloneToggle.classList.remove('has-anno');
+                }
+                if (cloneBox) cloneBox.style.display = 'none';
+                if (cloneView) {
+                    cloneView.innerHTML = '';
+                    cloneView.style.display = 'none';
+                }
+                if (cloneEdit) {
+                    cloneEdit.textContent = rawVal;
+                    cloneEdit.style.display = 'none';
+                    cloneEdit.removeAttribute('data-old-val');
+                }
+            });
+
+            // 5. 隐藏同步状态胶囊
+            const statusEl = clone.querySelector('#sync-status');
+            if (statusEl) {
+                statusEl.style.display = 'none';
+                statusEl.innerText = '📡 同步中...';
+            }
+
+            return '<!DOCTYPE html>\n' + clone.outerHTML;
+        }
+
+        async function syncToGitHub() {
+            const token = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN') || localStorage.getItem('EXT_GH_TOKEN') || localStorage.getItem('NYT_GH_TOKEN');
+            if (!token) {
+                alert('缺少 GitHub Token，无法同步批注！\n\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');
+                return;
+            }
+            const statusMsg = document.getElementById('sync-status');
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#2ea44f';
+            statusMsg.innerText = '📡 同步中...';
+
+            const pureHtml = reconstructSelfHTML();
+            const decodedPath = decodeURIComponent(window.location.pathname);
+            const sumIdx = decodedPath.indexOf('Summary/');
+            const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.replace(/^\/+/, '');
+
+            try {
+                const base64Html = toBase64(pureHtml);
+                const apiUrl = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + fileRelPath;
+                const getRes = await fetch(apiUrl + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    cache: 'no-store'
+                });
+                if (!getRes.ok) throw new Error('API Rate limit or File not found: ' + fileRelPath);
+                const fileData = await getRes.json();
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Auto-save annotation', content: base64Html, sha: fileData.sha })
+                });
+                if (putRes.ok) {
+                    statusMsg.style.backgroundColor = '#2ea44f';
+                    statusMsg.innerText = '✅ 云端已同步';
+                    setTimeout(() => {
+                        if (statusMsg.innerText === '✅ 云端已同步') statusMsg.style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Put failed');
+                }
+            } catch (e) {
+                console.error(e);
+                statusMsg.style.backgroundColor = '#e74c3c';
+                statusMsg.innerText = '❌ 同步失败 (点击重试)';
+                statusMsg.style.cursor = 'pointer';
+                statusMsg.onclick = () => {
+                    statusMsg.onclick = null;
+                    statusMsg.style.cursor = 'default';
+                    syncToGitHub();
+                };
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAnnotations);
+        } else {
+            initAnnotations();
+        }
     </script>
 </body>
 </html>

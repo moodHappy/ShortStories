@@ -6,14 +6,13 @@
     <title>ShortStories - 短篇小说日历枢纽</title>
     <style>
         :root {
-            /* 温暖文学风配色 */
-            --primary: #b85c38;          /* 主色调：赤土暖棕/锈红 */
+            --primary: #b85c38;
             --primary-gradient: linear-gradient(135deg, #c06c4b 0%, #8b4022 100%);
-            --bg: #fcfbfa;               /* 背景色：护眼轻暖白/纸张色 */
+            --bg: #fcfbfa;
             --card: #ffffff;
-            --text: #362f2d;             /* 文字色：深墨褐，减缓高对比度疲劳 */
-            --muted: #8c8279;            /* 次级文字：暖灰色 */
-            --border: #e8e2da;           /* 边框色：浅卡其灰 */
+            --text: #362f2d;
+            --muted: #8c8279;
+            --border: #e8e2da;
         }
         body, html {
             font-family: "Georgia", "Times New Roman", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, serif;
@@ -21,7 +20,6 @@
         }
         .container { max-width: 640px; margin: 0 auto; padding-bottom: 30px; }
 
-        /* 顶部导航与搜索框 */
         .top-bar {
             background: var(--card); padding: 14px 18px; display: flex; gap: 10px; align-items: center;
             border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 10px rgba(139, 64, 34, 0.04);
@@ -33,7 +31,6 @@
         .search-input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(184, 92, 56, 0.15); }
         .settings-btn { background: none; border: none; font-size: 22px; cursor: pointer; padding: 4px; border-radius: 50%; }
 
-        /* 控制器 */
         .controls {
             padding: 15px 20px; display: flex; justify-content: center; align-items: center; gap: 10px;
             background: var(--bg); border-bottom: 1px dashed var(--border);
@@ -50,7 +47,6 @@
             font-family: sans-serif;
         }
 
-        /* 日历区域 */
         .calendar-wrapper { background: var(--card); padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .weekdays {
             display: grid; grid-template-columns: repeat(7, 1fr); text-align: center;
@@ -70,7 +66,6 @@
         .dot { width: 6px; height: 6px; background-color: var(--primary); border-radius: 50%; position: absolute; bottom: 6px; display: none; }
         .day-cell.has-notes .dot { display: block; }
 
-        /* 文章列表 */
         .notes-section { padding: 0 16px; font-family: sans-serif; }
         .note-item-wrapper { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
         .note-item {
@@ -88,7 +83,6 @@
         .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; background: var(--card); border-radius: 14px; font-family: sans-serif; }
         #loadingBar { height: 3px; background: var(--primary-gradient); width: 0%; transition: width 0.3s; position: fixed; top: 0; left: 0; z-index: 9999; }
 
-        /* Modal 统一样式 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(54, 47, 45, 0.6); z-index: 1000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(4px); font-family: sans-serif; }
         .modal-content { background: var(--card); border-radius: 16px; padding: 22px; width: 100%; max-width: 460px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
         .modal-title { margin: 0 0 15px 0; font-size: 18px; font-weight: bold; color: var(--text); }
@@ -96,7 +90,8 @@
         .form-group label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: bold; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; background: #fff; }
         .form-group input:disabled { background-color: #f5f2ef; color: #a39c97; cursor: not-allowed; }
-        .form-group textarea { font-family: monospace; resize: vertical; min-height: 200px; }
+        .form-group textarea { font-family: monospace; resize: vertical; min-height: 180px; }
+        .date-hint { font-size: 12px; color: var(--primary); margin-top: 5px; display: none; font-weight: bold; }
         .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 12px; }
         .btn { padding: 8px 16px; border-radius: 8px; border: none; font-size: 14px; font-weight: bold; cursor: pointer; transition: opacity 0.2s; }
         .btn:hover { opacity: 0.9; }
@@ -140,15 +135,20 @@
     <div class="modal-overlay" id="uploadModal">
         <div class="modal-content">
             <h3 class="modal-title">📤 隐秘发布终端</h3>
-            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">智能识别当前年月结构。系统将自动从源码提取标题作为标识符并推送到远端仓库。</p>
+            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">直接粘贴转换工具生成的 HTML，系统将自动提取『发布时间』、注入 🔴 段落批注引擎并推送至对应日期。</p>
             
             <div class="form-group">
                 <label>英文标识符 (自动从源码 &lt;title&gt; 提取)</label>
                 <input type="text" id="upFilename" placeholder="粘贴下方源码后自动生成...">
             </div>
             <div class="form-group">
+                <label>归档日期与时间 (自动识别『发布时间』或跟随当前选中日历)</label>
+                <input type="datetime-local" id="upDateTime" step="1">
+                <div class="date-hint" id="dateHint">✨ 已自动识别并匹配文章内的发布时间！</div>
+            </div>
+            <div class="form-group">
                 <label>短篇小说 HTML 源码</label>
-                <textarea id="upContent" placeholder="在此粘贴小说完整 HTML 代码..."></textarea>
+                <textarea id="upContent" placeholder="在此粘贴转换工具生成的完整 HTML 代码..."></textarea>
             </div>
 
             <div class="modal-actions">
@@ -162,7 +162,7 @@
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-content">
             <h3 class="modal-title">⚙️ 核心配置中心</h3>
-            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">设置后在阅读页面中点击 🤖 AI解析 即可自动同步保存。</p>
+            <p style="font-size:12px; color:#888; margin-top:-10px; margin-bottom:15px;">设置后在阅读页面中点击 🔴 添加批注即可自动同步保存至 GitHub。</p>
             
             <div class="form-group">
                 <label>GitHub Personal Token</label>
@@ -205,6 +205,8 @@
 
     <script>
         const archiveData = /*DATA_START*/{"2026": {"10": {"24": [{"time": "23:56", "timestamp": 1792857411254, "path": "Summary/2026/10/kim-jong-uns-visit-to-china-what-does-the-new-yalu_1792857411254.html", "title": "📄 23:56 Kim Jong Un’s Visit to China: What Does the New Yalu River B...", "rawTitle": "kim-jong-uns-visit-to-china-what-does-the-new-yalu"}], "11": [{"time": "22:10", "timestamp": 1791727858968, "path": "Summary/2026/10/chapter-488-the-resurrection-prank_1791727858968.html", "title": "📄 22:10 Chapter 488: The Resurrection Prank", "rawTitle": "chapter-488-the-resurrection-prank"}, {"time": "21:25", "timestamp": 1791725149859, "path": "Summary/2026/10/chapter-547-angels-in-white_1791725149859.html", "title": "📄 21:25 Chapter 547: Angels in White", "rawTitle": "chapter-547-angels-in-white"}], "25": [{"time": "18:15", "timestamp": 1792923325216, "path": "Summary/2026/10/eileen-gus-suzhou-style_1792923325216.html", "title": "📄 18:15 Eileen Gu’s Suzhou Style", "rawTitle": "eileen-gus-suzhou-style"}], "15": [{"time": "21:25", "timestamp": 1792070710316, "path": "Summary/2026/10/chapter-62-the-unexpected-blessing_1792070710316.html", "title": "📄 21:25 Chapter 62: The Unexpected Blessing", "rawTitle": "chapter-62-the-unexpected-blessing"}, {"time": "21:14", "timestamp": 1792070061598, "path": "Summary/2026/10/chapter-61-the-neighborhood-surprise_1792070061598.html", "title": "📄 21:14 Chapter 61: The Neighborhood Surprise", "rawTitle": "chapter-61-the-neighborhood-surprise"}, {"time": "20:27", "timestamp": 1792067267413, "path": "Summary/2026/10/chapter-60-truth-or-dare_1792067267413.html", "title": "📄 20:27 Chapter 60: Truth or Dare", "rawTitle": "chapter-60-truth-or-dare"}, {"time": "13:50", "timestamp": 1792043425739, "path": "Summary/2026/10/chapter-559-the-dogshit-translation-and-the-cheap-_1792043425739.html", "title": "📄 13:50 Chapter 559: The Dogshit Translation and the Cheap Tyrant", "rawTitle": "chapter-559-the-dogshit-translation-and-the-cheap-"}, {"time": "07:02", "timestamp": 1792018968132, "path": "Summary/2026/10/chapter-558-the-shattered-dream-and-the-rhythm-of-_1792018968132.html", "title": "📄 07:02 Chapter 558: The Shattered Dream and the Rhythm of Reality", "rawTitle": "chapter-558-the-shattered-dream-and-the-rhythm-of-"}], "13": [{"time": "12:18", "timestamp": 1791865091161, "path": "Summary/2026/10/chapter-553-incompetent-rage_1791865091161.html", "title": "📄 12:18 Chapter 553: Incompetent Rage", "rawTitle": "chapter-553-incompetent-rage"}], "12": [{"time": "23:24", "timestamp": 1791818697758, "path": "Summary/2026/10/chapter-552-the-uncensored-leak_1791818697758.html", "title": "📄 23:24 Chapter 552: The Uncensored Leak", "rawTitle": "chapter-552-the-uncensored-leak"}, {"time": "20:26", "timestamp": 1791807962371, "path": "Summary/2026/10/chapter-551-the-goddess-of-av-religion-and-the-las_1791807962371.html", "title": "📄 20:26 Chapter 551: The Goddess of AV Religion and the Last Sage", "rawTitle": "chapter-551-the-goddess-of-av-religion-and-the-las"}, {"time": "13:00", "timestamp": 1791781232591, "path": "Summary/2026/10/chapter-550-the-lightbulb-experiment_1791781232591.html", "title": "📄 13:00 Chapter 550: The Lightbulb Experiment", "rawTitle": "chapter-550-the-lightbulb-experiment"}, {"time": "11:37", "timestamp": 1791776266044, "path": "Summary/2026/10/chapter-549-persian-twins-and-imperial-lust_1791776266044.html", "title": "📄 11:37 Chapter 549: Persian Twins and Imperial Lust", "rawTitle": "chapter-549-persian-twins-and-imperial-lust"}], "23": [{"time": "22:04", "timestamp": 1792764264945, "path": "Summary/2026/10/preview-of-the-cpcs-fifth-plenum-why-the-pre-meeti_1792764264945.html", "title": "📄 22:04 Preview of the CPC’s Fifth Plenum: Why the Pre-Meeting Anti-...", "rawTitle": "preview-of-the-cpcs-fifth-plenum-why-the-pre-meeti"}, {"time": "15:04", "timestamp": 1792739082439, "path": "Summary/2026/10/typhoon-champi-threatens-taiwan_1792739082439.html", "title": "📄 15:04 Typhoon Champi Threatens Taiwan", "rawTitle": "typhoon-champi-threatens-taiwan"}, {"time": "12:16", "timestamp": 1792728991448, "path": "Summary/2026/10/earthquake-hits-tibet-killing-16_1792728991448.html", "title": "📄 12:16 Earthquake Hits Tibet, Killing 16", "rawTitle": "earthquake-hits-tibet-killing-16"}], "4": [{"time": "21:40", "timestamp": 1791121252732, "path": "Summary/2026/10/the-final-roll_1791121252732.html", "title": "📄 21:40 The Final Roll", "rawTitle": "the-final-roll"}, {"time": "21:12", "timestamp": 1791119551957, "path": "Summary/2026/10/the-gilded-noose_1791119551957.html", "title": "📄 21:12 The Gilded Noose", "rawTitle": "the-gilded-noose"}, {"time": "20:03", "timestamp": 1791115428569, "path": "Summary/2026/10/the-pirates-rise_1791115428569.html", "title": "📄 20:03 The Pirate’s Rise", "rawTitle": "the-pirates-rise"}, {"time": "17:43", "timestamp": 1791106996929, "path": "Summary/2026/10/the-pirates-price_1791106996929.html", "title": "📄 17:43 The Pirate’s Price", "rawTitle": "the-pirates-price"}], "1": [{"time": "08:17", "timestamp": 1790813853156, "path": "Summary/2026/10/chapter-5_1790813853156.html", "title": "📄 08:17 Chapter 5", "rawTitle": "chapter-5"}], "26": [{"time": "11:12", "timestamp": 1792984358608, "path": "Summary/2026/10/brazil-presidential-election-lula-secures-fourth-t_1792984358608.html", "title": "📄 11:12 Brazil Presidential Election: Lula Secures Fourth Term in Na...", "rawTitle": "brazil-presidential-election-lula-secures-fourth-t"}], "14": [{"time": "21:05", "timestamp": 1791983148684, "path": "Summary/2026/10/chapter-557-the-emperors-worry_1791983148684.html", "title": "📄 21:05 Chapter 557: The Emperor's Worry", "rawTitle": "chapter-557-the-emperors-worry"}, {"time": "17:15", "timestamp": 1791969316480, "path": "Summary/2026/10/chapter-555-the-law-of-modesty-and-the-peeped-conc_1791969316480.html", "title": "📄 17:15 Chapter 555: The Law of Modesty and the Peeped Concubine", "rawTitle": "chapter-555-the-law-of-modesty-and-the-peeped-conc"}, {"time": "13:25", "timestamp": 1791955508633, "path": "Summary/2026/10/chapter-554-the-imperial-peeping-tom_1791955508633.html", "title": "📄 13:25 Chapter 554: The Imperial Peeping Tom", "rawTitle": "chapter-554-the-imperial-peeping-tom"}], "22": [{"time": "19:21", "timestamp": 1792668101592, "path": "Summary/2026/10/taiwan-comedian-targeted-in-alleged-attack_1792668101592.html", "title": "📄 19:21 Taiwan Comedian Targeted in Alleged Attack", "rawTitle": "taiwan-comedian-targeted-in-alleged-attack"}], "16": [{"time": "13:30", "timestamp": 1792128608312, "path": "Summary/2026/10/chapter-562-the-ascension-of-the-succubus-queen_1792128608312.html", "title": "📄 13:30 Chapter 562: The Ascension of the Succubus Queen", "rawTitle": "chapter-562-the-ascension-of-the-succubus-queen"}, {"time": "12:08", "timestamp": 1792123683334, "path": "Summary/2026/10/chapter-561-the-economics-of-eternity-and-the-peas_1792123683334.html", "title": "📄 12:08 Chapter 561: The Economics of Eternity and the Peasant Ban", "rawTitle": "chapter-561-the-economics-of-eternity-and-the-peas"}, {"time": "11:20", "timestamp": 1792120852790, "path": "Summary/2026/10/chapter-560-the-immortal-body-and-the-eternal-lord_1792120852790.html", "title": "📄 11:20 Chapter 560: The Immortal Body and the Eternal Lord", "rawTitle": "chapter-560-the-immortal-body-and-the-eternal-lord"}]}, "9": {"27": [{"time": "06:52", "timestamp": 1790463147386, "path": "Summary/2026/9/the-blue-light_1790463147386.html", "title": "📄 06:52 The Blue Light", "rawTitle": "the-blue-light"}, {"time": "06:46", "timestamp": 1790462813365, "path": "Summary/2026/9/the-unforgiving-lens_1790462813365.html", "title": "📄 06:46 The Unforgiving Lens", "rawTitle": "the-unforgiving-lens"}, {"time": "06:30", "timestamp": 1790461840976, "path": "Summary/2026/9/washing-away-sylvia_1790461840976.html", "title": "📄 06:30 Washing Away Sylvia", "rawTitle": "washing-away-sylvia"}, {"time": "05:50", "timestamp": 1790459451576, "path": "Summary/2026/9/the-sterile-equation_1790459451576.html", "title": "📄 05:50 The Sterile Equation", "rawTitle": "the-sterile-equation"}], "26": [{"time": "22:54", "timestamp": 1790434450967, "path": "Summary/2026/9/a-midsummer-escape_1790434450967.html", "title": "📄 22:54 A Midsummer Escape", "rawTitle": "a-midsummer-escape"}, {"time": "17:39", "timestamp": 1790415573635, "path": "Summary/2026/9/first-snow_1790415573635.html", "title": "📄 17:39 First Snow", "rawTitle": "first-snow"}, {"time": "16:34", "timestamp": 1790411652736, "path": "Summary/2026/9/the-fall_1790411652736.html", "title": "📄 16:34 The Fall", "rawTitle": "the-fall"}, {"time": "08:05", "timestamp": 1790381134688, "path": "Summary/2026/9/the-wait_1790381134688.html", "title": "📄 08:05 The Wait", "rawTitle": "the-wait"}], "25": [{"time": "21:14", "timestamp": 1790342083070, "path": "Summary/2026/9/the-granddaughter_1790342083070.html", "title": "📄 21:14 The Granddaughter", "rawTitle": "the-granddaughter"}, {"time": "21:09", "timestamp": 1790341792061, "path": "Summary/2026/9/the-son_1790341792061.html", "title": "📄 21:09 The Son", "rawTitle": "the-son"}, {"time": "20:53", "timestamp": 1790340780926, "path": "Summary/2026/9/the-night-before-the-train-left_1790340780926.html", "title": "📄 20:53 The night before the train left", "rawTitle": "the-night-before-the-train-left"}, {"time": "18:10", "timestamp": 1790331009943, "path": "Summary/2026/9/the-photograph_1790331009943.html", "title": "📄 18:10 The Photograph", "rawTitle": "the-photograph"}], "28": [{"time": "22:55", "timestamp": 1790607339398, "path": "Summary/2026/9/the-wardens-warning_1790607339398.html", "title": "📄 22:55 The Warden's Warning", "rawTitle": "the-wardens-warning"}, {"time": "21:40", "timestamp": 1790602835452, "path": "Summary/2026/9/the-king-of-the-yard_1790602835452.html", "title": "📄 21:40 The King of the Yard", "rawTitle": "the-king-of-the-yard"}, {"time": "21:35", "timestamp": 1790602541108, "path": "Summary/2026/9/the-fall_1790602541108.html", "title": "📄 21:35 The Fall", "rawTitle": "the-fall"}, {"time": "21:32", "timestamp": 1790602343847, "path": "Summary/2026/9/the-descent_1790602343847.html", "title": "📄 21:32 The Descent", "rawTitle": "the-descent"}, {"time": "21:27", "timestamp": 1790602048136, "path": "Summary/2026/9/the-ultimatum_1790602048136.html", "title": "📄 21:27 The Ultimatum", "rawTitle": "the-ultimatum"}, {"time": "20:45", "timestamp": 1790599547345, "path": "Summary/2026/9/the-accomplice_1790599547345.html", "title": "📄 20:45 The Accomplice", "rawTitle": "the-accomplice"}], "29": [{"time": "00:46", "timestamp": 1790614009172, "path": "Summary/2026/9/eighteen-year-old-margaret_1790614009172.html", "title": "📄 00:46 Eighteen-Year-Old Margaret", "rawTitle": "eighteen-year-old-margaret"}]}}}/*DATA_END*/;
+        const ANNO_STYLE_TEMPLATE = "    <style id=\"ss-anno-style\">\n        .para-wrap { margin-bottom: 1.5em; position: relative; }\n        .para-wrap > p { margin-bottom: 0 !important; }\n        .anno-toggle { display: inline-flex; margin-left: 6px; cursor: pointer; opacity: 0.25; font-size: 0.75em; vertical-align: middle; transition: all 0.2s; user-select: none; text-indent: 0; }\n        .anno-toggle:hover { opacity: 0.85; transform: scale(1.1); }\n        .anno-toggle.has-anno { opacity: 1; }\n        .anno-toggle::after { content: \"🔴\"; }\n        .anno-box { display: none; margin-top: 10px; background: #f8f6ff; border-left: 4px solid #8e7cc3; padding: 12px 16px; border-radius: 0 6px 6px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-indent: 0; font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; }\n        .anno-view { font-size: 0.9em; line-height: 1.6; color: #4a4a4a; min-height: 24px; text-indent: 0; text-align: left; }\n        .anno-edit { width: 100%; min-height: 110px; padding: 10px; font-family: monospace; font-size: 0.85em; border: 1px dashed #8e7cc3; border-radius: 6px; box-sizing: border-box; resize: vertical; display: none; background: #fff; color: #333; outline: none; text-indent: 0; }\n        .anno-edit:focus { border: 1px solid #8e7cc3; box-shadow: 0 0 0 3px rgba(142,124,195,0.15); }\n        .markdown-body p { margin-top: 0 !important; margin-bottom: 8px !important; text-indent: 0 !important; text-align: left !important; }\n        .markdown-body p:last-child { margin-bottom: 0 !important; }\n        .markdown-body p:empty { display: none; }\n        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #8e7cc3; font-size: 1.05em; margin: 10px 0 6px 0; border-bottom: 1px dashed #e0d8f0; padding-bottom: 4px; text-align: left !important; }\n        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 20px; text-indent: 0; }\n        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 14px; background: rgba(142,124,195,0.1); border-left: 4px solid #8e7cc3; color: #555; text-indent: 0; }\n        .ss-nav-link { color: #b85c38; text-decoration: none; background: #faede6; padding: 2px 10px; border-radius: 6px; font-weight: 600; font-size: 0.92em; margin-left: 12px; display: inline-block; transition: background 0.2s; text-indent: 0; }\n        .ss-nav-link:hover { background: #f3dccf; }\n        .sync-status { position: fixed; top: 14px; right: 16px; z-index: 2000; padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: bold; display: none; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.18); font-family: -apple-system, sans-serif; text-indent: 0; }\n    </style>";
+        const MATRIX_ENGINE_TEMPLATE = "    <span class=\"sync-status\" id=\"sync-status\">📡 同步中...</span>\n    <script id=\"matrix-engine\">\n        const GH_OWNER = \"moodHappy\";\n        const GH_REPO = \"ShortStories\";\n\n        function toBase64(str) {\n            const bytes = new TextEncoder().encode(str);\n            let bin = '';\n            const chunkSize = 0x8000;\n            for (let i = 0; i < bytes.length; i += chunkSize) {\n                bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));\n            }\n            return btoa(bin);\n        }\n\n        let syncTimeout = null;\n        function scheduleSync() {\n            const statusMsg = document.getElementById('sync-status');\n            if (!statusMsg) return;\n            statusMsg.style.display = 'inline-block';\n            statusMsg.style.backgroundColor = '#f39c12';\n            statusMsg.innerText = '⏳ 更改已记录，5秒后自动同步...';\n            statusMsg.style.cursor = 'default';\n            statusMsg.onclick = null;\n            if (syncTimeout) clearTimeout(syncTimeout);\n            syncTimeout = setTimeout(() => { syncToGitHub(); }, 5000);\n        }\n\n        function initAnnotations() {\n            document.querySelectorAll('.para-wrap').forEach(wrap => {\n                const view = wrap.querySelector('.anno-view');\n                const edit = wrap.querySelector('.anno-edit');\n                const toggle = wrap.querySelector('.anno-toggle');\n                const box = wrap.querySelector('.anno-box');\n                if (!edit || !toggle || !view || !box) return;\n\n                const rawText = edit.value.trim();\n                if (rawText) {\n                    toggle.classList.add('has-anno');\n                    if (typeof marked !== 'undefined') { view.innerHTML = marked.parse(rawText); }\n                    else { view.innerText = rawText; }\n                }\n\n                toggle.onclick = (e) => {\n                    e.stopPropagation();\n                    if (box.style.display === 'block') {\n                        box.style.display = 'none';\n                        wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });\n                    } else {\n                        box.style.display = 'block';\n                        if (!edit.value.trim()) {\n                            view.style.display = 'none';\n                            edit.style.display = 'block';\n                            edit.focus();\n                        } else {\n                            if (typeof marked !== 'undefined' && !view.innerHTML.trim()) {\n                                view.innerHTML = marked.parse(edit.value.trim());\n                            }\n                            view.style.display = 'block';\n                            edit.style.display = 'none';\n                        }\n                    }\n                };\n\n                const triggerEdit = () => {\n                    view.style.display = 'none';\n                    edit.style.display = 'block';\n                    edit.focus();\n                };\n\n                // 桌面端：右键点击已渲染的批注进入编辑；双击批注收起面板\n                view.addEventListener('contextmenu', e => {\n                    e.preventDefault();\n                    e.stopPropagation();\n                    triggerEdit();\n                });\n                view.addEventListener('dblclick', e => {\n                    e.stopPropagation();\n                    box.style.display = 'none';\n                    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });\n                });\n\n                // 移动端：双指轻触进入编辑；单指双击收起面板\n                let lastTap = 0;\n                view.addEventListener('touchstart', e => {\n                    if (e.touches.length === 2) {\n                        e.stopPropagation();\n                        triggerEdit();\n                    } else if (e.touches.length === 1) {\n                        const currentTime = new Date().getTime();\n                        const tapLength = currentTime - lastTap;\n                        if (tapLength < 500 && tapLength > 0) {\n                            e.stopPropagation();\n                            box.style.display = 'none';\n                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });\n                        }\n                        lastTap = currentTime;\n                    }\n                }, { passive: true });\n\n                edit.onblur = () => {\n                    const newVal = edit.value.trim();\n                    try {\n                        view.innerHTML = newVal ? (typeof marked !== 'undefined' ? marked.parse(newVal) : newVal) : '';\n                    } catch (e) {}\n                    edit.style.display = 'none';\n                    if (newVal) {\n                        view.style.display = 'block';\n                        toggle.classList.add('has-anno');\n                    } else {\n                        view.style.display = 'none';\n                        box.style.display = 'none';\n                        toggle.classList.remove('has-anno');\n                    }\n                    if (edit.getAttribute('data-old-val') !== newVal) {\n                        edit.setAttribute('data-old-val', newVal);\n                        scheduleSync();\n                    }\n                };\n                edit.setAttribute('data-old-val', rawText);\n            });\n        }\n\n        function reconstructSelfHTML() {\n            const clone = document.documentElement.cloneNode(true);\n\n            // 1. 移除运行期由查词/语音生成的临时 DOM 节点\n            clone.querySelectorAll('audio, [data-tippy-root], .tippy-box').forEach(el => el.remove());\n\n            // 2. 剥离运行期包裹的 span.tm-word，还原纯文本段落，防止保存后重复包裹\n            const contentContainer = clone.querySelector('#content-container');\n            if (contentContainer) {\n                contentContainer.style.fontSize = '';\n                contentContainer.querySelectorAll('span.tm-word').forEach(span => {\n                    span.replaceWith(document.createTextNode(span.textContent));\n                });\n                contentContainer.normalize();\n            }\n\n            // 3. 复位 body 与阅读控制栏默认状态，恢复中文段落默认模糊\n            const bodyEl = clone.querySelector('body');\n            if (bodyEl && contentContainer) {\n                bodyEl.className = 'bar-hidden global-blur-enabled dict-enabled highlights-enabled';\n            }\n            const topBar = clone.querySelector('#top-bar');\n            if (topBar) {\n                topBar.className = 'reader-bar hidden';\n            }\n            clone.querySelectorAll('.zh-para').forEach(p => {\n                p.classList.remove('revealed');\n                if (contentContainer) p.classList.add('blurred');\n            });\n\n            // 4. 将当前页面所有批注内容写入克隆 DOM 的 textarea 中\n            const liveWraps = document.querySelectorAll('.para-wrap');\n            const cloneWraps = clone.querySelectorAll('.para-wrap');\n            liveWraps.forEach((liveWrap, idx) => {\n                const cloneWrap = cloneWraps[idx];\n                if (!cloneWrap) return;\n                const liveEdit = liveWrap.querySelector('.anno-edit');\n                const rawVal = liveEdit ? liveEdit.value.trim() : '';\n\n                const cloneToggle = cloneWrap.querySelector('.anno-toggle');\n                const cloneBox = cloneWrap.querySelector('.anno-box');\n                const cloneView = cloneWrap.querySelector('.anno-view');\n                const cloneEdit = cloneWrap.querySelector('.anno-edit');\n\n                if (cloneToggle) {\n                    if (rawVal) cloneToggle.classList.add('has-anno');\n                    else cloneToggle.classList.remove('has-anno');\n                }\n                if (cloneBox) cloneBox.style.display = 'none';\n                if (cloneView) {\n                    cloneView.innerHTML = '';\n                    cloneView.style.display = 'none';\n                }\n                if (cloneEdit) {\n                    cloneEdit.textContent = rawVal;\n                    cloneEdit.style.display = 'none';\n                    cloneEdit.removeAttribute('data-old-val');\n                }\n            });\n\n            // 5. 隐藏同步状态胶囊\n            const statusEl = clone.querySelector('#sync-status');\n            if (statusEl) {\n                statusEl.style.display = 'none';\n                statusEl.innerText = '📡 同步中...';\n            }\n\n            return '<!DOCTYPE html>\\n' + clone.outerHTML;\n        }\n\n        async function syncToGitHub() {\n            const token = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN') || localStorage.getItem('EXT_GH_TOKEN') || localStorage.getItem('NYT_GH_TOKEN');\n            if (!token) {\n                alert('缺少 GitHub Token，无法同步批注！\\n\\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');\n                return;\n            }\n            const statusMsg = document.getElementById('sync-status');\n            statusMsg.style.display = 'inline-block';\n            statusMsg.style.backgroundColor = '#2ea44f';\n            statusMsg.innerText = '📡 同步中...';\n\n            const pureHtml = reconstructSelfHTML();\n            const decodedPath = decodeURIComponent(window.location.pathname);\n            const sumIdx = decodedPath.indexOf('Summary/');\n            const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.replace(/^\\/+/, '');\n\n            try {\n                const base64Html = toBase64(pureHtml);\n                const apiUrl = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + fileRelPath;\n                const getRes = await fetch(apiUrl + '?t=' + Date.now(), {\n                    headers: { 'Authorization': 'Bearer ' + token },\n                    cache: 'no-store'\n                });\n                if (!getRes.ok) throw new Error('API Rate limit or File not found: ' + fileRelPath);\n                const fileData = await getRes.json();\n                const putRes = await fetch(apiUrl, {\n                    method: 'PUT',\n                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ message: 'Auto-save annotation', content: base64Html, sha: fileData.sha })\n                });\n                if (putRes.ok) {\n                    statusMsg.style.backgroundColor = '#2ea44f';\n                    statusMsg.innerText = '✅ 云端已同步';\n                    setTimeout(() => {\n                        if (statusMsg.innerText === '✅ 云端已同步') statusMsg.style.display = 'none';\n                    }, 3000);\n                } else {\n                    throw new Error('Put failed');\n                }\n            } catch (e) {\n                console.error(e);\n                statusMsg.style.backgroundColor = '#e74c3c';\n                statusMsg.innerText = '❌ 同步失败 (点击重试)';\n                statusMsg.style.cursor = 'pointer';\n                statusMsg.onclick = () => {\n                    statusMsg.onclick = null;\n                    statusMsg.style.cursor = 'default';\n                    syncToGitHub();\n                };\n            }\n        }\n\n        if (document.readyState === 'loading') {\n            document.addEventListener('DOMContentLoaded', initAnnotations);\n        } else {\n            initAnnotations();\n        }\n    </script>";
         const today = new Date();
         
         // 🔒 锁死配置
@@ -218,6 +220,110 @@
             deleteMode: false,
             filterText: ''
         };
+
+        // 🔑 支持从文章内点击『🔙 返回日历』时通过 ?date=YYYY-M-D 精准跳回文章所属日期
+        (function applyUrlDateParam() {
+            const params = new URLSearchParams(window.location.search);
+            const dateStr = params.get('date');
+            if (dateStr) {
+                const parts = dateStr.split('-').map(Number);
+                if (parts.length === 3 && !isNaN(parts[0]) && !isNaN(parts[1]) && !isNaN(parts[2])) {
+                    AppState.year = parts[0];
+                    AppState.month = parts[1];
+                    AppState.day = parts[2];
+                }
+            }
+        })();
+
+        function pad2(n) { return String(n).padStart(2, '0'); }
+
+        function getSelectedDateTimeLocalStr() {
+            const now = new Date();
+            return `${AppState.year}-${pad2(AppState.month)}-${pad2(AppState.day)}T${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}`;
+        }
+
+        // 🚀 浏览器端自动注入引擎：将转换工具生成的 HTML 自动植入 🔴 批注系统、防冲突过滤与日历返回链接
+        function adaptHtmlForShortStories(rawHtml, yearStr, monthStr, dayStr) {
+            let html = rawHtml;
+            const targetBackHref = `../../../index.html?date=${yearStr}-${monthStr}-${dayStr}`;
+
+            // 1. 注入 marked.min.js
+            if (!html.includes('marked.min.js') && html.includes('</head>')) {
+                html = html.replace('</head>', '    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"><\/script>\n</head>');
+            }
+
+            // 2. 注入批注 CSS
+            if (!html.includes('id="ss-anno-style"') && !html.includes('.anno-toggle') && html.includes('</head>')) {
+                html = html.replace('</head>', ANNO_STYLE_TEMPLATE + '\n</head>');
+            }
+
+            // 3. 为正文中所有英文 <p> 段落包裹 .para-wrap 与 🔴 批注框（自动跳过 .zh-para）
+            if (!html.includes('class="para-wrap"')) {
+                const bodyIdx = html.indexOf('<body');
+                let scriptIdx = bodyIdx !== -1 ? html.indexOf('<script', bodyIdx) : -1;
+                if (scriptIdx === -1) scriptIdx = html.length;
+
+                let beforeScript = html.substring(0, scriptIdx);
+                const afterScript = html.substring(scriptIdx);
+
+                beforeScript = beforeScript.replace(/<p\b([^>]*)>([\s\S]*?)<\/p>/gi, function(fullMatch, attrs, inner) {
+                    if (attrs.includes('zh-para') || inner.includes('anno-toggle')) return fullMatch;
+                    return '<div class="para-wrap">\n' +
+                        '    <p' + attrs + '>' + inner + '<span class="anno-toggle"></span></p>\n' +
+                        '    <div class="anno-box" style="display:none;">\n' +
+                        '        <div class="anno-view markdown-body"></div>\n' +
+                        '        <textarea class="anno-edit" style="display:none;"></textarea>\n' +
+                        '    </div>\n' +
+                        '</div>';
+                });
+                html = beforeScript + afterScript;
+            }
+
+            // 4. 隔离 wrapTextNodesToWord 查词包裹与全局双击顶栏事件，防止干扰批注框
+            if (html.includes("parent.closest('.zh-para')") && !html.includes("parent.closest('.anno-box')")) {
+                html = html.replace(
+                    "parent.closest('.zh-para')",
+                    "parent.closest('.zh-para') || parent.closest('.anno-box') || parent.closest('.anno-toggle') || parent.closest('.ss-nav-link')"
+                );
+            }
+            if (html.includes("e.target.classList.contains('zh-para')") && !html.includes("e.target.closest('.anno-box')")) {
+                html = html.replace(
+                    "e.target.classList.contains('zh-para')",
+                    "e.target.classList.contains('zh-para') || e.target.closest('.anno-box') || e.target.closest('.anno-toggle')"
+                );
+            }
+
+            // 5. 在『发布时间：...』旁及顶部 #top-bar 注入『🔙 返回日历』按钮
+            if (!html.includes('ss-nav-link')) {
+                html = html.replace(
+                    /(发布时间[：:]\s*\d{4}[-/]\d{1,2}[-/]\d{1,2}(?:\s+\d{1,2}:\d{1,2}(?::\d{1,2})?)?)/,
+                    `$1 <a href="${targetBackHref}" class="ss-nav-link">🔙 返回日历</a>`
+                );
+            } else {
+                html = html.replace(
+                    /href=["'][^"']*index\.html(?:\?[^"']*)?["'](\s+class=["']ss-nav-link["'])/g,
+                    `href="${targetBackHref}"$1`
+                );
+            }
+
+            if (html.includes('class="reader-controls"') && !html.includes('ss-top-back-btn')) {
+                html = html.replace(
+                    '<div class="reader-controls">',
+                    `<div class="reader-controls">\n            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href='${targetBackHref}'">🔙 日历</button>`
+                );
+            }
+
+            // 兼容旧版 .meta 模板
+            html = html.replace(/href=["'](?:\.\.\/|\.\/)*index\.html(?:\?[^"']*)?["']/g, `href="${targetBackHref}"`);
+            html = html.replace(/const\s+GH_REPO\s*=\s*["'].*?["']\s*;/g, 'const GH_REPO = "ShortStories";');
+
+            // 6. 注入 #matrix-engine 批注同步引擎
+            if (!html.includes('id="matrix-engine"') && html.includes('</body>')) {
+                html = html.replace('</body>', MATRIX_ENGINE_TEMPLATE + '\n</body>');
+            }
+
+            return html;
+        }
 
         function initSelects() {
             const yearSelect = document.getElementById('yearSelect');
@@ -320,7 +426,6 @@
         document.getElementById('nextBtn').addEventListener('click', () => { AppState.month++; if (AppState.month > 12) { AppState.month = 1; AppState.year++; } forceRender(); });
         document.getElementById('todayBtn').addEventListener('click', () => { AppState.year = today.getFullYear(); AppState.month = today.getMonth() + 1; AppState.day = today.getDate(); forceRender(); });
 
-        // 搜索栏监听：检索过滤 OR 触发发布终端
         document.getElementById('searchInput').addEventListener('input', (e) => {
             AppState.filterText = e.target.value.trim();
             forceRender();
@@ -331,6 +436,8 @@
                 e.preventDefault();
                 document.getElementById('upFilename').value = '';
                 document.getElementById('upContent').value = '';
+                document.getElementById('upDateTime').value = getSelectedDateTimeLocalStr();
+                document.getElementById('dateHint').style.display = 'none';
                 document.getElementById('uploadModal').style.display = 'flex';
                 setTimeout(() => { document.getElementById('upContent').focus(); }, 100);
             }
@@ -352,7 +459,7 @@
         /* ================= 核心发布功能 ================= */
         document.getElementById('closeUploadBtn').addEventListener('click', () => { document.getElementById('uploadModal').style.display = 'none'; });
         
-        // 🚀 自动从源码中抓取 title 并格式化为文件名
+        // 🚀 粘贴源码后自动提取 <title> 及『发布时间：2026/10/26 13:51:14』
         document.getElementById('upContent').addEventListener('input', (e) => {
             const content = e.target.value;
             const titleMatch = content.match(/<title[^>]*>(.*?)<\/title>/i);
@@ -360,42 +467,61 @@
             if (titleMatch && titleMatch[1]) {
                 let rawTitle = titleMatch[1].replace(/<[^>]+>/g, '').trim();
                 let autoFilename = rawTitle
-                    .replace(/[^a-zA-Z0-9\s-_]/g, '') // 移除非字母数字和空格横线
-                    .replace(/\s+/g, '-')             // 空格转为横线
-                    .replace(/-+/g, '-')              // 合并多个相邻的横线
-                    .toLowerCase();                   // 统一转化为小写
+                    .replace(/[^a-zA-Z0-9\s-_]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .toLowerCase();
                 
-                // 限制文件名本身长度
                 if (autoFilename.length > 50) {
                     autoFilename = autoFilename.substring(0, 50);
                 }
-                
-                document.getElementById('upFilename').value = autoFilename;
+                document.getElementById('upFilename').value = autoFilename.replace(/^-+|-+$/g, '');
             } else {
                 document.getElementById('upFilename').value = '';
+            }
+
+            // 匹配『发布时间：2026/10/26 13:51:14』或『📅 2026-09-20 20:25』
+            const dateMatch = content.match(/(?:发布时间[：:]\s*|📅\s*)(\d{4})[-/](\d{1,2})[-/](\d{1,2})(?:\s+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?/);
+            const dateHint = document.getElementById('dateHint');
+            if (dateMatch) {
+                const y = dateMatch[1];
+                const m = pad2(dateMatch[2]);
+                const d = pad2(dateMatch[3]);
+                const hh = dateMatch[4] !== undefined ? pad2(dateMatch[4]) : '12';
+                const mm = dateMatch[5] !== undefined ? pad2(dateMatch[5]) : '00';
+                const ss = dateMatch[6] !== undefined ? pad2(dateMatch[6]) : '00';
+                document.getElementById('upDateTime').value = `${y}-${m}-${d}T${hh}:${mm}:${ss}`;
+                dateHint.innerText = `✨ 已自动识别文章发布时间：${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+                dateHint.style.display = 'block';
+            } else {
+                dateHint.style.display = 'none';
             }
         });
 
         document.getElementById('saveUploadBtn').addEventListener('click', async () => {
             let filename = document.getElementById('upFilename').value.trim();
-            let content = document.getElementById('upContent').value.trim();
+            let rawContent = document.getElementById('upContent').value.trim();
             
-            if(!content) return alert("请粘贴 HTML 代码！");
+            if(!rawContent) return alert("请粘贴 HTML 代码！");
             
-            filename = filename.replace(/[^a-zA-Z0-9\s-_]/g, '').trim().replace(/\s+/g, '-');
+            filename = filename.replace(/[^a-zA-Z0-9\s-_]/g, '').trim().replace(/\s+/g, '-').replace(/^-+|-+$/g, '');
             if(!filename) filename = "story";
 
-            const ghToken = localStorage.getItem('LITIT_GH_TOKEN');
-
+            const ghToken = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN');
             if (!ghToken) return alert('请先通过右侧齿轮 ⚙️ 配置 GitHub Token！');
 
-            const now = new Date();
-            const yearStr = String(now.getFullYear());
-            const monthStr = String(now.getMonth() + 1);
-            const dayStr = String(now.getDate());
-            const ts = now.getTime();
+            const dtVal = document.getElementById('upDateTime').value;
+            const targetDate = dtVal ? new Date(dtVal) : new Date(AppState.year, AppState.month - 1, AppState.day, new Date().getHours(), new Date().getMinutes());
             
-            // 构建目标路径，自动匹配年月结构 Summary/2026/8/xxx_12345.html
+            const yearStr = String(targetDate.getFullYear());
+            const monthStr = String(targetDate.getMonth() + 1);
+            const dayStr = String(targetDate.getDate());
+            const timeStr = pad2(targetDate.getHours()) + ':' + pad2(targetDate.getMinutes());
+            const ts = targetDate.getTime();
+            
+            // 🔑 自动将转换器生成的 HTML 升级为带 🔴 批注与日历返回链接的格式
+            const adaptedContent = adaptHtmlForShortStories(rawContent, yearStr, monthStr, dayStr);
+
             const fullPath = `Summary/${yearStr}/${monthStr}/${filename}_${ts}.html`;
             
             try {
@@ -403,27 +529,24 @@
                 loadingBar.style.width = '20%';
                 document.getElementById('saveUploadBtn').innerText = "推送中...";
                 
-                // 1. 推送 HTML 文件到仓库
-                const base64Content = btoa(unescape(encodeURIComponent(content)));
+                // 1. 推送注入批注后的 HTML 文件到仓库
+                const base64Content = btoa(unescape(encodeURIComponent(adaptedContent)));
                 const resUpload = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${fullPath}`, {
                     method: 'PUT',
                     headers: { 'Authorization': `Bearer ${ghToken}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: `Upload new short story: ${filename}`, content: base64Content })
+                    body: JSON.stringify({ message: `Upload short story (${yearStr}-${monthStr}-${dayStr}): ${filename}`, content: base64Content })
                 });
 
                 if(!resUpload.ok) throw new Error("文件推送失败");
                 loadingBar.style.width = '60%';
 
-                // 2. 🔑 核心修复：抓取 HTML 的 <title> 标题，更新本地索引变量
-                let displayTitleMatch = content.match(/<title[^>]*>(.*?)<\/title>/i);
+                // 2. 提取 <title> 更新索引
+                let displayTitleMatch = adaptedContent.match(/<title[^>]*>(.*?)<\/title>/i);
                 let htmlTitle = displayTitleMatch ? displayTitleMatch[1].replace(/<[^>]+>/g, '').trim() : "未命名小说";
                 
-                // 过长自动截断
                 if (htmlTitle.length > 60) {
                     htmlTitle = htmlTitle.substring(0, 60) + "...";
                 }
-
-                const timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
 
                 if(!archiveData[yearStr]) archiveData[yearStr] = {};
                 if(!archiveData[yearStr][monthStr]) archiveData[yearStr][monthStr] = {};
@@ -437,16 +560,17 @@
                     rawTitle: filename
                 });
 
-                // 跳转到今天并重绘，让用户立刻看到新上传的文件
-                AppState.year = now.getFullYear();
-                AppState.month = now.getMonth() + 1;
-                AppState.day = now.getDate();
+                // 跳转日历到文章所属的日期并重绘
+                AppState.year = targetDate.getFullYear();
+                AppState.month = targetDate.getMonth() + 1;
+                AppState.day = targetDate.getDate();
+                initSelects();
                 forceRender();
 
-                // 3. 将新的索引同步写入云端 index.html，确保持久化
+                // 3. 同步更新云端 index.html
                 const idxRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/index.html`, { headers: { 'Authorization': `Bearer ${ghToken}` } });
                 const idxData = await idxRes.json();
-                const idxContent = decodeURIComponent(escape(atob(idxData.content.replace(/\n/g, ''))));
+                const idxContent = decodeURIComponent(escape(atob(idxData.content.replace(/\s/g, ''))));
                 
                 const dataStart = idxContent.indexOf('/*DATA_START*/') + 14;
                 const dataEnd = idxContent.indexOf('/*DATA_END*/');
@@ -464,7 +588,7 @@
                 
                 document.getElementById('uploadModal').style.display = 'none';
                 document.getElementById('saveUploadBtn').innerText = "推送至云端 🚀";
-                alert('🎉 发布成功！小说已归档至云端。');
+                alert(`🎉 发布成功！已自动注入 🔴 批注系统并归档至 ${yearStr}-${pad2(monthStr)}-${pad2(dayStr)}。`);
                 
             } catch (e) {
                 console.error(e);
@@ -476,7 +600,7 @@
 
         /* ================= 核心设置/删除功能 ================= */
         document.getElementById('openSettingsBtn').addEventListener('click', () => {
-            document.getElementById('cfgGhToken').value = localStorage.getItem('LITIT_GH_TOKEN') || '';
+            document.getElementById('cfgGhToken').value = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN') || '';
             document.getElementById('cfgCustomUrl').value = localStorage.getItem('LITIT_CUSTOM_API_URL') || '';
             document.getElementById('cfgCustomKey').value = localStorage.getItem('LITIT_CUSTOM_API_KEY') || '';
             document.getElementById('cfgCustomModel').value = localStorage.getItem('LITIT_CUSTOM_MODEL') || '';
@@ -486,16 +610,18 @@
         document.getElementById('closeSettingsBtn').addEventListener('click', () => { document.getElementById('settingsModal').style.display = 'none'; });
         
         document.getElementById('saveSettingsBtn').addEventListener('click', () => {
-            localStorage.setItem('LITIT_GH_TOKEN', document.getElementById('cfgGhToken').value.trim());
+            const tokenVal = document.getElementById('cfgGhToken').value.trim();
+            localStorage.setItem('LITIT_GH_TOKEN', tokenVal);
+            if (tokenVal) localStorage.setItem('GH_TOKEN', tokenVal);
             localStorage.setItem('LITIT_CUSTOM_API_URL', document.getElementById('cfgCustomUrl').value.trim());
             localStorage.setItem('LITIT_CUSTOM_API_KEY', document.getElementById('cfgCustomKey').value.trim());
             localStorage.setItem('LITIT_CUSTOM_MODEL', document.getElementById('cfgCustomModel').value.trim());
             document.getElementById('settingsModal').style.display = 'none';
-            alert('配置已保存在本地浏览器（已通过专属前缀隔离）！');
+            alert('配置已保存在本地浏览器！');
         });
 
         async function syncDeleteToGithub(fileRelPath) {
-            const ghToken = localStorage.getItem('LITIT_GH_TOKEN');
+            const ghToken = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN');
             
             if (!ghToken) return alert('本地已移出索引，但未配置 GitHub Token，远端文件未删除。');
             try {
@@ -508,7 +634,7 @@
                 loadingBar.style.width = '70%';
                 const idxRes = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/index.html`, { headers: { 'Authorization': `Bearer ${ghToken}` } });
                 const idxData = await idxRes.json();
-                const idxContent = decodeURIComponent(escape(atob(idxData.content.replace(/\n/g, ''))));
+                const idxContent = decodeURIComponent(escape(atob(idxData.content.replace(/\s/g, ''))));
                 
                 const dataStart = idxContent.indexOf('/*DATA_START*/') + 14;
                 const dataEnd = idxContent.indexOf('/*DATA_END*/');

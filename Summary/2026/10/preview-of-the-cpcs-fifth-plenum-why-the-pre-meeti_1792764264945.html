@@ -55,10 +55,33 @@
         .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
         @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="ss-anno-style">
+        .para-wrap { margin-bottom: 1.5em; position: relative; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle { display: inline-flex; margin-left: 6px; cursor: pointer; opacity: 0.25; font-size: 0.75em; vertical-align: middle; transition: all 0.2s; user-select: none; text-indent: 0; }
+        .anno-toggle:hover { opacity: 0.85; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .anno-box { display: none; margin-top: 10px; background: #f8f6ff; border-left: 4px solid #8e7cc3; padding: 12px 16px; border-radius: 0 6px 6px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-indent: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .anno-view { font-size: 0.9em; line-height: 1.6; color: #4a4a4a; min-height: 24px; text-indent: 0; text-align: left; }
+        .anno-edit { width: 100%; min-height: 110px; padding: 10px; font-family: monospace; font-size: 0.85em; border: 1px dashed #8e7cc3; border-radius: 6px; box-sizing: border-box; resize: vertical; display: none; background: #fff; color: #333; outline: none; text-indent: 0; }
+        .anno-edit:focus { border: 1px solid #8e7cc3; box-shadow: 0 0 0 3px rgba(142,124,195,0.15); }
+        .markdown-body p { margin-top: 0 !important; margin-bottom: 8px !important; text-indent: 0 !important; text-align: left !important; }
+        .markdown-body p:last-child { margin-bottom: 0 !important; }
+        .markdown-body p:empty { display: none; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #8e7cc3; font-size: 1.05em; margin: 10px 0 6px 0; border-bottom: 1px dashed #e0d8f0; padding-bottom: 4px; text-align: left !important; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 20px; text-indent: 0; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 14px; background: rgba(142,124,195,0.1); border-left: 4px solid #8e7cc3; color: #555; text-indent: 0; }
+        .ss-nav-link { color: #b85c38; text-decoration: none; background: #faede6; padding: 2px 10px; border-radius: 6px; font-weight: 600; font-size: 0.92em; margin-left: 12px; display: inline-block; transition: background 0.2s; text-indent: 0; }
+        .ss-nav-link:hover { background: #f3dccf; }
+        .sync-status { position: fixed; top: 14px; right: 16px; z-index: 2000; padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: bold; display: none; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.18); font-family: -apple-system, sans-serif; text-indent: 0; }
+    </style>
 </head>
 <body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
     <div class="reader-bar hidden" id="top-bar">
         <div class="reader-controls">
+            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href="../../../index.html?date=2026-10-23"">🔙 日历</button>
             <button class="reader-btn" onclick="adjustFont(-0.1)">A-</button>
             <button class="reader-btn" onclick="adjustFont(0.1)">A+</button>
             <button id="blur-btn" class="reader-btn" style="background:#AF52DE; color:white;" onclick="toggleBlur()">模糊: 开</button>
@@ -73,60 +96,222 @@
         <a href="https://www.bbc.com/zhongwen/articles/ckx2q587wvrqo/simp" target="_blank" style="color: inherit; text-decoration: none; border-bottom: 1px solid currentColor;">🔗 阅读原文</a>
     </div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中共五中全会前瞻：会前为何密集“打虎”？未来怎样“从严治党”？</p>
-    <p>The Fifth Plenary Session of the 20th Central Committee of the Communist Party of China (CPC), known as the Fifth Plenum, will be held in Beijing from October 26 to 29. Its theme is “full and rigorous Party self-governance.” Taking place in the year before the 21st Party Congress, the meeting has drawn attention amid a renewed anti-corruption drive and a series of high-ranking officials being brought down. Observers are watching to see how the CPC assesses its anti-corruption record and whether it is laying the groundwork for next year’s leadership reshuffle.</p>
+    <div class="para-wrap">
+    <p>The Fifth Plenary Session of the 20th Central Committee of the Communist Party of China (CPC), known as the Fifth Plenum, will be held in Beijing from October 26 to 29. Its theme is “full and rigorous Party self-governance.” Taking place in the year before the 21st Party Congress, the meeting has drawn attention amid a renewed anti-corruption drive and a series of high-ranking officials being brought down. Observers are watching to see how the CPC assesses its anti-corruption record and whether it is laying the groundwork for next year’s leadership reshuffle.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中共第二十届中央委员会第五次全体会议（五中全会）将于10月26日至29日在北京召开，主题为“全面从严治党”。这是二十一大前一年举行的全会，在反腐持续升温、高级官员接连落马的背景下，外界关注中共如何总结过去的反腐成果，以及是否为明年换届铺路。</p>
-    <p>In the months leading up to the meeting, the anti-corruption campaign intensified once again. On August 27, Ye Jianchun, governor of Jiangxi Province, was placed under investigation. On October 13, Huang Qifan, a former mayor of Chongqing who had already retired, was also announced to be under investigation. The number of centrally administered officials brought down in recent years has continued to rise.</p>
+    <div class="para-wrap">
+    <p>In the months leading up to the meeting, the anti-corruption campaign intensified once again. On August 27, Ye Jianchun, governor of Jiangxi Province, was placed under investigation. On October 13, Huang Qifan, a former mayor of Chongqing who had already retired, was also announced to be under investigation. The number of centrally administered officials brought down in recent years has continued to rise.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">会前数月，反腐行动再度密集。8月27日，江西省长叶建春被查；10月13日，已退休的前重庆市长黄奇帆也被宣布接受调查。近年落马的中管干部人数持续攀升。</p>
-    <p>Andrew Wedeman, a professor of political science at Georgia State University who has long studied Chinese politics and anti-corruption campaigns, told BBC Chinese that the number of “tigers” investigated in recent years has repeatedly reached new highs, while the intensity and pace of the campaign have far exceeded those of any previous period. “This means two things: first, the campaign has indeed caught a lot of people; second, it has failed to act as an effective deterrent.”</p>
+    <div class="para-wrap">
+    <p>Andrew Wedeman, a professor of political science at Georgia State University who has long studied Chinese politics and anti-corruption campaigns, told BBC Chinese that the number of “tigers” investigated in recent years has repeatedly reached new highs, while the intensity and pace of the campaign have far exceeded those of any previous period. “This means two things: first, the campaign has indeed caught a lot of people; second, it has failed to act as an effective deterrent.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">美国乔治亚州立大学政治学教授安德鲁·魏德曼（Andrew Wedeman）长期研究中国政治与反腐运动。他对BBC中文表示，近几年被查的“老虎”数量屡创新高，反腐的力度和速度远超以往任何时期。“这意味着两件事：第一，反腐运动确实抓到了很多人；第二，它并没有成功发挥威慑作用。”</p>
-    <p>Analysts believe Beijing is using the pre-plenum crackdown to further discipline the bureaucracy and address personnel issues ahead of the 21st Party Congress. Yet, after 13 years of anti-corruption efforts, three key questions remain unanswered: Can Xi Jinping make the bureaucracy operate according to his wishes? Has corruption declined, and has the campaign effectively deterred misconduct? And do retired officials still have any room to feel secure?</p>
+    <div class="para-wrap">
+    <p>Analysts believe Beijing is using the pre-plenum crackdown to further discipline the bureaucracy and address personnel issues ahead of the 21st Party Congress. Yet, after 13 years of anti-corruption efforts, three key questions remain unanswered: Can Xi Jinping make the bureaucracy operate according to his wishes? Has corruption declined, and has the campaign effectively deterred misconduct? And do retired officials still have any room to feel secure?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">分析人士认为，北京正透过会前的反腐行动，进一步整顿官僚体系，并处理二十一大前的人事问题。但十三年反腐之后，仍有三个关键问题没有答案：习近平能否让官僚体系真正按他的意志运作？十三年反腐后，腐败是否减少、威慑是否有效？退休官员是否仍有安全空间？</p>
-    <p>Party-Building: From Formulating Policy to Implementing It</p>
+    <div class="para-wrap">
+    <p>Party-Building: From Formulating Policy to Implementing It<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“党建”主题：从制定政策到落实政策</p>
-    <p>By convention, the Fifth Plenum would normally focus on the next five-year plan. However, the postponement of the Third Plenum pushed back the agendas of the Fourth and Fifth Plenums in turn. The Fourth Plenum has already reviewed and approved recommendations for the 15th Five-Year Plan, so the Fifth Plenum will take up Party-building issues that would ordinarily be addressed at the Sixth Plenum. The authorities have confirmed that the meeting will deliberate on the “Decision of the CPC Central Committee on Major Issues Concerning the Sustained Advancement of Full and Rigorous Party Self-Governance.”</p>
+    <div class="para-wrap">
+    <p>By convention, the Fifth Plenum would normally focus on the next five-year plan. However, the postponement of the Third Plenum pushed back the agendas of the Fourth and Fifth Plenums in turn. The Fourth Plenum has already reviewed and approved recommendations for the 15th Five-Year Plan, so the Fifth Plenum will take up Party-building issues that would ordinarily be addressed at the Sixth Plenum. The authorities have confirmed that the meeting will deliberate on the “Decision of the CPC Central Committee on Major Issues Concerning the Sustained Advancement of Full and Rigorous Party Self-Governance.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">按照惯例，五中全会本应聚焦下一个五年规划。但本届三中全会延迟，四中、五中全会的议题依次顺延。四中全会已审议通过“十五五”规划建议，五中全会因此承接通常属于六中全会的党建议题。官方已明确，会议将审议《中共中央关于持之以恒推进全面从严治党若干重大问题的决定》。</p>
-    <p>Wedeman believes this reflects a shift in Xi’s priorities: his main concern is no longer simply formulating new policies, but ensuring that they are implemented. In recent years, Xi has repeatedly criticised local officials for paying lip service to central directives while acting otherwise, and for pursuing their own agendas. In Wedeman’s view, Beijing wants to address not only corruption, but also the bureaucracy’s ability to carry out policy.</p>
+    <div class="para-wrap">
+    <p>Wedeman believes this reflects a shift in Xi’s priorities: his main concern is no longer simply formulating new policies, but ensuring that they are implemented. In recent years, Xi has repeatedly criticised local officials for paying lip service to central directives while acting otherwise, and for pursuing their own agendas. In Wedeman’s view, Beijing wants to address not only corruption, but also the bureaucracy’s ability to carry out policy.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">魏德曼认为，这反映习近平当前最关注的已不只是制定新政策，而是如何确保政策得以落实。习近平近年多次批评地方官员“阳奉阴违”、“自行其是”。在魏德曼看来，北京真正希望解决的不只是腐败，更是官僚体系的执行力。</p>
-    <p>Neil Thomas, a fellow specialising in Chinese politics at the Asia Society Policy Institute, predicted in an email to BBC Chinese that several changes could follow the plenum: tighter oversight of major projects and public spending, stronger accountability mechanisms for Party committee secretaries, greater use of big data to detect corruption, stricter supervision of local officials, and expanded powers for disciplinary inspection bodies.</p>
+    <div class="para-wrap">
+    <p>Neil Thomas, a fellow specialising in Chinese politics at the Asia Society Policy Institute, predicted in an email to BBC Chinese that several changes could follow the plenum: tighter oversight of major projects and public spending, stronger accountability mechanisms for Party committee secretaries, greater use of big data to detect corruption, stricter supervision of local officials, and expanded powers for disciplinary inspection bodies.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">亚洲协会政策研究所中国政治研究员牛犇（Neil Thomas）在发给BBC中文的电邮中预测，全会后可能出现几项变化：重大项目和财政支出的监管加强，党委书记的问责机制强化，更多利用大数据查处腐败，地方官员面对更严格的监管，纪检部门的权力进一步扩大。</p>
-    <p>He cautioned, however, that such a stringent accountability system could make grassroots officials even more reluctant to take risks.</p>
+    <div class="para-wrap">
+    <p>He cautioned, however, that such a stringent accountability system could make grassroots officials even more reluctant to take risks.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过他也提醒，如此严厉的问责制度，可能令基层官员更不愿承担风险。</p>
-    <p>End of the featured section</p>
-    <p>Thirteen Years of Anti-Corruption: How Will the Party Continue Its Crackdown?</p>
+    <div class="para-wrap">
+    <p>End of the featured section<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <div class="para-wrap">
+    <p>Thirteen Years of Anti-Corruption: How Will the Party Continue Its Crackdown?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">十三年反腐，如何继续“从严治党”</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">After Xi Jinping came to power in late 2012, the CPC launched an all-out anti-corruption campaign. The slogan “打虎拍蝇” — literally, “swatting tigers and flies” — became a familiar part of China’s political vocabulary. “Tigers” generally refers to centrally administered officials at or above the vice-ministerial level, while “flies” refers to corrupt lower-level officials.</p>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中共反腐在习近平2012年底上台之后，开启“风暴”模式，“打虎拍蝇”成为中国人耳熟能详的政治语码。“老虎”通常指中央管理的副部级以上官员；“苍蝇”指查处基层腐败官员。</p>
-    <p>The number of centrally administered officials brought down has continued to climb in recent years. According to figures released by the Central Commission for Discipline Inspection (CCDI), 181 centrally administered officials were placed under review and investigation in 2025, nearly double the 92 recorded in 2024. During the same period, investigations were opened into 41,000 officials at the county and division levels and 137,000 at the township and section levels.</p>
+    <div class="para-wrap">
+    <p>The number of centrally administered officials brought down has continued to climb in recent years. According to figures released by the Central Commission for Discipline Inspection (CCDI), 181 centrally administered officials were placed under review and investigation in 2025, nearly double the 92 recorded in 2024. During the same period, investigations were opened into 41,000 officials at the county and division levels and 137,000 at the township and section levels.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">落马的中管官员人数近年持续攀升，根据中纪委披露，2025 年立案审查调查的中管干部181人，比2024年的92人增加近一倍。同期立案县处级干部4.1万人，立案乡科级干部13.7万人。</p>
-    <p>“Over the past decade or more, Xi Jinping’s anti-corruption campaign has accumulated remarkable results, but he has not won the war,” Wedeman said. He pointed out that the goal of anti-corruption efforts is not merely to investigate and punish offenders, but also to create a deterrent: those involved in corruption should stop, while those not yet involved should be afraid to cross the line. The persistently high number of senior officials brought down suggests that this deterrent effect has fallen short of expectations. Many of the “tigers” brought down today, he said, were already involved in corruption when they held mid-level positions. Some had been engaged in corrupt activities for ten or fifteen years, during which they not only evaded investigation but continued to rise through the ranks.</p>
+    <div class="para-wrap">
+    <p>“Over the past decade or more, Xi Jinping’s anti-corruption campaign has accumulated remarkable results, but he has not won the war,” Wedeman said. He pointed out that the goal of anti-corruption efforts is not merely to investigate and punish offenders, but also to create a deterrent: those involved in corruption should stop, while those not yet involved should be afraid to cross the line. The persistently high number of senior officials brought down suggests that this deterrent effect has fallen short of expectations. Many of the “tigers” brought down today, he said, were already involved in corruption when they held mid-level positions. Some had been engaged in corrupt activities for ten or fifteen years, during which they not only evaded investigation but continued to rise through the ranks.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">魏德曼说：“过去十几年里，习近平的反腐运动累积了惊人的战果，但他并没有赢得这场战争。”他指出，反腐的目的不只是查处，更在形成威慑，让涉腐者收手，让未涉腐者不敢越界，但高官落马数量长期居高不下，说明这一效果没有达到预期。他说，许多今天落马的“老虎”，在中层任上就已涉腐，有的持续十年、十五年，期间不仅逃过查处，还一路升迁。</p>
-    <p>As for the claim that corruption has worsened despite the crackdown, Wedeman does not believe the campaign itself has generated more corruption. A more accurate assessment, he argues, is that 13 years of high-pressure anti-corruption efforts have still failed to fundamentally change officials’ patterns of behaviour.</p>
+    <div class="para-wrap">
+    <p>As for the claim that corruption has worsened despite the crackdown, Wedeman does not believe the campaign itself has generated more corruption. A more accurate assessment, he argues, is that 13 years of high-pressure anti-corruption efforts have still failed to fundamentally change officials’ patterns of behaviour.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于外界所说的“越反越腐”，他并不认为是反腐催生了更多腐败。更准确的说法是，十三年高压反腐，仍未完全改变官员的行为模式。</p>
-    <p>How Do You Choose Officials from a “Contaminated Pool”?</p>
+    <div class="para-wrap">
+    <p>How Do You Choose Officials from a “Contaminated Pool”?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">被污染的池子中，如何选人？</p>
-    <p>Wedeman believes Xi is no longer dealing primarily with officials promoted under his predecessors. “What he really has to confront now is corruption among those who have been promoted during his own tenure.” Wedeman describes Xi as removing fallen “tigers” and promoting newcomers to replace them, only to find that he is choosing candidates from a pool that has already been contaminated. In his view, the problem may not lie solely with individual officials or particular factions, but with the entire system for selecting and promoting cadres.</p>
+    <div class="para-wrap">
+    <p>Wedeman believes Xi is no longer dealing primarily with officials promoted under his predecessors. “What he really has to confront now is corruption among those who have been promoted during his own tenure.” Wedeman describes Xi as removing fallen “tigers” and promoting newcomers to replace them, only to find that he is choosing candidates from a pool that has already been contaminated. In his view, the problem may not lie solely with individual officials or particular factions, but with the entire system for selecting and promoting cadres.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">魏德曼认为，习近平如今面对的，已不再主要是前任时期提拔的官员。“现在他真正不得不面对的，是那些在他任内被提拔上来的人当中的腐败问题。”他形容，习近平把落马的“老虎”清除，再提拔新人接替，却发现自己是在一个已被污染的池子里挑人。在他看来，问题未必只存在于个别官员或特定派系，而可能与整个干部选拔机制有关。</p>
-    <p>He has also noticed that public confessions published by many disgraced officials in recent years follow strikingly similar narratives. They begin with ideals and a commitment to serving the people, describe how the institutional environment gradually influenced them, and end with corruption followed by repentance after their downfall. Wedeman argues that these formulaic confessions reflect an official tendency to attribute corruption to individual moral failings. But if so many officials tell almost identical stories, can the problem really be reduced to personal morality alone?</p>
+    <div class="para-wrap">
+    <p>He has also noticed that public confessions published by many disgraced officials in recent years follow strikingly similar narratives. They begin with ideals and a commitment to serving the people, describe how the institutional environment gradually influenced them, and end with corruption followed by repentance after their downfall. Wedeman argues that these formulaic confessions reflect an official tendency to attribute corruption to individual moral failings. But if so many officials tell almost identical stories, can the problem really be reduced to personal morality alone?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">他还留意到，许多落马官员近年公开发表的忏悔录，叙事高度相似：从怀抱理想、服务人民开始，进入体制后逐步受环境影响，最终走向腐败，落马后完成悔悟。他认为，这种公式化的自白，反映官方倾向把腐败归因于个人道德失守。但如果大量官员讲述几乎相同的故事，问题是否仅在个人道德？</p>
-    <p>Wedeman argues that rapid economic growth and marketisation following the launch of reform and opening-up have altered the incentives facing officials. Compared with the collectivism and spirit of self-sacrifice emphasised during the Mao era, many officials today are more inclined to consider their personal interests, families and future career prospects. Xi has sought to restore officials’ sense of obedience and mission through ideological education and Party-building initiatives, but Wedeman believes these efforts have had limited effect.</p>
+    <div class="para-wrap">
+    <p>Wedeman argues that rapid economic growth and marketisation following the launch of reform and opening-up have altered the incentives facing officials. Compared with the collectivism and spirit of self-sacrifice emphasised during the Mao era, many officials today are more inclined to consider their personal interests, families and future career prospects. Xi has sought to restore officials’ sense of obedience and mission through ideological education and Party-building initiatives, but Wedeman believes these efforts have had limited effect.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">他分析，改革开放后的经济高速增长和市场化，改变了官员的激励方式。相比毛泽东时代强调的集体主义和奉献精神，如今许多官员更倾向于把个人、家庭和未来发展纳入考量。习近平透过意识形态教育和党建工作，试图重建官员的服从意识与使命感，但魏德曼认为效果并不明显。</p>
-    <p>Thomas similarly argues that anti-corruption has become a continuing mechanism for organisational discipline rather than simply a struggle between political factions. The Fifth Plenum’s renewed emphasis on full and rigorous Party self-governance therefore raises an unavoidable question: can the CPC change the institutional environment and bureaucratic culture that foster corruption, or can it only keep the system running through increasingly strict supervision and punishment?</p>
+    <div class="para-wrap">
+    <p>Thomas similarly argues that anti-corruption has become a continuing mechanism for organisational discipline rather than simply a struggle between political factions. The Fifth Plenum’s renewed emphasis on full and rigorous Party self-governance therefore raises an unavoidable question: can the CPC change the institutional environment and bureaucratic culture that foster corruption, or can it only keep the system running through increasingly strict supervision and punishment?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">牛犇同样认为，反腐如今已是持续性的组织整顿机制，而不再是派系斗争。于是，五中全会再次强调“全面从严治党”，一个难以回避的问题是：中共能否改变滋生腐败的制度环境和官僚文化，还是只能继续靠更严格的监督与惩罚维持运转？</p>
-    <p>Is There No Longer Any Such Thing as a “Safe Landing”?</p>
+    <div class="para-wrap">
+    <p>Is There No Longer Any Such Thing as a “Safe Landing”?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“安全着陆”不再存在？</p>
-    <p>Ahead of the plenum, Ye Jianchun and Huang Qifan, who had previously worked with Bo Xilai, were successively placed under investigation. Their cases have prompted discussion over whether the notion of a “safe landing” for retired officials has disappeared.</p>
+    <div class="para-wrap">
+    <p>Ahead of the plenum, Ye Jianchun and Huang Qifan, who had previously worked with Bo Xilai, were successively placed under investigation. Their cases have prompted discussion over whether the notion of a “safe landing” for retired officials has disappeared.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">会前，叶建春、曾与薄熙来共事的黄奇帆相继被查，外界讨论“安全着陆”是否已不复存在。</p>
-    <p>Jiangnan Zhu, an associate professor in the Department of Politics and Public Administration at the University of Hong Kong, said the latest wave of investigations sends a signal that retirement or departure from office does not guarantee a safe landing. It also indicates that the central leadership has no intention of easing its anti-corruption campaign.</p>
+    <div class="para-wrap">
+    <p>Jiangnan Zhu, an associate professor in the Department of Politics and Public Administration at the University of Hong Kong, said the latest wave of investigations sends a signal that retirement or departure from office does not guarantee a safe landing. It also indicates that the central leadership has no intention of easing its anti-corruption campaign.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">香港大学政治与公共行政学系副教授朱江南表示，目前这一轮密集的反腐传递出即使退休、离任也没有所谓安全着陆的讯号，表达中央反腐没有放松的意图。</p>
-    <p>Wedeman said he had never believed that a genuine safe landing existed within the CPC’s officialdom. He cited Chen Xitong, who fell from power in 1995, Chen Liangyu in 2006, and later cases involving Zhou Yongkang and Bo Xilai as examples.</p>
+    <div class="para-wrap">
+    <p>Wedeman said he had never believed that a genuine safe landing existed within the CPC’s officialdom. He cited Chen Xitong, who fell from power in 1995, Chen Liangyu in 2006, and later cases involving Zhou Yongkang and Bo Xilai as examples.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">魏德曼说，他从不相信中共官场存在真正的安全着陆，1995年的陈希同、2006年的陈良宇，以及后来的周永康、薄熙来都是例证。</p>
-    <p>As for why Huang Qifan has come under investigation, Wedeman said it is difficult to determine at this stage. The case could be related to his time in Chongqing, his earlier career in Shanghai, his financial-sector connections after retirement, or it could simply be a case of making a political example of someone.</p>
+    <div class="para-wrap">
+    <p>As for why Huang Qifan has come under investigation, Wedeman said it is difficult to determine at this stage. The case could be related to his time in Chongqing, his earlier career in Shanghai, his financial-sector connections after retirement, or it could simply be a case of making a political example of someone.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">至于黄奇帆为何落马，他认为目前很难判断：可能与重庆任期有关，可能与上海时期有关，可能与退休后的金融圈人脉有关，也可能纯粹是“政治祭旗”。</p>
-    <p>Thomas, meanwhile, regards Huang as a technocrat. Huang’s downfall, Thomas argues, suggests that the current anti-corruption campaign has moved beyond traditional factional divisions, focusing instead on political loyalty, risk control and organisational discipline.</p>
+    <div class="para-wrap">
+    <p>Thomas, meanwhile, regards Huang as a technocrat. Huang’s downfall, Thomas argues, suggests that the current anti-corruption campaign has moved beyond traditional factional divisions, focusing instead on political loyalty, risk control and organisational discipline.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">牛犇则认为，黄奇帆是专业技术官僚，他的落马显示当下的反腐已超越传统派系划分，更聚焦政治忠诚、风险控制和组织纪律。</p>
-    <p>The Fifth Plenum will also offer an important opportunity to observe personnel manoeuvres ahead of the 21st Party Congress. Several Central Committee members have been brought down in recent years, and some Politburo positions are vacant. Whether these posts will be filled or otherwise rearranged is a key question for outside observers.</p>
+    <div class="para-wrap">
+    <p>The Fifth Plenum will also offer an important opportunity to observe personnel manoeuvres ahead of the 21st Party Congress. Several Central Committee members have been brought down in recent years, and some Politburo positions are vacant. Whether these posts will be filled or otherwise rearranged is a key question for outside observers.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">五中全会也是观察二十一大前人事布局的重要窗口。近年多名中央委员落马，部分政治局职位出现空缺，这些位置是否会有新安排，是外界关注的焦点。</p>
-    <p>China’s political system still has no clearly identified successor to Xi. Both Wedeman and Thomas believe this reflects a dilemma facing Xi: not designating a successor helps him maintain his authority, while naming one could allow a new centre of power to emerge prematurely.</p>
+    <div class="para-wrap">
+    <p>China’s political system still has no clearly identified successor to Xi. Both Wedeman and Thomas believe this reflects a dilemma facing Xi: not designating a successor helps him maintain his authority, while naming one could allow a new centre of power to emerge prematurely.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
     <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">此外，中国政坛至今没有明确的接班人。魏德曼和牛犇都认为，这反映习近平面临两难：不指定接班人有助维持权威，指定接班人则可能提前形成新的权力中心。</p>    </div>
     <script>
         var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
@@ -145,7 +330,7 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
         }
         document.addEventListener('dblclick', function(e) {
-            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para')) return;
+            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para') || e.target.closest('.anno-box') || e.target.closest('.anno-toggle')) return;
             prefs.barHidden = !prefs.barHidden; applyPrefs();
         });
         function adjustFont(delta) { prefs.font = Math.max(0.6, Math.min(2.0, prefs.font + delta)); applyPrefs(); }
@@ -215,7 +400,7 @@
                 }
             function wrapTextNodesToWord(rootNode) {
                 var ignoreTags = new Set(['SCRIPT', 'STYLE', 'BUTTON', 'A']);
-                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
+                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para') || parent.closest('.anno-box') || parent.closest('.anno-toggle') || parent.closest('.ss-nav-link')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
                 var nodesToWrap = []; let currNode; while ((currNode = walker.nextNode())) { nodesToWrap.push(currNode); }
                 nodesToWrap.forEach(function(textNode) {
                     var text = textNode.nodeValue; var fragment = document.createDocumentFragment(); var lastIndex = 0;
@@ -252,6 +437,257 @@
             }
             setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
         })();
+    </script>
+    <span class="sync-status" id="sync-status">📡 同步中...</span>
+    <script id="matrix-engine">
+        const GH_OWNER = "moodHappy";
+        const GH_REPO = "ShortStories";
+
+        function toBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            let bin = '';
+            const chunkSize = 0x8000;
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+                bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+            }
+            return btoa(bin);
+        }
+
+        let syncTimeout = null;
+        function scheduleSync() {
+            const statusMsg = document.getElementById('sync-status');
+            if (!statusMsg) return;
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#f39c12';
+            statusMsg.innerText = '⏳ 更改已记录，5秒后自动同步...';
+            statusMsg.style.cursor = 'default';
+            statusMsg.onclick = null;
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToGitHub(); }, 5000);
+        }
+
+        function initAnnotations() {
+            document.querySelectorAll('.para-wrap').forEach(wrap => {
+                const view = wrap.querySelector('.anno-view');
+                const edit = wrap.querySelector('.anno-edit');
+                const toggle = wrap.querySelector('.anno-toggle');
+                const box = wrap.querySelector('.anno-box');
+                if (!edit || !toggle || !view || !box) return;
+
+                const rawText = edit.value.trim();
+                if (rawText) {
+                    toggle.classList.add('has-anno');
+                    if (typeof marked !== 'undefined') { view.innerHTML = marked.parse(rawText); }
+                    else { view.innerText = rawText; }
+                }
+
+                toggle.onclick = (e) => {
+                    e.stopPropagation();
+                    if (box.style.display === 'block') {
+                        box.style.display = 'none';
+                        wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        box.style.display = 'block';
+                        if (!edit.value.trim()) {
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.focus();
+                        } else {
+                            if (typeof marked !== 'undefined' && !view.innerHTML.trim()) {
+                                view.innerHTML = marked.parse(edit.value.trim());
+                            }
+                            view.style.display = 'block';
+                            edit.style.display = 'none';
+                        }
+                    }
+                };
+
+                const triggerEdit = () => {
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.focus();
+                };
+
+                // 桌面端：右键点击已渲染的批注进入编辑；双击批注收起面板
+                view.addEventListener('contextmenu', e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    triggerEdit();
+                });
+                view.addEventListener('dblclick', e => {
+                    e.stopPropagation();
+                    box.style.display = 'none';
+                    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+
+                // 移动端：双指轻触进入编辑；单指双击收起面板
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        e.stopPropagation();
+                        triggerEdit();
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        const tapLength = currentTime - lastTap;
+                        if (tapLength < 500 && tapLength > 0) {
+                            e.stopPropagation();
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        lastTap = currentTime;
+                    }
+                }, { passive: true });
+
+                edit.onblur = () => {
+                    const newVal = edit.value.trim();
+                    try {
+                        view.innerHTML = newVal ? (typeof marked !== 'undefined' ? marked.parse(newVal) : newVal) : '';
+                    } catch (e) {}
+                    edit.style.display = 'none';
+                    if (newVal) {
+                        view.style.display = 'block';
+                        toggle.classList.add('has-anno');
+                    } else {
+                        view.style.display = 'none';
+                        box.style.display = 'none';
+                        toggle.classList.remove('has-anno');
+                    }
+                    if (edit.getAttribute('data-old-val') !== newVal) {
+                        edit.setAttribute('data-old-val', newVal);
+                        scheduleSync();
+                    }
+                };
+                edit.setAttribute('data-old-val', rawText);
+            });
+        }
+
+        function reconstructSelfHTML() {
+            const clone = document.documentElement.cloneNode(true);
+
+            // 1. 移除运行期由查词/语音生成的临时 DOM 节点
+            clone.querySelectorAll('audio, [data-tippy-root], .tippy-box').forEach(el => el.remove());
+
+            // 2. 剥离运行期包裹的 span.tm-word，还原纯文本段落，防止保存后重复包裹
+            const contentContainer = clone.querySelector('#content-container');
+            if (contentContainer) {
+                contentContainer.style.fontSize = '';
+                contentContainer.querySelectorAll('span.tm-word').forEach(span => {
+                    span.replaceWith(document.createTextNode(span.textContent));
+                });
+                contentContainer.normalize();
+            }
+
+            // 3. 复位 body 与阅读控制栏默认状态，恢复中文段落默认模糊
+            const bodyEl = clone.querySelector('body');
+            if (bodyEl && contentContainer) {
+                bodyEl.className = 'bar-hidden global-blur-enabled dict-enabled highlights-enabled';
+            }
+            const topBar = clone.querySelector('#top-bar');
+            if (topBar) {
+                topBar.className = 'reader-bar hidden';
+            }
+            clone.querySelectorAll('.zh-para').forEach(p => {
+                p.classList.remove('revealed');
+                if (contentContainer) p.classList.add('blurred');
+            });
+
+            // 4. 将当前页面所有批注内容写入克隆 DOM 的 textarea 中
+            const liveWraps = document.querySelectorAll('.para-wrap');
+            const cloneWraps = clone.querySelectorAll('.para-wrap');
+            liveWraps.forEach((liveWrap, idx) => {
+                const cloneWrap = cloneWraps[idx];
+                if (!cloneWrap) return;
+                const liveEdit = liveWrap.querySelector('.anno-edit');
+                const rawVal = liveEdit ? liveEdit.value.trim() : '';
+
+                const cloneToggle = cloneWrap.querySelector('.anno-toggle');
+                const cloneBox = cloneWrap.querySelector('.anno-box');
+                const cloneView = cloneWrap.querySelector('.anno-view');
+                const cloneEdit = cloneWrap.querySelector('.anno-edit');
+
+                if (cloneToggle) {
+                    if (rawVal) cloneToggle.classList.add('has-anno');
+                    else cloneToggle.classList.remove('has-anno');
+                }
+                if (cloneBox) cloneBox.style.display = 'none';
+                if (cloneView) {
+                    cloneView.innerHTML = '';
+                    cloneView.style.display = 'none';
+                }
+                if (cloneEdit) {
+                    cloneEdit.textContent = rawVal;
+                    cloneEdit.style.display = 'none';
+                    cloneEdit.removeAttribute('data-old-val');
+                }
+            });
+
+            // 5. 隐藏同步状态胶囊
+            const statusEl = clone.querySelector('#sync-status');
+            if (statusEl) {
+                statusEl.style.display = 'none';
+                statusEl.innerText = '📡 同步中...';
+            }
+
+            return '<!DOCTYPE html>\n' + clone.outerHTML;
+        }
+
+        async function syncToGitHub() {
+            const token = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN') || localStorage.getItem('EXT_GH_TOKEN') || localStorage.getItem('NYT_GH_TOKEN');
+            if (!token) {
+                alert('缺少 GitHub Token，无法同步批注！\n\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');
+                return;
+            }
+            const statusMsg = document.getElementById('sync-status');
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#2ea44f';
+            statusMsg.innerText = '📡 同步中...';
+
+            const pureHtml = reconstructSelfHTML();
+            const decodedPath = decodeURIComponent(window.location.pathname);
+            const sumIdx = decodedPath.indexOf('Summary/');
+            const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.replace(/^\/+/, '');
+
+            try {
+                const base64Html = toBase64(pureHtml);
+                const apiUrl = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + fileRelPath;
+                const getRes = await fetch(apiUrl + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    cache: 'no-store'
+                });
+                if (!getRes.ok) throw new Error('API Rate limit or File not found: ' + fileRelPath);
+                const fileData = await getRes.json();
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Auto-save annotation', content: base64Html, sha: fileData.sha })
+                });
+                if (putRes.ok) {
+                    statusMsg.style.backgroundColor = '#2ea44f';
+                    statusMsg.innerText = '✅ 云端已同步';
+                    setTimeout(() => {
+                        if (statusMsg.innerText === '✅ 云端已同步') statusMsg.style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Put failed');
+                }
+            } catch (e) {
+                console.error(e);
+                statusMsg.style.backgroundColor = '#e74c3c';
+                statusMsg.innerText = '❌ 同步失败 (点击重试)';
+                statusMsg.style.cursor = 'pointer';
+                statusMsg.onclick = () => {
+                    statusMsg.onclick = null;
+                    statusMsg.style.cursor = 'default';
+                    syncToGitHub();
+                };
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAnnotations);
+        } else {
+            initAnnotations();
+        }
     </script>
 </body>
 </html>
