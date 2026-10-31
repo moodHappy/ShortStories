@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Halloween 2026 in China: From Street Carnival to a Tightly Controlled “Meme Festival”</title>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <style>
+        body { font-family: "Noto Serif SC", "Songti SC", STSong, "Microsoft YaHei", serif; max-width: 800px; margin: 0 auto; padding: 50px 24px; font-size: 20px; line-height: 1.8; letter-spacing: 0.05em; background-color: #F8F4E6; color: #4A3F35; } h1 { text-align: left !important; font-size: 28px; margin-bottom: 0.5em; font-weight: bold; border-bottom: 1px solid #D5CBBB; padding-bottom: 20px; color: #2C241B; } p { margin-bottom: 1.5em; text-indent: 2em; text-align: justify; }
+        body { padding-top: 70px !important; transition: padding-top 0.3s cubic-bezier(0.4,0,0.2,1); }
+        body.bar-hidden { padding-top: 20px !important; }
+        .reader-bar { position: fixed; top: 0; left: 0; right: 0; min-height: 50px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 1px 8px rgba(0,0,0,0.08); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px; }
+        .reader-bar.hidden { transform: translateY(-100%); }
+        .reader-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+        .reader-btn { background: #E5E5EA; color: #1C1C1E; border: none; padding: 6px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: transform 0.1s, background 0.2s; }
+        .reader-btn:active { transform: scale(0.95); }
+        #content-container { transition: font-size 0.2s; }
+        .zh-para { transition: filter 0.3s ease, opacity 0.3s ease; }
+        .global-blur-enabled .zh-para { cursor: pointer; }
+        .global-blur-enabled .zh-para.blurred { filter: blur(0.35em); opacity: 0.5; user-select: none; }
+        .global-blur-enabled .zh-para.blurred:hover { filter: blur(0.2em); opacity: 0.7; }
+        body.highlights-enabled .tm-word.is-highlight { color: #FF3B30 !important; font-weight: 700; background-color: rgba(255, 59, 48, 0.05); border-radius: 3px; padding: 0 2px; }
+        .dict-enabled .tm-word { cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; border-radius: 3px; }
+        .dict-enabled .tm-word:hover, .dict-enabled .tm-word[aria-expanded="true"] { background-color: #E3F2FD; color: #1565C0 !important; }
+        .tippy-box[data-theme~='light-border'] { background-color: #fff; color: #333; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        .tippy-box[data-theme~='light-border'][data-placement^='top'] > .tippy-arrow::before { border-top-color: #ccc; }
+        .tippy-box[data-theme~='light-border'][data-placement^='bottom'] > .tippy-arrow::before { border-bottom-color: #ccc; }
+        .tippy-content { padding: 8px; }
+        .dict-popup { text-align: left; font-size: 14px; line-height: 1.4; max-width: 280px; min-width: 200px; color: #333; font-family: -apple-system, sans-serif; }
+        .dict-header-row { border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 6px; }
+        .dict-word-line { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+        .dict-head-word { font-weight: bold; color: #D32F2F; font-size: 18px; }
+        .dict-ipa { font-family: sans-serif; color: #666; font-size: 13px; background: #f0f0f0; padding: 0 4px; border-radius: 4px; }
+        .dict-speaker-btn { display: inline-flex; cursor: pointer; color: #1976D2; padding: 2px; border-radius: 50%; transition: background 0.2s; }
+        .dict-speaker-btn:hover { background-color: rgba(25, 118, 210, 0.1); }
+        .dict-speaker-btn svg { width: 18px; height: 18px; pointer-events: none; }
+        .dict-speaker-btn.playing { color: #E91E63; animation: tm-pulse 1s infinite; }
+        .dict-tags-row { margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px; align-items: center;}
+        .dict-tag { background: #F0F4F8; color: #476582; font-size: 11px; padding: 2px 6px; border-radius: 4px; border: 1px solid #D9E2EC; font-weight: 500; }
+        .dict-tag.star-tag { color: #F59E0B; background: #FEF3C7; border-color: #FDE68A; letter-spacing: 1px; padding: 2px 4px; }
+        .dict-tag.cefr-A1 { background: #E8F5E9; color: #2E7D32; border-color: #C8E6C9; }
+        .dict-tag.cefr-A2 { background: #E0F2F1; color: #00695C; border-color: #B2DFDB; }
+        .dict-tag.cefr-B1 { background: #FFF8E1; color: #F57F17; border-color: #FFECB3; }
+        .dict-tag.cefr-B2 { background: #FFF3E0; color: #E65100; border-color: #FFE0B2; }
+        .dict-tag.cefr-C1 { background: #FCE4EC; color: #C2185B; border-color: #F8BBD0; }
+        .dict-tag.cefr-C2 { background: #F3E5F5; color: #7B1FA2; border-color: #E1BEE7; }
+        .dict-basic-trans { font-size: 14px; color: #444; margin-top: 4px; }
+        .dict-pos-block { margin-bottom: 4px; }
+        .dict-pos-tag { font-style: italic; color: #1976D2; font-weight: bold; font-size: 12px; margin-right: 4px; }
+        .dict-def-list { margin: 0; padding: 0; list-style: none; display: inline; }
+        .dict-def-item { display: inline; }
+        .dict-def-item::after { content: "; "; color: #999; }
+        .dict-def-item:last-child::after { content: ""; }
+        .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
+        @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="ss-anno-style">
+        .para-wrap { margin-bottom: 1.5em; position: relative; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle { display: inline-flex; margin-left: 6px; cursor: pointer; opacity: 0.25; font-size: 0.75em; vertical-align: middle; transition: all 0.2s; user-select: none; text-indent: 0; }
+        .anno-toggle:hover { opacity: 0.85; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .anno-box { display: none; margin-top: 10px; background: #f8f6ff; border-left: 4px solid #8e7cc3; padding: 12px 16px; border-radius: 0 6px 6px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-indent: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .anno-view { font-size: 0.9em; line-height: 1.6; color: #4a4a4a; min-height: 24px; text-indent: 0; text-align: left; }
+        .anno-edit { width: 100%; min-height: 110px; padding: 10px; font-family: monospace; font-size: 0.85em; border: 1px dashed #8e7cc3; border-radius: 6px; box-sizing: border-box; resize: vertical; display: none; background: #fff; color: #333; outline: none; text-indent: 0; }
+        .anno-edit:focus { border: 1px solid #8e7cc3; box-shadow: 0 0 0 3px rgba(142,124,195,0.15); }
+        .markdown-body p { margin-top: 0 !important; margin-bottom: 8px !important; text-indent: 0 !important; text-align: left !important; }
+        .markdown-body p:last-child { margin-bottom: 0 !important; }
+        .markdown-body p:empty { display: none; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #8e7cc3; font-size: 1.05em; margin: 10px 0 6px 0; border-bottom: 1px dashed #e0d8f0; padding-bottom: 4px; text-align: left !important; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 20px; text-indent: 0; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 14px; background: rgba(142,124,195,0.1); border-left: 4px solid #8e7cc3; color: #555; text-indent: 0; }
+        .ss-nav-link { color: #b85c38; text-decoration: none; background: #faede6; padding: 2px 10px; border-radius: 6px; font-weight: 600; font-size: 0.92em; margin-left: 12px; display: inline-block; transition: background 0.2s; text-indent: 0; }
+        .ss-nav-link:hover { background: #f3dccf; }
+        .sync-status { position: fixed; top: 14px; right: 16px; z-index: 2000; padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: bold; display: none; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.18); font-family: -apple-system, sans-serif; text-indent: 0; }
+    </style>
+</head>
+<body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
+    <div class="reader-bar hidden" id="top-bar">
+        <div class="reader-controls">
+            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href="../../../index.html?date=2026-10-31"">🔙 日历</button>
+            <button class="reader-btn" onclick="adjustFont(-0.1)">A-</button>
+            <button class="reader-btn" onclick="adjustFont(0.1)">A+</button>
+            <button id="blur-btn" class="reader-btn" style="background:#AF52DE; color:white;" onclick="toggleBlur()">模糊: 开</button>
+            <button id="hl-btn" class="reader-btn" style="background:#FF3B30; color:white;" onclick="toggleHighlight()">高亮: 开</button>
+            <button id="dict-btn" class="reader-btn" style="background:#34C759; color:white;" onclick="toggleDict()">查词: 开</button>
+        </div>
+    </div>
+    <div id="content-container">
+    <h1 style="text-align: left !important;">Halloween 2026 in China: From Street Carnival to a Tightly Controlled “Meme Festival”</h1>
+    <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/10/31 22:40:04</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">2026中国万圣节：从街头狂欢到严控下的“万梗节”</p>
+    <div class="para-wrap">
+    <p>October 31, 2026<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">2026年10月31日</p>
+    <div class="para-wrap">
+    <p>On Halloween night, discussions about China's celebrations remained lively on X, formerly Twitter, but the atmosphere on the ground was markedly different from what it had been three years earlier. Young people in Shanghai, Hangzhou and Guangzhou still appeared in costumes, and photos and videos continued to circulate online. Yet reports and footage from some locations also showed a heavy police presence, metal barriers and people being asked to leave. Some users lamented that “the vibe is gone,” while others joked that “even Taoist priests get taken away.” Many chose to look for alternatives in theme parks, shopping malls and indoor parties.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">2026年10月31日，万圣节当天，X（原Twitter）上关于中国万圣节的讨论依旧热闹，但现场气氛已与三年前截然不同。上海、杭州、广州等地仍有年轻人变装上街，网友也继续晒出照片和视频，但部分现场画面中，密集警力、金属围栏和劝返场面同样引人注目。有人感叹“氛围没了”，有人自嘲“连道士都要被带走”，也有人转向主题乐园、商场和室内派对寻找新的出口。</p>
+    <div class="para-wrap">
+    <p>The turning point came in 2023. That year, Shanghai's Julu Road became an overnight sensation as young people transformed a Western holiday into something distinctly Chinese: a “Meme Festival,” or “Wan Geng Jie.” Costumes featuring Big White, the pandemic-era hazmat-suited workers, livestreaming celebrity Li Jiaqi, surveillance cameras and symbols of economic hardship flooded social media. What began as Halloween dress-up evolved into a spontaneous street carnival, where humour, irony and social commentary mixed freely. For many, it became a rare collective release of emotions after years of pandemic restrictions. Some later called that night “Shanghai's last romance.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">转折点出现在2023年。那一年，上海巨鹿路一夜爆红，年轻人把西方节日彻底改造成了具有中国特色的“万梗节”。大白、李佳琦、监控摄像头、经济低迷的象征性装扮等纷纷刷屏社交平台。原本只是万圣节变装活动的街头聚集，逐渐演变成一场自发的狂欢，幽默、讽刺和社会表达交织在一起。对于许多人来说，这也是经历多年疫情管控之后，一次难得的集体情绪宣泄。后来，不少网友把那一夜称为“上海最后的浪漫”。</p>
+    <div class="para-wrap">
+    <p>What made the 2023 carnival particularly striking was not simply the costumes themselves, but the messages they could convey. A person dressed as a surveillance camera could be making a joke, while someone wearing a hazmat suit might be recalling the pandemic years. A seemingly absurd costume could also carry a layer of social criticism. The humour worked precisely because it was indirect: people could laugh at the same image without necessarily having to spell out what it meant. In this sense, Halloween became more than a party. It briefly turned public streets into a space for spontaneous expression.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">2023年这场狂欢真正引人注目的，不只是那些奇装异服，而是它们所能传递的信息。有人扮成监控摄像头，可能只是为了搞笑；有人穿上大白防护服，或许是在回望疫情岁月；一些看似荒诞的装扮，也可能暗含对现实的调侃。它的巧妙之处就在于间接表达：人们可以因为同一个画面发笑，却不必把背后的意思全部说出来。从这个意义上说，万圣节不再只是一场派对，而是短暂地让公共街道成为了自发表达的空间。</p>
+    <div class="para-wrap">
+    <p>From 2024 onward, however, the atmosphere changed. Police presence around popular gathering spots increased, street crowds were dispersed, and some people in elaborate costumes were questioned or taken away. In Shanghai, Julu Road once again became a focus of attention. Reports from 2024 documented metal barriers, police patrols and restrictions on street gatherings. The distinction is important: this did not amount to a clearly announced nationwide ban on Halloween, but the space for spontaneous public celebrations had become considerably narrower.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">然而，从2024年开始，气氛发生了变化。热门聚集地点的警力部署增加，街头人群遭到驱散，部分穿着特殊服装的人被盘查或带走。上海巨鹿路再次成为关注焦点。2024年的媒体报道记录了现场围栏、警方巡逻以及对街头聚集活动的限制。这里需要区分的是，这并不等于中国全国范围内正式颁布了万圣节禁令，但自发性公共庆祝活动的空间确实明显收窄了。</p>
+    <div class="para-wrap">
+    <p>By 2025 and into 2026, the contrast between public street gatherings and organised commercial events had become increasingly noticeable. Claims circulating online this year describe tighter preventive measures in Shanghai, including restrictions on student activities, warnings to businesses and increased security around places such as Julu Road and Zhongshan Park. Some posts also allege that people wearing masks or face paint were asked to leave. These accounts have fuelled the impression that authorities are particularly wary of satirical cosplay that could be interpreted as commentary on real-life issues. However, the specific scope of these measures has not been independently established, and online accounts should not be treated as proof of a uniform citywide or nationwide policy.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">到了2025年乃至2026年，公共街头聚集与商业化活动之间的反差越来越明显。今年，网络上流传着有关上海提前加强防范措施的说法，包括限制学生组织相关活动、提醒商户注意接待变装顾客，以及在巨鹿路、中山公园等地点加强安保。还有一些帖子称，戴面具或进行面部彩绘的顾客被要求离开。这些说法进一步强化了一种印象：管理部门尤其警惕那些可能被解读为影射现实问题的讽刺性角色扮演。不过，目前这些措施的具体范围尚未得到独立证实，网络爆料也不能直接作为全市乃至全国统一执行某项政策的证据。</p>
+    <div class="para-wrap">
+    <p>Meanwhile, the commercial side of Halloween has continued to expand. Theme parks such as Shanghai Disney Resort, Universal Studios Beijing and Chimelong have turned the holiday into a major seasonal attraction, with elaborate night-time events, immersive haunted houses and character-based experiences. Chinese intellectual properties have also become part of the mix, with franchises such as The Grave Robbers' Chronicles and Identity V offering local alternatives to traditional Western horror themes. Shopping malls in cities including Chengdu and Tianjin have also embraced Halloween-themed events, while Hong Kong has extended its celebrations across several weekends to attract visitors and boost nightlife spending.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">与此同时，万圣节的商业化一面却在持续扩大。上海迪士尼、北京环球影城、长隆等主题乐园，都将这个节日打造成重要的季节性活动，推出规模更大的夜场、沉浸式鬼屋和角色主题体验。中国本土IP也逐渐加入其中，《盗墓笔记》《第五人格》等作品为传统西方恐怖主题提供了本土化选择。成都、天津等城市的商场也纷纷推出万圣节主题活动，而香港则将庆祝活动延长至多个周末，以吸引游客、带动夜生活消费。</p>
+    <div class="para-wrap">
+    <p>Online culture has meanwhile developed its own version of Halloween. Rather than focusing exclusively on ghosts, vampires and monsters, Chinese internet users increasingly turn the occasion into a competition of absurdity and creativity. Yellow-coloured internet mascots, including Meituan's kangaroo delivery mascot, the “Naiwa” meme and the viral “Niu Lai” phenomenon, have become part of the wider meme culture. AI-generated mash-ups, such as pairing the Monkey King with Lin Daiyu, add another layer of surreal humour. The emphasis is no longer simply on looking frightening. It is about being recognisable, ridiculous and shareable.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">与此同时，网络文化也发展出了自己的万圣节版本。中国网友不再只满足于扮演鬼怪、吸血鬼和怪物，而是越来越倾向于把节日变成一场荒诞创意竞赛。美团袋鼠等黄色网络形象、“奶娃”以及走红网络的“牛来”等梗，都成为网络玩梗文化的一部分。人工智能生成的混搭形象，例如让孙悟空与林黛玉同框，更增添了一层超现实的幽默感。如今，重点已经不只是把自己打扮得吓人，而是要足够有辨识度、足够荒诞，还要适合传播。</p>
+    <div class="para-wrap">
+    <p>Voices on X remain divided. Some users proudly post costumes of fake police officers, Taoist priests and zombies. One joke circulating online reads: “I went downstairs and saw five police officers. Thought it was a crackdown on prostitution, but none of them were real.” Others express bewilderment: “Why would someone be taken away just for cosplaying as a Taoist priest? Isn't Taoism Chinese?” Still others have decided to stay indoors, saying, “I'm not going out this year. The atmosphere from previous years is never coming back.” The comments reveal a mixture of humour, frustration, nostalgia and resignation.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">X上的声音依然十分分裂。有人兴奋地晒出假警察、道士和僵尸装扮。网上流传着这样的调侃：“一下楼，五个警察，还以为是扫黄，吓尿了，结果一个真的都没有。”也有人感到困惑：“为啥Cos道士也要被带走啊？道教不是中国的吗？”还有人干脆决定待在室内，表示：“今年不出去了，去年的热闹回不去了。”这些评论混合着幽默、无奈、怀念和某种程度上的认命。</p>
+    <div class="para-wrap">
+    <p>The shift from open street celebrations to indoor parties and online performances reflects more than a change in how people celebrate a holiday. It reveals the continuing demand among young people for emotional outlets, social connection and opportunities to express themselves. When public gatherings become difficult, the desire to participate does not simply disappear. It moves elsewhere: into shopping malls, theme parks, private venues and digital spaces. The carnival survives, but its form changes.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">从公开街头狂欢转向室内派对和网络表演，反映的不仅仅是人们庆祝节日方式的变化。它还体现了年轻人对情绪出口、社交联系和自我表达机会的持续需求。当公共聚集变得困难时，人们参与其中的愿望并不会随之消失，而是转移到其他地方：商场、主题乐园、私人场所和数字空间。狂欢仍然存在，只是形式发生了变化。</p>
+    <div class="para-wrap">
+    <p>At a deeper level, Halloween in China is no longer simply a question of whether a Western festival should be celebrated. It has been thoroughly reshaped by local internet culture and has become a temporary stage on which urban youth use humour, satire and absurdity to respond to the world around them. The 2023 Julu Road carnival showed how quickly a foreign holiday could become a distinctly Chinese cultural phenomenon. The years that followed showed how easily that spontaneous energy could be channelled into more organised and commercially manageable forms.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">从更深层来看，中国万圣节已经不再只是一个“该不该过洋节”的问题。它被本土网络文化彻底改写，成为都市年轻人借助幽默、讽刺和荒诞回应周围世界的一座临时舞台。2023年巨鹿路的狂欢，展示了一个舶来的节日如何迅速变成具有中国特色的文化现象；而随后的几年则表明，这种自发产生的活力，也很容易被引导到更加有组织、更加便于商业管理的形式之中。</p>
+    <div class="para-wrap">
+    <p>When streets are filled with barriers and police officers, theme parks, shopping malls and phone screens become alternative stages. The noise has not entirely disappeared, but the nature of the celebration has changed. What was once a collective, spontaneous and largely unpredictable street performance is increasingly divided into controlled commercial entertainment and individual online expression.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">当街道上出现围栏和警力时，主题乐园、商场和手机屏幕便成为替代舞台。热闹并没有彻底消失，但庆祝活动的性质已经发生变化。曾经那种集体性的、自发的、难以预测的街头表演，如今越来越多地分化为受到管理的商业娱乐，以及个人化的网络表达。</p>
+    <div class="para-wrap">
+    <p>For many people who describe their lives as increasingly stressful or restrictive, this transformation has become a metaphor for something much larger. The question is not whether young people have stopped wanting to have fun. Clearly, they have not. The question is whether there is still room for the kind of spontaneous public joy that made the 2023 carnival so memorable.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">对于许多觉得生活越来越压抑、越来越受限的人来说，这种变化已经成为某种更大现实的隐喻。问题并不是年轻人不再想寻找快乐了，显然并非如此。真正的问题在于：那个曾经让2023年街头狂欢如此令人难忘的、可以自发产生的公共欢乐空间，是否还存在？</p>
+    <div class="para-wrap">
+    <p>Halloween in China is still alive. The costumes remain, the memes keep evolving, and commercial events continue to attract crowds. But the contrast between 2023 and 2026 is hard to ignore. Three years ago, the streets themselves became the attraction. Today, much of the celebration takes place in designated venues and online. The festival has not vanished; it has been transformed. And perhaps that transformation says as much about the changing boundaries of public life in China as it does about Halloween itself.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">中国的万圣节仍然存在。变装还在继续，网络梗不断更新，商业活动也依然吸引着人群。但2023年与2026年之间的反差，已经很难被忽视。三年前，街道本身就是节日最大的景点；如今，大部分庆祝活动则发生在指定场所和网络空间。节日并没有消失，只是发生了变化。或许，这种变化所反映的，不仅是中国万圣节的演变，也是在某种程度上折射出中国公共生活空间的变化。</p>    </div>
+    <script>
+        var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
+        var prefs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { font: 1.0, dictEnabled: true, barHidden: true, highlightEnabled: true, blurEnabled: true };
+        var bar = document.getElementById('top-bar');
+        var content = document.getElementById('content-container');
+        var dictBtn = document.getElementById('dict-btn');
+        var hlBtn = document.getElementById('hl-btn');
+        var blurBtn = document.getElementById('blur-btn');
+        function applyPrefs() {
+            content.style.fontSize = prefs.font + 'em';
+            if (prefs.barHidden) { bar.classList.add('hidden'); document.body.classList.add('bar-hidden'); } else { bar.classList.remove('hidden'); document.body.classList.remove('bar-hidden'); }
+            if (prefs.dictEnabled) { document.body.classList.add('dict-enabled'); dictBtn.innerText = "查词: 开"; dictBtn.style.background = "#34C759"; dictBtn.style.color = "#fff"; } else { document.body.classList.remove('dict-enabled'); dictBtn.innerText = "查词: 关"; dictBtn.style.background = "#E5E5EA"; dictBtn.style.color = "#1C1C1E"; }
+            if (prefs.highlightEnabled) { document.body.classList.add('highlights-enabled'); hlBtn.innerText = "高亮: 开"; hlBtn.style.background = "#FF3B30"; hlBtn.style.color = "#fff"; } else { document.body.classList.remove('highlights-enabled'); hlBtn.innerText = "高亮: 关"; hlBtn.style.background = "#E5E5EA"; hlBtn.style.color = "#1C1C1E"; }
+            if (prefs.blurEnabled) { document.body.classList.add('global-blur-enabled'); blurBtn.innerText = "模糊: 开"; blurBtn.style.background = "#AF52DE"; blurBtn.style.color = "#fff"; document.querySelectorAll('.zh-para').forEach(function(el){el.classList.add('blurred');}); } else { document.body.classList.remove('global-blur-enabled'); blurBtn.innerText = "模糊: 关"; blurBtn.style.background = "#E5E5EA"; blurBtn.style.color = "#1C1C1E"; }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+        }
+        document.addEventListener('dblclick', function(e) {
+            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para') || e.target.closest('.anno-box') || e.target.closest('.anno-toggle')) return;
+            prefs.barHidden = !prefs.barHidden; applyPrefs();
+        });
+        function adjustFont(delta) { prefs.font = Math.max(0.6, Math.min(2.0, prefs.font + delta)); applyPrefs(); }
+        function toggleDict() { prefs.dictEnabled = !prefs.dictEnabled; applyPrefs(); }
+        function toggleHighlight() { prefs.highlightEnabled = !prefs.highlightEnabled; applyPrefs(); }
+        function toggleBlur() { prefs.blurEnabled = !prefs.blurEnabled; applyPrefs(); }
+        window.addEventListener('DOMContentLoaded', function() {
+            applyPrefs(); var savedScroll = localStorage.getItem(STORAGE_KEY + '_scroll');
+            if (savedScroll) { setTimeout(function(){ window.scrollTo(0, parseFloat(savedScroll)); }, 150); }
+        });
+        var scrollTimer;
+        window.addEventListener('scroll', function() {
+            if (scrollTimer) clearTimeout(scrollTimer); scrollTimer = setTimeout(function(){ localStorage.setItem(STORAGE_KEY + '_scroll', window.scrollY); }, 300);
+        });
+        var highlightWords = new Set();
+        async function initCloudHighlights() {
+            var cacheKey = 'bio_remote_hl_words_v2'; var cached = localStorage.getItem(cacheKey); var now = Date.now();
+            if (cached) { try { var parsed = JSON.parse(cached); if (now - parsed.time < 24 * 60 * 60 * 1000 && Array.isArray(parsed.data)) { highlightWords = new Set(parsed.data); applyHighlightsToDOM(); return; } } catch(e){} }
+            try {
+                var urls = ['https://raw.githubusercontent.com/moodHappy/HelloWorld/refs/heads/master/Notes/one.txt','https://ghproxy.net/https://raw.githubusercontent.com/moodHappy/HelloWorld/refs/heads/master/Notes/one.txt','https://fastly.jsdelivr.net/gh/moodHappy/HelloWorld@master/Notes/one.txt'];
+                var text = ''; for (var i=0; i<urls.length; i++) { try { var res = await fetch(urls[i]); if (res.ok) { text = await res.text(); if (text && !text.includes('<html') && !text.includes('Cloudflare')) break; } } catch(err){} }
+                if (!text) throw new Error(); var arr = text.split('\n').map(function(w){return w.trim().toLowerCase();}).filter(function(w){return w;});
+                if (arr.length > 0) { highlightWords = new Set(arr); localStorage.setItem(cacheKey, JSON.stringify({data: arr, time: now})); applyHighlightsToDOM(); }
+            } catch(e){}
+        }
+        function applyHighlightsToDOM() {
+            if(highlightWords.size === 0) return;
+            document.querySelectorAll('.tm-word').forEach(function(span){ if(highlightWords.has(span.textContent.trim().toLowerCase())) span.classList.add('is-highlight'); });
+        }
+        var GM_getValue = function(key, def) { var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; };
+        var GM_setValue = function(key, val) { localStorage.setItem(key, JSON.stringify(val)); };
+        (function() {
+            function fetchWithTimeout(url, options = {}, timeout = 3000) { const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeout); return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer)); }
+            var ttsConfig = { voices: ["en-US-AdamNeural", "en-US-AriaNeural", "en-US-AnaNeural", "en-US-JennyNeural", "en-US-GuyNeural"], apis: [ { url: "https://read-aloud-bay.vercel.app/api/synthesis", type: "read-aloud" }, { url: "https://libre-tts-nu.vercel.app/api/tts", type: "libre" } ] };
+            var globalResultCache = GM_getValue('tm_dict_cache', {}); var saveTimeout = null;
+            function saveToGlobalCache(wordKey, resultData) { globalResultCache[wordKey] = resultData; var keys = Object.keys(globalResultCache); if (keys.length > 2000) delete globalResultCache[keys[0]]; clearTimeout(saveTimeout); saveTimeout = setTimeout(function(){ GM_setValue('tm_dict_cache', globalResultCache); }, 1500); }
+            var cefrStaticCache = {};
+            function initCEFRStaticDict() {
+                var staticUrls = ["https://fastly.jsdelivr.net/gh/winterdl/oxford-5000-vocabulary-audio-definition@main/data/oxford_5000.json","https://cdn.jsdelivr.net/gh/winterdl/oxford-5000-vocabulary-audio-definition@main/data/oxford_5000.json"];
+                var idx = 0; var tryFetch = function() { if (idx >= staticUrls.length) return; fetch(staticUrls[idx++]).then(function(r){return r.json();}).then(function(data){ if (Array.isArray(data)) data.forEach(function(item){ if (item.word && item.cefr) cefrStaticCache[item.word.toLowerCase()] = item.cefr.toUpperCase(); }); }).catch(tryFetch); };
+                tryFetch();
+            }
+            async function fetchCEFR(word) {
+                var w = word.toLowerCase(); if (cefrStaticCache[w]) return cefrStaticCache[w];
+                const targetUrl = 'https://dictionary.cambridge.org/dictionary/english/' + encodeURIComponent(w);
+                const proxies = [ targetUrl, 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl) ];
+                const tryProxy = async (proxy) => { const res = await fetchWithTimeout(proxy, {}, 2500); if (!res.ok) throw new Error(); const text = await res.text(); var match = text.match(/(?:epp-xref|dxref)[^>]*>\s*([A-C][1-2])\s*<\/span>/i) || text.match(/title="CEFR[^>]*>\s*([A-C][1-2])\s*<\/span>/i); if (match && match[1]) { cefrStaticCache[w] = match[1].toUpperCase(); return cefrStaticCache[w]; } return null; };
+                try { return await Promise.any(proxies.map(p => tryProxy(p))); } catch(e) { return null; }
+            }
+            async function fetchTranslation(text) { try { const res = await fetchWithTimeout('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&dt=bd&q=' + encodeURIComponent(text), {}, 3500); if (!res.ok) throw new Error(); return await res.json(); } catch(e) { return [[['查询超时或网络错误']]]; } }
+            async function fetchPhonetics(text) { try { const res = await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(text), {}, 2500); if (!res.ok) return null; const data = await res.json(); if (data && data.length > 0) { const pObj = data[0].phonetics.find(p => p.text) || data[0]; return pObj.text || null; } return null; } catch(e) { return null; } }
+            async function fetchWordLevel(text) {
+                const targetUrl = 'https://dict.youdao.com/jsonapi?q=' + encodeURIComponent(text);
+                const proxies = [ 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl), 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl) ];
+                const tryProxy = async (proxy) => { const res = await fetchWithTimeout(proxy, {}, 2000); if (!res.ok) throw new Error(); const data = await res.json(); var result = { stars: 0, tags: [] }; if (data.ec && data.ec.exam_type) result.tags = data.ec.exam_type; if (data.collins && data.collins.collins_entries && data.collins.collins_entries.length > 0) { var starStr = data.collins.collins_entries[0].star; if (starStr) { var parsedNum = parseInt(String(starStr).replace(/[^0-9]/g, ''), 10); result.stars = isNaN(parsedNum) ? 0 : parsedNum; } } return result; };
+                try { return await Promise.any(proxies.map(p => tryProxy(p))); } catch (e) { return { stars: 0, tags: [] }; }
+            }
+            var globalAudioPlayer = null; var currentPlayingBtn = null;
+            function initAudioPlayer() { if (!globalAudioPlayer) { globalAudioPlayer = document.createElement('audio'); globalAudioPlayer.style.display = 'none'; document.body.appendChild(globalAudioPlayer); } }
+            function playTTS(apiIndex, text, voice, btn) {
+                if (apiIndex >= ttsConfig.apis.length) { if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing'); return; }
+                if (currentPlayingBtn && currentPlayingBtn !== btn) currentPlayingBtn.classList.remove('playing');
+                currentPlayingBtn = btn; btn.classList.add('playing'); var api = ttsConfig.apis[apiIndex]; var params = new URLSearchParams();
+                if (api.type === "read-aloud") { params.append("text", text); params.append("voiceName", voice); } else { params.append("t", text); params.append("v", voice); params.append("r", "0"); params.append("p", "0"); }
+                globalAudioPlayer.src = api.url + '?' + params.toString(); globalAudioPlayer.onended = function() { if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing'); };
+                globalAudioPlayer.onerror = function() { playTTS(apiIndex + 1, text, voice, btn); }; var p = globalAudioPlayer.play(); if (p !== undefined) p.catch(function(){ playTTS(apiIndex + 1, text, voice, btn); });
+                }
+            function wrapTextNodesToWord(rootNode) {
+                var ignoreTags = new Set(['SCRIPT', 'STYLE', 'BUTTON', 'A']);
+                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para') || parent.closest('.anno-box') || parent.closest('.anno-toggle') || parent.closest('.ss-nav-link')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
+                var nodesToWrap = []; let currNode; while ((currNode = walker.nextNode())) { nodesToWrap.push(currNode); }
+                nodesToWrap.forEach(function(textNode) {
+                    var text = textNode.nodeValue; var fragment = document.createDocumentFragment(); var lastIndex = 0;
+                    text.replace(/\b([a-zA-Z'-]+)\b/g, function(match, p1, offset) { if (offset > lastIndex) fragment.appendChild(document.createTextNode(text.substring(lastIndex, offset))); var span = document.createElement('span'); span.className = 'tm-word'; span.textContent = match; fragment.appendChild(span); lastIndex = offset + match.length; return match; });
+                    if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.substring(lastIndex))); if (fragment.childNodes.length > 0) textNode.parentNode.replaceChild(fragment, textNode);
+                });
+            }
+            function formatDictData(originalWord, data) {
+                var transData = data.transData; var ipaText = data.ipaText; var levelData = data.levelData; var cefrLevel = data.cefrLevel; var tagsHtml = '';
+                if (cefrLevel || (levelData && (levelData.stars > 0 || (levelData.tags && levelData.tags.length > 0)))) {
+                    tagsHtml += '<div class="dict-tags-row">'; if (levelData && levelData.stars > 0) tagsHtml += '<span class="dict-tag star-tag">' + '★'.repeat(levelData.stars) + '☆'.repeat(5 - levelData.stars) + '</span>'; if (cefrLevel) tagsHtml += '<span class="dict-tag cefr-' + cefrLevel + '">CEFR ' + cefrLevel + '</span>'; if (levelData && levelData.tags) levelData.tags.forEach(function(tag){ tagsHtml += '<span class="dict-tag">' + tag + '</span>'; }); tagsHtml += '</div>';
+                }
+                var basicTrans = (transData && transData[0] && transData[0][0]) ? transData[0][0][0] : '';
+                var html = '<div class="dict-header-row"><div class="dict-word-line"><span class="dict-head-word Casting">' + originalWord + '</span>' + (ipaText ? '<span class="dict-ipa">' + ipaText + '</span>' : '') + '<span class="dict-speaker-btn" data-word="' + originalWord.replace(/"/g, '&quot;') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></span></div>' + tagsHtml + '<div class="dict-basic-trans">' + basicTrans + '</div></div>';
+                var dictEntries = transData ? transData[1] : null;
+                if (dictEntries && dictEntries.length > 0) {
+                    html += '<div class="dict-details">'; dictEntries.forEach(function(entry){ var pos = entry[0]; var displayDefs = entry[1].slice(0, 3); html += '<div class="dict-pos-block"><span class="dict-pos-tag">' + pos + '.</span><ul class="dict-def-list">'; displayDefs.forEach(function(def){ html += '<li class="dict-def-item">' + def + '</li>'; }); html += '</ul></div>'; }); html += '</div>';
+                } else if (!basicTrans) { html += '<div style="padding:5px; color:#666; font-size:13px;">无释义结果...</div>'; }
+                return html;
+            }
+            function setupTippyDelegate() {
+                tippy.delegate(document.body, { 
+                    target: '.tm-word', trigger: 'click', interactive: true, theme: 'light-border', placement: 'bottom', appendTo: function(){return document.body;}, maxWidth: 320,
+                    onShow: function(instance) {
+                        if (!document.body.classList.contains('dict-enabled')) return false;
+                        var word = instance.reference.innerText.trim(); var wordKey = word.toLowerCase();
+                        var renderContent = function(data) { if (instance.reference.innerText.trim() !== word) return; var contentDiv = document.createElement('div'); contentDiv.className = 'dict-popup'; contentDiv.innerHTML = formatDictData(word, data); ['mousedown', 'touchstart', 'click'].forEach(function(evt){ contentDiv.addEventListener(evt, function(e){e.stopPropagation();}, { capture: true }); }); var btn = contentDiv.querySelector('.dict-speaker-btn'); if (btn) { btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); var text = btn.getAttribute('data-word'); if (!text || btn.classList.contains('playing')) return; playTTS(0, text.trim(), ttsConfig.voices[Math.floor(Math.random() * ttsConfig.voices.length)], btn); }); } instance.setContent(contentDiv); };
+                        if (globalResultCache[wordKey]) { renderContent(globalResultCache[wordKey]); } else {
+                            var loadingDiv = document.createElement('div'); loadingDiv.className = 'dict-popup'; loadingDiv.innerHTML = '<div class="dict-loading">极速查询中...</div>'; instance.setContent(loadingDiv);
+                            Promise.all([fetchTranslation(word), fetchPhonetics(word), fetchWordLevel(word), fetchCEFR(word)]).then(function(arr){ var resultData = { transData: arr[0], ipaText: arr[1], levelData: arr[2], cefrLevel: arr[3] }; saveToGlobalCache(wordKey, resultData); if (instance.state.isVisible) renderContent(resultData); });
+                        }
+                    }
+                });
+            }
+            setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
+        })();
+    </script>
+    <script id="matrix-engine">
+        const GH_OWNER = "moodHappy";
+        const GH_REPO = "ShortStories";
+
+        function toBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            let bin = '';
+            const chunkSize = 0x8000;
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+                bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+            }
+            return btoa(bin);
+        }
+
+        function ensureSyncStatusBadge() {
+            let badge = document.getElementById('sync-status');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.id = 'sync-status';
+                badge.className = 'sync-status';
+                badge.innerText = '📡 同步中...';
+                document.body.appendChild(badge);
+            }
+            return badge;
+        }
+
+        let syncTimeout = null;
+        function scheduleSync() {
+            const statusMsg = ensureSyncStatusBadge();
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#f39c12';
+            statusMsg.innerText = '⏳ 更改已记录，5秒后自动同步...';
+            statusMsg.style.cursor = 'default';
+            statusMsg.onclick = null;
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToGitHub(); }, 5000);
+        }
+
+        function initAnnotations() {
+            ensureSyncStatusBadge();
+            document.querySelectorAll('.para-wrap').forEach(wrap => {
+                const view = wrap.querySelector('.anno-view');
+                const edit = wrap.querySelector('.anno-edit');
+                const toggle = wrap.querySelector('.anno-toggle');
+                const box = wrap.querySelector('.anno-box');
+                if (!edit || !toggle || !view || !box) return;
+
+                const rawText = edit.value.trim();
+                if (rawText) {
+                    toggle.classList.add('has-anno');
+                    if (typeof marked !== 'undefined') { view.innerHTML = marked.parse(rawText); }
+                    else { view.innerText = rawText; }
+                }
+
+                toggle.onclick = (e) => {
+                    e.stopPropagation();
+                    if (box.style.display === 'block') {
+                        box.style.display = 'none';
+                        wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        box.style.display = 'block';
+                        if (!edit.value.trim()) {
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.focus();
+                        } else {
+                            if (typeof marked !== 'undefined') {
+                                view.innerHTML = marked.parse(edit.value.trim());
+                            } else {
+                                view.innerText = edit.value.trim();
+                            }
+                            view.style.display = 'block';
+                            edit.style.display = 'none';
+                        }
+                    }
+                };
+
+                const triggerEdit = () => {
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.focus();
+                };
+
+                view.addEventListener('contextmenu', e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    triggerEdit();
+                });
+                view.addEventListener('dblclick', e => {
+                    e.stopPropagation();
+                    box.style.display = 'none';
+                    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        e.stopPropagation();
+                        triggerEdit();
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        const tapLength = currentTime - lastTap;
+                        if (tapLength < 500 && tapLength > 0) {
+                            e.stopPropagation();
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        lastTap = currentTime;
+                    }
+                }, { passive: true });
+
+                edit.onblur = () => {
+                    const newVal = edit.value.trim();
+                    try {
+                        view.innerHTML = newVal ? (typeof marked !== 'undefined' ? marked.parse(newVal) : newVal) : '';
+                    } catch (e) {}
+                    edit.style.display = 'none';
+                    if (newVal) {
+                        view.style.display = 'block';
+                        toggle.classList.add('has-anno');
+                    } else {
+                        view.style.display = 'none';
+                        box.style.display = 'none';
+                        toggle.classList.remove('has-anno');
+                    }
+                    if (edit.getAttribute('data-old-val') !== newVal) {
+                        edit.setAttribute('data-old-val', newVal);
+                        scheduleSync();
+                    }
+                };
+                edit.setAttribute('data-old-val', rawText);
+            });
+        }
+
+        function initBlurToggle() {
+            // 兼容旧版没有内联 onclick 的 .zh-para 段落
+            document.querySelectorAll('.zh-para').forEach(para => {
+                if (!para.getAttribute('onclick')) {
+                    para.onclick = () => para.classList.toggle('revealed');
+                }
+            });
+        }
+
+        function reconstructSelfHTML() {
+            const clone = document.documentElement.cloneNode(true);
+
+            // 1. 移除运行期由查词/语音生成的临时 DOM 节点
+            clone.querySelectorAll('audio, [data-tippy-root], .tippy-box').forEach(el => el.remove());
+
+            // 2. 剥离转换器格式在运行期动态包裹的 span.tm-word，还原纯文本段落
+            const contentContainer = clone.querySelector('#content-container');
+            if (contentContainer) {
+                contentContainer.style.fontSize = '';
+                contentContainer.querySelectorAll('span.tm-word').forEach(span => {
+                    span.replaceWith(document.createTextNode(span.textContent));
+                });
+                contentContainer.normalize();
+            }
+
+            // 3. 复位 body 与阅读控制栏默认状态，恢复中文段落默认模糊
+            const bodyEl = clone.querySelector('body');
+            if (bodyEl && contentContainer) {
+                bodyEl.className = 'bar-hidden global-blur-enabled dict-enabled highlights-enabled';
+            }
+            const topBar = clone.querySelector('#top-bar');
+            if (topBar) {
+                topBar.className = 'reader-bar hidden';
+            }
+            clone.querySelectorAll('.zh-para').forEach(p => {
+                p.classList.remove('revealed');
+                if (contentContainer) p.classList.add('blurred');
+            });
+
+            // 4. 将当前页面所有批注内容同步写入克隆 DOM 的 textarea 中
+            const liveWraps = document.querySelectorAll('.para-wrap');
+            const cloneWraps = clone.querySelectorAll('.para-wrap');
+            liveWraps.forEach((liveWrap, idx) => {
+                const cloneWrap = cloneWraps[idx];
+                if (!cloneWrap) return;
+                const liveEdit = liveWrap.querySelector('.anno-edit');
+                const rawVal = liveEdit ? liveEdit.value.trim() : '';
+
+                const cloneToggle = cloneWrap.querySelector('.anno-toggle');
+                const cloneBox = cloneWrap.querySelector('.anno-box');
+                const cloneView = cloneWrap.querySelector('.anno-view');
+                const cloneEdit = cloneWrap.querySelector('.anno-edit');
+
+                if (cloneToggle) {
+                    if (rawVal) cloneToggle.classList.add('has-anno');
+                    else cloneToggle.classList.remove('has-anno');
+                }
+                if (cloneBox) cloneBox.style.display = 'none';
+                if (cloneView) {
+                    cloneView.innerHTML = '';
+                    cloneView.style.display = 'none';
+                }
+                if (cloneEdit) {
+                    cloneEdit.textContent = rawVal;
+                    cloneEdit.style.display = 'none';
+                    cloneEdit.removeAttribute('data-old-val');
+                }
+            });
+
+            // 5. 隐藏同步状态胶囊
+            const statusEl = clone.querySelector('#sync-status');
+            if (statusEl) {
+                statusEl.style.display = 'none';
+                statusEl.innerText = '📡 同步中...';
+            }
+
+            return '<!DOCTYPE html>\n' + clone.outerHTML;
+        }
+
+        async function syncToGitHub() {
+            const token = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN') || localStorage.getItem('EXT_GH_TOKEN') || localStorage.getItem('NYT_GH_TOKEN');
+            if (!token) {
+                alert('缺少 GitHub Token，无法同步批注！\n\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');
+                return;
+            }
+            const statusMsg = ensureSyncStatusBadge();
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#2ea44f';
+            statusMsg.innerText = '📡 同步中...';
+
+            const pureHtml = reconstructSelfHTML();
+            const decodedPath = decodeURIComponent(window.location.pathname);
+            const sumIdx = decodedPath.indexOf('Summary/');
+            const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.replace(/^\/+/, '');
+
+            try {
+                const base64Html = toBase64(pureHtml);
+                const apiUrl = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + fileRelPath;
+                const getRes = await fetch(apiUrl + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    cache: 'no-store'
+                });
+                if (!getRes.ok) throw new Error('API Rate limit or File not found: ' + fileRelPath);
+                const fileData = await getRes.json();
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Auto-save annotation', content: base64Html, sha: fileData.sha })
+                });
+                if (putRes.ok) {
+                    statusMsg.style.backgroundColor = '#2ea44f';
+                    statusMsg.innerText = '✅ 云端已同步';
+                    setTimeout(() => {
+                        if (statusMsg.innerText === '✅ 云端已同步') statusMsg.style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Put failed');
+                }
+            } catch (e) {
+                console.error(e);
+                statusMsg.style.backgroundColor = '#e74c3c';
+                statusMsg.innerText = '❌ 同步失败 (点击重试)';
+                statusMsg.style.cursor = 'pointer';
+                statusMsg.onclick = () => {
+                    statusMsg.onclick = null;
+                    statusMsg.style.cursor = 'default';
+                    syncToGitHub();
+                };
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                initAnnotations();
+                initBlurToggle();
+            });
+        } else {
+            initAnnotations();
+            initBlurToggle();
+        }
+    </script>
+</body>
+</html>
