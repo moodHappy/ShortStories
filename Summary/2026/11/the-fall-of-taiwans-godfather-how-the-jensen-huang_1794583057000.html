@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Fall of Taiwan’s “Godfather”: How the Jensen Huang Scandal Is Shaking Taiwan’s Industry, Politics and Society</title>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <style>
+        body { font-family: "Noto Serif SC", "Songti SC", STSong, "Microsoft YaHei", serif; max-width: 800px; margin: 0 auto; padding: 50px 24px; font-size: 20px; line-height: 1.8; letter-spacing: 0.05em; background-color: #F8F4E6; color: #4A3F35; } h1 { text-align: left !important; font-size: 28px; margin-bottom: 0.5em; font-weight: bold; border-bottom: 1px solid #D5CBBB; padding-bottom: 20px; color: #2C241B; } p { margin-bottom: 1.5em; text-indent: 2em; text-align: justify; }
+        body { padding-top: 70px !important; transition: padding-top 0.3s cubic-bezier(0.4,0,0.2,1); }
+        body.bar-hidden { padding-top: 20px !important; }
+        .reader-bar { position: fixed; top: 0; left: 0; right: 0; min-height: 50px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 1px 8px rgba(0,0,0,0.08); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); border-bottom: 1px solid rgba(0,0,0,0.05); padding: 5px; }
+        .reader-bar.hidden { transform: translateY(-100%); }
+        .reader-controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+        .reader-btn { background: #E5E5EA; color: #1C1C1E; border: none; padding: 6px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: transform 0.1s, background 0.2s; }
+        .reader-btn:active { transform: scale(0.95); }
+        #content-container { transition: font-size 0.2s; }
+        .zh-para { transition: filter 0.3s ease, opacity 0.3s ease; }
+        .global-blur-enabled .zh-para { cursor: pointer; }
+        .global-blur-enabled .zh-para.blurred { filter: blur(0.35em); opacity: 0.5; user-select: none; }
+        .global-blur-enabled .zh-para.blurred:hover { filter: blur(0.2em); opacity: 0.7; }
+        body.highlights-enabled .tm-word.is-highlight { color: #FF3B30 !important; font-weight: 700; background-color: rgba(255, 59, 48, 0.05); border-radius: 3px; padding: 0 2px; }
+        .dict-enabled .tm-word { cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; border-radius: 3px; }
+        .dict-enabled .tm-word:hover, .dict-enabled .tm-word[aria-expanded="true"] { background-color: #E3F2FD; color: #1565C0 !important; }
+        .tippy-box[data-theme~='light-border'] { background-color: #fff; color: #333; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        .tippy-box[data-theme~='light-border'][data-placement^='top'] > .tippy-arrow::before { border-top-color: #ccc; }
+        .tippy-box[data-theme~='light-border'][data-placement^='bottom'] > .tippy-arrow::before { border-bottom-color: #ccc; }
+        .tippy-content { padding: 8px; }
+        .dict-popup { text-align: left; font-size: 14px; line-height: 1.4; max-width: 280px; min-width: 200px; color: #333; font-family: -apple-system, sans-serif; }
+        .dict-header-row { border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 6px; }
+        .dict-word-line { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+        .dict-head-word { font-weight: bold; color: #D32F2F; font-size: 18px; }
+        .dict-ipa { font-family: sans-serif; color: #666; font-size: 13px; background: #f0f0f0; padding: 0 4px; border-radius: 4px; }
+        .dict-speaker-btn { display: inline-flex; cursor: pointer; color: #1976D2; padding: 2px; border-radius: 50%; transition: background 0.2s; }
+        .dict-speaker-btn:hover { background-color: rgba(25, 118, 210, 0.1); }
+        .dict-speaker-btn svg { width: 18px; height: 18px; pointer-events: none; }
+        .dict-speaker-btn.playing { color: #E91E63; animation: tm-pulse 1s infinite; }
+        .dict-tags-row { margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px; align-items: center;}
+        .dict-tag { background: #F0F4F8; color: #476582; font-size: 11px; padding: 2px 6px; border-radius: 4px; border: 1px solid #D9E2EC; font-weight: 500; }
+        .dict-tag.star-tag { color: #F59E0B; background: #FEF3C7; border-color: #FDE68A; letter-spacing: 1px; padding: 2px 4px; }
+        .dict-tag.cefr-A1 { background: #E8F5E9; color: #2E7D32; border-color: #C8E6C9; }
+        .dict-tag.cefr-A2 { background: #E0F2F1; color: #00695C; border-color: #B2DFDB; }
+        .dict-tag.cefr-B1 { background: #FFF8E1; color: #F57F17; border-color: #FFECB3; }
+        .dict-tag.cefr-B2 { background: #FFF3E0; color: #E65100; border-color: #FFE0B2; }
+        .dict-tag.cefr-C1 { background: #FCE4EC; color: #C2185B; border-color: #F8BBD0; }
+        .dict-tag.cefr-C2 { background: #F3E5F5; color: #7B1FA2; border-color: #E1BEE7; }
+        .dict-basic-trans { font-size: 14px; color: #444; margin-top: 4px; }
+        .dict-pos-block { margin-bottom: 4px; }
+        .dict-pos-tag { font-style: italic; color: #1976D2; font-weight: bold; font-size: 12px; margin-right: 4px; }
+        .dict-def-list { margin: 0; padding: 0; list-style: none; display: inline; }
+        .dict-def-item { display: inline; }
+        .dict-def-item::after { content: "; "; color: #999; }
+        .dict-def-item:last-child::after { content: ""; }
+        .dict-loading { color: #666; font-style: italic; font-size: 13px; padding: 5px; text-align: center; }
+        @keyframes tm-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style id="ss-anno-style">
+        .para-wrap { margin-bottom: 1.5em; position: relative; }
+        .para-wrap > p { margin-bottom: 0 !important; }
+        .anno-toggle { display: inline-flex; margin-left: 6px; cursor: pointer; opacity: 0.25; font-size: 0.75em; vertical-align: middle; transition: all 0.2s; user-select: none; text-indent: 0; }
+        .anno-toggle:hover { opacity: 0.85; transform: scale(1.1); }
+        .anno-toggle.has-anno { opacity: 1; }
+        .anno-toggle::after { content: "🔴"; }
+        .anno-box { display: none; margin-top: 10px; background: #f8f6ff; border-left: 4px solid #8e7cc3; padding: 12px 16px; border-radius: 0 6px 6px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-indent: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .anno-view { font-size: 0.9em; line-height: 1.6; color: #4a4a4a; min-height: 24px; text-indent: 0; text-align: left; }
+        .anno-edit { width: 100%; min-height: 110px; padding: 10px; font-family: monospace; font-size: 0.85em; border: 1px dashed #8e7cc3; border-radius: 6px; box-sizing: border-box; resize: vertical; display: none; background: #fff; color: #333; outline: none; text-indent: 0; }
+        .anno-edit:focus { border: 1px solid #8e7cc3; box-shadow: 0 0 0 3px rgba(142,124,195,0.15); }
+        .markdown-body p { margin-top: 0 !important; margin-bottom: 8px !important; text-indent: 0 !important; text-align: left !important; }
+        .markdown-body p:last-child { margin-bottom: 0 !important; }
+        .markdown-body p:empty { display: none; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3 { color: #8e7cc3; font-size: 1.05em; margin: 10px 0 6px 0; border-bottom: 1px dashed #e0d8f0; padding-bottom: 4px; text-align: left !important; }
+        .markdown-body ul, .markdown-body ol { margin: 0 0 8px 0; padding-left: 20px; text-indent: 0; }
+        .markdown-body blockquote { margin: 0 0 10px 0; padding: 8px 14px; background: rgba(142,124,195,0.1); border-left: 4px solid #8e7cc3; color: #555; text-indent: 0; }
+        .ss-nav-link { color: #b85c38; text-decoration: none; background: #faede6; padding: 2px 10px; border-radius: 6px; font-weight: 600; font-size: 0.92em; margin-left: 12px; display: inline-block; transition: background 0.2s; text-indent: 0; }
+        .ss-nav-link:hover { background: #f3dccf; }
+        .sync-status { position: fixed; top: 14px; right: 16px; z-index: 2000; padding: 6px 14px; border-radius: 16px; font-size: 13px; font-weight: bold; display: none; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,0.18); font-family: -apple-system, sans-serif; text-indent: 0; }
+    </style>
+</head>
+<body class="bar-hidden global-blur-enabled dict-enabled highlights-enabled">
+    <div class="reader-bar hidden" id="top-bar">
+        <div class="reader-controls">
+            <button class="reader-btn ss-top-back-btn" style="background:#b85c38; color:white;" onclick="location.href="../../../index.html?date=2026-11-13"">🔙 日历</button>
+            <button class="reader-btn" onclick="adjustFont(-0.1)">A-</button>
+            <button class="reader-btn" onclick="adjustFont(0.1)">A+</button>
+            <button id="blur-btn" class="reader-btn" style="background:#AF52DE; color:white;" onclick="toggleBlur()">模糊: 开</button>
+            <button id="hl-btn" class="reader-btn" style="background:#FF3B30; color:white;" onclick="toggleHighlight()">高亮: 开</button>
+            <button id="dict-btn" class="reader-btn" style="background:#34C759; color:white;" onclick="toggleDict()">查词: 开</button>
+        </div>
+    </div>
+    <div id="content-container">
+    <h1 style="text-align: left !important;">The Fall of Taiwan’s “Godfather”: How the Jensen Huang Scandal Is Shaking Taiwan’s Industry, Politics and Society</h1>
+    <div style="text-align: left !important; margin-top: -0.2em; margin-bottom: 1.5em; font-size: 0.85em; color: #999; opacity: 0.8; font-family: -apple-system, sans-serif;">发布时间：2026/11/13 23:17:37</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“台湾干爹”光环崩塌：黄仁勋事件如何震动台湾产业、政治与社会？</p>
+    <div class="para-wrap">
+    <p>Late on November 12, 2026, Nvidia released a brief statement announcing that its co-founder Jensen Huang was stepping down immediately as president, chief executive and a member of the board, bringing to an end his 33-year career at the company he helped build and lead.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">2026年11月12日深夜，英伟达（Nvidia，辉达）发布一则简短声明，宣布共同创办人黄仁勋立即辞去总裁、执行长及董事职务，结束了他长达33年亲手创办并掌舵英伟达的生涯。</p>
+    <div class="para-wrap">
+    <p>The announcement sent shockwaves around the world. In Taiwan, the island where Huang was born, the news triggered an especially intense public reaction.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">这一消息瞬间震动全球。在黄仁勋的出生地台湾，公众反应尤其热烈，相关讨论迅速升温。</p>
+    <div class="para-wrap">
+    <p>Born in Tainan in 1963, Huang moved to the United States with his family at the age of nine. Over the years, he has frequently returned to Taiwan and cultivated an image as a “son of Taiwan”. He speaks Taiwanese Hokkien more fluently than Mandarin and has worked closely with Taiwanese companies, including global chipmaking giant TSMC, to build Nvidia's AI chip empire. His success has helped fuel Taiwan's optimistic vision of becoming an “AI island”.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">黄仁勋1963年出生于台南，9岁时随家人移民美国。多年来，他频繁回到台湾，并长期以“台湾之子”的形象示人。他的台语说得比华语更流利，也与包括全球晶圆代工龙头台积电（TSMC）在内的台湾企业密切合作，共同打造了英伟达的AI芯片帝国。他的成功，也让“台湾是AI岛”成为台湾社会乐观期待的一部分。</p>
+    <div class="para-wrap">
+    <p>As the AI boom pushed Taiwan's stock market to repeated record highs, investors who had made money from the rally jokingly dubbed him their “Taiwan godfather”. Local media portrayed the man in the black leather jacket as a rock-star-like tech idol. Behind the public image was another story repeatedly celebrated in Taiwan: Huang and his university sweetheart Lori had married, raised children and weathered the hardships of building a business together over several decades.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">随着AI浪潮推动台湾股市屡创新高，赚得盆满钵满的股民戏称他为自己的“台湾干爹”。当地媒体则把这位身穿黑色皮衣的科技企业家塑造成摇滚巨星般的偶像。在公众形象背后，还有一段被台湾媒体反复讲述的爱情故事：黄仁勋与大学时期的恋人Lori结为夫妻，数十年来相濡以沫，养育子女，共同熬过创业路上的重重艰难。</p>
+    <div class="para-wrap">
+    <p>Now, Huang is engulfed in an extramarital-affairs scandal. He has also become embroiled in controversy surrounding allegations that a Chinese American woman, Alice Huang, may have links to Chinese intelligence, while US media have hinted that further alleged affairs could emerge. His fall from grace has been remarkably swift. The Wall Street Journal says the scandal is testing Taiwan's devotion to its “hometown hero”.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <div class="para-wrap">
+    <p>Now, Huang is engulfed in an extramarital-affairs scandal. He has also become embroiled in controversy surrounding allegations that a Chinese American woman, Alice Huang, may have links to Chinese intelligence, while US media have hinted that further alleged affairs could emerge. His fall from grace has been remarkably swift. The Wall Street Journal says the scandal is testing Taiwan's devotion to its “hometown hero”.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">如今，黄仁勋深陷婚外情丑闻，还卷入有关华裔女性黄乐可能与中国情报机构有关联的争议；与此同时，美国媒体又暗示，未来可能还有更多婚外情对象曝光。他从神坛跌落的速度令人咋舌。《华尔街日报》称，这场风波正在考验台湾社会对这位“家乡英雄”的崇敬。</p>
+    <div class="para-wrap">
+    <p>The BBC examines how Taiwan's industry, political establishment and wider society are reassessing their close relationship with the man they once affectionately called their “godfather”.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">BBC中文梳理台湾产业界、政界与社会，如何重新审视这些年来与这位“台湾干爹”之间的密切关系。</p>
+    <div class="para-wrap">
+    <p>## Taiwan's Semiconductor Boom: “Too Much Is Tied to One Company”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">## 台湾半导体荣景：“太多东西绑在一家公司身上”</p>
+    <div class="para-wrap">
+    <p>Nvidia's ties with Taiwan's industrial ecosystem run deep, and they long predate the AI boom.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">英伟达与台湾产业链的联系极为深厚，而且这种合作关系远早于AI浪潮。</p>
+    <div class="para-wrap">
+    <p>Technology expert Lin Hongwen wrote in a Taiwanese media column that Nvidia and TSMC began working together in the late 1990s. At the time, Nvidia was still a small company, and TSMC was nowhere near the global giant it is today. The two companies have grown together ever since. The vast majority of Nvidia's GPUs (graphics processing units) are manufactured by TSMC, whose advanced manufacturing processes and CoWoS (Chip-on-Wafer-on-Substrate) advanced packaging technology have continued to develop in part because of Nvidia's orders.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">科技专家林宏文在台湾媒体专栏中指出，英伟达与台积电的合作始于1990年代末。当时英伟达还只是一家小公司，台积电也远未达到今天的全球地位。此后，两家公司一路相互成就：英伟达绝大多数GPU（图形处理器）都由台积电制造，而台积电的先进制程与CoWoS（Chip-on-Wafer-on-Substrate，晶圆上芯片基板）先进封装技术，也在英伟达订单的推动下持续发展。</p>
+    <div class="para-wrap">
+    <p>In the AI era, this supply chain has expanded into an entire semiconductor ecosystem. Major manufacturers such as Foxconn and Quanta, alongside hundreds of other Taiwanese companies, have helped turn the slogan “Taiwan is an AI island” into something much more tangible.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">进入AI时代，这条供应链进一步扩展为完整的半导体产业聚落。鸿海、广达等大型企业，以及数百家其他台湾公司，共同让“台湾是AI岛”不再只是一句口号。</p>
+    <div class="para-wrap">
+    <p>Lin recalled that at last year's Computex exhibition in Taipei, Huang did not simply stand on stage waiting for people to greet him. Instead, he went from table to table, shaking hands and chatting with Taiwanese suppliers individually. Those handshakes, Lin said, represented “decades of relationships”.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">林宏文举例，去年台北Computex展会上，黄仁勋并不是站在台上等别人来向他致意，而是“一桌一桌、一位一位走过去，和每一位台湾供应商握手、寒暄”。林宏文认为，那些握手握的是“几十年的交情”。</p>
+    <div class="para-wrap">
+    <p>Taiwanese financial commentator Hu Caiping made a similar point in a Facebook post. She noted that Huang's visits to Taiwan were always high-profile affairs. Even if this was partly a commercial strategy to strengthen supply-chain relationships, she argued, he had brought many influential Silicon Valley CEOs to Taiwan.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">台湾财经评论员胡采苹也在脸书专页表达了类似看法。她指出，黄仁勋每次来台湾都声势浩大。即使这在某种程度上也是拉拢供应链的商业策略，但她认为，黄仁勋确实为台湾带来了许多在硅谷举足轻重的CEO。</p>
+    <div class="para-wrap">
+    <p>“Huang gave these companies his public endorsement. Their speeches in Taiwan often attracted worldwide attention, bringing unprecedented visibility and energy to the island. No American technology company boss has ever treated Taiwan this well. For that, I remain grateful, whatever happens.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">“黄为这些公司站台，他们在台湾的演讲经常轰动全球，这为台湾带来了前所未有的关注与能量。从来没有任何一个美国科技公司老板这样善待过台湾，因此无论如何我都还是心怀感念。”</p>
+    <div class="para-wrap">
+    <p>Her post attracted more than 20,000 likes.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">她的这篇文章吸引了两万多名网民点赞。</p>
+    <div class="para-wrap">
+    <p>However, Stephen Witt, author of a biography of Huang, offered a different perspective in an article published in The New York Times. He described Huang's management style as highly centralised, demanding and unusually direct, with around 60 senior executives reporting to him. He also noted that Huang had placed family members, including children and a son-in-law with no technology background, in senior company positions. Such practices are unusual among major American corporations, Witt argued, but resemble the management culture of small and medium-sized family businesses in Huang's native Taiwan.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过，黄仁勋传记作者史蒂芬·维特（Stephen Witt）前晚在《纽约时报》发表文章，提出了另一种观察角度。他形容黄仁勋的管理风格高度集中、要求严苛且沟通直接，公司约有60名高层管理人员直接向他汇报。他还指出，黄仁勋安排了包括子女和女婿在内、没有科技背景的家人进入公司高层。这种做法在美国大型企业中相当罕见，却恰好与黄仁勋家乡台湾中小型家族企业的管理文化有相似之处。</p>
+    <div class="para-wrap">
+    <p>As Nvidia shares plunged in the United States, Taiwanese investors grew anxious. One investor in Kaohsiung told the BBC with a bitter laugh: “My US stocks have lost a fortune. I wasn't the one having an affair, so why am I the one paying for it?”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">随着英伟达股价在美国暴跌，台湾股民也开始人心惶惶。一名高雄股民苦笑着告诉BBC记者：“我的美股赔惨了，外遇的不是我，怎么会影响到我。”</p>
+    <div class="para-wrap">
+    <p>Yet on November 13, Taiwan's stock market rebounded by more than 1,000 points, while MediaTek, another major Nvidia partner, briefly hit its daily trading limit. The movement appeared to demonstrate that investors still had confidence in the underlying strength of Taiwan's semiconductor supply chain. The Commercial Times suggested that the market had treated Huang's departure as a case of “bad news already priced in”, with Taiwanese shares closing sharply higher despite losses across all four major US stock indices on November 12.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">然而，11月13日，台股强势反弹逾千点，英伟达合作伙伴联发科一度涨停。这一走势似乎也显示，市场仍对台湾半导体产业链的基本实力抱有信心。《工商时报》指出，黄仁勋离职后，台湾股市反而因为利空出尽而释放压力。尽管美股四大指数在11月12日全线收跌，台股却以大涨收盘。</p>
+    <div class="para-wrap">
+    <p>Taiwanese investment adviser Huang Guowei told Taiwan's Central News Agency that Huang's resignation would have “absolutely no impact” on Taiwanese manufacturers. With AI continuing to advance and supply chains increasingly shifting away from China, he argued, Taiwan's AI ecosystem remained irreplaceable.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">台湾投顾业者黄国伟向中央社直言，黄仁勋辞职对台湾厂商“完全没有影响”。他认为，随着AI持续升级，以及供应链“去中化”趋势发展，台湾AI供应链仍然无可取代。</p>
+    <div class="para-wrap">
+    <p>Financial expert Dr Zhu Yuezhong also told BBC Chinese: “Only TSMC can manufacture Nvidia's most advanced chips. Whoever becomes CEO will still need TSMC.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">财经专家朱岳中博士也向BBC中文表示：“辉达的高阶晶片只有台积电会做，不管谁当CEO，都需要台积电。”</p>
+    <div class="para-wrap">
+    <p>He said the immediate impact on the global semiconductor supply chain was likely to be limited. However, Nvidia's resources could be redistributed over time, affecting both customers and suppliers. “Previously, Huang personally decided who received orders and who bought the chips. In the future, those decisions will be redistributed. Suppliers in Southeast Asia that receive Nvidia orders could be among the first affected.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">他指出，短期内这起事件对全球半导体产业链的影响不大，但未来英伟达的资源势必重新分配，涉及客户与供应链两个方面。“以前要下单给谁、晶片要卖谁都是黄仁勋说了算，未来会重新分配，东南亚接辉达订单的供应链首当其冲。”</p>
+    <div class="para-wrap">
+    <p>Lin Hongwen also issued a warning: part of Taiwan's AI boom, he said, was tied to one company — and even to one person's personal relationships and connections. “When Huang was there, that was an advantage. Once he is gone, personal relationships will be replaced by contracts, and trust will be replaced by legal procedures.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">林宏文也提醒，台湾AI荣景有一部分是绑在一家公司身上，“甚至绑在一个人的人情和关系上”。他认为，黄仁勋在的时候，这些关系是优势；他不在了，“人情就会被合约取代，信任就会被法务流程取代”。</p>
+    <div class="para-wrap">
+    <p>Ultimately, he argued, genuine competitiveness must come from technological strength and the ability to offer something others cannot replace.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">他认为，真正的竞争力，最终还是要建立在自身技术实力与不可取代性之上。</p>
+    <div class="para-wrap">
+    <p>## Nvidia's Overseas Headquarters: Could It Affect Taipei's Mayoral Race?<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">## 英伟达海外总部：会影响台北市长选情吗？</p>
+    <div class="para-wrap">
+    <p>The fallout from Huang's scandal has also reached Taiwan's political arena.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">黄仁勋风波的影响也延伸到了台湾政坛。</p>
+    <div class="para-wrap">
+    <p>Nvidia is not only a major customer for Taiwan's semiconductor supply chain. Its decision to establish an overseas headquarters in Taipei has also become one of the Taipei city government's most prominent investment-attraction achievements in recent years. The project is closely linked to Mayor Chiang Wan-an's public image and his political plans for re-election.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">英伟达不仅是台湾半导体供应链的重要客户，其决定将海外总部设在台北，也成为台北市政府近年最受瞩目的招商成果之一。这项计划与市长蒋万安的施政形象及其连任布局紧密相连。</p>
+    <div class="para-wrap">
+    <p>Nvidia selected sites T17 and T18 in Taipei's Beitou-Shilin Technology Park for the project. According to reports, the site covers approximately 3.89 hectares and is planned to feature a low-rise building shaped like a “Starship” constellation. The headquarters is expected to open in 2030, accommodate around 4,000 employees and involve an investment of at least NT$40 billion, or approximately US$1.2 billion.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">英伟达选定台北市北投士林科技园区（北士科）的T17、T18基地设立海外总部。据报道，该基地面积约3.89公顷，规划兴建一座名为“星舰”（Constellation）的低量体建筑，预计于2030年进驻，可容纳约4,000名员工，投资规模至少为新台币400亿元（约12亿美元）。</p>
+    <div class="para-wrap">
+    <p>The two sides signed a land-use agreement granting Nvidia development rights for 50 years, with an option to extend for another 20 years. The signing premium was NT$12.2 billion. The project is expected to generate around 10,000 jobs for Taipei during construction and operation.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">双方签署了为期50年、可延长20年的设定地上权合约，签约权利金为新台币122亿元。预计从兴建到营运阶段，这项计划将为台北市创造约一万个就业机会。</p>
+    <div class="para-wrap">
+    <p>Chiang has repeatedly said that securing Nvidia's investment in Taipei was “the achievement I am most proud of over the past four years”. He previously told Taiwanese media that he and his wife, Shih Fang-yun, had contacted Huang through an intermediary and communicated directly with him by email about the location.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">蒋万安过去多次公开表示，争取英伟达进驻台北是他“四年来最有成就感的一件事”。他曾向台湾媒体透露，自己与妻子石舫亘通过“中间人”联系黄仁勋，并直接通过电子邮件与黄沟通选址事宜。</p>
+    <div class="para-wrap">
+    <p>Since Huang became embroiled in the scandal and stepped down, Chiang's public comments on Nvidia appear to have become more restrained. Asked by reporters about the situation, he replied: “The city government has received no relevant information. Cooperation is proceeding according to plan, and a comprehensive contract has already been signed.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">随着黄仁勋卷入丑闻并辞职，蒋万安对英伟达相关议题的公开表态似乎转趋低调。面对媒体询问，他仅回应：“市府未收到相关讯息，合作照计划推进，已签订完整合约。”</p>
+    <div class="para-wrap">
+    <p>The Taipei city government has emphasised that Nvidia has paid its required performance bond, signing premium and land rent. The underground diaphragm-wall engineering plan has also passed review, and preparations are proceeding on schedule. Officials say the project should not be affected by a change of CEO.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">台北市政府强调，英伟达已正常缴付履约保证金、权利金及地租，地下连续壁工程也已通过审议，筹建工作正按计划推进，不至于因为执行长更换而受到影响。</p>
+    <div class="para-wrap">
+    <p>Nevertheless, questions remain over whether this highly personalised political achievement could have subtle consequences for the year-end election now that Huang's public image has collapsed.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">然而，外界仍然质疑，这项高度个人化的招商政绩，在黄仁勋光环崩塌之后，是否会对年底选情产生微妙影响。</p>
+    <div class="para-wrap">
+    <p>Chang Chun-hao, a professor in the Department of Political Science at Tunghai University, told BBC Chinese that if the Nvidia affair were to affect the election, the main factor would likely be the China-related dimension, particularly the so-called “spy scandal”. But at present, Chiang's election rival Shen Po-yang has not made the China issue a central part of his campaign strategy, so it is not yet clear how much the Nvidia controversy could influence the race.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">东海大学政治学系教授张峻豪向BBC中文表示，如果英伟达事件对选情产生影响，主要可能涉及中国因素，尤其是外界关注的所谓“间谍门事件”。但就目前而言，蒋万安的选战对手沈伯洋并没有把中国因素作为主要选战策略，因此暂时看不出英伟达风波会对选情产生多大影响。</p>
+    <div class="para-wrap">
+    <p>“Unless it affects stock prices and makes investors unhappy,” he said.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">他说：“除非影响到股价，让股民不满。”</p>
+    <div class="para-wrap">
+    <p>## Goodbye, Taiwan's “Godfather”: Taiwan's Culture of Creating Heroes<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">## 再见，台湾干爹！台湾社会的造神工程</p>
+    <div class="para-wrap">
+    <p>Huang enjoys enormous popularity across Asia, but in Taiwan his reception has often resembled that of a familiar old friend, going far beyond the usual admiration shown to a business leader.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">黄仁勋在亚洲各地都拥有极高人气，但在台湾，他受到的欢迎更像是一位熟悉的老朋友，远远超出一般企业家所获得的礼遇。</p>
+    <div class="para-wrap">
+    <p>His Taiwanese origins have led local media to treat him as one of their own. His approachable public image — visiting Taipei night markets, using his wealth to treat entire crowds, and going from table to table to shake hands with suppliers — combined with his rock-star-like leather-jacket style to create what Taiwanese media have called “Renlai-craze”, a social phenomenon centred on Huang.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">由于黄仁勋出生于台湾，当地媒体往往把他视为“自己人”。他亲民的形象，包括逛台北夜市、用“钞能力”请客全场，以及逐桌与供应商握手，再加上摇滚明星般的皮衣造型，共同催生了台湾社会所谓的“仁来疯”现象。</p>
+    <div class="para-wrap">
+    <p>Lev Nachman, an associate professor at National Taiwan University's Graduate Institute of Development Studies, told foreign media that Taiwanese people had reacted with the same “shock and disbelief” seen elsewhere in the world. For many, Huang had always been like “a cool uncle”.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">台湾大学国际发展研究所副教授南乐（Lev Nachman）向外媒表示，台湾人的反应与世界其他地方一样，充满“震惊和难以置信”。对许多人来说，黄仁勋一直就像一位“很酷的叔叔”。</p>
+    <div class="para-wrap">
+    <p>However, Patrick McGee, author of the technology bestseller *Apple in China*, expressed puzzlement about Huang's attitude towards Taiwan's political position in an interview with CBS, the US broadcast partner of the BBC. “I've always found it strange that Jensen Huang was born in Taiwan, yet seemed not to take seriously what Xi Jinping has said about Taiwan — or perhaps he simply lacked a deeper understanding of it.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">不过，科技畅销书《苹果在中国》作者派翠克·麦奇（Patrick McGee）昨日接受美国广播公司（CBS，BBC在美国的合作伙伴）专访时，对黄仁勋面对台湾政治议题时的态度表示不解。“我一直觉得很奇怪，黄仁勋出生在台湾，却似乎对习近平有关台湾的言论并不放在心上，或者说，缺乏更深一层的理解。”</p>
+    <div class="para-wrap">
+    <p>McGee elaborated: “For example, Xi Jinping has said that we cannot leave the Taiwan question to the next generation. Beijing believes that the Taiwan issue should ideally be resolved peacefully, but that force cannot be ruled out if necessary. If I had been born in Taiwan, those words would keep me awake at night. But Jensen seems not to care, which I find rather strange.”<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">麦奇进一步解释：“例如，习近平曾说过‘我们不能把台湾问题留给下一代’。北京方面认为，台湾问题最好以和平方式解决，但必要时不排除使用武力。若我出生在台湾，这些话会让我夜不能寐。但Jensen似乎并不在意，这实在有些奇怪。”</p>
+    <div class="para-wrap">
+    <p>Technology expert Lin Hongwen was blunt in his assessment of Taiwan's media coverage, including his own work. He said that in recent years, Taiwanese media had shown “more enthusiasm than clear-headedness, more star worship than scrutiny” when covering Huang. Once someone has been elevated to the status of a god, it becomes difficult to examine his decisions and the risks surrounding him with ordinary detachment.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">科技专家林宏文直言，近年来台湾媒体，包括他自己在内，在报道黄仁勋时“热情多于冷静，追星多于监督”。一旦把一个人捧成神，就很难再以平常心审视他的决策与背后的风险。</p>
+    <div class="para-wrap">
+    <p>Many women online have also expressed disappointment. Huang's alleged affairs stand in stark contrast to his repeated public declarations of affection for his wife Lori and the image he cultivated as a devoted husband and technology-world idol. As the controversy has unfolded, media outlets have also revisited footage of him signing his name on the chests of female fans, questioning whether such interactions were appropriate.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">许多女性网民也表达了失望。黄仁勋的婚外情丑闻，与他多次公开表达对妻子Lori的钟爱，以及长期塑造的“爱妻科技男神”形象形成鲜明反差。随着近期争议浮上台面，媒体也重新检视他曾在女性粉丝胸前签名的画面，质疑这类“亲民”互动是否恰当。</p>
+    <div class="para-wrap">
+    <p>The Nvidia scandal has not immediately brought Taiwan's semiconductor supply chain to its knees. TSMC's production capacity and technological strength, together with existing orders, have helped the market absorb the bad news in a single trading day. The land agreement for Nvidia's Taipei headquarters has also been signed, making it unlikely that the project will simply disappear because one person has left.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">黄仁勋事件并没有让台湾半导体产业链立即崩盘。台积电的产能与技术实力，加上既有订单，使市场似乎在一个交易日内就消化了这项利空。英伟达台北海外总部的土地合约也已经落地，不至于因为一个人的离开就彻底取消。</p>
+    <div class="para-wrap">
+    <p>But the most profound impact of Huang's rapid fall from grace may be a shift in perspective. Taiwanese society is reassessing its admiration for him, politicians are reconsidering how closely they tied their achievements to his personal image, and the industry is being forced to rethink its dependence on one individual.<span class="anno-toggle"></span></p>
+    <div class="anno-box" style="display:none;">
+        <div class="anno-view markdown-body"></div>
+        <textarea class="anno-edit" style="display:none;"></textarea>
+    </div>
+</div>
+    <p class="zh-para blurred" onclick="if(document.body.classList.contains('global-blur-enabled')) this.classList.toggle('blurred')">但黄仁勋如此迅速地跌落神坛，最深刻的冲击或许并不在股价或某一项投资计划，而在于观念的转变。台湾社会正在重新校准对他的崇拜，政治人物开始重新审视自己与他个人形象之间的绑定，而产业界也不得不重新思考对单一个人的依赖。</p>    </div>
+    <script>
+        var STORAGE_KEY = 'bio_reader_prefs_' + location.pathname.replace(/[^a-zA-Z0-9]/g, '');
+        var prefs = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { font: 1.0, dictEnabled: true, barHidden: true, highlightEnabled: true, blurEnabled: true };
+        var bar = document.getElementById('top-bar');
+        var content = document.getElementById('content-container');
+        var dictBtn = document.getElementById('dict-btn');
+        var hlBtn = document.getElementById('hl-btn');
+        var blurBtn = document.getElementById('blur-btn');
+        function applyPrefs() {
+            content.style.fontSize = prefs.font + 'em';
+            if (prefs.barHidden) { bar.classList.add('hidden'); document.body.classList.add('bar-hidden'); } else { bar.classList.remove('hidden'); document.body.classList.remove('bar-hidden'); }
+            if (prefs.dictEnabled) { document.body.classList.add('dict-enabled'); dictBtn.innerText = "查词: 开"; dictBtn.style.background = "#34C759"; dictBtn.style.color = "#fff"; } else { document.body.classList.remove('dict-enabled'); dictBtn.innerText = "查词: 关"; dictBtn.style.background = "#E5E5EA"; dictBtn.style.color = "#1C1C1E"; }
+            if (prefs.highlightEnabled) { document.body.classList.add('highlights-enabled'); hlBtn.innerText = "高亮: 开"; hlBtn.style.background = "#FF3B30"; hlBtn.style.color = "#fff"; } else { document.body.classList.remove('highlights-enabled'); hlBtn.innerText = "高亮: 关"; hlBtn.style.background = "#E5E5EA"; hlBtn.style.color = "#1C1C1E"; }
+            if (prefs.blurEnabled) { document.body.classList.add('global-blur-enabled'); blurBtn.innerText = "模糊: 开"; blurBtn.style.background = "#AF52DE"; blurBtn.style.color = "#fff"; document.querySelectorAll('.zh-para').forEach(function(el){el.classList.add('blurred');}); } else { document.body.classList.remove('global-blur-enabled'); blurBtn.innerText = "模糊: 关"; blurBtn.style.background = "#E5E5EA"; blurBtn.style.color = "#1C1C1E"; }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+        }
+        document.addEventListener('dblclick', function(e) {
+            if(e.target.closest('#top-bar') || e.target.classList.contains('zh-para') || e.target.closest('.anno-box') || e.target.closest('.anno-toggle')) return;
+            prefs.barHidden = !prefs.barHidden; applyPrefs();
+        });
+        function adjustFont(delta) { prefs.font = Math.max(0.6, Math.min(2.0, prefs.font + delta)); applyPrefs(); }
+        function toggleDict() { prefs.dictEnabled = !prefs.dictEnabled; applyPrefs(); }
+        function toggleHighlight() { prefs.highlightEnabled = !prefs.highlightEnabled; applyPrefs(); }
+        function toggleBlur() { prefs.blurEnabled = !prefs.blurEnabled; applyPrefs(); }
+        window.addEventListener('DOMContentLoaded', function() {
+            applyPrefs(); var savedScroll = localStorage.getItem(STORAGE_KEY + '_scroll');
+            if (savedScroll) { setTimeout(function(){ window.scrollTo(0, parseFloat(savedScroll)); }, 150); }
+        });
+        var scrollTimer;
+        window.addEventListener('scroll', function() {
+            if (scrollTimer) clearTimeout(scrollTimer); scrollTimer = setTimeout(function(){ localStorage.setItem(STORAGE_KEY + '_scroll', window.scrollY); }, 300);
+        });
+        var highlightWords = new Set();
+        async function initCloudHighlights() {
+            var cacheKey = 'bio_remote_hl_words_v2'; var cached = localStorage.getItem(cacheKey); var now = Date.now();
+            if (cached) { try { var parsed = JSON.parse(cached); if (now - parsed.time < 24 * 60 * 60 * 1000 && Array.isArray(parsed.data)) { highlightWords = new Set(parsed.data); applyHighlightsToDOM(); return; } } catch(e){} }
+            try {
+                var urls = ['https://raw.githubusercontent.com/moodHappy/HelloWorld/refs/heads/master/Notes/one.txt','https://ghproxy.net/https://raw.githubusercontent.com/moodHappy/HelloWorld/refs/heads/master/Notes/one.txt','https://fastly.jsdelivr.net/gh/moodHappy/HelloWorld@master/Notes/one.txt'];
+                var text = ''; for (var i=0; i<urls.length; i++) { try { var res = await fetch(urls[i]); if (res.ok) { text = await res.text(); if (text && !text.includes('<html') && !text.includes('Cloudflare')) break; } } catch(err){} }
+                if (!text) throw new Error(); var arr = text.split('\n').map(function(w){return w.trim().toLowerCase();}).filter(function(w){return w;});
+                if (arr.length > 0) { highlightWords = new Set(arr); localStorage.setItem(cacheKey, JSON.stringify({data: arr, time: now})); applyHighlightsToDOM(); }
+            } catch(e){}
+        }
+        function applyHighlightsToDOM() {
+            if(highlightWords.size === 0) return;
+            document.querySelectorAll('.tm-word').forEach(function(span){ if(highlightWords.has(span.textContent.trim().toLowerCase())) span.classList.add('is-highlight'); });
+        }
+        var GM_getValue = function(key, def) { var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; };
+        var GM_setValue = function(key, val) { localStorage.setItem(key, JSON.stringify(val)); };
+        (function() {
+            function fetchWithTimeout(url, options = {}, timeout = 3000) { const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeout); return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer)); }
+            var ttsConfig = { voices: ["en-US-AdamNeural", "en-US-AriaNeural", "en-US-AnaNeural", "en-US-JennyNeural", "en-US-GuyNeural"], apis: [ { url: "https://read-aloud-bay.vercel.app/api/synthesis", type: "read-aloud" }, { url: "https://libre-tts-nu.vercel.app/api/tts", type: "libre" } ] };
+            var globalResultCache = GM_getValue('tm_dict_cache', {}); var saveTimeout = null;
+            function saveToGlobalCache(wordKey, resultData) { globalResultCache[wordKey] = resultData; var keys = Object.keys(globalResultCache); if (keys.length > 2000) delete globalResultCache[keys[0]]; clearTimeout(saveTimeout); saveTimeout = setTimeout(function(){ GM_setValue('tm_dict_cache', globalResultCache); }, 1500); }
+            var cefrStaticCache = {};
+            function initCEFRStaticDict() {
+                var staticUrls = ["https://fastly.jsdelivr.net/gh/winterdl/oxford-5000-vocabulary-audio-definition@main/data/oxford_5000.json","https://cdn.jsdelivr.net/gh/winterdl/oxford-5000-vocabulary-audio-definition@main/data/oxford_5000.json"];
+                var idx = 0; var tryFetch = function() { if (idx >= staticUrls.length) return; fetch(staticUrls[idx++]).then(function(r){return r.json();}).then(function(data){ if (Array.isArray(data)) data.forEach(function(item){ if (item.word && item.cefr) cefrStaticCache[item.word.toLowerCase()] = item.cefr.toUpperCase(); }); }).catch(tryFetch); };
+                tryFetch();
+            }
+            async function fetchCEFR(word) {
+                var w = word.toLowerCase(); if (cefrStaticCache[w]) return cefrStaticCache[w];
+                const targetUrl = 'https://dictionary.cambridge.org/dictionary/english/' + encodeURIComponent(w);
+                const proxies = [ targetUrl, 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl) ];
+                const tryProxy = async (proxy) => { const res = await fetchWithTimeout(proxy, {}, 2500); if (!res.ok) throw new Error(); const text = await res.text(); var match = text.match(/(?:epp-xref|dxref)[^>]*>\s*([A-C][1-2])\s*<\/span>/i) || text.match(/title="CEFR[^>]*>\s*([A-C][1-2])\s*<\/span>/i); if (match && match[1]) { cefrStaticCache[w] = match[1].toUpperCase(); return cefrStaticCache[w]; } return null; };
+                try { return await Promise.any(proxies.map(p => tryProxy(p))); } catch(e) { return null; }
+            }
+            async function fetchTranslation(text) { try { const res = await fetchWithTimeout('https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&dt=bd&q=' + encodeURIComponent(text), {}, 3500); if (!res.ok) throw new Error(); return await res.json(); } catch(e) { return [[['查询超时或网络错误']]]; } }
+            async function fetchPhonetics(text) { try { const res = await fetchWithTimeout('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(text), {}, 2500); if (!res.ok) return null; const data = await res.json(); if (data && data.length > 0) { const pObj = data[0].phonetics.find(p => p.text) || data[0]; return pObj.text || null; } return null; } catch(e) { return null; } }
+            async function fetchWordLevel(text) {
+                const targetUrl = 'https://dict.youdao.com/jsonapi?q=' + encodeURIComponent(text);
+                const proxies = [ 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl), 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl) ];
+                const tryProxy = async (proxy) => { const res = await fetchWithTimeout(proxy, {}, 2000); if (!res.ok) throw new Error(); const data = await res.json(); var result = { stars: 0, tags: [] }; if (data.ec && data.ec.exam_type) result.tags = data.ec.exam_type; if (data.collins && data.collins.collins_entries && data.collins.collins_entries.length > 0) { var starStr = data.collins.collins_entries[0].star; if (starStr) { var parsedNum = parseInt(String(starStr).replace(/[^0-9]/g, ''), 10); result.stars = isNaN(parsedNum) ? 0 : parsedNum; } } return result; };
+                try { return await Promise.any(proxies.map(p => tryProxy(p))); } catch (e) { return { stars: 0, tags: [] }; }
+            }
+            var globalAudioPlayer = null; var currentPlayingBtn = null;
+            function initAudioPlayer() { if (!globalAudioPlayer) { globalAudioPlayer = document.createElement('audio'); globalAudioPlayer.style.display = 'none'; document.body.appendChild(globalAudioPlayer); } }
+            function playTTS(apiIndex, text, voice, btn) {
+                if (apiIndex >= ttsConfig.apis.length) { if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing'); return; }
+                if (currentPlayingBtn && currentPlayingBtn !== btn) currentPlayingBtn.classList.remove('playing');
+                currentPlayingBtn = btn; btn.classList.add('playing'); var api = ttsConfig.apis[apiIndex]; var params = new URLSearchParams();
+                if (api.type === "read-aloud") { params.append("text", text); params.append("voiceName", voice); } else { params.append("t", text); params.append("v", voice); params.append("r", "0"); params.append("p", "0"); }
+                globalAudioPlayer.src = api.url + '?' + params.toString(); globalAudioPlayer.onended = function() { if (currentPlayingBtn) currentPlayingBtn.classList.remove('playing'); };
+                globalAudioPlayer.onerror = function() { playTTS(apiIndex + 1, text, voice, btn); }; var p = globalAudioPlayer.play(); if (p !== undefined) p.catch(function(){ playTTS(apiIndex + 1, text, voice, btn); });
+                }
+            function wrapTextNodesToWord(rootNode) {
+                var ignoreTags = new Set(['SCRIPT', 'STYLE', 'BUTTON', 'A']);
+                var walker = document.createTreeWalker(rootNode, NodeFilter.SHOW_TEXT, { acceptNode: function(currentNode) { var parent = currentNode.parentNode; if (!parent || ignoreTags.has(parent.nodeName.toUpperCase()) || parent.closest('.tm-word') || parent.closest('.zh-para') || parent.closest('.anno-box') || parent.closest('.anno-toggle') || parent.closest('.ss-nav-link')) return NodeFilter.FILTER_REJECT; if (!currentNode.nodeValue.trim() || !/\b[a-zA-Z'-]+\b/.test(currentNode.nodeValue)) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
+                var nodesToWrap = []; let currNode; while ((currNode = walker.nextNode())) { nodesToWrap.push(currNode); }
+                nodesToWrap.forEach(function(textNode) {
+                    var text = textNode.nodeValue; var fragment = document.createDocumentFragment(); var lastIndex = 0;
+                    text.replace(/\b([a-zA-Z'-]+)\b/g, function(match, p1, offset) { if (offset > lastIndex) fragment.appendChild(document.createTextNode(text.substring(lastIndex, offset))); var span = document.createElement('span'); span.className = 'tm-word'; span.textContent = match; fragment.appendChild(span); lastIndex = offset + match.length; return match; });
+                    if (lastIndex < text.length) fragment.appendChild(document.createTextNode(text.substring(lastIndex))); if (fragment.childNodes.length > 0) textNode.parentNode.replaceChild(fragment, textNode);
+                });
+            }
+            function formatDictData(originalWord, data) {
+                var transData = data.transData; var ipaText = data.ipaText; var levelData = data.levelData; var cefrLevel = data.cefrLevel; var tagsHtml = '';
+                if (cefrLevel || (levelData && (levelData.stars > 0 || (levelData.tags && levelData.tags.length > 0)))) {
+                    tagsHtml += '<div class="dict-tags-row">'; if (levelData && levelData.stars > 0) tagsHtml += '<span class="dict-tag star-tag">' + '★'.repeat(levelData.stars) + '☆'.repeat(5 - levelData.stars) + '</span>'; if (cefrLevel) tagsHtml += '<span class="dict-tag cefr-' + cefrLevel + '">CEFR ' + cefrLevel + '</span>'; if (levelData && levelData.tags) levelData.tags.forEach(function(tag){ tagsHtml += '<span class="dict-tag">' + tag + '</span>'; }); tagsHtml += '</div>';
+                }
+                var basicTrans = (transData && transData[0] && transData[0][0]) ? transData[0][0][0] : '';
+                var html = '<div class="dict-header-row"><div class="dict-word-line"><span class="dict-head-word Casting">' + originalWord + '</span>' + (ipaText ? '<span class="dict-ipa">' + ipaText + '</span>' : '') + '<span class="dict-speaker-btn" data-word="' + originalWord.replace(/"/g, '&quot;') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg></span></div>' + tagsHtml + '<div class="dict-basic-trans">' + basicTrans + '</div></div>';
+                var dictEntries = transData ? transData[1] : null;
+                if (dictEntries && dictEntries.length > 0) {
+                    html += '<div class="dict-details">'; dictEntries.forEach(function(entry){ var pos = entry[0]; var displayDefs = entry[1].slice(0, 3); html += '<div class="dict-pos-block"><span class="dict-pos-tag">' + pos + '.</span><ul class="dict-def-list">'; displayDefs.forEach(function(def){ html += '<li class="dict-def-item">' + def + '</li>'; }); html += '</ul></div>'; }); html += '</div>';
+                } else if (!basicTrans) { html += '<div style="padding:5px; color:#666; font-size:13px;">无释义结果...</div>'; }
+                return html;
+            }
+            function setupTippyDelegate() {
+                tippy.delegate(document.body, { 
+                    target: '.tm-word', trigger: 'click', interactive: true, theme: 'light-border', placement: 'bottom', appendTo: function(){return document.body;}, maxWidth: 320,
+                    onShow: function(instance) {
+                        if (!document.body.classList.contains('dict-enabled')) return false;
+                        var word = instance.reference.innerText.trim(); var wordKey = word.toLowerCase();
+                        var renderContent = function(data) { if (instance.reference.innerText.trim() !== word) return; var contentDiv = document.createElement('div'); contentDiv.className = 'dict-popup'; contentDiv.innerHTML = formatDictData(word, data); ['mousedown', 'touchstart', 'click'].forEach(function(evt){ contentDiv.addEventListener(evt, function(e){e.stopPropagation();}, { capture: true }); }); var btn = contentDiv.querySelector('.dict-speaker-btn'); if (btn) { btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); var text = btn.getAttribute('data-word'); if (!text || btn.classList.contains('playing')) return; playTTS(0, text.trim(), ttsConfig.voices[Math.floor(Math.random() * ttsConfig.voices.length)], btn); }); } instance.setContent(contentDiv); };
+                        if (globalResultCache[wordKey]) { renderContent(globalResultCache[wordKey]); } else {
+                            var loadingDiv = document.createElement('div'); loadingDiv.className = 'dict-popup'; loadingDiv.innerHTML = '<div class="dict-loading">极速查询中...</div>'; instance.setContent(loadingDiv);
+                            Promise.all([fetchTranslation(word), fetchPhonetics(word), fetchWordLevel(word), fetchCEFR(word)]).then(function(arr){ var resultData = { transData: arr[0], ipaText: arr[1], levelData: arr[2], cefrLevel: arr[3] }; saveToGlobalCache(wordKey, resultData); if (instance.state.isVisible) renderContent(resultData); });
+                        }
+                    }
+                });
+            }
+            setTimeout(function() { initAudioPlayer(); initCEFRStaticDict(); var container = document.getElementById('content-container'); if(container) wrapTextNodesToWord(container); setupTippyDelegate(); initCloudHighlights(); }, 500);
+        })();
+    </script>
+    <script id="matrix-engine">
+        const GH_OWNER = "moodHappy";
+        const GH_REPO = "ShortStories";
+
+        function toBase64(str) {
+            const bytes = new TextEncoder().encode(str);
+            let bin = '';
+            const chunkSize = 0x8000;
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+                bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+            }
+            return btoa(bin);
+        }
+
+        function ensureSyncStatusBadge() {
+            let badge = document.getElementById('sync-status');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.id = 'sync-status';
+                badge.className = 'sync-status';
+                badge.innerText = '📡 同步中...';
+                document.body.appendChild(badge);
+            }
+            return badge;
+        }
+
+        let syncTimeout = null;
+        function scheduleSync() {
+            const statusMsg = ensureSyncStatusBadge();
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#f39c12';
+            statusMsg.innerText = '⏳ 更改已记录，5秒后自动同步...';
+            statusMsg.style.cursor = 'default';
+            statusMsg.onclick = null;
+            if (syncTimeout) clearTimeout(syncTimeout);
+            syncTimeout = setTimeout(() => { syncToGitHub(); }, 5000);
+        }
+
+        function initAnnotations() {
+            ensureSyncStatusBadge();
+            document.querySelectorAll('.para-wrap').forEach(wrap => {
+                const view = wrap.querySelector('.anno-view');
+                const edit = wrap.querySelector('.anno-edit');
+                const toggle = wrap.querySelector('.anno-toggle');
+                const box = wrap.querySelector('.anno-box');
+                if (!edit || !toggle || !view || !box) return;
+
+                const rawText = edit.value.trim();
+                if (rawText) {
+                    toggle.classList.add('has-anno');
+                    if (typeof marked !== 'undefined') { view.innerHTML = marked.parse(rawText); }
+                    else { view.innerText = rawText; }
+                }
+
+                toggle.onclick = (e) => {
+                    e.stopPropagation();
+                    if (box.style.display === 'block') {
+                        box.style.display = 'none';
+                        wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        box.style.display = 'block';
+                        if (!edit.value.trim()) {
+                            view.style.display = 'none';
+                            edit.style.display = 'block';
+                            edit.focus();
+                        } else {
+                            if (typeof marked !== 'undefined') {
+                                view.innerHTML = marked.parse(edit.value.trim());
+                            } else {
+                                view.innerText = edit.value.trim();
+                            }
+                            view.style.display = 'block';
+                            edit.style.display = 'none';
+                        }
+                    }
+                };
+
+                const triggerEdit = () => {
+                    view.style.display = 'none';
+                    edit.style.display = 'block';
+                    edit.focus();
+                };
+
+                view.addEventListener('contextmenu', e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    triggerEdit();
+                });
+                view.addEventListener('dblclick', e => {
+                    e.stopPropagation();
+                    box.style.display = 'none';
+                    wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+
+                let lastTap = 0;
+                view.addEventListener('touchstart', e => {
+                    if (e.touches.length === 2) {
+                        e.stopPropagation();
+                        triggerEdit();
+                    } else if (e.touches.length === 1) {
+                        const currentTime = new Date().getTime();
+                        const tapLength = currentTime - lastTap;
+                        if (tapLength < 500 && tapLength > 0) {
+                            e.stopPropagation();
+                            box.style.display = 'none';
+                            wrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        lastTap = currentTime;
+                    }
+                }, { passive: true });
+
+                edit.onblur = () => {
+                    const newVal = edit.value.trim();
+                    try {
+                        view.innerHTML = newVal ? (typeof marked !== 'undefined' ? marked.parse(newVal) : newVal) : '';
+                    } catch (e) {}
+                    edit.style.display = 'none';
+                    if (newVal) {
+                        view.style.display = 'block';
+                        toggle.classList.add('has-anno');
+                    } else {
+                        view.style.display = 'none';
+                        box.style.display = 'none';
+                        toggle.classList.remove('has-anno');
+                    }
+                    if (edit.getAttribute('data-old-val') !== newVal) {
+                        edit.setAttribute('data-old-val', newVal);
+                        scheduleSync();
+                    }
+                };
+                edit.setAttribute('data-old-val', rawText);
+            });
+        }
+
+        function initBlurToggle() {
+            // 兼容旧版没有内联 onclick 的 .zh-para 段落
+            document.querySelectorAll('.zh-para').forEach(para => {
+                if (!para.getAttribute('onclick')) {
+                    para.onclick = () => para.classList.toggle('revealed');
+                }
+            });
+        }
+
+        function reconstructSelfHTML() {
+            const clone = document.documentElement.cloneNode(true);
+
+            // 1. 移除运行期由查词/语音生成的临时 DOM 节点
+            clone.querySelectorAll('audio, [data-tippy-root], .tippy-box').forEach(el => el.remove());
+
+            // 2. 剥离转换器格式在运行期动态包裹的 span.tm-word，还原纯文本段落
+            const contentContainer = clone.querySelector('#content-container');
+            if (contentContainer) {
+                contentContainer.style.fontSize = '';
+                contentContainer.querySelectorAll('span.tm-word').forEach(span => {
+                    span.replaceWith(document.createTextNode(span.textContent));
+                });
+                contentContainer.normalize();
+            }
+
+            // 3. 复位 body 与阅读控制栏默认状态，恢复中文段落默认模糊
+            const bodyEl = clone.querySelector('body');
+            if (bodyEl && contentContainer) {
+                bodyEl.className = 'bar-hidden global-blur-enabled dict-enabled highlights-enabled';
+            }
+            const topBar = clone.querySelector('#top-bar');
+            if (topBar) {
+                topBar.className = 'reader-bar hidden';
+            }
+            clone.querySelectorAll('.zh-para').forEach(p => {
+                p.classList.remove('revealed');
+                if (contentContainer) p.classList.add('blurred');
+            });
+
+            // 4. 将当前页面所有批注内容同步写入克隆 DOM 的 textarea 中
+            const liveWraps = document.querySelectorAll('.para-wrap');
+            const cloneWraps = clone.querySelectorAll('.para-wrap');
+            liveWraps.forEach((liveWrap, idx) => {
+                const cloneWrap = cloneWraps[idx];
+                if (!cloneWrap) return;
+                const liveEdit = liveWrap.querySelector('.anno-edit');
+                const rawVal = liveEdit ? liveEdit.value.trim() : '';
+
+                const cloneToggle = cloneWrap.querySelector('.anno-toggle');
+                const cloneBox = cloneWrap.querySelector('.anno-box');
+                const cloneView = cloneWrap.querySelector('.anno-view');
+                const cloneEdit = cloneWrap.querySelector('.anno-edit');
+
+                if (cloneToggle) {
+                    if (rawVal) cloneToggle.classList.add('has-anno');
+                    else cloneToggle.classList.remove('has-anno');
+                }
+                if (cloneBox) cloneBox.style.display = 'none';
+                if (cloneView) {
+                    cloneView.innerHTML = '';
+                    cloneView.style.display = 'none';
+                }
+                if (cloneEdit) {
+                    cloneEdit.textContent = rawVal;
+                    cloneEdit.style.display = 'none';
+                    cloneEdit.removeAttribute('data-old-val');
+                }
+            });
+
+            // 5. 隐藏同步状态胶囊
+            const statusEl = clone.querySelector('#sync-status');
+            if (statusEl) {
+                statusEl.style.display = 'none';
+                statusEl.innerText = '📡 同步中...';
+            }
+
+            return '<!DOCTYPE html>\n' + clone.outerHTML;
+        }
+
+        async function syncToGitHub() {
+            const token = localStorage.getItem('LITIT_GH_TOKEN') || localStorage.getItem('GH_TOKEN') || localStorage.getItem('EXT_GH_TOKEN') || localStorage.getItem('NYT_GH_TOKEN');
+            if (!token) {
+                alert('缺少 GitHub Token，无法同步批注！\n\n👉 请返回【日历中心首页】，点击右上角 ⚙️ 齿轮图标配置 Token。');
+                return;
+            }
+            const statusMsg = ensureSyncStatusBadge();
+            statusMsg.style.display = 'inline-block';
+            statusMsg.style.backgroundColor = '#2ea44f';
+            statusMsg.innerText = '📡 同步中...';
+
+            const pureHtml = reconstructSelfHTML();
+            const decodedPath = decodeURIComponent(window.location.pathname);
+            const sumIdx = decodedPath.indexOf('Summary/');
+            const fileRelPath = sumIdx !== -1 ? decodedPath.substring(sumIdx) : decodedPath.replace(/^\/+/, '');
+
+            try {
+                const base64Html = toBase64(pureHtml);
+                const apiUrl = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + fileRelPath;
+                const getRes = await fetch(apiUrl + '?t=' + Date.now(), {
+                    headers: { 'Authorization': 'Bearer ' + token },
+                    cache: 'no-store'
+                });
+                if (!getRes.ok) throw new Error('API Rate limit or File not found: ' + fileRelPath);
+                const fileData = await getRes.json();
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: 'Auto-save annotation', content: base64Html, sha: fileData.sha })
+                });
+                if (putRes.ok) {
+                    statusMsg.style.backgroundColor = '#2ea44f';
+                    statusMsg.innerText = '✅ 云端已同步';
+                    setTimeout(() => {
+                        if (statusMsg.innerText === '✅ 云端已同步') statusMsg.style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Put failed');
+                }
+            } catch (e) {
+                console.error(e);
+                statusMsg.style.backgroundColor = '#e74c3c';
+                statusMsg.innerText = '❌ 同步失败 (点击重试)';
+                statusMsg.style.cursor = 'pointer';
+                statusMsg.onclick = () => {
+                    statusMsg.onclick = null;
+                    statusMsg.style.cursor = 'default';
+                    syncToGitHub();
+                };
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                initAnnotations();
+                initBlurToggle();
+            });
+        } else {
+            initAnnotations();
+            initBlurToggle();
+        }
+    </script>
+</body>
+</html>
